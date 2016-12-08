@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+            <string>OpenSans</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="89" id="KGk-i7-Jjw" customClass="NotificationCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Kqe-gT-l5u">
+                        <rect key="frame" x="8" y="8" width="60" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="Z9N-jh-Za3"/>
+                            <constraint firstAttribute="height" constant="60" id="xP7-ve-z27"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="29 дней назад" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbF-GK-3xv">
+                        <rect key="frame" x="90" y="57" width="74" height="13"/>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="clocks" translatesAutoresizingMaskIntoConstraints="NO" id="HJF-W0-Ikm">
+                        <rect key="frame" x="76" y="58" width="10" height="10"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="separatorLine" translatesAutoresizingMaskIntoConstraints="NO" id="Ouf-8Z-kbu">
+                        <rect key="frame" x="0.0" y="79" width="320" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="SeU-Zh-SrL"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Новое сообщение от Moyoutlet: Дарим бонусы за просмотр объявлений!" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTR-iy-ksl">
+                        <rect key="frame" x="76" y="8" width="228" height="46"/>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="CTR-iy-ksl" firstAttribute="leading" secondItem="Kqe-gT-l5u" secondAttribute="trailing" constant="8" id="AuA-Sa-G1i"/>
+                    <constraint firstItem="Ouf-8Z-kbu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DJJ-Jd-KpK"/>
+                    <constraint firstItem="HJF-W0-Ikm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CTR-iy-ksl" secondAttribute="bottom" constant="4" id="Fsb-hE-jLS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="CTR-iy-ksl" secondAttribute="trailing" constant="8" id="HwO-1o-laE"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="HJF-W0-Ikm" secondAttribute="bottom" constant="4" id="LEW-3f-AbL"/>
+                    <constraint firstItem="Kqe-gT-l5u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="QHo-l5-pHZ"/>
+                    <constraint firstAttribute="bottom" secondItem="Kqe-gT-l5u" secondAttribute="bottom" constant="8" id="T5I-LE-vIs"/>
+                    <constraint firstAttribute="trailing" secondItem="Ouf-8Z-kbu" secondAttribute="trailing" id="TtI-x8-kDd"/>
+                    <constraint firstItem="tbF-GK-3xv" firstAttribute="centerY" secondItem="HJF-W0-Ikm" secondAttribute="centerY" id="Zhf-Zn-qvM"/>
+                    <constraint firstAttribute="bottom" secondItem="Ouf-8Z-kbu" secondAttribute="bottom" id="aaH-T4-MK6"/>
+                    <constraint firstItem="tbF-GK-3xv" firstAttribute="leading" secondItem="HJF-W0-Ikm" secondAttribute="trailing" constant="4" id="fOh-KR-dcX"/>
+                    <constraint firstItem="HJF-W0-Ikm" firstAttribute="leading" secondItem="Kqe-gT-l5u" secondAttribute="trailing" constant="8" id="not-8A-he6"/>
+                    <constraint firstItem="CTR-iy-ksl" firstAttribute="top" secondItem="Kqe-gT-l5u" secondAttribute="top" id="uoR-Ky-cAC"/>
+                    <constraint firstItem="Kqe-gT-l5u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="xhx-mG-21M"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="daysAgoLabel" destination="tbF-GK-3xv" id="MlB-Jv-UUr"/>
+                <outlet property="image" destination="Kqe-gT-l5u" id="H3N-4J-CsR"/>
+                <outlet property="mainTextLabel" destination="CTR-iy-ksl" id="zu9-eY-60n"/>
+            </connections>
+            <point key="canvasLocation" x="199" y="216.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Logo" width="47" height="47"/>
+        <image name="clocks" width="10" height="10"/>
+        <image name="separatorLine" width="329" height="1"/>
+    </resources>
+</document>
