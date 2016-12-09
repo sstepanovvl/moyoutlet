@@ -8,7 +8,6 @@
 
 #import "CategoriesWithOffersVC.h"
 #import "OffersVC.h"
-#import "moyoutlet-swift.h"
 #import "OfferCollectionViewCell.h"
 #import "OfferVC.h"
 #import "CreateOfferVC.h"
@@ -185,12 +184,56 @@
 }
 
 
--(void)sellButtonPressed:(id)sender {
-    UIStoryboard* mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    CreateOfferVC* cofvc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"CreateOfferVC"];
-    [self.navigationController pushViewController:cofvc animated:YES];
 
+
+
+-(void)sellButtonPressed:(id)sender {
+    [self showImagePicker];
+    
 }
+
+#pragma mark Fusuma delegates 
+
+- (void)fusumaImageSelected:(UIImage *)image {
+    
+    CreateOfferVC* cofvc = [[CreateOfferVC alloc] initFromStoryboard];
+    cofvc.item.arrImages = [[NSMutableArray alloc] initWithObjects:image, nil];
+
+    [self.navigationController pushViewController:cofvc animated:YES];
+}
+
+#pragma mark get photos first
+
+-(void)showImagePicker {
+    FusumaViewController* fsvc = [FusumaViewController new];
+    
+    fsvc.delegate = self;
+    fsvc.hasVideo = false;
+        
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Сделать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            
+            [self.navigationController pushViewController:fsvc animated:YES];
+        }]];
+    }
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Выбрать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        [self.navigationController presentViewController:fsvc animated:YES completion:nil];
+        
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:NULL]];
+    
+    alert.popoverPresentationController.sourceView = [self.view  superview];
+    alert.popoverPresentationController.sourceRect = [self.view  frame];
+    
+    [self presentViewController:alert animated:YES completion:NULL];
+}
+
+
 
 
 #pragma mark ScrollView delegate

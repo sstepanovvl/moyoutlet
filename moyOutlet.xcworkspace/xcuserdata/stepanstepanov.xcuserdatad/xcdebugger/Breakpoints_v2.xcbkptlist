@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moyoutlet/CategoriesWithOffersVC.m"
-            timestampString = "502964254.954386"
+            timestampString = "503005248.585107"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-initSellButtonOnFrame"
             landmarkType = "7">
          </BreakpointContent>

@@ -18,10 +18,10 @@ extension UIScrollView {
   So we had to place UILoadControl inside a UIView "loadControlView" and place "loadControlView" as a subview of UIScrollView.
   */
   
-  private struct AssociatedKeys {
+  fileprivate struct AssociatedKeys {
     static var delegate: UIScrollViewDelegate?
     static var loadControl: UILoadControl?
-    private static var loadControlView: UIView?
+    fileprivate static var loadControlView: UIView?
   }
   
   /*
@@ -43,7 +43,7 @@ extension UIScrollView {
   /*
   UILoadControl view containers
   */
-  private var loadControlView: UIView? {
+  fileprivate var loadControlView: UIView? {
     get {
       return objc_getAssociatedObject(self, &AssociatedKeys.loadControlView) as? UIView
     }
@@ -58,11 +58,11 @@ extension UIScrollView {
 
 extension UIScrollView {
 
-  public override func setValue(value: AnyObject?, forKey key: String) {
+  open override func setValue(_ value: Any?, forKey key: String) {
     super.setValue(value, forKey: key)
   }
   
-  private func updateLoadControl() {
+  fileprivate func updateLoadControl() {
     guard let loadControl = self.loadControl else {
       return
     }
@@ -72,7 +72,7 @@ extension UIScrollView {
   }
   
   
-  private func setupLoadControlViewWithControl(control: UILoadControl) {
+  fileprivate func setupLoadControlViewWithControl(_ control: UILoadControl) {
     
     guard let loadControlView = self.loadControlView else {
       self.loadControlView = UIView()

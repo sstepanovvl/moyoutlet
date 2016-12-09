@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "baseVC.h"
-@interface CreateOfferVC : baseVC <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
+#import "moyoutlet-swift.h"
+@interface CreateOfferVC : baseVC <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, FusumaDelegate>
+
+-(instancetype) initFromStoryboard;
+
 @property (strong,nonatomic) OfferItem* item;
 
 @end

@@ -13,18 +13,18 @@ extension String: MenuItemType {}
 extension UIImage: MenuItemType {}
 
 @objc public protocol MenuViewDelegate: class {
-    optional func willMoveToMenuItemView(menuItemView: MenuItemView, previousMenuItemView: MenuItemView)
-    optional func didMoveToMenuItemView(menuItemView: MenuItemView, previousMenuItemView: MenuItemView)
+    @objc optional func willMoveToMenuItemView(_ menuItemView: MenuItemView, previousMenuItemView: MenuItemView)
+    @objc optional func didMoveToMenuItemView(_ menuItemView: MenuItemView, previousMenuItemView: MenuItemView)
 }
 
-public class MenuView: UIScrollView {
-    weak public var viewDelegate: MenuViewDelegate?
-    public private(set) var menuItemViews = [MenuItemView]()
-    public private(set) var currentPage: Int = 0
-    public private(set) var currentMenuItemView: MenuItemView!
+open class MenuView: UIScrollView {
+    weak open var viewDelegate: MenuViewDelegate?
+    open fileprivate(set) var menuItemViews = [MenuItemView]()
+    open fileprivate(set) var currentPage: Int = 0
+    open fileprivate(set) var currentMenuItemView: MenuItemView!
     internal var menuItemCount: Int {
         switch options.menuDisplayMode {
-        case .Infinite: return options.menuItemCount * options.dummyMenuItemViewsSet
+        case .infinite: return options.menuItemCount * options.dummyMenuItemViewsSet
         default: return options.menuItemCount
         }
     }
@@ -34,60 +34,60 @@ public class MenuView: UIScrollView {
     internal var nextPage: Int {
         return currentPage + 1 > menuItemCount - 1 ? 0 : currentPage + 1
     }
-    private var sortedMenuItemViews = [MenuItemView]()
-    private var options: PagingMenuOptions!
+    fileprivate var sortedMenuItemViews = [MenuItemView]()
+    fileprivate var options: PagingMenuOptions!
     
-    private let contentView: UIView = {
+    fileprivate let contentView: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    lazy private var underlineView: UIView = {
+    lazy fileprivate var underlineView: UIView = {
         let view = UIView(frame: .zero)
         return view
     }()
-    lazy private var roundRectView: UIView = {
+    lazy fileprivate var roundRectView: UIView = {
         let view = UIView(frame: .zero)
-        view.userInteractionEnabled = true
+        view.isUserInteractionEnabled = true
         return view
     }()
-    private var menuViewBounces: Bool {
+    fileprivate var menuViewBounces: Bool {
         switch options.menuDisplayMode {
-        case .Standard(_, _, .ScrollEnabledAndBouces),
-             .Infinite(_, .ScrollEnabledAndBouces): return true
+        case .standard(_, _, .scrollEnabledAndBouces),
+             .infinite(_, .scrollEnabledAndBouces): return true
         default: return false
         }
     }
-    private var menuViewScrollEnabled: Bool {
+    fileprivate var menuViewScrollEnabled: Bool {
         switch options.menuDisplayMode {
-        case .Standard(_, _, .ScrollEnabledAndBouces),
-             .Standard(_, _, .ScrollEnabled),
-             .Infinite(_, .ScrollEnabledAndBouces),
-             .Infinite(_, .ScrollEnabled): return true
+        case .standard(_, _, .scrollEnabledAndBouces),
+             .standard(_, _, .scrollEnabled),
+             .infinite(_, .scrollEnabledAndBouces),
+             .infinite(_, .scrollEnabled): return true
         default: return false
         }
     }
-    private var contentOffsetX: CGFloat {
+    fileprivate var contentOffsetX: CGFloat {
         switch options.menuDisplayMode {
-        case let .Standard(_, centerItem, _) where centerItem:
+        case let .standard(_, centerItem, _) where centerItem:
             return centerOfScreenWidth
-        case .SegmentedControl:
+        case .segmentedControl:
             return contentOffset.x
-        case .Infinite:
+        case .infinite:
             return centerOfScreenWidth
         default:
             return contentOffsetXForCurrentPage
         }
     }
-    private var centerOfScreenWidth: CGFloat {
-        return menuItemViews[currentPage].frame.midX - UIApplication.sharedApplication().keyWindow!.bounds.width / 2
+    fileprivate var centerOfScreenWidth: CGFloat {
+        return menuItemViews[currentPage].frame.midX - UIApplication.shared.keyWindow!.bounds.width / 2
     }
-    private var contentOffsetXForCurrentPage: CGFloat {
+    fileprivate var contentOffsetXForCurrentPage: CGFloat {
         guard menuItemCount > options.minumumSupportedViewCount else { return 0.0 }
         let ratio = CGFloat(currentPage) / CGFloat(menuItemCount - 1)
         return (contentSize.width - frame.width) * ratio
     }
-    lazy private var rawIndex: (Int) -> Int = { [unowned self] in
+    lazy fileprivate var rawIndex: (Int) -> Int = { [unowned self] in
         let count = self.menuItemCount
         let startIndex = self.currentPage - count / 2
         return (startIndex + $0 + count) % count
@@ -103,7 +103,7 @@ public class MenuView: UIScrollView {
         commonInit({ self.constructMenuItemViews(menuItemTypes) })
     }
     
-    private func commonInit(constructor: () -> Void) {
+    fileprivate func commonInit(_ constructor: () -> Void) {
         setupScrollView()
         layoutScrollView()
         setupContentView()
@@ -118,7 +118,7 @@ public class MenuView: UIScrollView {
         super.init(coder: aDecoder)
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         adjustmentContentInsetIfNeeded()
@@ -126,7 +126,7 @@ public class MenuView: UIScrollView {
     
     // MARK: - Internal method
     
-    internal func moveToMenu(page: Int, animated: Bool = true) {
+    internal func moveToMenu(_ page: Int, animated: Bool = true) {
         let duration = animated ? options.animationDuration : 0
         let previousPage = currentPage
         currentPage = page
@@ -139,20 +139,20 @@ public class MenuView: UIScrollView {
         let menuItemView = menuItemViews[page]
         let previousMenuItemView = currentMenuItemView
         
-        if let previousMenuItemView = previousMenuItemView where page != previousPage {
+        if let previousMenuItemView = previousMenuItemView, page != previousPage {
             viewDelegate?.willMoveToMenuItemView?(menuItemView, previousMenuItemView: previousMenuItemView)
         }
         
-        UIView.animateWithDuration(duration, animations: { [unowned self] () -> Void in
+        UIView.animate(withDuration: duration, animations: { [unowned self] () -> Void in
             self.focusMenuItem()
             if self.options.menuSelectedItemCenter {
                 self.positionMenuItemViews()
             }
-        }) { [weak self] (_) in
+        }, completion: { [weak self] (_) in
             guard let _ = self else { return }
             
             // relayout menu item views dynamically
-            if case .Infinite = self!.options.menuDisplayMode {
+            if case .infinite = self!.options.menuDisplayMode {
                 self!.relayoutMenuItemViews()
             }
             if self!.options.menuSelectedItemCenter {
@@ -166,14 +166,14 @@ public class MenuView: UIScrollView {
                 self!.alpha = 1
             }
             
-            if let previousMenuItemView = previousMenuItemView where page != previousPage {
+            if let previousMenuItemView = previousMenuItemView, page != previousPage {
                 self!.viewDelegate?.didMoveToMenuItemView?(self!.currentMenuItemView, previousMenuItemView: previousMenuItemView)
             }
-        }
+        }) 
     }
     
-    internal func updateMenuViewConstraints(size size: CGSize) {
-        if case .SegmentedControl = options.menuDisplayMode {
+    internal func updateMenuViewConstraints(size: CGSize) {
+        if case .segmentedControl = options.menuDisplayMode {
             menuItemViews.forEach { $0.updateConstraints(size) }
         }
         setNeedsLayout()
@@ -186,9 +186,9 @@ public class MenuView: UIScrollView {
     internal func cleanup() {
         contentView.removeFromSuperview()
         switch options.menuItemMode {
-        case .Underline(_, _, _, _): underlineView.removeFromSuperview()
-        case .RoundRect(_, _, _, _): roundRectView.removeFromSuperview()
-        case .None: break
+        case .underline(_, _, _, _): underlineView.removeFromSuperview()
+        case .roundRect(_, _, _, _): roundRectView.removeFromSuperview()
+        case .none: break
         }
         
         if !menuItemViews.isEmpty {
@@ -201,47 +201,47 @@ public class MenuView: UIScrollView {
     
     // MARK: - Private method
     
-    private func setupScrollView() {
+    fileprivate func setupScrollView() {
         backgroundColor = options.backgroundColor
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
         bounces = menuViewBounces
-        scrollEnabled = menuViewScrollEnabled
+        isScrollEnabled = menuViewScrollEnabled
         decelerationRate = options.deceleratingRate
         scrollsToTop = false
         translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func layoutScrollView() {
+    fileprivate func layoutScrollView() {
         let viewsDictionary = ["menuView": self]
         let metrics = ["height": options.menuHeight]
-        NSLayoutConstraint.activateConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat("V:[menuView(height)]", options: [], metrics: metrics, views: viewsDictionary)
+        NSLayoutConstraint.activate(
+            NSLayoutConstraint.constraints(withVisualFormat: "V:[menuView(height)]", options: [], metrics: metrics, views: viewsDictionary)
         )
     }
     
-    private func setupContentView() {
+    fileprivate func setupContentView() {
         addSubview(contentView)
     }
     
-    private func layoutContentView() {
+    fileprivate func layoutContentView() {
         let viewsDictionary = ["contentView": contentView, "scrollView": self]
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: [], metrics: nil, views: viewsDictionary)
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView(==scrollView)]|", options: [], metrics: nil, views: viewsDictionary)
+        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[contentView]|", options: [], metrics: nil, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[contentView(==scrollView)]|", options: [], metrics: nil, views: viewsDictionary)
         
-        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints)
+        NSLayoutConstraint.activate(horizontalConstraints + verticalConstraints)
     }
     
-    private func constructMenuItemViews<Element: MenuItemType>(menuItemTypes: [Element]) {
+    fileprivate func constructMenuItemViews<Element: MenuItemType>(_ menuItemTypes: [Element]) {
         constructMenuItemViews({
             switch self.options.menuItemViewContent {
-            case .Text: return MenuItemView(title: menuItemTypes[$0] as! String, options: self.options, addDivider: $1)
-            case .Image: return MenuItemView(image: menuItemTypes[$0] as! UIImage, options: self.options, addDivider: $1)
+            case .text: return MenuItemView(title: menuItemTypes[$0] as! String, options: self.options, addDivider: $1)
+            case .image: return MenuItemView(image: menuItemTypes[$0] as! UIImage, options: self.options, addDivider: $1)
             }
         })
     }
     
-    private func constructMenuItemViews(constructor: (Int, Bool) -> MenuItemView) {
+    fileprivate func constructMenuItemViews(_ constructor: (Int, Bool) -> MenuItemView) {
         for index in 0..<menuItemCount {
             let addDivider = index < menuItemCount - 1
             let menuItemView = constructor(index % options.menuItemCount, addDivider)
@@ -254,12 +254,12 @@ public class MenuView: UIScrollView {
         sortMenuItemViews()
     }
     
-    private func sortMenuItemViews() {
+    fileprivate func sortMenuItemViews() {
         if !sortedMenuItemViews.isEmpty {
             sortedMenuItemViews.removeAll()
         }
         
-        if case .Infinite = options.menuDisplayMode {
+        if case .infinite = options.menuDisplayMode {
             for i in 0..<menuItemCount {
                 let index = rawIndex(i)
                 sortedMenuItemViews.append(menuItemViews[index])
@@ -269,10 +269,10 @@ public class MenuView: UIScrollView {
         }
     }
     
-    private func layoutMenuItemViews() {
-        NSLayoutConstraint.deactivateConstraints(contentView.constraints)
+    fileprivate func layoutMenuItemViews() {
+        NSLayoutConstraint.deactivate(contentView.constraints)
         
-        for (index, menuItemView) in sortedMenuItemViews.enumerate() {
+        for (index, menuItemView) in sortedMenuItemViews.enumerated() {
             let visualFormat: String;
             var viewsDicrionary = ["menuItemView": menuItemView]
             if index == 0 {
@@ -285,65 +285,65 @@ public class MenuView: UIScrollView {
                     visualFormat = "H:[previousMenuItemView][menuItemView]"
                 }
             }
-            let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(visualFormat, options: [], metrics: nil, views: viewsDicrionary)
-            let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[menuItemView]|", options: [], metrics: nil, views: viewsDicrionary)
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: visualFormat, options: [], metrics: nil, views: viewsDicrionary)
+            let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[menuItemView]|", options: [], metrics: nil, views: viewsDicrionary)
             
-            NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints)
+            NSLayoutConstraint.activate(horizontalConstraints + verticalConstraints)
         }
         
         setNeedsLayout()
         layoutIfNeeded()
     }
     
-    private func setupUnderlineViewIfNeeded() {
-        guard case let .Underline(height, color, horizontalPadding, verticalPadding) = options.menuItemMode else { return }
+    fileprivate func setupUnderlineViewIfNeeded() {
+        guard case let .underline(height, color, horizontalPadding, verticalPadding) = options.menuItemMode else { return }
         
         let width = menuItemViews[currentPage].bounds.width - horizontalPadding * 2
-        underlineView.frame = CGRectMake(horizontalPadding, options.menuHeight - (height + verticalPadding), width, height)
+        underlineView.frame = CGRect(x: horizontalPadding, y: options.menuHeight - (height + verticalPadding), width: width, height: height)
         underlineView.backgroundColor = color
         contentView.addSubview(underlineView)
     }
     
-    private func setupRoundRectViewIfNeeded() {
-        guard case let .RoundRect(radius, _, verticalPadding, selectedColor) = options.menuItemMode else { return }
+    fileprivate func setupRoundRectViewIfNeeded() {
+        guard case let .roundRect(radius, _, verticalPadding, selectedColor) = options.menuItemMode else { return }
         
         let height = options.menuHeight - verticalPadding * 2
-        roundRectView.frame = CGRectMake(0, verticalPadding, 0, height)
+        roundRectView.frame = CGRect(x: 0, y: verticalPadding, width: 0, height: height)
         roundRectView.layer.cornerRadius = radius
         roundRectView.backgroundColor = selectedColor
         contentView.addSubview(roundRectView)
     }
     
-    private func animateUnderlineViewIfNeeded() {
-        guard case let .Underline(_, _, horizontalPadding, _) = options.menuItemMode else { return }
+    fileprivate func animateUnderlineViewIfNeeded() {
+        guard case let .underline(_, _, horizontalPadding, _) = options.menuItemMode else { return }
         
         let targetFrame = menuItemViews[currentPage].frame
         underlineView.frame.origin.x = targetFrame.minX + horizontalPadding
         underlineView.frame.size.width = targetFrame.width - horizontalPadding * 2
     }
     
-    private func animateRoundRectViewIfNeeded() {
-        guard case let .RoundRect(_, horizontalPadding, _, _) = options.menuItemMode else { return }
+    fileprivate func animateRoundRectViewIfNeeded() {
+        guard case let .roundRect(_, horizontalPadding, _, _) = options.menuItemMode else { return }
         
         let targetFrame = menuItemViews[currentPage].frame
         roundRectView.frame.origin.x = targetFrame.minX + horizontalPadding
         roundRectView.frame.size.width = targetFrame.width - horizontalPadding * 2
     }
 
-    private func relayoutMenuItemViews() {
+    fileprivate func relayoutMenuItemViews() {
         sortMenuItemViews()
         layoutMenuItemViews()
     }
 
-    private func positionMenuItemViews() {
+    fileprivate func positionMenuItemViews() {
         contentOffset.x = contentOffsetX
         animateUnderlineViewIfNeeded()
         animateRoundRectViewIfNeeded()
     }
     
-    private func adjustmentContentInsetIfNeeded() {
+    fileprivate func adjustmentContentInsetIfNeeded() {
         switch options.menuDisplayMode {
-        case let .Standard(_, centerItem, _) where centerItem: break
+        case let .standard(_, centerItem, _) where centerItem: break
         default: return
         }
         
@@ -357,8 +357,8 @@ public class MenuView: UIScrollView {
         contentInset = inset
     }
     
-    private func focusMenuItem() {
-        let selected: (MenuItemView) -> Bool = { self.menuItemViews.indexOf($0) == self.currentPage }
+    fileprivate func focusMenuItem() {
+        let selected: (MenuItemView) -> Bool = { self.menuItemViews.index(of: $0) == self.currentPage }
         
         // make selected item focused
         menuItemViews.forEach {

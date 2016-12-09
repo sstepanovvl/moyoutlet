@@ -9,4 +9,5 @@ target 'moyoutlet' do
 pod 'SHSPhoneComponent'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'Fusuma'
 end

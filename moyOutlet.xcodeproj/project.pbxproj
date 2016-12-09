@@ -87,27 +87,6 @@
 		047C2C8D1CE24B93000FF304 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 047C2C8C1CE24B93000FF304 /* OpenSans-Regular.ttf */; };
 		048109C91D621AFF00EAB6AA /* CreateOfferPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048109C71D621AFE00EAB6AA /* CreateOfferPhotoCell.m */; };
 		048109CA1D621AFF00EAB6AA /* CreateOfferPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048109C81D621AFE00EAB6AA /* CreateOfferPhotoCell.xib */; };
-		048109E61D63340400EAB6AA /* CameraView.strings in Resources */ = {isa = PBXBuildFile; fileRef = 048109CE1D63340400EAB6AA /* CameraView.strings */; };
-		048109E71D63340400EAB6AA /* CameraViewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048109CF1D63340400EAB6AA /* CameraViewAssets.xcassets */; };
-		048109E81D63340400EAB6AA /* CameraGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D11D63340400EAB6AA /* CameraGlobals.swift */; };
-		048109E91D63340400EAB6AA /* CameraShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D21D63340400EAB6AA /* CameraShot.swift */; };
-		048109EA1D63340400EAB6AA /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D31D63340400EAB6AA /* ImageFetcher.swift */; };
-		048109EB1D63340400EAB6AA /* PhotoLibraryAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D41D63340400EAB6AA /* PhotoLibraryAuthorizer.swift */; };
-		048109EC1D63340400EAB6AA /* SingleImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D51D63340400EAB6AA /* SingleImageFetcher.swift */; };
-		048109ED1D63340400EAB6AA /* SingleImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D61D63340400EAB6AA /* SingleImageSaver.swift */; };
-		048109EE1D63340400EAB6AA /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D71D63340400EAB6AA /* UIButtonExtensions.swift */; };
-		048109EF1D63340400EAB6AA /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D81D63340400EAB6AA /* UIViewExtensions.swift */; };
-		048109F01D63340400EAB6AA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109D91D63340400EAB6AA /* Utilities.swift */; };
-		048109F11D63340400EAB6AA /* VolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109DA1D63340400EAB6AA /* VolumeControl.swift */; };
-		048109F21D63340400EAB6AA /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109DC1D63340400EAB6AA /* CameraViewController.swift */; };
-		048109F31D63340400EAB6AA /* CameraViewControllerConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109DD1D63340400EAB6AA /* CameraViewControllerConstraint.swift */; };
-		048109F41D63340400EAB6AA /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109DE1D63340400EAB6AA /* ConfirmViewController.swift */; };
-		048109F51D63340400EAB6AA /* ConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048109DF1D63340400EAB6AA /* ConfirmViewController.xib */; };
-		048109F61D63340400EAB6AA /* PhotoLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109E01D63340400EAB6AA /* PhotoLibraryViewController.swift */; };
-		048109F71D63340400EAB6AA /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109E21D63340400EAB6AA /* CameraView.swift */; };
-		048109F81D63340400EAB6AA /* CropOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109E31D63340400EAB6AA /* CropOverlay.swift */; };
-		048109F91D63340400EAB6AA /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109E41D63340400EAB6AA /* ImageCell.swift */; };
-		048109FA1D63340400EAB6AA /* PermissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048109E51D63340400EAB6AA /* PermissionsView.swift */; };
 		0484A4471D3579BE00A43315 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0484A4451D3579BE00A43315 /* Fabric.framework */; };
 		0484A4481D3579BE00A43315 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0484A4461D3579BE00A43315 /* Crashlytics.framework */; };
 		048A73DC1CF36F89002CCA31 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A73BC1CF36F89002CCA31 /* MKAnnotationView+WebCache.m */; };
@@ -146,6 +125,22 @@
 		04F3CF081D47882A0041D864 /* NewsItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CF061D47882A0041D864 /* NewsItemVC.m */; };
 		04F3CF091D47882A0041D864 /* NewsItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CF071D47882A0041D864 /* NewsItemVC.xib */; };
 		04F3CF131D47A2580041D864 /* UIWebView+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CF121D47A2580041D864 /* UIWebView+Additional.m */; };
+		48EA941D1DFB325100B68F21 /* FSAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94071DFB325100B68F21 /* FSAlbumView.swift */; };
+		48EA941E1DFB325100B68F21 /* FSAlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94081DFB325100B68F21 /* FSAlbumViewCell.swift */; };
+		48EA941F1DFB325100B68F21 /* FSCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94091DFB325100B68F21 /* FSCameraView.swift */; };
+		48EA94201DFB325100B68F21 /* FSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940A1DFB325100B68F21 /* FSConstants.swift */; };
+		48EA94211DFB325100B68F21 /* FSImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940B1DFB325100B68F21 /* FSImageCropView.swift */; };
+		48EA94221DFB325100B68F21 /* FSVideoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940C1DFB325100B68F21 /* FSVideoCameraView.swift */; };
+		48EA94231DFB325100B68F21 /* FusumaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940D1DFB325100B68F21 /* FusumaViewController.swift */; };
+		48EA94241DFB325100B68F21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48EA940E1DFB325100B68F21 /* Assets.xcassets */; };
+		48EA94251DFB325100B68F21 /* FSAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA940F1DFB325100B68F21 /* FSAlbumView.xib */; };
+		48EA94261DFB325100B68F21 /* FSAlbumViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */; };
+		48EA94271DFB325100B68F21 /* FSCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94111DFB325100B68F21 /* FSCameraView.xib */; };
+		48EA94281DFB325100B68F21 /* FSVideoCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */; };
+		48EA94291DFB325100B68F21 /* FusumaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94131DFB325100B68F21 /* FusumaViewController.xib */; };
+		48EA942A1DFB325100B68F21 /* Fusuma.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94161DFB325100B68F21 /* Fusuma.xcconfig */; };
+		48EA942B1DFB325100B68F21 /* Fusuma-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94171DFB325100B68F21 /* Fusuma-dummy.m */; };
+		48EA942C1DFB325100B68F21 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48EA941A1DFB325100B68F21 /* Info.plist */; };
 		A74AE8A7DE4BFD3E00553623 /* Pods_moyoutlet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD8317B031065561D047D14 /* Pods_moyoutlet.framework */; };
 /* End PBXBuildFile section */
 
@@ -305,27 +300,6 @@
 		048109C61D621AFE00EAB6AA /* CreateOfferPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateOfferPhotoCell.h; sourceTree = "<group>"; };
 		048109C71D621AFE00EAB6AA /* CreateOfferPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateOfferPhotoCell.m; sourceTree = "<group>"; };
 		048109C81D621AFE00EAB6AA /* CreateOfferPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateOfferPhotoCell.xib; sourceTree = "<group>"; };
-		048109CE1D63340400EAB6AA /* CameraView.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = CameraView.strings; sourceTree = "<group>"; };
-		048109CF1D63340400EAB6AA /* CameraViewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CameraViewAssets.xcassets; sourceTree = "<group>"; };
-		048109D11D63340400EAB6AA /* CameraGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraGlobals.swift; sourceTree = "<group>"; };
-		048109D21D63340400EAB6AA /* CameraShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraShot.swift; sourceTree = "<group>"; };
-		048109D31D63340400EAB6AA /* ImageFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
-		048109D41D63340400EAB6AA /* PhotoLibraryAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryAuthorizer.swift; sourceTree = "<group>"; };
-		048109D51D63340400EAB6AA /* SingleImageFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageFetcher.swift; sourceTree = "<group>"; };
-		048109D61D63340400EAB6AA /* SingleImageSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageSaver.swift; sourceTree = "<group>"; };
-		048109D71D63340400EAB6AA /* UIButtonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
-		048109D81D63340400EAB6AA /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		048109D91D63340400EAB6AA /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		048109DA1D63340400EAB6AA /* VolumeControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeControl.swift; sourceTree = "<group>"; };
-		048109DC1D63340400EAB6AA /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		048109DD1D63340400EAB6AA /* CameraViewControllerConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewControllerConstraint.swift; sourceTree = "<group>"; };
-		048109DE1D63340400EAB6AA /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
-		048109DF1D63340400EAB6AA /* ConfirmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmViewController.xib; sourceTree = "<group>"; };
-		048109E01D63340400EAB6AA /* PhotoLibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryViewController.swift; sourceTree = "<group>"; };
-		048109E21D63340400EAB6AA /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		048109E31D63340400EAB6AA /* CropOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropOverlay.swift; sourceTree = "<group>"; };
-		048109E41D63340400EAB6AA /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
-		048109E51D63340400EAB6AA /* PermissionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsView.swift; sourceTree = "<group>"; };
 		0484A4451D3579BE00A43315 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		0484A4461D3579BE00A43315 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		048A73BB1CF36F89002CCA31 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -390,6 +364,26 @@
 		04F3CF071D47882A0041D864 /* NewsItemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsItemVC.xib; sourceTree = "<group>"; };
 		04F3CF111D47A2580041D864 /* UIWebView+Additional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+Additional.h"; sourceTree = "<group>"; };
 		04F3CF121D47A2580041D864 /* UIWebView+Additional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+Additional.m"; sourceTree = "<group>"; };
+		48EA94051DFB2FD300B68F21 /* Fusuma.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fusuma.framework; path = "../../../../Developer/Xcode/DerivedData/moyOutlet-gatwtgidpmjkmsaafasabwrzkrfy/Build/Products/Debug-iphonesimulator/Fusuma/Fusuma.framework"; sourceTree = "<group>"; };
+		48EA94071DFB325100B68F21 /* FSAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSAlbumView.swift; path = Sources/FSAlbumView.swift; sourceTree = "<group>"; };
+		48EA94081DFB325100B68F21 /* FSAlbumViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSAlbumViewCell.swift; path = Sources/FSAlbumViewCell.swift; sourceTree = "<group>"; };
+		48EA94091DFB325100B68F21 /* FSCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSCameraView.swift; path = Sources/FSCameraView.swift; sourceTree = "<group>"; };
+		48EA940A1DFB325100B68F21 /* FSConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSConstants.swift; path = Sources/FSConstants.swift; sourceTree = "<group>"; };
+		48EA940B1DFB325100B68F21 /* FSImageCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSImageCropView.swift; path = Sources/FSImageCropView.swift; sourceTree = "<group>"; };
+		48EA940C1DFB325100B68F21 /* FSVideoCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSVideoCameraView.swift; path = Sources/FSVideoCameraView.swift; sourceTree = "<group>"; };
+		48EA940D1DFB325100B68F21 /* FusumaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FusumaViewController.swift; path = Sources/FusumaViewController.swift; sourceTree = "<group>"; };
+		48EA940E1DFB325100B68F21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sources/Assets.xcassets; sourceTree = "<group>"; };
+		48EA940F1DFB325100B68F21 /* FSAlbumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSAlbumView.xib; path = Sources/FSAlbumView.xib; sourceTree = "<group>"; };
+		48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSAlbumViewCell.xib; path = Sources/FSAlbumViewCell.xib; sourceTree = "<group>"; };
+		48EA94111DFB325100B68F21 /* FSCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSCameraView.xib; path = Sources/FSCameraView.xib; sourceTree = "<group>"; };
+		48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSVideoCameraView.xib; path = Sources/FSVideoCameraView.xib; sourceTree = "<group>"; };
+		48EA94131DFB325100B68F21 /* FusumaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FusumaViewController.xib; path = Sources/FusumaViewController.xib; sourceTree = "<group>"; };
+		48EA94151DFB325100B68F21 /* Fusuma.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = Fusuma.modulemap; sourceTree = "<group>"; };
+		48EA94161DFB325100B68F21 /* Fusuma.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Fusuma.xcconfig; sourceTree = "<group>"; };
+		48EA94171DFB325100B68F21 /* Fusuma-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Fusuma-dummy.m"; sourceTree = "<group>"; };
+		48EA94181DFB325100B68F21 /* Fusuma-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Fusuma-prefix.pch"; sourceTree = "<group>"; };
+		48EA94191DFB325100B68F21 /* Fusuma-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Fusuma-umbrella.h"; sourceTree = "<group>"; };
+		48EA941A1DFB325100B68F21 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F06A3B1DF5EC31004AD9B1 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		5AD32DDB36E2406F132DA415 /* Pods-moyoutlet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyoutlet.release.xcconfig"; path = "Pods/Target Support Files/Pods-moyoutlet/Pods-moyoutlet.release.xcconfig"; sourceTree = "<group>"; };
 		8CD8317B031065561D047D14 /* Pods_moyoutlet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyoutlet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -825,7 +819,7 @@
 		047C2C0F1CE21A84000FF304 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				048109CD1D63340400EAB6AA /* ALCameraViewController */,
+				48EA941C1DFB325100B68F21 /* Fusuma */,
 				045D7FF51D4FBA4900513E3D /* UILoadControl */,
 				042C2E9B1D461FE4005E4C3D /* ARSPopover */,
 				046529401D3E081A00DAA187 /* MBProgressHUD */,
@@ -912,58 +906,6 @@
 				048109C81D621AFE00EAB6AA /* CreateOfferPhotoCell.xib */,
 			);
 			name = CreateOfferPhotoCell;
-			sourceTree = "<group>";
-		};
-		048109CD1D63340400EAB6AA /* ALCameraViewController */ = {
-			isa = PBXGroup;
-			children = (
-				048109CE1D63340400EAB6AA /* CameraView.strings */,
-				048109CF1D63340400EAB6AA /* CameraViewAssets.xcassets */,
-				048109D01D63340400EAB6AA /* Utilities */,
-				048109DB1D63340400EAB6AA /* ViewController */,
-				048109E11D63340400EAB6AA /* Views */,
-			);
-			path = ALCameraViewController;
-			sourceTree = "<group>";
-		};
-		048109D01D63340400EAB6AA /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				048109D11D63340400EAB6AA /* CameraGlobals.swift */,
-				048109D21D63340400EAB6AA /* CameraShot.swift */,
-				048109D31D63340400EAB6AA /* ImageFetcher.swift */,
-				048109D41D63340400EAB6AA /* PhotoLibraryAuthorizer.swift */,
-				048109D51D63340400EAB6AA /* SingleImageFetcher.swift */,
-				048109D61D63340400EAB6AA /* SingleImageSaver.swift */,
-				048109D71D63340400EAB6AA /* UIButtonExtensions.swift */,
-				048109D81D63340400EAB6AA /* UIViewExtensions.swift */,
-				048109D91D63340400EAB6AA /* Utilities.swift */,
-				048109DA1D63340400EAB6AA /* VolumeControl.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
-		048109DB1D63340400EAB6AA /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				048109DC1D63340400EAB6AA /* CameraViewController.swift */,
-				048109DD1D63340400EAB6AA /* CameraViewControllerConstraint.swift */,
-				048109DE1D63340400EAB6AA /* ConfirmViewController.swift */,
-				048109DF1D63340400EAB6AA /* ConfirmViewController.xib */,
-				048109E01D63340400EAB6AA /* PhotoLibraryViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		048109E11D63340400EAB6AA /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				048109E21D63340400EAB6AA /* CameraView.swift */,
-				048109E31D63340400EAB6AA /* CropOverlay.swift */,
-				048109E41D63340400EAB6AA /* ImageCell.swift */,
-				048109E51D63340400EAB6AA /* PermissionsView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		048A73BA1CF36F89002CCA31 /* SDWebImage */ = {
@@ -1118,6 +1060,50 @@
 			name = NewsItemVC;
 			sourceTree = "<group>";
 		};
+		48EA94141DFB325100B68F21 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				48EA940E1DFB325100B68F21 /* Assets.xcassets */,
+				48EA940F1DFB325100B68F21 /* FSAlbumView.xib */,
+				48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */,
+				48EA94111DFB325100B68F21 /* FSCameraView.xib */,
+				48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */,
+				48EA94131DFB325100B68F21 /* FusumaViewController.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		48EA941B1DFB325100B68F21 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				48EA94151DFB325100B68F21 /* Fusuma.modulemap */,
+				48EA94161DFB325100B68F21 /* Fusuma.xcconfig */,
+				48EA94171DFB325100B68F21 /* Fusuma-dummy.m */,
+				48EA94181DFB325100B68F21 /* Fusuma-prefix.pch */,
+				48EA94191DFB325100B68F21 /* Fusuma-umbrella.h */,
+				48EA941A1DFB325100B68F21 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Fusuma";
+			sourceTree = "<group>";
+		};
+		48EA941C1DFB325100B68F21 /* Fusuma */ = {
+			isa = PBXGroup;
+			children = (
+				48EA94071DFB325100B68F21 /* FSAlbumView.swift */,
+				48EA94081DFB325100B68F21 /* FSAlbumViewCell.swift */,
+				48EA94091DFB325100B68F21 /* FSCameraView.swift */,
+				48EA940A1DFB325100B68F21 /* FSConstants.swift */,
+				48EA940B1DFB325100B68F21 /* FSImageCropView.swift */,
+				48EA940C1DFB325100B68F21 /* FSVideoCameraView.swift */,
+				48EA940D1DFB325100B68F21 /* FusumaViewController.swift */,
+				48EA94141DFB325100B68F21 /* Resources */,
+				48EA941B1DFB325100B68F21 /* Support Files */,
+			);
+			name = Fusuma;
+			path = ../Pods/Fusuma;
+			sourceTree = "<group>";
+		};
 		5A04BB10D6E35805E3227591 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1130,6 +1116,7 @@
 		B0D3D7DF15701189E3A8CF22 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48EA94051DFB2FD300B68F21 /* Fusuma.framework */,
 				8CD8317B031065561D047D14 /* Pods_moyoutlet.framework */,
 			);
 			name = Frameworks;
@@ -1204,10 +1191,14 @@
 				047BE6721D51C41A008C999F /* HeaderView.xib in Resources */,
 				04F3CEFC1D4736D90041D864 /* NotificationCell.xib in Resources */,
 				044CA79F1D39641900678E24 /* OpenSans-BoldItalic.ttf in Resources */,
+				48EA94281DFB325100B68F21 /* FSVideoCameraView.xib in Resources */,
+				48EA94241DFB325100B68F21 /* Assets.xcassets in Resources */,
 				04F3CF091D47882A0041D864 /* NewsItemVC.xib in Resources */,
 				044CA7C51D39844C00678E24 /* MyPurchasesVC.xib in Resources */,
+				48EA94291DFB325100B68F21 /* FusumaViewController.xib in Resources */,
 				044CA7A01D39641900678E24 /* OpenSans-ExtraBold.ttf in Resources */,
 				044CA7A11D39641900678E24 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				48EA942C1DFB325100B68F21 /* Info.plist in Resources */,
 				04F3CEF61D47262F0041D864 /* PopupWithNotificationsVC.xib in Resources */,
 				044CA7A21D39641900678E24 /* OpenSans-Italic.ttf in Resources */,
 				044CA7D01D39847F00678E24 /* HelpVC.xib in Resources */,
@@ -1218,18 +1209,19 @@
 				048109CA1D621AFF00EAB6AA /* CreateOfferPhotoCell.xib in Resources */,
 				043752661D4B1A81000EE3E5 /* SearchResultVC.xib in Resources */,
 				04C38D5B1D3A7E2000532FB9 /* OfferLightCollectionViewCell.xib in Resources */,
+				48EA942A1DFB325100B68F21 /* Fusuma.xcconfig in Resources */,
+				48EA94261DFB325100B68F21 /* FSAlbumViewCell.xib in Resources */,
 				0405AD641D4918EE0059E668 /* SearchVC.xib in Resources */,
 				047C2C441CE21B07000FF304 /* Main.storyboard in Resources */,
-				048109E61D63340400EAB6AA /* CameraView.strings in Resources */,
 				047C2C461CE21B0B000FF304 /* LaunchScreen.storyboard in Resources */,
 				047C2C7A1CE21CA9000FF304 /* CenturyGothicBold.ttf in Resources */,
 				04C38D581D3A729200532FB9 /* ProfileVC.xib in Resources */,
 				044CA7B81D39840200678E24 /* MyOffersVC.xib in Resources */,
+				48EA94271DFB325100B68F21 /* FSCameraView.xib in Resources */,
 				047C2C8D1CE24B93000FF304 /* OpenSans-Regular.ttf in Resources */,
-				048109E71D63340400EAB6AA /* CameraViewAssets.xcassets in Resources */,
 				047BE6771D51C769008C999F /* SearchCell.xib in Resources */,
-				048109F51D63340400EAB6AA /* ConfirmViewController.xib in Resources */,
 				044CA7AC1D39837900678E24 /* NewsVC.xib in Resources */,
+				48EA94251DFB325100B68F21 /* FSAlbumView.xib in Resources */,
 				044CA7CA1D39846300678E24 /* SettingsVC.xib in Resources */,
 				047C2C8B1CE24364000FF304 /* CenturyGothicRegular.ttf in Resources */,
 				047C2C0E1CE21A74000FF304 /* Assets.xcassets in Resources */,
@@ -1305,12 +1297,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048109EC1D63340400EAB6AA /* SingleImageFetcher.swift in Sources */,
 				044CA7B71D39840200678E24 /* MyOffersVC.m in Sources */,
 				047C2C311CE21A9A000FF304 /* IIViewDeckController.m in Sources */,
 				049F15B41D3D4E4C00CB2132 /* MenuItemView.swift in Sources */,
 				044CA7C41D39844C00678E24 /* MyPurchasesVC.m in Sources */,
-				048109F81D63340400EAB6AA /* CropOverlay.swift in Sources */,
 				047C2C7D1CE21D94000FF304 /* customNavigationController.m in Sources */,
 				048A73E81CF36F89002CCA31 /* UIImage+WebP.m in Sources */,
 				047C2C781CE21BA3000FF304 /* categoryItemButton.m in Sources */,
@@ -1321,12 +1311,12 @@
 				047C2C741CE21B74000FF304 /* JVFloatLabeledTextView.m in Sources */,
 				047C2C091CE21A63000FF304 /* AppConfig.m in Sources */,
 				047C2C891CE22E51000FF304 /* UIButton+Badge.m in Sources */,
-				048109F91D63340400EAB6AA /* ImageCell.swift in Sources */,
 				047C2BF01CE219F1000FF304 /* baseError.m in Sources */,
+				48EA942B1DFB325100B68F21 /* Fusuma-dummy.m in Sources */,
 				04DE64631D5DB2D9003C0C5C /* CreateOfferVC.m in Sources */,
-				048109FA1D63340400EAB6AA /* PermissionsView.swift in Sources */,
 				049F15B71D3D4E4C00CB2132 /* PagingMenuOptions.swift in Sources */,
 				048A73DD1CF36F89002CCA31 /* NSData+ImageContentType.m in Sources */,
+				48EA94201DFB325100B68F21 /* FSConstants.swift in Sources */,
 				042D17971CE219340032E5DF /* moyoutlet.xcdatamodeld in Sources */,
 				047C2BEB1CE219DE000FF304 /* baseVC.m in Sources */,
 				045105421D05DDE7000C740A /* RDPagingView.m in Sources */,
@@ -1337,25 +1327,26 @@
 				048109C91D621AFF00EAB6AA /* CreateOfferPhotoCell.m in Sources */,
 				049F15A51D3D4CA100CB2132 /* CategoriesWithOffersVC.m in Sources */,
 				04F3CEFB1D4736D90041D864 /* NotificationCell.m in Sources */,
-				048109EF1D63340400EAB6AA /* UIViewExtensions.swift in Sources */,
 				044CA7CF1D39847F00678E24 /* HelpVC.m in Sources */,
 				048A73E41CF36F89002CCA31 /* SDWebImagePrefetcher.m in Sources */,
 				047C2C751CE21B74000FF304 /* NSString+TextDirectionality.m in Sources */,
 				042A0EBA1D37F94A00213DFA /* MenuVC.m in Sources */,
 				043752651D4B1A81000EE3E5 /* SearchResultVC.m in Sources */,
 				048A73DF1CF36F89002CCA31 /* SDWebImageCompat.m in Sources */,
-				048109F01D63340400EAB6AA /* Utilities.swift in Sources */,
 				047C2BF51CE21A11000FF304 /* OfferCollectionViewCell.m in Sources */,
 				04F3CF131D47A2580041D864 /* UIWebView+Additional.m in Sources */,
 				044CA7B11D3983D800678E24 /* FavoritesVC.m in Sources */,
+				48EA94221DFB325100B68F21 /* FSVideoCameraView.swift in Sources */,
 				047C2C331CE21A9A000FF304 /* ViewDeckController.m in Sources */,
 				043466F01D6622610043DC34 /* PhotoCollectionView.swift in Sources */,
 				047C2C731CE21B74000FF304 /* JVFloatLabeledTextField.m in Sources */,
 				048A73E01CF36F89002CCA31 /* SDWebImageDecoder.m in Sources */,
+				48EA941F1DFB325100B68F21 /* FSCameraView.swift in Sources */,
 				047BE66F1D51C406008C999F /* HeaderView.m in Sources */,
 				047C2C321CE21A9A000FF304 /* IIWrapController.m in Sources */,
 				046529431D3E083200DAA187 /* MBProgressHUD.m in Sources */,
 				047C2BF81CE21A1D000FF304 /* OfferItem.m in Sources */,
+				48EA94231DFB325100B68F21 /* FusumaViewController.swift in Sources */,
 				044CA7C91D39846300678E24 /* SettingsVC.m in Sources */,
 				048A73E91CF36F89002CCA31 /* UIImageView+HighlightedWebCache.m in Sources */,
 				04F3CEF51D47262F0041D864 /* PopupWithNotificationsVC.m in Sources */,
@@ -1363,46 +1354,37 @@
 				043752551D4A62C9000EE3E5 /* UserItem.m in Sources */,
 				04C4F5581D54992B004BC279 /* CategoryButton.m in Sources */,
 				048A73EB1CF36F89002CCA31 /* UIView+WebCacheOperation.m in Sources */,
-				048109ED1D63340400EAB6AA /* SingleImageSaver.swift in Sources */,
 				047C2C301CE21A9A000FF304 /* IISideController.m in Sources */,
-				048109F21D63340400EAB6AA /* CameraViewController.swift in Sources */,
-				048109EB1D63340400EAB6AA /* PhotoLibraryAuthorizer.swift in Sources */,
+				48EA941E1DFB325100B68F21 /* FSAlbumViewCell.swift in Sources */,
 				042C2E9E1D461FF1005E4C3D /* ARSPopover.m in Sources */,
 				048A73DE1CF36F89002CCA31 /* SDImageCache.m in Sources */,
 				048A73EA1CF36F89002CCA31 /* UIImageView+WebCache.m in Sources */,
 				049F15B61D3D4E4C00CB2132 /* PagingMenuController.swift in Sources */,
 				0437525A1D4A71B1000EE3E5 /* AddressItem.m in Sources */,
-				048109E81D63340400EAB6AA /* CameraGlobals.swift in Sources */,
 				047C2BFD1CE21A25000FF304 /* OffersVC.m in Sources */,
 				045D7FF81D4FBA5800513E3D /* UILoadControl.swift in Sources */,
 				042D178E1CE219340032E5DF /* AppDelegate.m in Sources */,
 				048A73E61CF36F89002CCA31 /* UIImage+GIF.m in Sources */,
-				048109EA1D63340400EAB6AA /* ImageFetcher.swift in Sources */,
 				04F3CF081D47882A0041D864 /* NewsItemVC.m in Sources */,
-				048109F61D63340400EAB6AA /* PhotoLibraryViewController.swift in Sources */,
 				042D178B1CE219340032E5DF /* main.m in Sources */,
 				047C2C0C1CE21A69000FF304 /* AppManager.m in Sources */,
 				047C2C381CE21AAF000FF304 /* LoginVC.m in Sources */,
 				047C2C421CE21AC9000FF304 /* LeftMenuCell.m in Sources */,
+				48EA941D1DFB325100B68F21 /* FSAlbumView.swift in Sources */,
 				047BE67B1D51CB97008C999F /* SearchItem.m in Sources */,
 				048A73E71CF36F89002CCA31 /* UIImage+MultiFormat.m in Sources */,
 				044CA7AB1D39837900678E24 /* NewsVC.m in Sources */,
 				049F15B51D3D4E4C00CB2132 /* MenuView.swift in Sources */,
 				049F15B81D3D4E4C00CB2132 /* UIViewController+MenuItemImage.swift in Sources */,
-				048109EE1D63340400EAB6AA /* UIButtonExtensions.swift in Sources */,
 				04F3CF031D4776660041D864 /* NewsCell.m in Sources */,
-				048109F11D63340400EAB6AA /* VolumeControl.swift in Sources */,
 				0405AD631D4918EE0059E668 /* SearchVC.m in Sources */,
 				045B9BA11CFB658A00616678 /* PhotoCollectionViewCell.m in Sources */,
-				048109E91D63340400EAB6AA /* CameraShot.swift in Sources */,
-				048109F71D63340400EAB6AA /* CameraView.swift in Sources */,
 				048A73E31CF36F89002CCA31 /* SDWebImageManager.m in Sources */,
 				048A73E11CF36F89002CCA31 /* SDWebImageDownloader.m in Sources */,
-				048109F41D63340400EAB6AA /* ConfirmViewController.swift in Sources */,
 				04C38D571D3A729200532FB9 /* ProfileVC.m in Sources */,
-				048109F31D63340400EAB6AA /* CameraViewControllerConstraint.swift in Sources */,
 				048A73E21CF36F89002CCA31 /* SDWebImageDownloaderOperation.m in Sources */,
 				045105461D05DEA0000C740A /* rd_M2DURLConnectionOperation.m in Sources */,
+				48EA94211DFB325100B68F21 /* FSImageCropView.swift in Sources */,
 				048A73DC1CF36F89002CCA31 /* MKAnnotationView+WebCache.m in Sources */,
 				047C2C831CE2289A000FF304 /* UIColor+CustomColors.m in Sources */,
 			);
@@ -1522,7 +1504,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "moyoutlet/moyoutlet-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1549,7 +1531,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "moyoutlet/moyoutlet-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

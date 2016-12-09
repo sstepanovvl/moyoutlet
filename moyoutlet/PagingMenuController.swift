@@ -9,24 +9,24 @@
 import UIKit
 
 @objc public protocol PagingMenuControllerDelegate: class {
-    optional func willMoveToPageMenuController(menuController: UIViewController, previousMenuController: UIViewController)
-    optional func didMoveToPageMenuController(menuController: UIViewController, previousMenuController: UIViewController)
+    @objc optional func willMoveToPageMenuController(_ menuController: UIViewController, previousMenuController: UIViewController)
+    @objc optional func didMoveToPageMenuController(_ menuController: UIViewController, previousMenuController: UIViewController)
 }
 
-public class PagingMenuController: UIViewController {
+open class PagingMenuController: UIViewController {
     
-    weak public var delegate: PagingMenuControllerDelegate?
-    public private(set) var menuView: MenuView!
-    public private(set) var currentPage: Int = 0
-    public private(set) var currentViewController: UIViewController!
-    public private(set) var visiblePagingViewControllers = [UIViewController]()
-    public private(set) var pagingViewControllers = [UIViewController]() {
+    weak open var delegate: PagingMenuControllerDelegate?
+    open fileprivate(set) var menuView: MenuView!
+    open fileprivate(set) var currentPage: Int = 0
+    open fileprivate(set) var currentViewController: UIViewController!
+    open fileprivate(set) var visiblePagingViewControllers = [UIViewController]()
+    open fileprivate(set) var pagingViewControllers = [UIViewController]() {
         willSet {
             options.menuItemCount = newValue.count
-            options.menuItemViewContent = newValue.flatMap({ $0.menuItemImage }).isEmpty ? .Text : .Image
+            options.menuItemViewContent = newValue.flatMap({ $0.menuItemImage }).isEmpty ? .text : .image
             switch options.menuItemViewContent {
-            case .Text: menuItemTitles = newValue.map { $0.title ?? "Menu" }
-            case .Image: menuItemImages = newValue.map { $0.menuItemImage ?? UIImage() }
+            case .text: menuItemTitles = newValue.map { $0.title ?? "Menu" }
+            case .image: menuItemImages = newValue.map { $0.menuItemImage ?? UIImage() }
             }
         }
         didSet {
@@ -34,11 +34,11 @@ public class PagingMenuController: UIViewController {
         }
     }
     
-    private var options: PagingMenuOptions!
-    private let visiblePagingViewNumber: Int = 3
-    private let contentScrollView: UIScrollView = {
+    fileprivate var options: PagingMenuOptions!
+    fileprivate let visiblePagingViewNumber: Int = 3
+    fileprivate let contentScrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
-        scrollView.pagingEnabled = true
+        scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.scrollsToTop = false
@@ -46,40 +46,40 @@ public class PagingMenuController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-    private let contentView: UIView = {
+    fileprivate let contentView: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private var menuItemTitles: [String] = []
-    private var menuItemImages: [UIImage] = []
-    private enum PagingViewPosition {
-        case Left, Center, Right, Unknown
+    fileprivate var menuItemTitles: [String] = []
+    fileprivate var menuItemImages: [UIImage] = []
+    fileprivate enum PagingViewPosition {
+        case left, center, right, unknown
         
         init(order: Int) {
             switch order {
-            case 0: self = .Left
-            case 1: self = .Center
-            case 2: self = .Right
-            default: self = .Unknown
+            case 0: self = .left
+            case 1: self = .center
+            case 2: self = .right
+            default: self = .unknown
             }
         }
     }
-    private var previousIndex: Int {
-        guard case .Infinite = options.menuDisplayMode else { return currentPage - 1 }
+    fileprivate var previousIndex: Int {
+        guard case .infinite = options.menuDisplayMode else { return currentPage - 1 }
         
         return currentPage - 1 < 0 ? options.menuItemCount - 1 : currentPage - 1
     }
-    private var nextIndex: Int {
-        guard case .Infinite = options.menuDisplayMode else { return currentPage + 1 }
+    fileprivate var nextIndex: Int {
+        guard case .infinite = options.menuDisplayMode else { return currentPage + 1 }
         
         return currentPage + 1 > options.menuItemCount - 1 ? 0 : currentPage + 1
     }
-    private var currentPagingViewPosition: PagingViewPosition {
+    fileprivate var currentPagingViewPosition: PagingViewPosition {
         let pageWidth = contentScrollView.frame.width
         let order = Int(ceil((contentScrollView.contentOffset.x - pageWidth / 2) / pageWidth))
         
-        if case .Infinite = options.menuDisplayMode {
+        if case .infinite = options.menuDisplayMode {
             return PagingViewPosition(order: order)
         }
         
@@ -87,13 +87,13 @@ public class PagingMenuController: UIViewController {
         guard currentPage == 0 && contentScrollView.contentSize.width < (pageWidth * CGFloat(visiblePagingViewNumber)) else { return PagingViewPosition(order: order) }
         return PagingViewPosition(order: order + 1)
     }
-    lazy private var shouldLoadPage: (Int) -> Bool = { [unowned self] in
+    lazy fileprivate var shouldLoadPage: (Int) -> Bool = { [unowned self] in
         switch (self.options.menuControllerSet, self.options.lazyLoadingPage) {
-        case (.Single, _),
-             (_, .One):
+        case (.single, _),
+             (_, .one):
             guard $0 == self.currentPage else { return false }
-        case (_, .Three):
-            if case .Infinite = self.options.menuDisplayMode {
+        case (_, .three):
+            if case .infinite = self.options.menuDisplayMode {
                 guard $0 == self.currentPage || $0 == self.previousIndex || $0 == self.nextIndex else { return false }
             } else {
                 guard $0 >= self.previousIndex && $0 <= self.nextIndex else { return false }
@@ -102,11 +102,11 @@ public class PagingMenuController: UIViewController {
         return true
     }
     
-    lazy private var isVisiblePagingViewController: (UIViewController) -> Bool = { [unowned self] in
+    lazy fileprivate var isVisiblePagingViewController: (UIViewController) -> Bool = { [unowned self] in
         return self.childViewControllers.contains($0)
     }
     
-    private let ExceptionName = "PMCException"
+    fileprivate let ExceptionName = "PMCException"
 
     // MARK: - Lifecycle
     
@@ -134,13 +134,13 @@ public class PagingMenuController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    public override func viewDidAppear(animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         positionMenuController()
     }
     
-    override public func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         // fix unnecessary inset for menu view when implemented by programmatically
@@ -150,19 +150,19 @@ public class PagingMenuController: UIViewController {
         positionMenuController()
     }
     
-    override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
         if let menuView = menuView {
             menuView.updateMenuViewConstraints(size: size)
             
-            coordinator.animateAlongsideTransition({ [unowned self] (_) -> Void in
+            coordinator.animate(alongsideTransition: { [unowned self] (_) -> Void in
                 self.view.setNeedsLayout()
                 self.view.layoutIfNeeded()
                 
                 // reset selected menu item view position
                 switch self.options.menuDisplayMode {
-                case .Standard, .Infinite:
+                case .standard, .infinite:
                     self.moveToMenuPage(self.currentPage, animated: true)
                 default: break
                 }
@@ -172,7 +172,7 @@ public class PagingMenuController: UIViewController {
     
     // MARK: - Public
     
-    public func setup(viewControllers: [UIViewController], options: PagingMenuOptions) {
+    open func setup(_ viewControllers: [UIViewController], options: PagingMenuOptions) {
         self.options = options
         pagingViewControllers = viewControllers
         visiblePagingViewControllers.reserveCapacity(visiblePagingViewNumber)
@@ -190,9 +190,9 @@ public class PagingMenuController: UIViewController {
         moveToMenuPage(currentPage, animated: false)
     }
     
-    private func setupMenuView() {
+    fileprivate func setupMenuView() {
         switch options.menuComponentType {
-        case .MenuController: return
+        case .menuController: return
         default: break
         }
         
@@ -200,9 +200,9 @@ public class PagingMenuController: UIViewController {
         layoutMenuView()
     }
     
-    private func setupMenuController() {
+    fileprivate func setupMenuController() {
         switch options.menuComponentType {
-        case .MenuView: return
+        case .menuView: return
         default: break
         }
         
@@ -214,16 +214,16 @@ public class PagingMenuController: UIViewController {
         layoutPagingViewControllers()
     }
     
-    public func setup(menuItemTypes: [MenuItemType], options: PagingMenuOptions) {
+    open func setup(_ menuItemTypes: [MenuItemType], options: PagingMenuOptions) {
         self.options = options
         currentPage = options.defaultPage
-        options.menuComponentType = .MenuView
+        options.menuComponentType = .menuView
         
-        if let title = menuItemTypes.first where title is String {
-            options.menuItemViewContent = .Text
+        if let title = menuItemTypes.first, title is String {
+            options.menuItemViewContent = .text
             menuItemTitles = menuItemTypes.map { $0 as! String }
-        } else if let image = menuItemTypes.first where image is UIImage {
-            options.menuItemViewContent = .Image
+        } else if let image = menuItemTypes.first, image is UIImage {
+            options.menuItemViewContent = .image
             menuItemImages = menuItemTypes.map { $0 as! UIImage }
         }
         
@@ -232,9 +232,9 @@ public class PagingMenuController: UIViewController {
         menuView.moveToMenu(currentPage, animated: false)
     }
     
-    public func moveToMenuPage(page: Int, animated: Bool = true) {
+    open func moveToMenuPage(_ page: Int, animated: Bool = true) {
         switch options.menuComponentType {
-        case .MenuView, .All:
+        case .menuView, .all:
             // ignore an unexpected page number
             guard page < menuView.menuItemCount else { return }
             
@@ -246,12 +246,12 @@ public class PagingMenuController: UIViewController {
                 return
             }
             
-            guard options.menuComponentType == .All else {
+            guard options.menuComponentType == .all else {
                 updateCurrentPage(page)
                 menuView.moveToMenu(page, animated: animated)
                 return
             }
-        case .MenuController:
+        case .menuController:
             guard page < pagingViewControllers.count else { return }
             guard page != currentPage else { return }
         }
@@ -261,16 +261,16 @@ public class PagingMenuController: UIViewController {
         
         let previousViewController = currentViewController
         
-        delegate?.willMoveToPageMenuController?(currentViewController, previousMenuController: previousViewController)
+        delegate?.willMoveToPageMenuController?(currentViewController, previousMenuController: previousViewController!)
         updateCurrentPage(page)
         currentViewController = pagingViewControllers[currentPage]
         menuView?.moveToMenu(page)
         
         let duration = animated ? options.animationDuration : 0
-        UIView.animateWithDuration(duration, animations: {
+        UIView.animate(withDuration: duration, animations: {
             [unowned self] () -> Void in
             self.positionMenuController()
-            }) { [weak self] (_) -> Void in
+            }, completion: { [weak self] (_) -> Void in
                 guard let _ = self else { return }
                 
                 self!.relayoutPagingViewControllers()
@@ -278,27 +278,27 @@ public class PagingMenuController: UIViewController {
                 // show paging views
                 self!.showPagingMenuControllers()
                 
-                self!.delegate?.didMoveToPageMenuController?(self!.currentViewController, previousMenuController: previousViewController)
-        }
+                self!.delegate?.didMoveToPageMenuController?(self!.currentViewController, previousMenuController: previousViewController!)
+        }) 
     }
     
     // MARK: - UIGestureRecognizer
     
-    internal func handleTapGesture(recognizer: UITapGestureRecognizer) {
+    internal func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
         guard let menuItemView = recognizer.view as? MenuItemView else { return }
-        guard let page = menuView.menuItemViews.indexOf(menuItemView) where page != menuView.currentPage else { return }
+        guard let page = menuView.menuItemViews.index(of: menuItemView), page != menuView.currentPage else { return }
         
         let newPage: Int
         switch self.options.menuDisplayMode {
-        case .Standard(_, _, .PagingEnabled):
+        case .standard(_, _, .pagingEnabled):
             newPage = page < self.currentPage ? self.currentPage - 1 : self.currentPage + 1
-        case .Infinite(_, .PagingEnabled):
+        case .infinite(_, .pagingEnabled):
             if menuItemView.frame.midX > menuView.currentMenuItemView.frame.midX {
                 newPage = menuView.nextPage
             } else {
                 newPage = menuView.previousPage
             }
-        case .Infinite: fallthrough
+        case .infinite: fallthrough
         default:
             newPage = page
         }
@@ -306,18 +306,18 @@ public class PagingMenuController: UIViewController {
         moveToMenuPage(newPage)
     }
     
-    internal func handleSwipeGesture(recognizer: UISwipeGestureRecognizer) {
+    internal func handleSwipeGesture(_ recognizer: UISwipeGestureRecognizer) {
         guard let menuView = recognizer.view as? MenuView else { return }
         
         let newPage: Int
         switch (recognizer.direction, options.menuDisplayMode) {
-        case (UISwipeGestureRecognizerDirection.Left, .Infinite):
+        case (UISwipeGestureRecognizerDirection.left, .infinite):
             newPage = menuView.nextPage
-        case (UISwipeGestureRecognizerDirection.Left, _):
+        case (UISwipeGestureRecognizerDirection.left, _):
             newPage = min(nextIndex, options.menuItemCount - 1)
-        case (UISwipeGestureRecognizerDirection.Right, .Infinite):
+        case (UISwipeGestureRecognizerDirection.right, .infinite):
             newPage = menuView.previousPage
-        case (UISwipeGestureRecognizerDirection.Right, _):
+        case (UISwipeGestureRecognizerDirection.right, _):
             newPage = max(previousIndex, 0)
         default: return
         }
@@ -327,15 +327,15 @@ public class PagingMenuController: UIViewController {
     
     // MARK: - Constructor
     
-    private func constructMenuView() {
+    fileprivate func constructMenuView() {
         switch options.menuComponentType {
-        case .MenuController: return
+        case .menuController: return
         default: break
         }
         
         switch options.menuItemViewContent {
-        case .Text: menuView = MenuView(menuItemTypes: menuItemTitles, options: options)
-        case .Image: menuView = MenuView(menuItemTypes: menuItemImages, options: options)
+        case .text: menuView = MenuView(menuItemTypes: menuItemTitles, options: options)
+        case .image: menuView = MenuView(menuItemTypes: menuItemImages, options: options)
         }
         
         menuView.delegate = self
@@ -345,83 +345,83 @@ public class PagingMenuController: UIViewController {
         addSwipeGestureHandlersIfNeeded()
     }
     
-    private func layoutMenuView() {
+    fileprivate func layoutMenuView() {
         let viewsDictionary = ["menuView": menuView]
         
         let verticalConstraints: [NSLayoutConstraint]
         switch options.menuComponentType {
-        case .All:
+        case .all:
             switch options.menuPosition {
-            case .Top:
-                verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[menuView]", options: [], metrics: nil, views: viewsDictionary)
-            case .Bottom:
-                verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[menuView]|", options: [], metrics: nil, views: viewsDictionary)
+            case .top:
+                verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[menuView]", options: [], metrics: nil, views: viewsDictionary)
+            case .bottom:
+                verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[menuView]|", options: [], metrics: nil, views: viewsDictionary)
             }
-        case .MenuView:
-            verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[menuView]", options: [], metrics: nil, views: viewsDictionary)
+        case .menuView:
+            verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[menuView]", options: [], metrics: nil, views: viewsDictionary)
         default: return
         }
         
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[menuView]|", options: [], metrics: nil, views: viewsDictionary)
-        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints)
+        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[menuView]|", options: [], metrics: nil, views: viewsDictionary)
+        NSLayoutConstraint.activate(horizontalConstraints + verticalConstraints)
         
         menuView.setNeedsLayout()
         menuView.layoutIfNeeded()
     }
     
-    private func setupContentScrollView() {
+    fileprivate func setupContentScrollView() {
         contentScrollView.delegate = self
-        contentScrollView.scrollEnabled = options.scrollEnabled
+        contentScrollView.isScrollEnabled = options.scrollEnabled
         view.addSubview(contentScrollView)
     }
     
-    private func layoutContentScrollView() {
+    fileprivate func layoutContentScrollView() {
         let viewsDictionary: [String: UIView]
         switch options.menuComponentType {
-        case .MenuController:
+        case .menuController:
             viewsDictionary = ["contentScrollView": contentScrollView]
         default:
             viewsDictionary = ["contentScrollView": contentScrollView, "menuView": menuView]
         }
         
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentScrollView]|", options: [], metrics: nil, views: viewsDictionary)
+        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[contentScrollView]|", options: [], metrics: nil, views: viewsDictionary)
         let verticalConstraints: [NSLayoutConstraint]
         switch (options.menuComponentType, options.menuPosition) {
-        case (.MenuController, _):
-            verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentScrollView]|", options: [], metrics: nil, views: viewsDictionary)
-        case (_, .Top):
-            verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[menuView][contentScrollView]|", options: [], metrics: nil, views: viewsDictionary)
-        case (_, .Bottom):
-            verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentScrollView][menuView]", options: [], metrics: nil, views: viewsDictionary)
+        case (.menuController, _):
+            verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[contentScrollView]|", options: [], metrics: nil, views: viewsDictionary)
+        case (_, .top):
+            verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:[menuView][contentScrollView]|", options: [], metrics: nil, views: viewsDictionary)
+        case (_, .bottom):
+            verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[contentScrollView][menuView]", options: [], metrics: nil, views: viewsDictionary)
         }
         
-        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints)
+        NSLayoutConstraint.activate(horizontalConstraints + verticalConstraints)
     }
     
-    private func setupContentView() {
+    fileprivate func setupContentView() {
         contentScrollView.addSubview(contentView)
     }
     
-    private func layoutContentView() {
+    fileprivate func layoutContentView() {
         let viewsDictionary = ["contentView": contentView, "contentScrollView": contentScrollView]
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: [], metrics: nil, views: viewsDictionary)
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView(==contentScrollView)]|", options: [], metrics: nil, views: viewsDictionary)
+        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[contentView]|", options: [], metrics: nil, views: viewsDictionary)
+        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[contentView(==contentScrollView)]|", options: [], metrics: nil, views: viewsDictionary)
         
-        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints)
+        NSLayoutConstraint.activate(horizontalConstraints + verticalConstraints)
     }
     
-    private func constructPagingViewControllers() {
-        for (index, pagingViewController) in pagingViewControllers.enumerate() {
+    fileprivate func constructPagingViewControllers() {
+        for (index, pagingViewController) in pagingViewControllers.enumerated() {
             // construct three child view controllers at a maximum, previous(optional), current and next(optional)
             if !shouldLoadPage(index) {
                 // remove unnecessary child view controllers
                 if isVisiblePagingViewController(pagingViewController) {
-                    pagingViewController.willMoveToParentViewController(nil)
+                    pagingViewController.willMove(toParentViewController: nil)
                     pagingViewController.view!.removeFromSuperview()
                     pagingViewController.removeFromParentViewController()
                     
-                    if let viewIndex = visiblePagingViewControllers.indexOf(pagingViewController) {
-                        visiblePagingViewControllers.removeAtIndex(viewIndex)
+                    if let viewIndex = visiblePagingViewControllers.index(of: pagingViewController) {
+                        visiblePagingViewControllers.remove(at: viewIndex)
                     }
                 }
                 continue
@@ -441,18 +441,18 @@ public class PagingMenuController: UIViewController {
 
             contentView.addSubview(pagingView)
             addChildViewController(pagingViewController as UIViewController)
-            pagingViewController.didMoveToParentViewController(self)
+            pagingViewController.didMove(toParentViewController: self)
             
             visiblePagingViewControllers.append(pagingViewController)
         }
     }
     
-    private func layoutPagingViewControllers() {
+    fileprivate func layoutPagingViewControllers() {
         // cleanup
-        NSLayoutConstraint.deactivateConstraints(contentView.constraints)
+        NSLayoutConstraint.deactivate(contentView.constraints)
 
         var viewsDictionary: [String: AnyObject] = ["contentScrollView": contentScrollView]
-        for (index, pagingViewController) in pagingViewControllers.enumerate() {
+        for (index, pagingViewController) in pagingViewControllers.enumerated() {
             if !shouldLoadPage(index) {
                 continue
             }
@@ -462,11 +462,11 @@ public class PagingMenuController: UIViewController {
             
             // only one view controller
             if options.menuItemCount == options.minumumSupportedViewCount ||
-                options.lazyLoadingPage == .One ||
-                options.menuControllerSet == .Single {
+                options.lazyLoadingPage == .one ||
+                options.menuControllerSet == .single {
                 horizontalVisualFormat = "H:|[pagingView(==contentScrollView)]|"
             } else {
-                if case .Infinite = options.menuDisplayMode {
+                if case .infinite = options.menuDisplayMode {
                     if index == currentPage {
                         viewsDictionary["previousPagingView"] = pagingViewControllers[previousIndex].view
                         viewsDictionary["nextPagingView"] = pagingViewControllers[nextIndex].view
@@ -490,17 +490,17 @@ public class PagingMenuController: UIViewController {
                 }
             }
             
-            let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(horizontalVisualFormat, options: [], metrics: nil, views: viewsDictionary)
-            let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[pagingView(==contentScrollView)]|", options: [], metrics: nil, views: viewsDictionary)
+            let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: horizontalVisualFormat, options: [], metrics: nil, views: viewsDictionary)
+            let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[pagingView(==contentScrollView)]|", options: [], metrics: nil, views: viewsDictionary)
             
-            NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints)
+            NSLayoutConstraint.activate(horizontalConstraints + verticalConstraints)
         }
 
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
     
-    private func relayoutPagingViewControllers() {
+    fileprivate func relayoutPagingViewControllers() {
         constructPagingViewControllers()
         layoutPagingViewControllers()
         view.setNeedsLayout()
@@ -509,12 +509,12 @@ public class PagingMenuController: UIViewController {
     
     // MARK: - Cleanup
     
-    private func cleanup() {
+    fileprivate func cleanup() {
         visiblePagingViewControllers.removeAll()
         currentViewController = nil
         
         childViewControllers.forEach {
-            $0.willMoveToParentViewController(nil)
+            $0.willMove(toParentViewController: nil)
             $0.view.removeFromSuperview()
             $0.removeFromParentViewController()
         }
@@ -528,35 +528,35 @@ public class PagingMenuController: UIViewController {
     
     // MARK: - Private
     
-    private func positionMenuController() {
+    fileprivate func positionMenuController() {
         if let currentViewController = currentViewController,
             let currentView = currentViewController.view {
             contentScrollView.contentOffset.x = currentView.frame.minX
         }
     }
     
-    private func updateCurrentPage(page: Int) {
+    fileprivate func updateCurrentPage(_ page: Int) {
         let currentPage = page % options.menuItemCount
         self.currentPage = currentPage
     }
     
-    private func hidePagingMenuControllers(page: Int) {
+    fileprivate func hidePagingMenuControllers(_ page: Int) {
         switch (options.lazyLoadingPage, options.menuDisplayMode, page) {
-        case (.Three, .Infinite, menuView?.previousPage ?? previousIndex),
-             (.Three, .Infinite, menuView?.nextPage ?? nextIndex),
-             (.Three, _, previousIndex),
-             (.Three, _, nextIndex): break
+        case (.three, .infinite, menuView?.previousPage ?? previousIndex),
+             (.three, .infinite, menuView?.nextPage ?? nextIndex),
+             (.three, _, previousIndex),
+             (.three, _, nextIndex): break
         default: visiblePagingViewControllers.forEach { $0.view.alpha = 0 }
         }
     }
     
-    private func showPagingMenuControllers() {
+    fileprivate func showPagingMenuControllers() {
         visiblePagingViewControllers.forEach { $0.view.alpha = 1 }
     }
     
     // MARK: - Gesture handler
     
-    private func addTapGestureHandlers() {
+    fileprivate func addTapGestureHandlers() {
         menuView.menuItemViews.forEach {
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(PagingMenuController.handleTapGesture(_:)))
             gestureRecognizer.numberOfTapsRequired = 1
@@ -564,57 +564,57 @@ public class PagingMenuController: UIViewController {
         }
     }
     
-    private func addSwipeGestureHandlersIfNeeded() {
+    fileprivate func addSwipeGestureHandlersIfNeeded() {
         switch options.menuDisplayMode {
-        case .Standard(_, _, .PagingEnabled): break
-        case .Infinite(_, .PagingEnabled): break
+        case .standard(_, _, .pagingEnabled): break
+        case .infinite(_, .pagingEnabled): break
         default: return
         }
         
         let leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(PagingMenuController.handleSwipeGesture(_:)))
-        leftSwipeGesture.direction = .Left
-        menuView.panGestureRecognizer.requireGestureRecognizerToFail(leftSwipeGesture)
+        leftSwipeGesture.direction = .left
+        menuView.panGestureRecognizer.require(toFail: leftSwipeGesture)
         menuView.addGestureRecognizer(leftSwipeGesture)
         let rightSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(PagingMenuController.handleSwipeGesture(_:)))
-        rightSwipeGesture.direction = .Right
-        menuView.panGestureRecognizer.requireGestureRecognizerToFail(rightSwipeGesture)
+        rightSwipeGesture.direction = .right
+        menuView.panGestureRecognizer.require(toFail: rightSwipeGesture)
         menuView.addGestureRecognizer(rightSwipeGesture)
     }
     
     // MARK: - Validator
     
-    private func validateDefaultPage() {
+    fileprivate func validateDefaultPage() {
         guard options.defaultPage >= options.menuItemCount || options.defaultPage < 0 else { return }
         
-        NSException(name: ExceptionName, reason: "default page is invalid", userInfo: nil).raise()
+        NSException(name: NSExceptionName(rawValue: ExceptionName), reason: "default page is invalid", userInfo: nil).raise()
     }
     
-    private func validatePageNumbers() {
-        guard case .Infinite = options.menuDisplayMode else { return }
+    fileprivate func validatePageNumbers() {
+        guard case .infinite = options.menuDisplayMode else { return }
         guard options.menuItemCount < visiblePagingViewNumber else { return }
         
-        NSException(name: ExceptionName, reason: "the number of view controllers should be more than three with Infinite display mode", userInfo: nil).raise()
+        NSException(name: NSExceptionName(rawValue: ExceptionName), reason: "the number of view controllers should be more than three with Infinite display mode", userInfo: nil).raise()
     }
 }
 
 extension PagingMenuController: UIScrollViewDelegate {
-    private var nextPageFromCurrentPosition: Int {
+    fileprivate var nextPageFromCurrentPosition: Int {
         // set new page number according to current moving direction
         let nextPage: Int
         switch currentPagingViewPosition {
-        case .Left:
-            nextPage = options.menuComponentType == .MenuController ? previousIndex : menuView.previousPage
-        case .Right:
-            nextPage = options.menuComponentType == .MenuController ? nextIndex : menuView.nextPage
+        case .left:
+            nextPage = options.menuComponentType == .menuController ? previousIndex : menuView.previousPage
+        case .right:
+            nextPage = options.menuComponentType == .menuController ? nextIndex : menuView.nextPage
         default: nextPage = currentPage
         }
         return nextPage
     }
     
-    private var nextPageFromCurrentPoint: Int {
-        let point = CGPointMake(menuView.contentOffset.x + menuView.frame.width / 2, 0)
-        for (index, menuItemView) in menuView.menuItemViews.enumerate() {
-            guard CGRectContainsPoint(menuItemView.frame, point) else { continue }
+    fileprivate var nextPageFromCurrentPoint: Int {
+        let point = CGPoint(x: menuView.contentOffset.x + menuView.frame.width / 2, y: 0)
+        for (index, menuItemView) in menuView.menuItemViews.enumerated() {
+            guard menuItemView.frame.contains(point) else { continue }
             return index
         }
         return currentPage
@@ -622,7 +622,7 @@ extension PagingMenuController: UIScrollViewDelegate {
     
     // MARK: - UIScrollViewDelegate
     
-    public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let nextPage: Int
         switch scrollView {
         case let scrollView where scrollView.isEqual(contentScrollView):
@@ -635,7 +635,7 @@ extension PagingMenuController: UIScrollViewDelegate {
         moveToMenuPage(nextPage)
     }
     
-    public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         switch (scrollView, decelerate) {
         case (let scrollView, false) where scrollView.isEqual(menuView): break
         default: return

@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSString* senderCity;
 @property (strong, nonatomic) UserItem* seller;
 @property (strong, nonatomic) NSMutableArray* categories;
+@property (strong, nonatomic) NSMutableArray* arrImages;
 -(instancetype)initWith:(NSDictionary*)dictionary;
 
 @end

@@ -9,23 +9,23 @@
 import UIKit
 import Foundation
 
-public class UILoadControl: UIControl {
+open class UILoadControl: UIControl {
   
-  private var activityIndicatorView: UIActivityIndicatorView!
-  private var originalDelegate: UIScrollViewDelegate?
+  fileprivate var activityIndicatorView: UIActivityIndicatorView!
+  fileprivate var originalDelegate: UIScrollViewDelegate?
   
   internal var target: AnyObject?
   internal var action: Selector!
   
-  public var heightLimit: CGFloat = 80.0
-  public private (set) var loading: Bool = false
+  open var heightLimit: CGFloat = 80.0
+  open fileprivate (set) var loading: Bool = false
   
   var scrollView: UIScrollView = UIScrollView()
   
-  override public var frame: CGRect {
+  override open var frame: CGRect {
     didSet{
       if (frame.size.height > heightLimit) && !loading {
-        self.sendActionsForControlEvents(UIControlEvents.ValueChanged)
+        self.sendActions(for: UIControlEvents.valueChanged)
       }
     }
   }
@@ -45,26 +45,26 @@ public class UILoadControl: UIControl {
     self.initialize()
     self.target = target
     self.action = action
-    addTarget(self.target, action: self.action, forControlEvents: .ValueChanged)
+    addTarget(self.target, action: self.action, for: .valueChanged)
   }
   
-  override public func awakeFromNib() {
+  override open func awakeFromNib() {
     super.awakeFromNib()
   }
   
-  override public func layoutSubviews() {
+  override open func layoutSubviews() {
     super.layoutSubviews()
   }
   
   /*
    Update layout at finsih to load
    */
-  public func endLoading(){
+  open func endLoading(){
     setLoading(false)
     fixPosition()
   }
   
-  public func update() {
+  open func update() {
     updateUI()
   }
 }
@@ -74,8 +74,8 @@ extension UILoadControl {
   /*
    Initilize the control
    */
-  private func initialize(){
-    self.addTarget(self, action: #selector(UILoadControl.didValueChange(_:)), forControlEvents: .ValueChanged)
+  fileprivate func initialize(){
+    self.addTarget(self, action: #selector(UILoadControl.didValueChange(_:)), for: .valueChanged)
     setupActivityIndicator()
   }
  
@@ -90,14 +90,14 @@ extension UILoadControl {
     
     let contentOffSetBottom = max(0, ((scrollView.contentOffset.y + scrollView.frame.size.height) - scrollView.contentSize.height))
     if (contentOffSetBottom >= 0 && !loading) || (contentOffSetBottom >= heightLimit && loading) {
-      self.updateFrame(CGRectMake(0.0, scrollView.contentSize.height, scrollView.frame.size.width, contentOffSetBottom))
+      self.updateFrame(CGRect(x: 0.0, y: scrollView.contentSize.height, width: scrollView.frame.size.width, height: contentOffSetBottom))
     }
   }
   
   /*
    Update layout after user scroll the scrollView
    */
-  private func updateFrame(rect: CGRect){
+  fileprivate func updateFrame(_ rect: CGRect){
     guard let superview = self.superview else {
       return
     }
@@ -105,22 +105,22 @@ extension UILoadControl {
     superview.frame = rect
     frame = superview.bounds
     activityIndicatorView.alpha = (((frame.size.height * 100) / heightLimit) / 100)
-    activityIndicatorView.center = CGPointMake((frame.size.width / 2), (frame.size.height / 2))
+    activityIndicatorView.center = CGPoint(x: (frame.size.width / 2), y: (frame.size.height / 2))
   }
   
   /*
    Place control at the scrollView bottom
    */
-  private func fixPosition(){
-    self.updateFrame(CGRectMake(0.0, scrollView.contentSize.height, scrollView.frame.size.width, 0.0))
+  fileprivate func fixPosition(){
+    self.updateFrame(CGRect(x: 0.0, y: scrollView.contentSize.height, width: scrollView.frame.size.width, height: 0.0))
   }
   
   /*
    Set layout to a "loading" or "not loading" state
    */
-  private func setLoading(isLoading: Bool){
+  fileprivate func setLoading(_ isLoading: Bool){
     loading = isLoading
-    dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+    DispatchQueue.main.async { [unowned self] in
       
       var contentInset = self.scrollView.contentInset
       
@@ -139,22 +139,22 @@ extension UILoadControl {
   /*
    Prepare activityIndicator
    */
-  private func setupActivityIndicator(){
+  fileprivate func setupActivityIndicator(){
     
     if self.activityIndicatorView != nil {
       return
     }
     
-    self.activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    self.activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     self.activityIndicatorView.hidesWhenStopped = false
-    self.activityIndicatorView.color = UIColor.darkGrayColor()
-    self.activityIndicatorView.transform = CGAffineTransformMakeScale(1.4, 1.4)
+    self.activityIndicatorView.color = UIColor.darkGray
+    self.activityIndicatorView.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
     
     addSubview(self.activityIndicatorView)
-    bringSubviewToFront(self.activityIndicatorView)
+    bringSubview(toFront: self.activityIndicatorView)
   }
   
-  @objc private func didValueChange(sender: AnyObject?){
+  @objc fileprivate func didValueChange(_ sender: AnyObject?){
     setLoading(true)
   }
   

@@ -8,7 +8,6 @@
 
 #import "CreateOfferVC.h"
 #import "CreateOfferPhotoCell.h"
-#import "moyoutlet-swift.h"
 
 @interface CreateOfferVC ()
 @property (strong, nonatomic) IBOutlet PhotoCollectionView *photoCollectionView;
@@ -26,20 +25,20 @@
 
 @implementation CreateOfferVC
 
+
+-(instancetype) initFromStoryboard {
+    self = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"CreateOfferVC"];
+    if (self) {
+        self.item = [OfferItem new];
+    }
+    return self;
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNavigationItems];
-    NSArray* offers = [[AppManager sharedInstance].offers allValues];
-    
-    self.item = [[[AppManager sharedInstance].offers objectForKey:@"0"] objectAtIndex:2];
 
-    for (OfferItem* item in [offers objectAtIndex:0]) {
-        if (4 == [item.photoUrls count]) {
-
-            self.item = item;
-            break;
-        }
-    }
     _photoCollectionView.clipsToBounds = NO;
     
     _photoCollectionView.backgroundColor = [UIColor clearColor];
@@ -49,8 +48,44 @@
     UIGestureRecognizer* longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [_photoCollectionView addGestureRecognizer:longPressGesture];
 
-
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+-(void)showImagePicker {
+    FusumaViewController* fsvc = [FusumaViewController new];
+    
+    fsvc.delegate = self;
+    fsvc.hasVideo = false;
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    
+    self.selfcell = (CreateOfferPhotoCell*)[self.photoCollectionView cellForItemAtIndexPath:indexPath];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Сделать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+
+            [self.navigationController pushViewController:fsvc animated:YES];
+        }]];
+    }
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Выбрать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        [self.navigationController presentViewController:fsvc animated:YES completion:nil];
+        
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:NULL]];
+    
+    alert.popoverPresentationController.sourceView = [self.selfcell  superview];
+    alert.popoverPresentationController.sourceRect = [self.selfcell  frame];
+    
+    [self presentViewController:alert animated:YES completion:NULL];
 }
 
 -(void)initNavigationItems {
@@ -136,11 +171,15 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CreateOfferPhotoCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CreateOfferPhotoCell" forIndexPath:indexPath];
     [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[self.item.photoUrls objectAtIndex:indexPath.row]]
-                      placeholderImage:[UIImage imageNamed:@"photoPlaceholder"]
-                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                 cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-                             }];
+    switch (indexPath.row) {
+        case 0:
+            [cell.imageView setImage:[self.item.arrImages objectAtIndex:0]];
+            break;
+        default:
+            [cell.imageView setImage:[UIImage imageNamed:@"photoPlaceholder"]];
+            break;
+    }
+    
     return cell;
 }
 
@@ -156,45 +195,75 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath  {
 
-    __weak typeof(self) weakSelf = self;
-
-    CreateOfferPhotoCell* selfcell  = (CreateOfferPhotoCell*)[self.photoCollectionView cellForItemAtIndexPath:indexPath];
+    FusumaViewController* fsvc = [FusumaViewController new];
+    
+    fsvc.delegate = self;
+    fsvc.hasVideo = false;
+    fsvc.hidesBottomBarWhenPushed = YES;
+    
+    self.selfcell = (CreateOfferPhotoCell*)[self.photoCollectionView cellForItemAtIndexPath:indexPath];
 
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
         [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Сделать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            
+            [self.navigationController pushViewController:fsvc animated:YES];
 
-            CameraViewController* camvc = [[CameraViewController alloc] initWithCroppingEnabled:YES allowsLibraryAccess:YES completion:^(UIImage * _Nullable image, PHAsset * _Nullable asset) {
-                if (image) {
-                    selfcell.imageView.image = image;
-                }
-                [self dismissViewControllerAnimated:YES
-                                         completion:nil];
-            }];
-
-            [self presentViewController:camvc animated:YES completion:nil];
         }]];
     }
 
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Выбрать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
 
-        PhotoLibraryViewController* camvc = [[PhotoLibraryViewController alloc] init];
-
-        [self.navigationController presentViewController:camvc animated:YES completion:nil];
+        [self.navigationController presentViewController:fsvc animated:YES completion:nil];
 
     }]];
 
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:NULL]];
 
-        alert.popoverPresentationController.sourceView = [selfcell superview];
-        alert.popoverPresentationController.sourceRect = [selfcell frame];
-    
+    alert.popoverPresentationController.sourceView = [self.selfcell  superview];
+    alert.popoverPresentationController.sourceRect = [self.selfcell  frame];
     
     [self presentViewController:alert animated:YES completion:NULL];
+}
 
+#pragma mark Fusuma delegate
+
+- (void)fusumaImageSelected:(UIImage * _Nonnull)image {
+    [self.selfcell.imageView setImage:image];
+    if (debug_enabled ) {
+        NSLog(@"fusumaImageSelected");
+    }
+    
+}
+
+- (void)fusumaDismissedWithImage:(UIImage * _Nonnull)image {
+    if (debug_enabled) {
+    NSLog(@"fusumaDismissedWithImage");
+    }
+}
+
+- (void)fusumaVideoCompletedWithFileURL:(NSURL * _Nonnull)fileURL {
+    if (debug_enabled) {
+        NSLog(@"fusumaVideoCompletedWithFileURL");
+    }
+}
+
+
+- (void)fusumaCameraRollUnauthorized {
+    if (debug_enabled) {
+        NSLog(@"fusumaCameraRollUnauthorized");
+    }
 
 }
+
+- (void)fusumaClosed {
+    if (debug_enabled) {
+        NSLog(@"fusumaClosed");
+    }
+
+}
+
 
 #pragma mark Alert Stuff
 
