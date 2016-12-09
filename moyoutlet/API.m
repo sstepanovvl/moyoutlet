@@ -20,7 +20,7 @@
         NSLog(@"API request data:%@",data);
     }
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@.php?XDEBUG_SESSION_START=%@", apiServer, method,XDEBUG_SESSION_START];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@.php", apiServer, method];
 
 
     NSURL *url = [NSURL URLWithString:urlString];

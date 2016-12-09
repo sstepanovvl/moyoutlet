@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="OpenSans-Regular.ttf">
+        <array key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
-            <string>OpenSans</string>
-            <string>OpenSans</string>
-        </mutableArray>
-        <mutableArray key="OpenSans-Semibold.ttf">
+        </array>
+        <array key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -26,12 +27,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="165" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3u-zb-7gZ" userLabel="cellView">
+                    <view contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C3u-zb-7gZ" userLabel="cellView">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAD-Il-ltb" userLabel="line">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAD-Il-ltb" userLabel="line">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="2Kl-Fz-hyx"/>
                                 </constraints>
@@ -46,17 +47,17 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hb3-ES-ubl" userLabel="priceView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hb3-ES-ubl" userLabel="priceView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTh-Rd-Y6X">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="36.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTh-Rd-Y6X">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.83921568629999999" green="0.058823529409999999" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.83921568629999999" green="0.058823529409999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="XTh-Rd-Y6X" firstAttribute="leading" secondItem="hb3-ES-ubl" secondAttribute="leading" id="5V4-U8-C5u">
                                         <variation key="heightClass=regular-widthClass=compact" constant="5"/>
@@ -79,9 +80,9 @@
                                     <mask key="constraints">
                                         <exclude reference="ejg-ss-sDr"/>
                                         <exclude reference="nnY-YX-IVa"/>
-                                        <exclude reference="bjg-aK-ecA"/>
                                         <exclude reference="5V4-U8-C5u"/>
                                         <exclude reference="ai3-s4-EQH"/>
+                                        <exclude reference="bjg-aK-ecA"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -91,29 +92,29 @@
                                     <mask key="constraints">
                                         <include reference="ejg-ss-sDr"/>
                                         <include reference="nnY-YX-IVa"/>
-                                        <include reference="bjg-aK-ecA"/>
                                         <include reference="5V4-U8-C5u"/>
                                         <include reference="ai3-s4-EQH"/>
+                                        <include reference="bjg-aK-ecA"/>
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vj7-b7-Xnc" userLabel="Brand">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vj7-b7-Xnc" userLabel="Brand">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" text="Кофточка на все случаи жизни" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIu-mb-W81" userLabel="Title">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" misplaced="YES" text="Кофточка на все случаи жизни" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIu-mb-W81" userLabel="Title">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="testContent" translatesAutoresizingMaskIntoConstraints="NO" id="Bvp-o5-jSW" userLabel="ImageView">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" misplaced="YES" image="testContent" translatesAutoresizingMaskIntoConstraints="NO" id="Bvp-o5-jSW" userLabel="ImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like" translatesAutoresizingMaskIntoConstraints="NO" id="uRQ-xP-tiH" userLabel="Like">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="like" translatesAutoresizingMaskIntoConstraints="NO" id="uRQ-xP-tiH" userLabel="Like">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="ckh-Ka-DXw">
@@ -125,25 +126,25 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="wnw-cb-0GG"/>
                                         <exclude reference="ckh-Ka-DXw"/>
+                                        <exclude reference="wnw-cb-0GG"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="wnw-cb-0GG"/>
                                         <include reference="ckh-Ka-DXw"/>
+                                        <include reference="wnw-cb-0GG"/>
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="42" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kls-RW-4kx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="42" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kls-RW-4kx">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="IUG-4s-JnG"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="XsZ-TX-aj1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -159,8 +160,8 @@
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kls-RW-4kx" firstAttribute="leading" secondItem="uRQ-xP-tiH" secondAttribute="trailing" constant="8" symbolic="YES" id="1hS-4E-z5A">
                                 <variation key="heightClass=regular-widthClass=compact" constant="2"/>
@@ -215,23 +216,23 @@
                             <mask key="constraints">
                                 <exclude reference="Zcz-Is-O5T"/>
                                 <exclude reference="n5P-O6-ogY"/>
-                                <exclude reference="zZb-Mc-jX2"/>
-                                <exclude reference="vFh-Oo-teT"/>
+                                <exclude reference="1hS-4E-z5A"/>
+                                <exclude reference="Ml7-zs-XJc"/>
+                                <exclude reference="SeD-Pq-mDK"/>
                                 <exclude reference="Pmy-jY-Iwu"/>
                                 <exclude reference="tBb-bJ-NgD"/>
-                                <exclude reference="Ml7-zs-XJc"/>
-                                <exclude reference="1hS-4E-z5A"/>
-                                <exclude reference="SeD-Pq-mDK"/>
+                                <exclude reference="vFh-Oo-teT"/>
+                                <exclude reference="zZb-Mc-jX2"/>
+                                <exclude reference="F4D-Zv-ohH"/>
                                 <exclude reference="hB4-ku-GkS"/>
                                 <exclude reference="qbw-um-D4T"/>
-                                <exclude reference="F4D-Zv-ohH"/>
-                                <exclude reference="Lsi-kC-6ye"/>
-                                <exclude reference="UES-TN-n8t"/>
-                                <exclude reference="SBr-nT-nrL"/>
+                                <exclude reference="WVS-Cv-DNE"/>
                                 <exclude reference="fyS-8k-CG9"/>
                                 <exclude reference="tag-I5-73I"/>
-                                <exclude reference="WVS-Cv-DNE"/>
                                 <exclude reference="vbJ-aH-VJh"/>
+                                <exclude reference="Lsi-kC-6ye"/>
+                                <exclude reference="SBr-nT-nrL"/>
+                                <exclude reference="UES-TN-n8t"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -247,28 +248,27 @@
                             <mask key="constraints">
                                 <include reference="Zcz-Is-O5T"/>
                                 <include reference="n5P-O6-ogY"/>
-                                <include reference="zZb-Mc-jX2"/>
-                                <include reference="vFh-Oo-teT"/>
+                                <include reference="1hS-4E-z5A"/>
+                                <include reference="Ml7-zs-XJc"/>
+                                <include reference="SeD-Pq-mDK"/>
                                 <include reference="Pmy-jY-Iwu"/>
                                 <include reference="tBb-bJ-NgD"/>
-                                <include reference="Ml7-zs-XJc"/>
-                                <include reference="1hS-4E-z5A"/>
-                                <include reference="SeD-Pq-mDK"/>
+                                <include reference="vFh-Oo-teT"/>
+                                <include reference="zZb-Mc-jX2"/>
+                                <include reference="F4D-Zv-ohH"/>
                                 <include reference="hB4-ku-GkS"/>
                                 <include reference="qbw-um-D4T"/>
-                                <include reference="F4D-Zv-ohH"/>
-                                <include reference="Lsi-kC-6ye"/>
-                                <include reference="UES-TN-n8t"/>
-                                <include reference="SBr-nT-nrL"/>
+                                <include reference="WVS-Cv-DNE"/>
                                 <include reference="fyS-8k-CG9"/>
                                 <include reference="tag-I5-73I"/>
-                                <include reference="WVS-Cv-DNE"/>
                                 <include reference="vbJ-aH-VJh"/>
+                                <include reference="Lsi-kC-6ye"/>
+                                <include reference="SBr-nT-nrL"/>
+                                <include reference="UES-TN-n8t"/>
                             </mask>
                         </variation>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="C3u-zb-7gZ" firstAttribute="top" secondItem="cyM-1h-euJ" secondAttribute="topMargin" constant="-8" id="2Pk-1Y-2N0"/>
@@ -318,7 +318,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="like" width="12" height="12"/>
-        <image name="testContent" width="383" height="397"/>
+        <image name="like" width="11" height="11"/>
+        <image name="testContent" width="191" height="198"/>
     </resources>
 </document>

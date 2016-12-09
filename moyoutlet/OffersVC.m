@@ -38,7 +38,9 @@ NSString *kCellID = @"OfferCollectionViewCell";
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-
+    
+//    [_offersCollectionView registerClass:[OfferCollectionViewCell class] forCellWithReuseIdentifier:kCellID];
+    
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
 
     _refreshControl = [[UIRefreshControl alloc] init];
@@ -60,7 +62,17 @@ NSString *kCellID = @"OfferCollectionViewCell";
     CGFloat availableWidthForCells = CGRectGetWidth(self.view.bounds) - flowLayout.sectionInset.left - flowLayout.sectionInset.right - flowLayout.minimumInteritemSpacing * (kCellsPerRow - 1);
 
     CGFloat cellWidth = availableWidthForCells / kCellsPerRow;
-    flowLayout.itemSize = CGSizeMake(cellWidth, flowLayout.itemSize.height);
+    CGSize itemSize = CGSizeZero;
+    if (IS_IPHONE_6P) {
+        itemSize = CGSizeMake(cellWidth, 230.0f);
+    } else if (IS_IPHONE_6) {
+        itemSize = CGSizeMake(cellWidth, 210.0f);
+    } else {
+        itemSize = CGSizeMake(cellWidth, 180.0f);
+
+    }
+
+    flowLayout.itemSize = itemSize;
 
     if (!_category_id) {
         _arrOffers = [[[AppManager sharedInstance].offers allKeys] mutableCopy];
@@ -143,34 +155,36 @@ NSString *kCellID = @"OfferCollectionViewCell";
 
     OfferCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellID
                                                                               forIndexPath:indexPath];
-    NSArray* items = [[AppManager sharedInstance].offers valueForKey:[NSString stringWithFormat:@"%li",(long)self.category_id]];
-    if ([items count] && [[items objectAtIndex:indexPath.row] isKindOfClass:[OfferItem class]]) {
-        cell.item = [_arrOffers objectAtIndex:indexPath.row];
-        cell.brandLabel.text = cell.item.brandName;
-        cell.titleLabel.text = cell.item.name;
-        cell.likesCount.text = [cell.item.likesCount stringValue];
-
-
-        cell.priceView.layer.cornerRadius = 4.0f;
-        cell.priceView.layer.masksToBounds = YES;
-        cell.priceView.backgroundColor = [UIColor appRedColor];
-
-        cell.cellView.layer.borderColor = [[UIColor appLightGrayColor] CGColor];
-        cell.cellView.layer.borderWidth = 0.5f;
-        cell.cellView.layer.masksToBounds = YES;
-
-        cell.priceLabel.text = [self printPriceWithCurrencySymbol: cell.item.price];
-        cell.imageView.backgroundColor = [UIColor whiteColor];
-        [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[cell.item.photoUrls objectAtIndex:0]]
-                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                     cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-                                  }];
-    } else {
-        NSLog(@"Empty category!");
-    }
-
+    
+        NSLog(@"Cell initialized");
+        NSArray* items = [[AppManager sharedInstance].offers valueForKey:[NSString stringWithFormat:@"%li",(long)self.category_id]];
+        if ([items count] && [[items objectAtIndex:indexPath.row] isKindOfClass:[OfferItem class]]) {
+            cell.item = [_arrOffers objectAtIndex:indexPath.row];
+            cell.brandLabel.text = cell.item.brandName;
+            cell.titleLabel.text = cell.item.name;
+            cell.likesCount.text = [cell.item.likesCount stringValue];
+            
+            cell.priceView.layer.cornerRadius = 4.0f;
+            cell.priceView.layer.masksToBounds = YES;
+            cell.priceView.backgroundColor = [UIColor appRedColor];
+            cell.cellView.layer.borderColor = [[UIColor appLightGrayColor] CGColor];
+            cell.cellView.layer.borderWidth = 0.5f;
+            cell.cellView.layer.masksToBounds = YES;
+            cell.priceLabel.text = [self printPriceWithCurrencySymbol: cell.item.price];
+            cell.imageView.backgroundColor = [UIColor whiteColor];
+            
+            [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[cell.item mainThumbUrl]]
+                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                         cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+                                     }];
+            
+        } else {
+            NSLog(@"Empty category!");
+        }
+    
     return cell;
 }
 

@@ -1,19 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="CenturyGothicBold.ttf">
+        <array key="CenturyGothicBold.ttf">
             <string>CenturyGothic-Bold</string>
-        </mutableArray>
-        <mutableArray key="CenturyGothicRegular.ttf">
+        </array>
+        <array key="CenturyGothicRegular.ttf">
             <string>CenturyGothic</string>
-        </mutableArray>
-        <mutableArray key="OpenSans-Regular.ttf">
+        </array>
+        <array key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,12 +28,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="28q-yK-DcR" userLabel="cellView">
+                    <view contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28q-yK-DcR" userLabel="cellView">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Cw-gc-aL8" userLabel="line">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Cw-gc-aL8" userLabel="line">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="3oP-64-Kdo"/>
                                 </constraints>
@@ -46,19 +49,16 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DY-bk-EXL" userLabel="priceView">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <rect key="frame" x="4" y="25" width="42" height="13"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LV-v7-ljX">
-                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="36.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LV-v7-ljX">
+                                        <rect key="frame" x="5" y="1" width="31" height="12"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="5" y="1" width="31" height="12"/>
-                                        </variation>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.83921568629999999" green="0.058823529409999999" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.83921568629999999" green="0.058823529409999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="6LV-v7-ljX" firstAttribute="leading" secondItem="9DY-bk-EXL" secondAttribute="leading" id="7F3-En-1Ws">
                                         <variation key="heightClass=regular-widthClass=compact" constant="5"/>
@@ -86,8 +86,7 @@
                                         <exclude reference="Rnq-I7-1j3"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="5" y="25" width="41" height="13"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="6LV-v7-ljX"/>
                                     </mask>
@@ -100,31 +99,25 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7y-jJ-ILk" userLabel="Brand">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7y-jJ-ILk" userLabel="Brand">
+                                <rect key="frame" x="8" y="11" width="27" height="10"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="11"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="8" y="11" width="27" height="10"/>
-                                </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" text="Кофточка на все случаи жизни" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byb-RS-YKs" userLabel="Title">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" misplaced="YES" text="Кофточка на все случаи жизни" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byb-RS-YKs" userLabel="Title">
+                                <rect key="frame" x="40" y="11" width="2" height="10"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="11"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="40" y="11" width="2" height="10"/>
-                                </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bgd-EJ-tnH" userLabel="ImageView">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bgd-EJ-tnH" userLabel="ImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="byb-RS-YKs" firstAttribute="bottom" secondItem="a7y-jJ-ILk" secondAttribute="bottom" id="3On-aF-Nnn">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -173,6 +166,9 @@
                                 <exclude reference="SjG-gj-2TC"/>
                                 <exclude reference="U8j-KQ-mKc"/>
                                 <exclude reference="g7p-ar-ztq"/>
+                                <exclude reference="Gwl-me-vyV"/>
+                                <exclude reference="jAD-Lf-kV9"/>
+                                <exclude reference="xpi-2U-Zgq"/>
                                 <exclude reference="3On-aF-Nnn"/>
                                 <exclude reference="JFO-Nl-P0H"/>
                                 <exclude reference="bYt-IK-lyQ"/>
@@ -180,9 +176,6 @@
                                 <exclude reference="C7Q-4K-XjL"/>
                                 <exclude reference="GyW-Jc-PdV"/>
                                 <exclude reference="TRi-HK-tet"/>
-                                <exclude reference="Gwl-me-vyV"/>
-                                <exclude reference="jAD-Lf-kV9"/>
-                                <exclude reference="xpi-2U-Zgq"/>
                                 <exclude reference="GVA-Zq-ywO"/>
                                 <exclude reference="cWw-4l-VGD"/>
                                 <exclude reference="g0s-7s-364"/>
@@ -200,6 +193,9 @@
                                 <include reference="SjG-gj-2TC"/>
                                 <include reference="U8j-KQ-mKc"/>
                                 <include reference="g7p-ar-ztq"/>
+                                <include reference="Gwl-me-vyV"/>
+                                <include reference="jAD-Lf-kV9"/>
+                                <include reference="xpi-2U-Zgq"/>
                                 <include reference="3On-aF-Nnn"/>
                                 <include reference="JFO-Nl-P0H"/>
                                 <include reference="bYt-IK-lyQ"/>
@@ -207,9 +203,6 @@
                                 <include reference="C7Q-4K-XjL"/>
                                 <include reference="GyW-Jc-PdV"/>
                                 <include reference="TRi-HK-tet"/>
-                                <include reference="Gwl-me-vyV"/>
-                                <include reference="jAD-Lf-kV9"/>
-                                <include reference="xpi-2U-Zgq"/>
                                 <include reference="GVA-Zq-ywO"/>
                                 <include reference="cWw-4l-VGD"/>
                                 <include reference="g0s-7s-364"/>
@@ -217,7 +210,6 @@
                         </variation>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="28q-yK-DcR" firstAttribute="leading" secondItem="e4G-r8-bll" secondAttribute="leading" id="Dk1-26-P71"/>

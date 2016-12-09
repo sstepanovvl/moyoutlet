@@ -21,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UILabel *likesCount;
+@property (assign, nonatomic) BOOL alreadyShown;
 
 @end

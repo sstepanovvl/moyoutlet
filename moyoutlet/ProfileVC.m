@@ -113,6 +113,8 @@ NSString *kUserOfferLightCellID = @"OfferLightCollectionViewCell";
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor]}];
         self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    
 
     UIButton* rightNotifyButton = [[UIButton alloc] init];
     UIImage *rightNotifyImage = [[UIImage imageNamed:@"navigationItemMore"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

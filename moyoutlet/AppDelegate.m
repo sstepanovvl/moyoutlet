@@ -29,7 +29,6 @@
 
     [[AppManager sharedInstance] getUserFromServer:1 WithSuccessBlock:^(UserItem *user) {
         [AppManager sharedInstance].authorizedUser = user;
-
         if (debug_enabled) {
             NSLog(@"User initialized");
         }
@@ -52,9 +51,6 @@
         si.text = str;
         [[AppManager sharedInstance].savedSearch addObject:si];
     }
-    
-    
-
 
     [Fabric with:@[[Crashlytics class]]];
 

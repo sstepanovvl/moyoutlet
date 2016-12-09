@@ -47,11 +47,22 @@
 }
 
 -(void)initNavigationItems {
+    
 
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor]}];
 
+    UIView *overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 0.5f)];
+    [overlayView setBackgroundColor:[UIColor appDarkGrayColor]];
+    [self.navigationController.navigationBar addSubview:overlayView]; // navBar is your UINavigationBar instance
+
+    UIImage* empty = [UIImage new];
+    [self.navigationController.navigationBar setBackgroundImage:empty forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:empty];
+    
     [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
+    
+    
     UIButton* rightSearchButton = [[UIButton alloc] init];
     UIImage *rightSearchImage = [[UIImage imageNamed:@"rightMenuItemSearch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [rightSearchButton setFrame:CGRectMake(0, 0, 35, 35)];

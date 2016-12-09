@@ -37,42 +37,8 @@ NSString *kPhotoCellID = @"PhotoCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Bold" size:18.0],
-                              NSForegroundColorAttributeName :  [UIColor appRedColor]}];
-
-    UIButton* rightSearchButton = [[UIButton alloc] init];
-    UIImage *rightSearchImage = [[UIImage imageNamed:@"rightMenuItemSearch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [rightSearchButton setFrame:CGRectMake(0, 0, 35, 35)];
-    [rightSearchButton setImage:rightSearchImage forState:UIControlStateNormal];
-    [rightSearchButton addTarget:self
-                          action:@selector(searchButtonPressed:)
-                forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem* rightSearchBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightSearchButton];
-
-    UIButton* rightNotifyButton = [[UIButton alloc] init];
-    UIImage *rightNotifyImage = [[UIImage imageNamed:@"rightMenuItemShare"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [rightNotifyButton setFrame:CGRectMake(0, 0, 35, 35)];
-    [rightNotifyButton setImage:rightNotifyImage forState:UIControlStateNormal];
-    [rightNotifyButton addTarget:self
-                          action:@selector(shareButtonPressed)
-                forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem* rightNotifyBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightNotifyButton];
-    NSArray* rightBarItems = [[NSArray alloc] initWithObjects:rightNotifyBarButtonItem,rightSearchBarButtonItem, nil];
-    self.navigationItem.rightBarButtonItems = rightBarItems;
-
-    self.navigationItem.title = _offerItem.name;
-
-    UIButton* leftBarButtonWithLogo = [[UIButton alloc] init];
-
-    UIImage *image = [[UIImage imageNamed:@"leftMenuBackButton"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [leftBarButtonWithLogo setFrame:CGRectMake(0, 0, 35, 35)];
-    [leftBarButtonWithLogo setImage:image forState:UIControlStateNormal];
-    [leftBarButtonWithLogo addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem* but = [[UIBarButtonItem alloc] initWithCustomView:leftBarButtonWithLogo];
-    NSArray* leftBarItems = [[NSArray alloc] initWithObjects:but, nil];
-    self.navigationItem.leftBarButtonItems = leftBarItems;
-
+    [self initNavigationItems];
+    
     [self initPhotoView];
 
     _descriptionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
@@ -85,9 +51,6 @@ NSString *kPhotoCellID = @"PhotoCell";
 
     _footerBuyButton.layer.cornerRadius = 3.0f;
     _footerBuyButton.layer.masksToBounds = YES;
-
-    _photoCollectionView.layer.cornerRadius = 5.0f;
-    _photoCollectionView.layer.masksToBounds = YES;
 
     _sellerHeaderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
     _sellerDetailView.backgroundColor = [UIColor whiteColor];
@@ -162,6 +125,46 @@ NSString *kPhotoCellID = @"PhotoCell";
     return self;
 }
 
+-(void)initNavigationItems {
+    [super initNavigationItems];
+    
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Bold" size:18.0],
+                              NSForegroundColorAttributeName :  [UIColor appRedColor]}];
+    
+    UIButton* rightSearchButton = [[UIButton alloc] init];
+    UIImage *rightSearchImage = [[UIImage imageNamed:@"rightMenuItemSearch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [rightSearchButton setFrame:CGRectMake(0, 0, 35, 35)];
+    [rightSearchButton setImage:rightSearchImage forState:UIControlStateNormal];
+    [rightSearchButton addTarget:self
+                          action:@selector(searchButtonPressed:)
+                forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* rightSearchBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightSearchButton];
+    
+    UIButton* rightNotifyButton = [[UIButton alloc] init];
+    UIImage *rightNotifyImage = [[UIImage imageNamed:@"rightMenuItemShare"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [rightNotifyButton setFrame:CGRectMake(0, 0, 35, 35)];
+    [rightNotifyButton setImage:rightNotifyImage forState:UIControlStateNormal];
+    [rightNotifyButton addTarget:self
+                          action:@selector(shareButtonPressed)
+                forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* rightNotifyBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightNotifyButton];
+    NSArray* rightBarItems = [[NSArray alloc] initWithObjects:rightNotifyBarButtonItem,rightSearchBarButtonItem, nil];
+    self.navigationItem.rightBarButtonItems = rightBarItems;
+    
+    self.navigationItem.title = _offerItem.name;
+    
+    UIButton* leftBarButtonWithLogo = [[UIButton alloc] init];
+    
+    UIImage *image = [[UIImage imageNamed:@"leftMenuBackButton"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [leftBarButtonWithLogo setFrame:CGRectMake(0, 0, 35, 35)];
+    [leftBarButtonWithLogo setImage:image forState:UIControlStateNormal];
+    [leftBarButtonWithLogo addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* but = [[UIBarButtonItem alloc] initWithCustomView:leftBarButtonWithLogo];
+    NSArray* leftBarItems = [[NSArray alloc] initWithObjects:but, nil];
+    self.navigationItem.leftBarButtonItems = leftBarItems;
+
+}
 
 -(void)initCategoryButtons {
     int indexOfLeftmostButtonOnCurrentLine = 0;
@@ -414,7 +417,7 @@ NSString *kPhotoCellID = @"PhotoCell";
 
         cell.priceLabel.text = [self printPriceWithCurrencySymbol: cell.item.price];
 
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[cell.item.photoUrls objectAtIndex:0]]
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:cell.item.mainThumbUrl]
                           placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                      [UIView transitionWithView:cell.cellView
@@ -437,6 +440,9 @@ NSString *kPhotoCellID = @"PhotoCell";
         frame.size.width = collectionView.frame.size.width;
         frame.size.height = collectionView.frame.size.height;
         cell.photoImageView.alpha = 0.0f;
+        
+        cell.layer.cornerRadius = 5.0f;
+        cell.layer.masksToBounds = YES;
 
         [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:[_offerItem.photoUrls objectAtIndex:indexPath.row]]
                           placeholderImage:[UIImage imageNamed:@"placeholder.png"]

@@ -739,9 +739,9 @@
 		047C2BE41CE2199A000FF304 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				049F15A61D3D4CA500CB2132 /* CategoriesWithOffersVC */,
 				04DE645F1D5DB2C0003C0C5C /* CreateOfferVC */,
 				0437525C1D4B19FB000EE3E5 /* SearchResultsVC */,
-				049F15A61D3D4CA500CB2132 /* CategoriesWithOffersVC */,
 				044CA7C01D39843600678E24 /* MyPurchasesVC */,
 				044CA7D51D3984E800678E24 /* LoginVC */,
 				044CA7AD1D39837E00678E24 /* NewsVC */,

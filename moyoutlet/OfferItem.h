@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString* size;
 @property (assign, nonatomic) float price;
 @property (strong, nonatomic) NSMutableArray* photoUrls;
+@property (strong, nonatomic) NSString* mainThumbUrl;
 @property (strong, nonatomic) NSNumber* likesCount;
 @property (strong, nonatomic) NSString* category;
 @property (strong, nonatomic) NSString* shipping;

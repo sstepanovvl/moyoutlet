@@ -139,9 +139,13 @@
                        failure(err);
                        NSLog(@"Request error: %@",err.localizedDescription);
                    } else {
-//                       NSLog(@"%@",resp);
+                       if (debug_enabled) {
+                            NSLog(@"%@",resp);
+                       }
+
                        for (NSDictionary* offer in [resp valueForKey:@"offers"]) {
                            OfferItem* item = [[OfferItem alloc] initWith:offer];
+                           NSLog(@"%@",offer);
                            [arr addObject:item];
                        }
 

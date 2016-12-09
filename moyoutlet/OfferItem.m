@@ -20,9 +20,26 @@
         _likesCount = [NSNumber numberWithInt:(arc4random() % 1000) + 100];
         _price = [[dictionary valueForKey:@"price"] intValue];
         _photoUrls = [NSMutableArray array];
-        for (NSDictionary* photo in [dictionary objectForKey:@"photo_urls"]) {
-            [_photoUrls addObject:[photo valueForKey:@"url"]];
+
+        NSString* imageSize = [NSString string];
+        
+        if(IS_IPHONE_5 && IS_IPHONE_4_OR_LESS) {
+            imageSize = @"260x260";
+        } else if (IS_IPHONE_6) {
+            imageSize = @"330x330";
+        } else if (IS_IPHONE_6P) {
+            imageSize = @"550x550";
         }
+        
+        for (NSDictionary* photo in [dictionary objectForKey:@"photo_urls"]) {
+            if (!_mainThumbUrl) {
+                _mainThumbUrl = [NSString stringWithFormat:@"%@?size=%@&image=%@",imageServerUrl,imageSize,[photo valueForKey:@"url"]];
+
+            }
+            NSString* url = [NSString stringWithFormat:@"%@?image=%@",imageServerUrl,[photo valueForKey:@"url"]];
+            [_photoUrls addObject:url];
+        }
+        
         if (!_photoUrls) {
             _photoUrls = [NSMutableArray arrayWithObject:@"https://static-mercariapp-com.akamaized.net/photos/m944492977_1.jpg?1463985609"];
         }

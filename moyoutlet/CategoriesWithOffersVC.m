@@ -112,8 +112,19 @@
 #pragma mark - sellButton stuff
 
 -(void)initSellButtonOnFrame {
+    CGRect sellButtonRect = CGRectMake(0, 0, 0, 0);
+    float multiplier = 0.0f;
+    if (IS_IPHONE_4_OR_LESS) {
+        sellButtonRect = CGRectMake(275.0f, 292.0f, 75, 75);
+    } else if (IS_IPHONE_5) {
+        sellButtonRect = CGRectMake(275.0f, 388.0f, 75, 75);
+    } else if(IS_IPHONE_6) {
+        sellButtonRect = CGRectMake(323.0f, 464.0f, 75, 75);
+    } else if(IS_IPHONE_6P) {
+        sellButtonRect = CGRectMake(356.0f, 517.0f, 75, 75);
+    }
 
-    _sellButton = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 40, self.view.frame.size.height - 180, 75, 75)];
+    _sellButton = [[UIImageView alloc] initWithFrame:sellButtonRect];
     [_sellButton setImage:[UIImage imageNamed:@"sellMainButton"]];
 
 
@@ -175,9 +186,6 @@
 
 
 -(void)sellButtonPressed:(id)sender {
-    NSLog(@"%f,%f",self.view.bounds.size.height, self.view.bounds.size.width);
-    NSLog(@"%f,%f",self.view.frame.size.height, self.view.frame.size.width);
-
     UIStoryboard* mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CreateOfferVC* cofvc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"CreateOfferVC"];
     [self.navigationController pushViewController:cofvc animated:YES];
@@ -238,16 +246,26 @@
 }// called when scroll view grinds to a halt
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
-    OfferCollectionViewCell* cell = (OfferCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-
-    OfferVC* vc = [sb instantiateViewControllerWithIdentifier:@"OfferVC"];
-
-    vc.offerItem = cell.item;
-
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    [UIView animateWithDuration:1.0f
+                          delay:0
+         usingSpringWithDamping:0.75
+          initialSpringVelocity:10
+                        options:0
+                     animations:^{
+                         OfferCollectionViewCell* cell = (OfferCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+                         
+                         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                         
+                         OfferVC* vc = [sb instantiateViewControllerWithIdentifier:@"OfferVC"];
+                         
+                         vc.offerItem = cell.item;
+                         
+                         [self.navigationController pushViewController:vc animated:YES];
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
 }
 
 @end

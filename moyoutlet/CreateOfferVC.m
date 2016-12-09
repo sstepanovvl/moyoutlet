@@ -54,6 +54,7 @@
 }
 
 -(void)initNavigationItems {
+    [super initNavigationItems];
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Bold" size:18.0],
                               NSForegroundColorAttributeName :  [UIColor appRedColor]}];

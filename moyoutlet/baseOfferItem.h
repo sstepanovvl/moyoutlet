@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Constants.h"
 
 @interface baseOfferItem : NSObject
 @property (assign, nonatomic) NSInteger objectId;
