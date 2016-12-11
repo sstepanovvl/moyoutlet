@@ -125,13 +125,7 @@
 		04F3CF081D47882A0041D864 /* NewsItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CF061D47882A0041D864 /* NewsItemVC.m */; };
 		04F3CF091D47882A0041D864 /* NewsItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CF071D47882A0041D864 /* NewsItemVC.xib */; };
 		04F3CF131D47A2580041D864 /* UIWebView+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CF121D47A2580041D864 /* UIWebView+Additional.m */; };
-		48EA941D1DFB325100B68F21 /* FSAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94071DFB325100B68F21 /* FSAlbumView.swift */; };
-		48EA941E1DFB325100B68F21 /* FSAlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94081DFB325100B68F21 /* FSAlbumViewCell.swift */; };
 		48EA941F1DFB325100B68F21 /* FSCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94091DFB325100B68F21 /* FSCameraView.swift */; };
-		48EA94201DFB325100B68F21 /* FSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940A1DFB325100B68F21 /* FSConstants.swift */; };
-		48EA94211DFB325100B68F21 /* FSImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940B1DFB325100B68F21 /* FSImageCropView.swift */; };
-		48EA94221DFB325100B68F21 /* FSVideoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940C1DFB325100B68F21 /* FSVideoCameraView.swift */; };
-		48EA94231DFB325100B68F21 /* FusumaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940D1DFB325100B68F21 /* FusumaViewController.swift */; };
 		48EA94241DFB325100B68F21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48EA940E1DFB325100B68F21 /* Assets.xcassets */; };
 		48EA94251DFB325100B68F21 /* FSAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA940F1DFB325100B68F21 /* FSAlbumView.xib */; };
 		48EA94261DFB325100B68F21 /* FSAlbumViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */; };
@@ -139,9 +133,18 @@
 		48EA94281DFB325100B68F21 /* FSVideoCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */; };
 		48EA94291DFB325100B68F21 /* FusumaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94131DFB325100B68F21 /* FusumaViewController.xib */; };
 		48EA942A1DFB325100B68F21 /* Fusuma.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94161DFB325100B68F21 /* Fusuma.xcconfig */; };
-		48EA942B1DFB325100B68F21 /* Fusuma-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94171DFB325100B68F21 /* Fusuma-dummy.m */; };
 		48EA942C1DFB325100B68F21 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48EA941A1DFB325100B68F21 /* Info.plist */; };
-		A74AE8A7DE4BFD3E00553623 /* Pods_moyoutlet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD8317B031065561D047D14 /* Pods_moyoutlet.framework */; };
+		48EA942D1DFD9A8A00B68F21 /* FSAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94071DFB325100B68F21 /* FSAlbumView.swift */; };
+		48EA942E1DFD9A8A00B68F21 /* FSAlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94081DFB325100B68F21 /* FSAlbumViewCell.swift */; };
+		48EA942F1DFD9A8A00B68F21 /* FSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940A1DFB325100B68F21 /* FSConstants.swift */; };
+		48EA94301DFD9A8A00B68F21 /* FSImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940B1DFB325100B68F21 /* FSImageCropView.swift */; };
+		48EA94311DFD9A8A00B68F21 /* FSVideoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940C1DFB325100B68F21 /* FSVideoCameraView.swift */; };
+		48EA94321DFD9A8A00B68F21 /* FusumaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940D1DFB325100B68F21 /* FusumaViewController.swift */; };
+		48EA94331DFD9A8A00B68F21 /* FSAlbumView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940F1DFB325100B68F21 /* FSAlbumView.xib */; };
+		48EA94341DFD9A8A00B68F21 /* FSAlbumViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */; };
+		48EA94351DFD9A8A00B68F21 /* FSCameraView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94111DFB325100B68F21 /* FSCameraView.xib */; };
+		48EA94361DFD9A8A00B68F21 /* FSVideoCameraView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */; };
+		48EA94371DFD9A8A00B68F21 /* FusumaViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94131DFB325100B68F21 /* FusumaViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -398,7 +401,6 @@
 				043752571D4A6382000EE3E5 /* UIKit.framework in Frameworks */,
 				0484A4481D3579BE00A43315 /* Crashlytics.framework in Frameworks */,
 				0484A4471D3579BE00A43315 /* Fabric.framework in Frameworks */,
-				A74AE8A7DE4BFD3E00553623 /* Pods_moyoutlet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1297,6 +1299,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48EA942D1DFD9A8A00B68F21 /* FSAlbumView.swift in Sources */,
+				48EA942E1DFD9A8A00B68F21 /* FSAlbumViewCell.swift in Sources */,
+				48EA942F1DFD9A8A00B68F21 /* FSConstants.swift in Sources */,
+				48EA94301DFD9A8A00B68F21 /* FSImageCropView.swift in Sources */,
+				48EA94311DFD9A8A00B68F21 /* FSVideoCameraView.swift in Sources */,
+				48EA94321DFD9A8A00B68F21 /* FusumaViewController.swift in Sources */,
+				48EA94331DFD9A8A00B68F21 /* FSAlbumView.xib in Sources */,
+				48EA94341DFD9A8A00B68F21 /* FSAlbumViewCell.xib in Sources */,
+				48EA94351DFD9A8A00B68F21 /* FSCameraView.xib in Sources */,
+				48EA94361DFD9A8A00B68F21 /* FSVideoCameraView.xib in Sources */,
+				48EA94371DFD9A8A00B68F21 /* FusumaViewController.xib in Sources */,
 				044CA7B71D39840200678E24 /* MyOffersVC.m in Sources */,
 				047C2C311CE21A9A000FF304 /* IIViewDeckController.m in Sources */,
 				049F15B41D3D4E4C00CB2132 /* MenuItemView.swift in Sources */,
@@ -1312,11 +1325,9 @@
 				047C2C091CE21A63000FF304 /* AppConfig.m in Sources */,
 				047C2C891CE22E51000FF304 /* UIButton+Badge.m in Sources */,
 				047C2BF01CE219F1000FF304 /* baseError.m in Sources */,
-				48EA942B1DFB325100B68F21 /* Fusuma-dummy.m in Sources */,
 				04DE64631D5DB2D9003C0C5C /* CreateOfferVC.m in Sources */,
 				049F15B71D3D4E4C00CB2132 /* PagingMenuOptions.swift in Sources */,
 				048A73DD1CF36F89002CCA31 /* NSData+ImageContentType.m in Sources */,
-				48EA94201DFB325100B68F21 /* FSConstants.swift in Sources */,
 				042D17971CE219340032E5DF /* moyoutlet.xcdatamodeld in Sources */,
 				047C2BEB1CE219DE000FF304 /* baseVC.m in Sources */,
 				045105421D05DDE7000C740A /* RDPagingView.m in Sources */,
@@ -1336,7 +1347,6 @@
 				047C2BF51CE21A11000FF304 /* OfferCollectionViewCell.m in Sources */,
 				04F3CF131D47A2580041D864 /* UIWebView+Additional.m in Sources */,
 				044CA7B11D3983D800678E24 /* FavoritesVC.m in Sources */,
-				48EA94221DFB325100B68F21 /* FSVideoCameraView.swift in Sources */,
 				047C2C331CE21A9A000FF304 /* ViewDeckController.m in Sources */,
 				043466F01D6622610043DC34 /* PhotoCollectionView.swift in Sources */,
 				047C2C731CE21B74000FF304 /* JVFloatLabeledTextField.m in Sources */,
@@ -1346,7 +1356,6 @@
 				047C2C321CE21A9A000FF304 /* IIWrapController.m in Sources */,
 				046529431D3E083200DAA187 /* MBProgressHUD.m in Sources */,
 				047C2BF81CE21A1D000FF304 /* OfferItem.m in Sources */,
-				48EA94231DFB325100B68F21 /* FusumaViewController.swift in Sources */,
 				044CA7C91D39846300678E24 /* SettingsVC.m in Sources */,
 				048A73E91CF36F89002CCA31 /* UIImageView+HighlightedWebCache.m in Sources */,
 				04F3CEF51D47262F0041D864 /* PopupWithNotificationsVC.m in Sources */,
@@ -1355,7 +1364,6 @@
 				04C4F5581D54992B004BC279 /* CategoryButton.m in Sources */,
 				048A73EB1CF36F89002CCA31 /* UIView+WebCacheOperation.m in Sources */,
 				047C2C301CE21A9A000FF304 /* IISideController.m in Sources */,
-				48EA941E1DFB325100B68F21 /* FSAlbumViewCell.swift in Sources */,
 				042C2E9E1D461FF1005E4C3D /* ARSPopover.m in Sources */,
 				048A73DE1CF36F89002CCA31 /* SDImageCache.m in Sources */,
 				048A73EA1CF36F89002CCA31 /* UIImageView+WebCache.m in Sources */,
@@ -1370,7 +1378,6 @@
 				047C2C0C1CE21A69000FF304 /* AppManager.m in Sources */,
 				047C2C381CE21AAF000FF304 /* LoginVC.m in Sources */,
 				047C2C421CE21AC9000FF304 /* LeftMenuCell.m in Sources */,
-				48EA941D1DFB325100B68F21 /* FSAlbumView.swift in Sources */,
 				047BE67B1D51CB97008C999F /* SearchItem.m in Sources */,
 				048A73E71CF36F89002CCA31 /* UIImage+MultiFormat.m in Sources */,
 				044CA7AB1D39837900678E24 /* NewsVC.m in Sources */,
@@ -1384,7 +1391,6 @@
 				04C38D571D3A729200532FB9 /* ProfileVC.m in Sources */,
 				048A73E21CF36F89002CCA31 /* SDWebImageDownloaderOperation.m in Sources */,
 				045105461D05DEA0000C740A /* rd_M2DURLConnectionOperation.m in Sources */,
-				48EA94211DFB325100B68F21 /* FSImageCropView.swift in Sources */,
 				048A73DC1CF36F89002CCA31 /* MKAnnotationView+WebCache.m in Sources */,
 				047C2C831CE2289A000FF304 /* UIColor+CustomColors.m in Sources */,
 			);

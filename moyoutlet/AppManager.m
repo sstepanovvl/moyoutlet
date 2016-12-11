@@ -7,6 +7,9 @@
 //
 
 #import "AppManager.h"
+@interface AppManager ()
+@end
+
 
 @implementation AppManager
 
@@ -20,7 +23,6 @@
         sharedInstance.offers = [NSMutableDictionary dictionary];
         sharedInstance.savedSearch = [NSMutableArray array];
         sharedInstance.searchHistory = [NSMutableArray array];
-
         // Do any other initialisation stuff here
     });
 
@@ -170,11 +172,11 @@
 
 #pragma mark Create Offer
 
--(void) createOffer {
-
-
+-(void) createOfferWithData:(NSDictionary*)data andImages:(NSArray*)images {
+    
+    [API createOfferWithData:data andImages:images];
+    
 }
-
 -(void) saveOfferToDB {
 
 
@@ -213,4 +215,39 @@
      postNotificationName:@"userDidChanged"
      object:self];
 }
+
+/*
+#pragma mark NSUrlsession Delegate
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
+    NSLog(@"Sent %lld, Total sent %lld, Not Sent %lld", bytesSent, totalBytesSent, totalBytesExpectedToSend);
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
+    _receiveData = [NSMutableData data];
+    [_receiveData setLength:0];
+    completionHandler(NSURLSessionResponseAllow);
+    NSLog(@"NSURLSession Starts to Receive Data");
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+    [_receiveData appendData:data];
+    NSLog(@"NSURLSession Receive Data");
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    NSLog(@"URL Session Complete: %@", task.response.description);
+    
+    if(error != nil) {
+        NSLog(@"Error %@",[error userInfo]);
+    } else {
+        NSLog(@"Uploading is Succesfull");
+        
+        NSString *result = [[NSString alloc] initWithData:_receiveData encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", result);
+    }
+}
+ */
+
+
 @end

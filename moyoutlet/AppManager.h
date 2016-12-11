@@ -14,7 +14,7 @@
 #import "SearchItem.h"
 
 
-@interface AppManager : NSObject
+@interface AppManager : NSObject <NSURLSessionDelegate>
 
 @property (assign,nonatomic) BOOL configured;
 @property (assign,nonatomic) NSString* token;
@@ -73,7 +73,7 @@
 
 #pragma mark Create Offer
 
--(void) createOffer;
+-(void) createOfferWithData:(NSDictionary*)data andImages:(NSArray*)images;
 -(void) saveOfferToDB;
 
 @end

@@ -209,7 +209,10 @@
     
     fsvc.delegate = self;
     fsvc.hasVideo = false;
-        
+    
+    [self.navigationController presentViewController:fsvc animated:YES completion:nil];
+
+/*
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
@@ -231,6 +234,7 @@
     alert.popoverPresentationController.sourceRect = [self.view  frame];
     
     [self presentViewController:alert animated:YES completion:NULL];
+ */
 }
 
 

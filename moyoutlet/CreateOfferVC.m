@@ -13,7 +13,7 @@
 @property (strong, nonatomic) IBOutlet PhotoCollectionView *photoCollectionView;
 @property (strong, nonatomic) IBOutlet UISwitch *deliverySwitch;
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *deliverySectionHeightConstraint;
-
+@property (strong, nonatomic) NSData* receiveData;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *deliverySection;
 
 @property (strong, nonatomic) CreateOfferPhotoCell* selfcell ;
@@ -137,6 +137,16 @@
     }
 }
 
+#pragma mark IBAction
+
+- (IBAction)publishButtonDidPress:(id)sender {
+    NSDictionary* data = @{
+                           @"title" : @"Тестовый оффер",
+                           @"sellerId" : @0
+                           };
+    
+    [[AppManager sharedInstance] createOfferWithData:data andImages:self.item.arrImages];
+}
 
 #pragma mark - TableView Delegate & DataSource
 
@@ -199,17 +209,17 @@
     
     fsvc.delegate = self;
     fsvc.hasVideo = false;
-    fsvc.hidesBottomBarWhenPushed = YES;
     
     self.selfcell = (CreateOfferPhotoCell*)[self.photoCollectionView cellForItemAtIndexPath:indexPath];
 
+    [self.navigationController presentViewController:fsvc animated:YES completion:^{}];
+
+/*
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
         [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Сделать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-            
-            [self.navigationController pushViewController:fsvc animated:YES];
-
+            [self.navigationController presentViewController:fsvc animated:YES completion:^{}];
         }]];
     }
 
@@ -225,12 +235,12 @@
     alert.popoverPresentationController.sourceRect = [self.selfcell  frame];
     
     [self presentViewController:alert animated:YES completion:NULL];
+ */
 }
 
 #pragma mark Fusuma delegate
 
 - (void)fusumaImageSelected:(UIImage * _Nonnull)image {
-    [self.selfcell.imageView setImage:image];
     if (debug_enabled ) {
         NSLog(@"fusumaImageSelected");
     }
@@ -238,6 +248,9 @@
 }
 
 - (void)fusumaDismissedWithImage:(UIImage * _Nonnull)image {
+    [self.selfcell.imageView setImage:image];
+    [self.item.arrImages insertObject:image atIndex:[[_photoCollectionView indexPathForCell:self.selfcell] row]];
+    
     if (debug_enabled) {
     NSLog(@"fusumaDismissedWithImage");
     }
@@ -262,6 +275,37 @@
         NSLog(@"fusumaClosed");
     }
 
+}
+
+#pragma mark NSUrlsession Delegate
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend {
+    NSLog(@"Sent %lld, Total sent %lld, Not Sent %lld", bytesSent, totalBytesSent, totalBytesExpectedToSend);
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
+//    _receiveData = [NSMutableData data];
+//    [_receiveData setLength:0];
+//    completionHandler(NSURLSessionResponseAllow);
+    NSLog(@"NSURLSession Starts to Receive Data");
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+//    [_receiveData appendData:data];
+    NSLog(@"NSURLSession Receive Data");
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    NSLog(@"URL Session Complete: %@", task.response.description);
+    
+    if(error != nil) {
+        NSLog(@"Error %@",[error userInfo]);
+    } else {
+        NSLog(@"Uploading is Succesfull");
+        
+        NSString *result = [[NSString alloc] initWithData:_receiveData encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", result);
+    }
 }
 
 

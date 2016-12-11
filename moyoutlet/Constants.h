@@ -28,7 +28,7 @@
 
 static const BOOL debug_enabled = YES;
 static const NSString* apiServer = @"http://moyoutlet.ru/api/"; 
-static const NSString* XDEBUG_SESSION_START = @"10491";
-static const NSString* imageServerUrl = @"http://moyoutlet.ru:8000/api/image.php";
+static const NSString* XDEBUG_SESSION_START = @"12951";
+static const NSString* imageServerUrl = @"http://moyoutlet.ru:8000/api/image";
 static const NSString* imagesSize = @"500x500";
 
