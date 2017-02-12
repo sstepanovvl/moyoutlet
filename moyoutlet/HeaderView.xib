@@ -1,36 +1,36 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="OpenSans-Regular.ttf">
-            <string>OpenSans</string>
-        </mutableArray>
+        <array key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="487" height="130"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6DM-ZO-UpC">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <rect key="frame" x="0.0" y="0.0" width="487" height="130"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIS-cI-RTB">
-                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="25" y="65" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                            <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="CIS-cI-RTB" secondAttribute="bottom" constant="8" id="I6z-Fr-DFQ">
-                            <variation key="heightClass=regular-widthClass=compact" constant="8"/>
-                        </constraint>
+                        <constraint firstItem="CIS-cI-RTB" firstAttribute="centerY" secondItem="6DM-ZO-UpC" secondAttribute="centerY" id="WcP-iR-7az"/>
                         <constraint firstItem="CIS-cI-RTB" firstAttribute="leading" secondItem="6DM-ZO-UpC" secondAttribute="leading" constant="8" id="bk7-5S-DU0">
                             <variation key="heightClass=regular-widthClass=compact" constant="25"/>
                         </constraint>
@@ -40,7 +40,6 @@
                             <exclude reference="CIS-cI-RTB"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="I6z-Fr-DFQ"/>
                             <exclude reference="bk7-5S-DU0"/>
                         </mask>
                     </variation>
@@ -49,13 +48,12 @@
                             <include reference="CIS-cI-RTB"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="I6z-Fr-DFQ"/>
                             <include reference="bk7-5S-DU0"/>
                         </mask>
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="6DM-ZO-UpC" secondAttribute="bottom" id="Le2-xs-OoI"/>
                 <constraint firstAttribute="trailing" secondItem="6DM-ZO-UpC" secondAttribute="trailing" id="PRv-e0-Wn9"/>
@@ -88,7 +86,7 @@
             <connections>
                 <outlet property="headerTitle" destination="CIS-cI-RTB" id="hWB-Vd-WUG"/>
             </connections>
-            <point key="canvasLocation" x="195" y="-156.5"/>
+            <point key="canvasLocation" x="263.5" y="-588"/>
         </view>
     </objects>
 </document>

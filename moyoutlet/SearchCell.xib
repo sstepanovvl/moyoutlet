@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="OpenSans-Light.ttf">
+            <string>OpenSans-Light</string>
+        </array>
         <array key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
         </array>
@@ -23,38 +27,60 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uio-VB-wcl">
-                        <rect key="frame" x="25" y="10" width="43" height="24"/>
+                        <rect key="frame" x="25" y="9" width="43" height="24"/>
                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separatorLine" translatesAutoresizingMaskIntoConstraints="NO" id="DZx-WA-Kow">
-                        <rect key="frame" x="25" y="42" width="270" height="1"/>
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAY-O8-5Cp">
+                        <rect key="frame" x="290" y="11" width="14" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="SLu-KZ-RrQ"/>
+                            <constraint firstAttribute="width" constant="14" id="cra-ab-eja"/>
                         </constraints>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="arrowFront" translatesAutoresizingMaskIntoConstraints="NO" id="L4I-o3-yYw">
-                        <rect key="frame" x="280" y="14" width="15" height="15"/>
-                    </imageView>
+                        <state key="normal" image="arrowFront"/>
+                        <connections>
+                            <action selector="selectButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="R2r-U1-sse"/>
+                        </connections>
+                    </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqY-UU-eUt">
+                        <rect key="frame" x="265" y="11" width="17" height="22"/>
+                        <state key="normal" image="checkedImageRed"/>
+                        <connections>
+                            <action selector="selectButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jQJ-sb-zuU"/>
+                        </connections>
+                    </button>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мужское - Джинсы - Все" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buc-vz-tFe">
+                        <rect key="frame" x="25" y="23" width="111" height="20"/>
+                        <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="10"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="DZx-WA-Kow" secondAttribute="bottom" id="3ga-Pi-g0U"/>
-                    <constraint firstItem="L4I-o3-yYw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9jR-I7-icP"/>
-                    <constraint firstItem="DZx-WA-Kow" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="BSg-0x-XId"/>
+                    <constraint firstItem="buc-vz-tFe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="EZv-Gp-2xk"/>
                     <constraint firstItem="uio-VB-wcl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ox2-2t-R7o"/>
-                    <constraint firstAttribute="trailing" secondItem="L4I-o3-yYw" secondAttribute="trailing" constant="25" id="WRL-7F-FRH"/>
+                    <constraint firstItem="LAY-O8-5Cp" firstAttribute="leading" secondItem="rqY-UU-eUt" secondAttribute="trailing" constant="8" id="bqk-0C-cWF"/>
+                    <constraint firstItem="LAY-O8-5Cp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cav-Vg-wa0"/>
+                    <constraint firstItem="buc-vz-tFe" firstAttribute="top" secondItem="uio-VB-wcl" secondAttribute="bottom" constant="-10" id="etf-g1-mvs"/>
                     <constraint firstItem="uio-VB-wcl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="h9M-92-IUm"/>
-                    <constraint firstAttribute="trailing" secondItem="DZx-WA-Kow" secondAttribute="trailing" constant="25" id="u2b-Sv-Sxz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="LAY-O8-5Cp" secondAttribute="trailing" constant="8" id="mGE-lM-KPM"/>
+                    <constraint firstAttribute="bottom" secondItem="buc-vz-tFe" secondAttribute="bottom" id="zDR-Mf-iUd"/>
+                    <constraint firstItem="rqY-UU-eUt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zl8-cB-2BR"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
             <connections>
+                <outlet property="categoriesTitle" destination="buc-vz-tFe" id="ymn-J4-eR7"/>
                 <outlet property="cellTitle" destination="uio-VB-wcl" id="S0d-TF-cqX"/>
+                <outlet property="selectButton" destination="LAY-O8-5Cp" id="3Qb-o1-YVM"/>
+                <outlet property="selectButtonConstraint" destination="cra-ab-eja" id="omD-M8-wEX"/>
+                <outlet property="selectButtonTrailingConstraint" destination="mGE-lM-KPM" id="TUk-pi-SPD"/>
+                <outlet property="selectedButton" destination="rqY-UU-eUt" id="DCu-vl-Hnf"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
         <image name="arrowFront" width="14" height="14"/>
-        <image name="separatorLine" width="1" height="1"/>
+        <image name="checkedImageRed" width="17" height="17"/>
     </resources>
 </document>

@@ -22,8 +22,8 @@ open class PagingMenuOptions {
     open var menuItemMargin: CGFloat = 10
     open var menuItemDividerImage: UIImage?
     open var animationDuration: TimeInterval = 0.5
-    open var deceleratingRate: CGFloat = UIScrollViewDecelerationRateFast
-    open var menuDisplayMode = MenuDisplayMode.infinite(widthMode: PagingMenuOptions.MenuItemWidthMode.flexible, scrollingMode: PagingMenuOptions.MenuScrollingMode.scrollEnabledAndBouces)
+    open var deceleratingRate: CGFloat = UIScrollViewDecelerationRateNormal
+    open var menuDisplayMode = MenuDisplayMode.infinite(widthMode: .flexible, scrollingMode: .scrollEnabledAndBouces)
     open var menuSelectedItemCenter = true
     open var menuItemMode = MenuItemMode.underline(height: 2, color: UIColor.appRed(), horizontalPadding: 0, verticalPadding: 0)
     open var lazyLoadingPage: LazyLoadingPage = .three

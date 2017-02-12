@@ -9,7 +9,7 @@
 #import "SearchVC.h"
 #import "SearchCell.h"
 #import "HeaderView.h"
-#import "SearchResultVC.h"
+#import "SearchOffersResultVC.h"
 
 @interface SearchVC ()
 
@@ -17,9 +17,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray* searchResult;
-
-
-
 @property BOOL searchControllerWasActive;
 @property BOOL searchControllerSearchFieldWasFirstResponder;
 
@@ -37,26 +34,28 @@
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.sectionHeaderHeight = 60.0f;
+    
+    [self initSearchType];
+    
+    // Do any additional setup after loading the view from its nib.
+}
 
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
+-(void)initSearchType {
+    _searchBar = [[SearchBar alloc] initWithFrame:CGRectZero];
     [_searchBar sizeToFit];
-    _searchBar.barTintColor = [UIColor whiteColor];
     _searchBar.delegate = self;
     _searchBar.placeholder = @"Поиск в MoyOutlet";
     [[UISearchBar appearance] setImage:nil forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    
+    [_tableView registerNib:[UINib nibWithNibName:@"HeaderView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"HeaderView"];
+    [_tableView registerNib:[UINib nibWithNibName:@"SearchCell" bundle:nil] forCellReuseIdentifier:@"SearchCell"];
+    
+
     self.navigationItem.titleView = _searchBar;
     // It is usually good to set the presentation context.
     self.definesPresentationContext = YES;
 
-
-    
-    [_tableView registerNib:[UINib nibWithNibName:@"HeaderView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"HeaderView"];
-    [_tableView registerNib:[UINib nibWithNibName:@"SearchCell" bundle:nil] forCellReuseIdentifier:@"SearchCell"];
-
-
-    // Do any additional setup after loading the view from its nib.
 }
-
 
 -(void)initNavigationItems {
 
@@ -93,8 +92,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    AppManager* app = [AppManager sharedInstance];
 
     switch (section) {
         case 0:
@@ -160,23 +157,38 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     if (indexPath.section == 0) {
-        [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+        if (indexPath.row == 0) {
+            SelectCategoryVC* srvc = [[SelectCategoryVC alloc] initWithNibName:@"SelectCategoryVC" bundle:nil];
+            srvc.parent_id = @0;
+            [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+            
+            [self.navigationController pushViewController:srvc animated:YES];
+            
+        }  else {
+            SelectBrandVC* srvc = [[SelectBrandVC alloc] initWithNibName:@"SelectBrandVC" bundle:nil];
+            [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+            
+            [self.navigationController pushViewController:srvc animated:YES];
+        }
+        
     } else {
-    SearchCell* cell = (SearchCell*)[tableView cellForRowAtIndexPath:indexPath];
+        
+        SearchOffersResultVC* srvc = [[SearchOffersResultVC alloc] initWithNibName:@"SearchResultVC" bundle:nil];
+        
+        SearchCell* cell = (SearchCell*)[tableView cellForRowAtIndexPath:indexPath];
+        
+        srvc.searchItem = cell.searchItem;
 
-    SearchResultVC* srvc = [[SearchResultVC alloc] initWithNibName:@"SearchResultVC" bundle:nil];
-
-    srvc.searchItem = cell.searchItem;
-
-    srvc.searchString = srvc.searchItem.text;
-
-    srvc.searchResults = _searchResult;
-
-    [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    [self.navigationController pushViewController:srvc animated:YES];
+        srvc.searchString = srvc.searchItem.text;
+        
+        srvc.searchResults = _searchResult;
+        
+        [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        [self.navigationController pushViewController:srvc animated:YES];
+        
     }
 }
 
@@ -186,11 +198,43 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - searchBar delegate
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [_searchBar setShowsCancelButton:YES animated:YES];
+    UIView *view = [_searchBar.subviews objectAtIndex:0];
+    for (UIView *subView in view.subviews) {
+        if ([subView isKindOfClass:[UIButton class]]) {
+            UIButton *cancelButton = (UIButton *)subView;
+            [cancelButton setTitleColor:[UIColor appRedColor] forState:UIControlStateNormal];
+            [cancelButton setTitleColor:[UIColor appRedColor] forState:UIControlStateHighlighted];
+        }
+    }
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+    
+    [_searchBar resignFirstResponder];
+    [_searchBar setShowsCancelButton:NO animated:YES];
+    
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    NSLog(@"textDidChange %@", searchText);
+    
+    //self.sectionsArray = [self generateSectionsFromArray:self.namesArray withFilter:searchText];
+    //[self.tableView reloadData];
+    
+    //    [self generateSectionsInBackgroundFromArray:self.itemsToDisplay withFilter:self.searchBar.text];
+    
+}
+
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 
-    SearchResultVC* srvc = [[SearchResultVC alloc] initWithNibName:@"SearchResultVC" bundle:nil];
+    SearchOffersResultVC* srvc = [[SearchOffersResultVC alloc] initWithNibName:@"SearchResultVC" bundle:nil];
     srvc.searchString = searchBar.text;
     srvc.searchResults = _searchResult;
     [self.navigationController pushViewController:srvc animated:YES];

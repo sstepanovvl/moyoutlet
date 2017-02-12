@@ -237,15 +237,16 @@
 }
 - (NSString *)printPriceWithCurrencySymbol:(CGFloat)price {
 
-    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+//    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+//
+//    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+//    [numberFormatter setCurrencyCode:@"RUB"];
+//    [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"ru"]];
 
-    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [numberFormatter setCurrencyCode:@"RUB"];
-    [numberFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"ru"]];
-
-    NSString * productPrice = [numberFormatter stringFromNumber:[NSNumber numberWithInt:price]];
-    productPrice = [productPrice stringByReplacingOccurrencesOfString:@",00" withString:@""];
-    return productPrice;
+//    NSString * productPrice = [numberFormatter stringFromNumber:[NSNumber numberWithInt:price]];
+//    productPrice = [productPrice stringByReplacingOccurrencesOfString:@",00" withString:@""];
+    NSAttributedString* productPrice = [[NSAttributedString alloc] initWithString: [NSString stringWithFormat:@"%.f \u20BD",price]];
+    return [productPrice string];
     
 }
 

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "baseVC.h"
 #import "moyoutlet-swift.h"
+@import Fusuma;
+
 @interface CreateOfferVC : baseVC <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, FusumaDelegate, NSURLSessionDelegate>
 
 -(instancetype) initFromStoryboard;

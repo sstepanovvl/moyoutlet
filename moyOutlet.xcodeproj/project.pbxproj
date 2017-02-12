@@ -19,8 +19,8 @@
 		043752551D4A62C9000EE3E5 /* UserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 043752541D4A62C9000EE3E5 /* UserItem.m */; };
 		043752571D4A6382000EE3E5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043752561D4A6382000EE3E5 /* UIKit.framework */; };
 		0437525A1D4A71B1000EE3E5 /* AddressItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 043752591D4A71B1000EE3E5 /* AddressItem.m */; };
-		043752651D4B1A81000EE3E5 /* SearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043752631D4B1A81000EE3E5 /* SearchResultVC.m */; };
-		043752661D4B1A81000EE3E5 /* SearchResultVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043752641D4B1A81000EE3E5 /* SearchResultVC.xib */; };
+		043752651D4B1A81000EE3E5 /* SearchOffersResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 043752631D4B1A81000EE3E5 /* SearchOffersResultVC.m */; };
+		043752661D4B1A81000EE3E5 /* SearchOffersResultVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043752641D4B1A81000EE3E5 /* SearchOffersResultVC.xib */; };
 		043752681D4B2EB2000EE3E5 /* OfferCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043752671D4B2EB2000EE3E5 /* OfferCollectionViewCell.xib */; };
 		044CA79E1D39641900678E24 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044CA7951D395E2A00678E24 /* OpenSans-Bold.ttf */; };
 		044CA79F1D39641900678E24 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 044CA7961D395E2A00678E24 /* OpenSans-BoldItalic.ttf */; };
@@ -125,26 +125,13 @@
 		04F3CF081D47882A0041D864 /* NewsItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CF061D47882A0041D864 /* NewsItemVC.m */; };
 		04F3CF091D47882A0041D864 /* NewsItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F3CF071D47882A0041D864 /* NewsItemVC.xib */; };
 		04F3CF131D47A2580041D864 /* UIWebView+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3CF121D47A2580041D864 /* UIWebView+Additional.m */; };
-		48EA941F1DFB325100B68F21 /* FSCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94091DFB325100B68F21 /* FSCameraView.swift */; };
-		48EA94241DFB325100B68F21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48EA940E1DFB325100B68F21 /* Assets.xcassets */; };
-		48EA94251DFB325100B68F21 /* FSAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA940F1DFB325100B68F21 /* FSAlbumView.xib */; };
-		48EA94261DFB325100B68F21 /* FSAlbumViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */; };
-		48EA94271DFB325100B68F21 /* FSCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94111DFB325100B68F21 /* FSCameraView.xib */; };
-		48EA94281DFB325100B68F21 /* FSVideoCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */; };
-		48EA94291DFB325100B68F21 /* FusumaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94131DFB325100B68F21 /* FusumaViewController.xib */; };
-		48EA942A1DFB325100B68F21 /* Fusuma.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 48EA94161DFB325100B68F21 /* Fusuma.xcconfig */; };
-		48EA942C1DFB325100B68F21 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48EA941A1DFB325100B68F21 /* Info.plist */; };
-		48EA942D1DFD9A8A00B68F21 /* FSAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94071DFB325100B68F21 /* FSAlbumView.swift */; };
-		48EA942E1DFD9A8A00B68F21 /* FSAlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94081DFB325100B68F21 /* FSAlbumViewCell.swift */; };
-		48EA942F1DFD9A8A00B68F21 /* FSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940A1DFB325100B68F21 /* FSConstants.swift */; };
-		48EA94301DFD9A8A00B68F21 /* FSImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940B1DFB325100B68F21 /* FSImageCropView.swift */; };
-		48EA94311DFD9A8A00B68F21 /* FSVideoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940C1DFB325100B68F21 /* FSVideoCameraView.swift */; };
-		48EA94321DFD9A8A00B68F21 /* FusumaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940D1DFB325100B68F21 /* FusumaViewController.swift */; };
-		48EA94331DFD9A8A00B68F21 /* FSAlbumView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA940F1DFB325100B68F21 /* FSAlbumView.xib */; };
-		48EA94341DFD9A8A00B68F21 /* FSAlbumViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */; };
-		48EA94351DFD9A8A00B68F21 /* FSCameraView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94111DFB325100B68F21 /* FSCameraView.xib */; };
-		48EA94361DFD9A8A00B68F21 /* FSVideoCameraView.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */; };
-		48EA94371DFD9A8A00B68F21 /* FusumaViewController.xib in Sources */ = {isa = PBXBuildFile; fileRef = 48EA94131DFB325100B68F21 /* FusumaViewController.xib */; };
+		481EF77B1E1290AD00B85D69 /* SelectBrandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 481EF7791E1290AD00B85D69 /* SelectBrandVC.m */; };
+		481EF77C1E1290AD00B85D69 /* SelectBrandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 481EF77A1E1290AD00B85D69 /* SelectBrandVC.xib */; };
+		481EF7811E13EAF100B85D69 /* SelectCategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 481EF77F1E13EAF100B85D69 /* SelectCategoryVC.m */; };
+		481EF7821E13EAF100B85D69 /* SelectCategoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 481EF7801E13EAF100B85D69 /* SelectCategoryVC.xib */; };
+		481F05EC1E0AB6A3009F7C79 /* SearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 481F05EB1E0AB6A3009F7C79 /* SearchBar.m */; };
+		485A66AE1E50292D00C5F5F7 /* MOCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485A66AD1E50292D00C5F5F7 /* MOCollectionView.m */; };
+		74655A2B1AEC3D4437EB2578 /* Pods_moyoutlet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD8317B031065561D047D14 /* Pods_moyoutlet.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,9 +156,9 @@
 		043752561D4A6382000EE3E5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		043752581D4A71B1000EE3E5 /* AddressItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressItem.h; sourceTree = "<group>"; };
 		043752591D4A71B1000EE3E5 /* AddressItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressItem.m; sourceTree = "<group>"; };
-		043752621D4B1A81000EE3E5 /* SearchResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultVC.h; sourceTree = "<group>"; };
-		043752631D4B1A81000EE3E5 /* SearchResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultVC.m; sourceTree = "<group>"; };
-		043752641D4B1A81000EE3E5 /* SearchResultVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultVC.xib; sourceTree = "<group>"; };
+		043752621D4B1A81000EE3E5 /* SearchOffersResultVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchOffersResultVC.h; sourceTree = "<group>"; };
+		043752631D4B1A81000EE3E5 /* SearchOffersResultVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOffersResultVC.m; sourceTree = "<group>"; };
+		043752641D4B1A81000EE3E5 /* SearchOffersResultVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchOffersResultVC.xib; sourceTree = "<group>"; };
 		043752671D4B2EB2000EE3E5 /* OfferCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfferCollectionViewCell.xib; sourceTree = "<group>"; };
 		044CA7951D395E2A00678E24 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		044CA7961D395E2A00678E24 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -367,26 +354,17 @@
 		04F3CF071D47882A0041D864 /* NewsItemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsItemVC.xib; sourceTree = "<group>"; };
 		04F3CF111D47A2580041D864 /* UIWebView+Additional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+Additional.h"; sourceTree = "<group>"; };
 		04F3CF121D47A2580041D864 /* UIWebView+Additional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+Additional.m"; sourceTree = "<group>"; };
+		481EF7781E1290AD00B85D69 /* SelectBrandVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectBrandVC.h; sourceTree = "<group>"; };
+		481EF7791E1290AD00B85D69 /* SelectBrandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectBrandVC.m; sourceTree = "<group>"; };
+		481EF77A1E1290AD00B85D69 /* SelectBrandVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectBrandVC.xib; sourceTree = "<group>"; };
+		481EF77E1E13EAF100B85D69 /* SelectCategoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryVC.h; sourceTree = "<group>"; };
+		481EF77F1E13EAF100B85D69 /* SelectCategoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryVC.m; sourceTree = "<group>"; };
+		481EF7801E13EAF100B85D69 /* SelectCategoryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectCategoryVC.xib; sourceTree = "<group>"; };
+		481F05EA1E0AB6A3009F7C79 /* SearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchBar.h; sourceTree = "<group>"; };
+		481F05EB1E0AB6A3009F7C79 /* SearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchBar.m; sourceTree = "<group>"; };
+		485A66AC1E50292D00C5F5F7 /* MOCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOCollectionView.h; sourceTree = "<group>"; };
+		485A66AD1E50292D00C5F5F7 /* MOCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOCollectionView.m; sourceTree = "<group>"; };
 		48EA94051DFB2FD300B68F21 /* Fusuma.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fusuma.framework; path = "../../../../Developer/Xcode/DerivedData/moyOutlet-gatwtgidpmjkmsaafasabwrzkrfy/Build/Products/Debug-iphonesimulator/Fusuma/Fusuma.framework"; sourceTree = "<group>"; };
-		48EA94071DFB325100B68F21 /* FSAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSAlbumView.swift; path = Sources/FSAlbumView.swift; sourceTree = "<group>"; };
-		48EA94081DFB325100B68F21 /* FSAlbumViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSAlbumViewCell.swift; path = Sources/FSAlbumViewCell.swift; sourceTree = "<group>"; };
-		48EA94091DFB325100B68F21 /* FSCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSCameraView.swift; path = Sources/FSCameraView.swift; sourceTree = "<group>"; };
-		48EA940A1DFB325100B68F21 /* FSConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSConstants.swift; path = Sources/FSConstants.swift; sourceTree = "<group>"; };
-		48EA940B1DFB325100B68F21 /* FSImageCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSImageCropView.swift; path = Sources/FSImageCropView.swift; sourceTree = "<group>"; };
-		48EA940C1DFB325100B68F21 /* FSVideoCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FSVideoCameraView.swift; path = Sources/FSVideoCameraView.swift; sourceTree = "<group>"; };
-		48EA940D1DFB325100B68F21 /* FusumaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FusumaViewController.swift; path = Sources/FusumaViewController.swift; sourceTree = "<group>"; };
-		48EA940E1DFB325100B68F21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sources/Assets.xcassets; sourceTree = "<group>"; };
-		48EA940F1DFB325100B68F21 /* FSAlbumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSAlbumView.xib; path = Sources/FSAlbumView.xib; sourceTree = "<group>"; };
-		48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSAlbumViewCell.xib; path = Sources/FSAlbumViewCell.xib; sourceTree = "<group>"; };
-		48EA94111DFB325100B68F21 /* FSCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSCameraView.xib; path = Sources/FSCameraView.xib; sourceTree = "<group>"; };
-		48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FSVideoCameraView.xib; path = Sources/FSVideoCameraView.xib; sourceTree = "<group>"; };
-		48EA94131DFB325100B68F21 /* FusumaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FusumaViewController.xib; path = Sources/FusumaViewController.xib; sourceTree = "<group>"; };
-		48EA94151DFB325100B68F21 /* Fusuma.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = Fusuma.modulemap; sourceTree = "<group>"; };
-		48EA94161DFB325100B68F21 /* Fusuma.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Fusuma.xcconfig; sourceTree = "<group>"; };
-		48EA94171DFB325100B68F21 /* Fusuma-dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Fusuma-dummy.m"; sourceTree = "<group>"; };
-		48EA94181DFB325100B68F21 /* Fusuma-prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Fusuma-prefix.pch"; sourceTree = "<group>"; };
-		48EA94191DFB325100B68F21 /* Fusuma-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Fusuma-umbrella.h"; sourceTree = "<group>"; };
-		48EA941A1DFB325100B68F21 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48F06A3B1DF5EC31004AD9B1 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		5AD32DDB36E2406F132DA415 /* Pods-moyoutlet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moyoutlet.release.xcconfig"; path = "Pods/Target Support Files/Pods-moyoutlet/Pods-moyoutlet.release.xcconfig"; sourceTree = "<group>"; };
 		8CD8317B031065561D047D14 /* Pods_moyoutlet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyoutlet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -401,6 +379,7 @@
 				043752571D4A6382000EE3E5 /* UIKit.framework in Frameworks */,
 				0484A4481D3579BE00A43315 /* Crashlytics.framework in Frameworks */,
 				0484A4471D3579BE00A43315 /* Fabric.framework in Frameworks */,
+				74655A2B1AEC3D4437EB2578 /* Pods_moyoutlet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,9 +509,9 @@
 		0437525C1D4B19FB000EE3E5 /* SearchResultsVC */ = {
 			isa = PBXGroup;
 			children = (
-				043752621D4B1A81000EE3E5 /* SearchResultVC.h */,
-				043752631D4B1A81000EE3E5 /* SearchResultVC.m */,
-				043752641D4B1A81000EE3E5 /* SearchResultVC.xib */,
+				043752621D4B1A81000EE3E5 /* SearchOffersResultVC.h */,
+				043752631D4B1A81000EE3E5 /* SearchOffersResultVC.m */,
+				043752641D4B1A81000EE3E5 /* SearchOffersResultVC.xib */,
 			);
 			name = SearchResultsVC;
 			sourceTree = "<group>";
@@ -725,6 +704,7 @@
 		047C2BE31CE21996000FF304 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				481F05E91E0AB689009F7C79 /* SearchBar */,
 				047C2BF21CE21A06000FF304 /* Cell */,
 				047BE6701D51C409008C999F /* HeaderView */,
 				04C4F5591D54992E004BC279 /* Buttons */,
@@ -735,6 +715,8 @@
 		047C2BE41CE2199A000FF304 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				481EF77D1E13EAD300B85D69 /* SelectCategoryVC */,
+				482753411E09840100A1FB80 /* SelectBrandVC */,
 				049F15A61D3D4CA500CB2132 /* CategoriesWithOffersVC */,
 				04DE645F1D5DB2C0003C0C5C /* CreateOfferVC */,
 				0437525C1D4B19FB000EE3E5 /* SearchResultsVC */,
@@ -759,6 +741,7 @@
 		047C2BE81CE219CC000FF304 /* Base Items */ = {
 			isa = PBXGroup;
 			children = (
+				485A66AB1E5028D700C5F5F7 /* Custom classes */,
 				047C2C841CE22E51000FF304 /* UIBarButtonItem+Badge.h */,
 				047C2C851CE22E51000FF304 /* UIBarButtonItem+Badge.m */,
 				047C2C861CE22E51000FF304 /* UIButton+Badge.h */,
@@ -1062,45 +1045,47 @@
 			name = NewsItemVC;
 			sourceTree = "<group>";
 		};
-		48EA94141DFB325100B68F21 /* Resources */ = {
+		481EF77D1E13EAD300B85D69 /* SelectCategoryVC */ = {
 			isa = PBXGroup;
 			children = (
-				48EA940E1DFB325100B68F21 /* Assets.xcassets */,
-				48EA940F1DFB325100B68F21 /* FSAlbumView.xib */,
-				48EA94101DFB325100B68F21 /* FSAlbumViewCell.xib */,
-				48EA94111DFB325100B68F21 /* FSCameraView.xib */,
-				48EA94121DFB325100B68F21 /* FSVideoCameraView.xib */,
-				48EA94131DFB325100B68F21 /* FusumaViewController.xib */,
+				481EF77E1E13EAF100B85D69 /* SelectCategoryVC.h */,
+				481EF77F1E13EAF100B85D69 /* SelectCategoryVC.m */,
+				481EF7801E13EAF100B85D69 /* SelectCategoryVC.xib */,
 			);
-			name = Resources;
+			name = SelectCategoryVC;
 			sourceTree = "<group>";
 		};
-		48EA941B1DFB325100B68F21 /* Support Files */ = {
+		481F05E91E0AB689009F7C79 /* SearchBar */ = {
 			isa = PBXGroup;
 			children = (
-				48EA94151DFB325100B68F21 /* Fusuma.modulemap */,
-				48EA94161DFB325100B68F21 /* Fusuma.xcconfig */,
-				48EA94171DFB325100B68F21 /* Fusuma-dummy.m */,
-				48EA94181DFB325100B68F21 /* Fusuma-prefix.pch */,
-				48EA94191DFB325100B68F21 /* Fusuma-umbrella.h */,
-				48EA941A1DFB325100B68F21 /* Info.plist */,
+				481F05EA1E0AB6A3009F7C79 /* SearchBar.h */,
+				481F05EB1E0AB6A3009F7C79 /* SearchBar.m */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Fusuma";
+			name = SearchBar;
+			sourceTree = "<group>";
+		};
+		482753411E09840100A1FB80 /* SelectBrandVC */ = {
+			isa = PBXGroup;
+			children = (
+				481EF7781E1290AD00B85D69 /* SelectBrandVC.h */,
+				481EF7791E1290AD00B85D69 /* SelectBrandVC.m */,
+				481EF77A1E1290AD00B85D69 /* SelectBrandVC.xib */,
+			);
+			name = SelectBrandVC;
+			sourceTree = "<group>";
+		};
+		485A66AB1E5028D700C5F5F7 /* Custom classes */ = {
+			isa = PBXGroup;
+			children = (
+				485A66AC1E50292D00C5F5F7 /* MOCollectionView.h */,
+				485A66AD1E50292D00C5F5F7 /* MOCollectionView.m */,
+			);
+			name = "Custom classes";
 			sourceTree = "<group>";
 		};
 		48EA941C1DFB325100B68F21 /* Fusuma */ = {
 			isa = PBXGroup;
 			children = (
-				48EA94071DFB325100B68F21 /* FSAlbumView.swift */,
-				48EA94081DFB325100B68F21 /* FSAlbumViewCell.swift */,
-				48EA94091DFB325100B68F21 /* FSCameraView.swift */,
-				48EA940A1DFB325100B68F21 /* FSConstants.swift */,
-				48EA940B1DFB325100B68F21 /* FSImageCropView.swift */,
-				48EA940C1DFB325100B68F21 /* FSVideoCameraView.swift */,
-				48EA940D1DFB325100B68F21 /* FusumaViewController.swift */,
-				48EA94141DFB325100B68F21 /* Resources */,
-				48EA941B1DFB325100B68F21 /* Support Files */,
 			);
 			name = Fusuma;
 			path = ../Pods/Fusuma;
@@ -1193,14 +1178,10 @@
 				047BE6721D51C41A008C999F /* HeaderView.xib in Resources */,
 				04F3CEFC1D4736D90041D864 /* NotificationCell.xib in Resources */,
 				044CA79F1D39641900678E24 /* OpenSans-BoldItalic.ttf in Resources */,
-				48EA94281DFB325100B68F21 /* FSVideoCameraView.xib in Resources */,
-				48EA94241DFB325100B68F21 /* Assets.xcassets in Resources */,
 				04F3CF091D47882A0041D864 /* NewsItemVC.xib in Resources */,
 				044CA7C51D39844C00678E24 /* MyPurchasesVC.xib in Resources */,
-				48EA94291DFB325100B68F21 /* FusumaViewController.xib in Resources */,
 				044CA7A01D39641900678E24 /* OpenSans-ExtraBold.ttf in Resources */,
 				044CA7A11D39641900678E24 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
-				48EA942C1DFB325100B68F21 /* Info.plist in Resources */,
 				04F3CEF61D47262F0041D864 /* PopupWithNotificationsVC.xib in Resources */,
 				044CA7A21D39641900678E24 /* OpenSans-Italic.ttf in Resources */,
 				044CA7D01D39847F00678E24 /* HelpVC.xib in Resources */,
@@ -1209,21 +1190,19 @@
 				044CA7A51D39641900678E24 /* OpenSans-Semibold.ttf in Resources */,
 				044CA7A61D39641900678E24 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				048109CA1D621AFF00EAB6AA /* CreateOfferPhotoCell.xib in Resources */,
-				043752661D4B1A81000EE3E5 /* SearchResultVC.xib in Resources */,
+				043752661D4B1A81000EE3E5 /* SearchOffersResultVC.xib in Resources */,
+				481EF7821E13EAF100B85D69 /* SelectCategoryVC.xib in Resources */,
 				04C38D5B1D3A7E2000532FB9 /* OfferLightCollectionViewCell.xib in Resources */,
-				48EA942A1DFB325100B68F21 /* Fusuma.xcconfig in Resources */,
-				48EA94261DFB325100B68F21 /* FSAlbumViewCell.xib in Resources */,
 				0405AD641D4918EE0059E668 /* SearchVC.xib in Resources */,
+				481EF77C1E1290AD00B85D69 /* SelectBrandVC.xib in Resources */,
 				047C2C441CE21B07000FF304 /* Main.storyboard in Resources */,
 				047C2C461CE21B0B000FF304 /* LaunchScreen.storyboard in Resources */,
 				047C2C7A1CE21CA9000FF304 /* CenturyGothicBold.ttf in Resources */,
 				04C38D581D3A729200532FB9 /* ProfileVC.xib in Resources */,
 				044CA7B81D39840200678E24 /* MyOffersVC.xib in Resources */,
-				48EA94271DFB325100B68F21 /* FSCameraView.xib in Resources */,
 				047C2C8D1CE24B93000FF304 /* OpenSans-Regular.ttf in Resources */,
 				047BE6771D51C769008C999F /* SearchCell.xib in Resources */,
 				044CA7AC1D39837900678E24 /* NewsVC.xib in Resources */,
-				48EA94251DFB325100B68F21 /* FSAlbumView.xib in Resources */,
 				044CA7CA1D39846300678E24 /* SettingsVC.xib in Resources */,
 				047C2C8B1CE24364000FF304 /* CenturyGothicRegular.ttf in Resources */,
 				047C2C0E1CE21A74000FF304 /* Assets.xcassets in Resources */,
@@ -1299,17 +1278,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48EA942D1DFD9A8A00B68F21 /* FSAlbumView.swift in Sources */,
-				48EA942E1DFD9A8A00B68F21 /* FSAlbumViewCell.swift in Sources */,
-				48EA942F1DFD9A8A00B68F21 /* FSConstants.swift in Sources */,
-				48EA94301DFD9A8A00B68F21 /* FSImageCropView.swift in Sources */,
-				48EA94311DFD9A8A00B68F21 /* FSVideoCameraView.swift in Sources */,
-				48EA94321DFD9A8A00B68F21 /* FusumaViewController.swift in Sources */,
-				48EA94331DFD9A8A00B68F21 /* FSAlbumView.xib in Sources */,
-				48EA94341DFD9A8A00B68F21 /* FSAlbumViewCell.xib in Sources */,
-				48EA94351DFD9A8A00B68F21 /* FSCameraView.xib in Sources */,
-				48EA94361DFD9A8A00B68F21 /* FSVideoCameraView.xib in Sources */,
-				48EA94371DFD9A8A00B68F21 /* FusumaViewController.xib in Sources */,
 				044CA7B71D39840200678E24 /* MyOffersVC.m in Sources */,
 				047C2C311CE21A9A000FF304 /* IIViewDeckController.m in Sources */,
 				049F15B41D3D4E4C00CB2132 /* MenuItemView.swift in Sources */,
@@ -1318,6 +1286,7 @@
 				048A73E81CF36F89002CCA31 /* UIImage+WebP.m in Sources */,
 				047C2C781CE21BA3000FF304 /* categoryItemButton.m in Sources */,
 				047C2BF11CE219F1000FF304 /* baseOfferItem.m in Sources */,
+				485A66AE1E50292D00C5F5F7 /* MOCollectionView.m in Sources */,
 				045A6A951CFB0DD400B03B5E /* OfferLightCollectionViewCell.m in Sources */,
 				045D7FF91D4FBA5800513E3D /* UILoadControl_UIScrollView.swift in Sources */,
 				047BE6761D51C769008C999F /* SearchCell.m in Sources */,
@@ -1342,7 +1311,7 @@
 				048A73E41CF36F89002CCA31 /* SDWebImagePrefetcher.m in Sources */,
 				047C2C751CE21B74000FF304 /* NSString+TextDirectionality.m in Sources */,
 				042A0EBA1D37F94A00213DFA /* MenuVC.m in Sources */,
-				043752651D4B1A81000EE3E5 /* SearchResultVC.m in Sources */,
+				043752651D4B1A81000EE3E5 /* SearchOffersResultVC.m in Sources */,
 				048A73DF1CF36F89002CCA31 /* SDWebImageCompat.m in Sources */,
 				047C2BF51CE21A11000FF304 /* OfferCollectionViewCell.m in Sources */,
 				04F3CF131D47A2580041D864 /* UIWebView+Additional.m in Sources */,
@@ -1350,8 +1319,8 @@
 				047C2C331CE21A9A000FF304 /* ViewDeckController.m in Sources */,
 				043466F01D6622610043DC34 /* PhotoCollectionView.swift in Sources */,
 				047C2C731CE21B74000FF304 /* JVFloatLabeledTextField.m in Sources */,
+				481F05EC1E0AB6A3009F7C79 /* SearchBar.m in Sources */,
 				048A73E01CF36F89002CCA31 /* SDWebImageDecoder.m in Sources */,
-				48EA941F1DFB325100B68F21 /* FSCameraView.swift in Sources */,
 				047BE66F1D51C406008C999F /* HeaderView.m in Sources */,
 				047C2C321CE21A9A000FF304 /* IIWrapController.m in Sources */,
 				046529431D3E083200DAA187 /* MBProgressHUD.m in Sources */,
@@ -1371,6 +1340,7 @@
 				0437525A1D4A71B1000EE3E5 /* AddressItem.m in Sources */,
 				047C2BFD1CE21A25000FF304 /* OffersVC.m in Sources */,
 				045D7FF81D4FBA5800513E3D /* UILoadControl.swift in Sources */,
+				481EF77B1E1290AD00B85D69 /* SelectBrandVC.m in Sources */,
 				042D178E1CE219340032E5DF /* AppDelegate.m in Sources */,
 				048A73E61CF36F89002CCA31 /* UIImage+GIF.m in Sources */,
 				04F3CF081D47882A0041D864 /* NewsItemVC.m in Sources */,
@@ -1378,6 +1348,7 @@
 				047C2C0C1CE21A69000FF304 /* AppManager.m in Sources */,
 				047C2C381CE21AAF000FF304 /* LoginVC.m in Sources */,
 				047C2C421CE21AC9000FF304 /* LeftMenuCell.m in Sources */,
+				481EF7811E13EAF100B85D69 /* SelectCategoryVC.m in Sources */,
 				047BE67B1D51CB97008C999F /* SearchItem.m in Sources */,
 				048A73E71CF36F89002CCA31 /* UIImage+MultiFormat.m in Sources */,
 				044CA7AB1D39837900678E24 /* NewsVC.m in Sources */,

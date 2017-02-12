@@ -10,5 +10,9 @@
 
 @interface HeaderView : UITableViewHeaderFooterView
 @property (strong, nonatomic) IBOutlet UILabel *headerTitle;
+@property (strong, nonatomic) NSMutableArray* childItems;
+@property (strong, nonatomic) NSString* name;
+@property (assign, nonatomic) int parent_id;
+@property (assign, nonatomic) int item_id;
 
 @end

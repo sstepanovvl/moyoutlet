@@ -22,10 +22,15 @@
 @property (assign,nonatomic) BOOL authorized;
 @property (strong,nonatomic) AppConfig* config;
 @property (strong,nonatomic) NSMutableDictionary* offers;
+@property (strong,nonatomic) NSMutableArray* brands;
 @property (strong,nonatomic) NSDictionary* categories;
 @property (strong,nonatomic) UserItem* authorizedUser;
 @property (strong,nonatomic) NSMutableArray* savedSearch;
 @property (strong,nonatomic) NSMutableArray* searchHistory;
+@property (strong,nonatomic) NSMutableArray* selectedBrands;
+@property (strong,nonatomic) NSMutableArray* selectedCategories;
+
+
 
 
 + (instancetype)sharedInstance;
@@ -60,6 +65,10 @@
         WithSuccessBlock:(void (^)(UserItem* user))success
          andFailureBlock:(void (^)(NSError *error))failure;
 
+#pragma mark Get Brands
+
+-(void)getBrandsFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure;
+
 #pragma mark Get Offers
 
 -(void)getCategoriesFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure;
@@ -75,5 +84,11 @@
 
 -(void) createOfferWithData:(NSDictionary*)data andImages:(NSArray*)images;
 -(void) saveOfferToDB;
+
+#pragma mark Helpers
+
+-(NSDictionary*)buildTreeForCategory:(NSInteger)category_id;
+-(BOOL)checkChildItemsInCategory:(NSInteger)categoryId;
+
 
 @end

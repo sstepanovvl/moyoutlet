@@ -10,6 +10,6 @@
 
 @interface SearchItem : NSObject
 @property (strong,nonatomic) NSString* text;
-@property (assign,nonatomic) NSInteger category_id;
-
+@property (assign,nonatomic) NSInteger item_id;
+@property (assign,nonatomic) NSInteger parent_id;
 @end

@@ -9,7 +9,6 @@
 #ifndef Constants_h
 #define Constants_h
 
-
 #endif /* Constants_h */
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -28,7 +27,6 @@
 
 static const BOOL debug_enabled = YES;
 static const NSString* apiServer = @"http://moyoutlet.ru/api/"; 
-static const NSString* XDEBUG_SESSION_START = @"12951";
-static const NSString* imageServerUrl = @"http://moyoutlet.ru:8000/api/image";
+static const NSString* XDEBUG_SESSION_START = @"11756";
+static const NSString* imageServerUrl = @"http://moyoutlet.ru/api/image";
 static const NSString* imagesSize = @"500x500";
-

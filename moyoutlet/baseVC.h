@@ -21,6 +21,8 @@
 #import "ARSPopover.h"
 #import "SearchItem.h"
 #import "UserItem.h"
+#import "SearchBar.h"
+#import "MOCollectionView.h"
 
 @interface baseVC : UIViewController <UIPopoverPresentationControllerDelegate,UITableViewDelegate, UITableViewDataSource>
 

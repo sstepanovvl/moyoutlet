@@ -9,7 +9,7 @@
 #import "baseVC.h"
 #import "moyoutlet-swift.h"
 
-//@import Fusuma;
+@import Fusuma;
 
 @interface CategoriesWithOffersVC : baseVC <FusumaDelegate>
 

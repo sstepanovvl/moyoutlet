@@ -19,6 +19,8 @@
 @property (strong, nonatomic) CreateOfferPhotoCell* selfcell ;
 @property (strong, nonatomic) IBOutlet UIView *superView;
 @property (strong, nonatomic) IBOutlet UIScrollView *superScrollView;
+@property (unsafe_unretained, nonatomic) IBOutlet UITextField *offerTitleField;
+@property (unsafe_unretained, nonatomic) IBOutlet UITextView *offerDescriptionField;
 
 
 @end
@@ -137,12 +139,28 @@
     }
 }
 
+#pragma mark Publish helpers
+
+-(id)getSelectedCategoryId {
+#warning добавить модель категории
+    return @0;
+}
 #pragma mark IBAction
 
 - (IBAction)publishButtonDidPress:(id)sender {
     NSDictionary* data = @{
+                           @"category_id": [self getSelectedCategoryId],
                            @"title" : @"Тестовый оффер",
-                           @"sellerId" : @0
+                           @"description":@"",
+                           @"brand":@"",
+                           @"item_condition":@"",
+                           @"shipping":@"",
+                           @"senderCity":@"",
+                           @"sellerId" : @0,
+                           @"price":@"",
+                           @"size":@"",
+                           @"super_category_id":@"",
+                           @"categories":@""
                            };
     
     [[AppManager sharedInstance] createOfferWithData:data andImages:self.item.arrImages];

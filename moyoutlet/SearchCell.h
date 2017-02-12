@@ -8,12 +8,28 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchItem.h"
+@protocol SearchCellDelegate;
 
 @interface SearchCell : UITableViewCell
+
 @property (strong, nonatomic) IBOutlet UILabel *cellTitle;
 @property (strong, nonatomic) SearchItem* searchItem;
+@property (weak, nonatomic) IBOutlet UIButton *selectButton;
+@property (weak, nonatomic) IBOutlet UILabel *categoriesTitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectButtonConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectButtonTrailingConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *selectedButton;
 
+@property (assign, nonatomic) id <SearchCellDelegate> delegate;
 
 -(instancetype)initWithSearchItem:(SearchItem*)searchItem;
+
+@end
+
+@protocol SearchCellDelegate <NSObject>
+
+@optional
+
+- (void)delegateForCell:(SearchCell *)cell showSubItems:(BOOL)showSubItems;
 
 @end

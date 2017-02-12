@@ -6,11 +6,11 @@
 //  Copyright © 2016 Stepan Stepanov. All rights reserved.
 //
 
-#import "SearchResultVC.h"
+#import "SearchOffersResultVC.h"
 #import "OfferCollectionViewCell.h"
 #import "OfferVC.h"
 
-@interface SearchResultVC ()
+@interface SearchOffersResultVC ()
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 
@@ -19,7 +19,7 @@
 
 #define kCellsPerRow 2
 
-@implementation SearchResultVC
+@implementation SearchOffersResultVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,6 +27,7 @@
     [self initNavigationItems];
 
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
+   
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
 
 
@@ -34,11 +35,16 @@
     [_searchBar sizeToFit];
     _searchBar.barTintColor = [UIColor whiteColor];
     _searchBar.delegate = self;
-    _searchBar.placeholder = @"Поиск в MoyOutlet";
-    [[UISearchBar appearance] setImage:nil forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
-    self.navigationItem.titleView = _searchBar;
-    self.definesPresentationContext = YES;
+    _searchBar.placeholder = @"Поиск вещей в MoyOutlet";
     _searchBar.text = _searchString;
+
+    
+    [[UISearchBar appearance] setImage:nil forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    
+    self.navigationItem.titleView = _searchBar;
+    
+    self.definesPresentationContext = YES;
+    
 
     _collectionView.alwaysBounceVertical = YES;
     _collectionView.alwaysBounceHorizontal = NO;
@@ -55,6 +61,31 @@
 
     _flowLayout.itemSize = CGSizeMake(cellWidth, _flowLayout.itemSize.height);
 
+  /*
+    switch (_searchType) {
+        case OFFERS:
+            
+            break;
+        case CATEGORY:
+            _searchBar.placeholder = @"Поиск категории";
+            [[UISearchBar appearance] setImage:nil forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+            
+            [_tableView registerNib:[UINib nibWithNibName:@"HeaderView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"HeaderView"];
+            [_tableView registerNib:[UINib nibWithNibName:@"SearchCell" bundle:nil] forCellReuseIdentifier:@"SearchCell"];
+            break;
+        case BRAND:
+            _searchBar.placeholder = @"Поиск бренда";
+            
+            [[UISearchBar appearance] setImage:nil forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+            
+            [_tableView registerNib:[UINib nibWithNibName:@"HeaderView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"HeaderView"];
+            [_tableView registerNib:[UINib nibWithNibName:@"SearchCell" bundle:nil] forCellReuseIdentifier:@"SearchCell"];
+            break;
+        default:
+            break;
+    }
+
+    */
 }
 
 -(void)initNavigationItems {

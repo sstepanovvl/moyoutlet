@@ -27,14 +27,25 @@
     [AppManager sharedInstance];
     [AppManager sharedInstance].authorized = YES;
 
+    [[AppManager sharedInstance] getBrandsFromServerwithSuccessBlock:^(BOOL response) {
+        NSLog(@"Brands downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].brands count]);
+        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                                     ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+        [AppManager sharedInstance].brands = [[[AppManager sharedInstance].brands sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+    } andFailureBlock:^(NSError *error) {
+        NSLog(@"Brands download failed with error %@",error.localizedDescription);
+    }];
+    
     [[AppManager sharedInstance] getUserFromServer:1 WithSuccessBlock:^(UserItem *user) {
         [AppManager sharedInstance].authorizedUser = user;
         if (debug_enabled) {
             NSLog(@"User initialized");
         }
     } andFailureBlock:^(NSError *error) {
-
+        NSLog(@"User download failed with error %@",error.localizedDescription);
     }];
+
 
     NSArray* arrSearchHistory = [NSArray arrayWithObjects:@"IPhone",@"IPad",@"Apple", @"Dress", @"Jeans", nil];
     NSArray* arrSavedSearch = [NSArray arrayWithObjects:@"Free",@"IPod",@"Good", nil];

@@ -81,19 +81,19 @@
 		573D50FB453C53709B84E62E54CD0145 /* FABAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FABAttributes.h; path = iOS/Fabric.framework/Headers/FABAttributes.h; sourceTree = "<group>"; };
 		5AB72930A5B3027324EE5BF658972F46 /* SHSPhoneNumberFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SHSPhoneNumberFormatter.h; path = SHSPhoneComponents/SHSPhoneNumberFormatter.h; sourceTree = "<group>"; };
 		60BA8C19FCF76F37780F65DBFFD9DB54 /* Pods-moyoutlet-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-moyoutlet-acknowledgements.plist"; sourceTree = "<group>"; };
-		6679DE3367346F47A9061A45CCCA7D75 /* Pods_moyoutlet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyoutlet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6679DE3367346F47A9061A45CCCA7D75 /* Pods_moyoutlet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_moyoutlet.framework; path = "Pods-moyoutlet.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67373F49E28B7511B6FC5A3223E1B86D /* Pods-moyoutlet-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-moyoutlet-umbrella.h"; sourceTree = "<group>"; };
 		6739846640F3A8620AC3E149A5260CE0 /* SHSPhoneLogic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SHSPhoneLogic.h; path = SHSPhoneComponents/SHSPhoneLogic.h; sourceTree = "<group>"; };
 		6BF486C3342DB7969EA9CFB480169763 /* FusumaViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FusumaViewController.swift; path = Sources/FusumaViewController.swift; sourceTree = "<group>"; };
 		6EA42E4D142FAA011E6F32B7AC53A99D /* Pods-moyoutlet-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-moyoutlet-resources.sh"; sourceTree = "<group>"; };
 		736208FADC1A399C614614BC78DAB902 /* SHSPhoneComponent.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SHSPhoneComponent.xcconfig; sourceTree = "<group>"; };
-		8CD8F4A72E93D0EA1F0FC067EE6CFD85 /* SHSPhoneComponent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SHSPhoneComponent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CD8F4A72E93D0EA1F0FC067EE6CFD85 /* SHSPhoneComponent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SHSPhoneComponent.framework; path = SHSPhoneComponent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1FD4A0B1ECCCF63AC3F765C3A9DB0B /* FusumaViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FusumaViewController.xib; path = Sources/FusumaViewController.xib; sourceTree = "<group>"; };
-		8DAD02AC724BCFC967C9E76E1A4717B4 /* Pods-moyoutlet.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-moyoutlet.modulemap"; sourceTree = "<group>"; };
+		8DAD02AC724BCFC967C9E76E1A4717B4 /* Pods-moyoutlet.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-moyoutlet.modulemap"; sourceTree = "<group>"; };
 		8E7CFA7626A3FD3F145B9BBCDFD2BFE7 /* FSAlbumViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSAlbumViewCell.swift; path = Sources/FSAlbumViewCell.swift; sourceTree = "<group>"; };
 		8F0B8814FCA2E7019B719FE038BF2E32 /* SHSFlagAccessoryView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SHSFlagAccessoryView.m; path = SHSPhoneComponents/SHSFlagAccessoryView.m; sourceTree = "<group>"; };
 		90A90B7F12A24E57F7F042C84E4A336E /* FSCameraView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FSCameraView.xib; path = Sources/FSCameraView.xib; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		943CCA9873ACE36F9F97B279B0E92C51 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		98F6831519F5F8A2095F5794D4CDCB24 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C1680357E02DBD0C1EFD5FC79D5B0BB /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
@@ -103,12 +103,12 @@
 		A2EE98970E481B5B6C4F15938109A86D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A582616D4E079060AF8B3B2502F79C05 /* Pods-moyoutlet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-moyoutlet.release.xcconfig"; sourceTree = "<group>"; };
 		A709BD0A3D4C24CCE382393857CD4B0D /* Pods-moyoutlet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-moyoutlet.debug.xcconfig"; sourceTree = "<group>"; };
-		AAA1CC5695397523F75352D111824035 /* Fusuma.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Fusuma.modulemap; sourceTree = "<group>"; };
+		AAA1CC5695397523F75352D111824035 /* Fusuma.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Fusuma.modulemap; sourceTree = "<group>"; };
 		AAE59F0A040DF6E5D509E6EEE23784DB /* SHSPhoneComponent-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SHSPhoneComponent-dummy.m"; sourceTree = "<group>"; };
 		BD6ADE253FA2A4221A06F270AB4291C0 /* FSVideoCameraView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FSVideoCameraView.xib; path = Sources/FSVideoCameraView.xib; sourceTree = "<group>"; };
 		BDB27C000D4E1DE2F3F9D38B5093A1C5 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sources/Assets.xcassets; sourceTree = "<group>"; };
 		C8715F93452C280EFE448F1F20654E6A /* SHSPhoneLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SHSPhoneLibrary.h; path = SHSPhoneComponents/SHSPhoneLibrary.h; sourceTree = "<group>"; };
-		CB10D138BB586E00E41F3489A8CFA94B /* SHSPhoneComponent.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SHSPhoneComponent.modulemap; sourceTree = "<group>"; };
+		CB10D138BB586E00E41F3489A8CFA94B /* SHSPhoneComponent.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SHSPhoneComponent.modulemap; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CC61D2052AE36AA09ACBC3FB34F5D95F /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
 		D5536A09A33A7D6773D6502E3B0B773E /* SHSPhoneNumberFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SHSPhoneNumberFormatter.m; path = SHSPhoneComponents/SHSPhoneNumberFormatter.m; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		DC5DCCC4C13D8CCC0212BE830ACD569A /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
 		DC811D58A109EFEF5A449A4DD72C390E /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
 		E474A05B15824E5CB205F844838D04E3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
-		ED57A9E965813F18CE3283E70A2E99FF /* Fusuma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fusuma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED57A9E965813F18CE3283E70A2E99FF /* Fusuma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Fusuma.framework; path = Fusuma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1AA43CEFCB42D96D362741575987E4B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1C7B69CA520B07FB97FF31DA6F32D88 /* SHSPhoneTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SHSPhoneTextField.m; path = SHSPhoneComponents/SHSPhoneTextField.m; sourceTree = "<group>"; };
 		F2BD9363F2BBE64DB35DBF6BAFF62DD7 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
@@ -187,6 +187,7 @@
 				AC1C934FB847EB527BC451015A1FAC2F /* Resources */,
 				F8C59647F02A8A2BEE28CF2D544776B9 /* Support Files */,
 			);
+			name = Fusuma;
 			path = Fusuma;
 			sourceTree = "<group>";
 		};
@@ -220,6 +221,7 @@
 				329CF743A8CA7BBEA33759C46222F033 /* Crashlytics.h */,
 				9EA2A5FFA989F9243CE49464CED2CAA0 /* Frameworks */,
 			);
+			name = Crashlytics;
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
@@ -316,6 +318,7 @@
 				F1C7B69CA520B07FB97FF31DA6F32D88 /* SHSPhoneTextField.m */,
 				3C4BB4CCDC7A8E0859502D62023E5247 /* Support Files */,
 			);
+			name = SHSPhoneComponent;
 			path = SHSPhoneComponent;
 			sourceTree = "<group>";
 		};
@@ -326,6 +329,7 @@
 				DC5DCCC4C13D8CCC0212BE830ACD569A /* Fabric.h */,
 				2D469604E0F91786563601CAD658DFB3 /* Frameworks */,
 			);
+			name = Fabric;
 			path = Fabric;
 			sourceTree = "<group>";
 		};
@@ -441,11 +445,6 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
-				TargetAttributes = {
-					3E0D8640A124012AB6F0A9F775A38285 = {
-						LastSwiftMigration = 0810;
-					};
-				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -572,39 +571,7 @@
 			};
 			name = Release;
 		};
-		1AF1C8F848E5815D4F1A21C608AC111C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 736208FADC1A399C614614BC78DAB902 /* SHSPhoneComponent.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SHSPhoneComponent/SHSPhoneComponent-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SHSPhoneComponent/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SHSPhoneComponent/SHSPhoneComponent.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SHSPhoneComponent;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		55F4C281C3E26787012D17C0AF1C28E3 /* Debug */ = {
+		40607FA92E2C791D7A3FA66F8D50A63B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2B0A208D5117D00418D41F7B949B6867 /* Fusuma.xcconfig */;
 			buildSettings = {
@@ -717,7 +684,39 @@
 			};
 			name = Debug;
 		};
-		8893E3DC72E0BCD9548D9D953A3E3256 /* Release */ = {
+		66FEA512CD2FB30D295E693122F2264A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 736208FADC1A399C614614BC78DAB902 /* SHSPhoneComponent.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SHSPhoneComponent/SHSPhoneComponent-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SHSPhoneComponent/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SHSPhoneComponent/SHSPhoneComponent.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SHSPhoneComponent;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		75B46EAA6283FFCC5C4586D90D5B4644 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2B0A208D5117D00418D41F7B949B6867 /* Fusuma.xcconfig */;
 			buildSettings = {
@@ -789,7 +788,7 @@
 			};
 			name = Release;
 		};
-		CF5C31899463D428AD965F989C6DA329 /* Release */ = {
+		EE90305F76F50CA5C814535B7CE2CE55 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 736208FADC1A399C614614BC78DAB902 /* SHSPhoneComponent.xcconfig */;
 			buildSettings = {
@@ -814,7 +813,7 @@
 				PRODUCT_NAME = SHSPhoneComponent;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -836,8 +835,8 @@
 		69FDA4CADDE19F7B4339DB94F3AC8B74 /* Build configuration list for PBXNativeTarget "SHSPhoneComponent" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1AF1C8F848E5815D4F1A21C608AC111C /* Debug */,
-				CF5C31899463D428AD965F989C6DA329 /* Release */,
+				66FEA512CD2FB30D295E693122F2264A /* Debug */,
+				EE90305F76F50CA5C814535B7CE2CE55 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -845,8 +844,8 @@
 		701EE424EC02B83CAB3D7F07E65B18F3 /* Build configuration list for PBXNativeTarget "Fusuma" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				55F4C281C3E26787012D17C0AF1C28E3 /* Debug */,
-				8893E3DC72E0BCD9548D9D953A3E3256 /* Release */,
+				40607FA92E2C791D7A3FA66F8D50A63B /* Debug */,
+				75B46EAA6283FFCC5C4586D90D5B4644 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

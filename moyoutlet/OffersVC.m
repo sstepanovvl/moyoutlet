@@ -24,12 +24,15 @@ NSString *kCellID = @"OfferCollectionViewCell";
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSMutableArray* categoryButtons;
 @property (strong, nonatomic) NSMutableArray* arrOffers;
+@property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, assign) NSInteger totalPages;
+@property (nonatomic, assign) NSInteger totalItems;
 @end
 
 @implementation OffersVC
-@synthesize refreshControl = _refreshControl;
-@synthesize categoryButtons = _categoryButtons;
-@synthesize arrOffers = _arrOffers;
+//@synthesize refreshControl = _refreshControl;
+//@synthesize categoryButtons = _categoryButtons;
+//@synthesize arrOffers = _arrOffers;
 
 
 #pragma mark - LifeCycle
@@ -57,7 +60,7 @@ NSString *kCellID = @"OfferCollectionViewCell";
     _offersCollectionView.backgroundColor = [UIColor clearColor];
 
     _offersCollectionView.delegate = self;
-
+    
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)_offersCollectionView.collectionViewLayout;
     CGFloat availableWidthForCells = CGRectGetWidth(self.view.bounds) - flowLayout.sectionInset.left - flowLayout.sectionInset.right - flowLayout.minimumInteritemSpacing * (kCellsPerRow - 1);
 
@@ -91,6 +94,7 @@ NSString *kCellID = @"OfferCollectionViewCell";
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_offersCollectionView reloadData];
                         [_offersCollectionView layoutIfNeeded];
+                        NSLog(@"[_offersCollectionView layoutIfNeeded];");
                         [MBProgressHUD hideHUDForView:_offersCollectionView animated:YES];
                     });
                 }
@@ -107,9 +111,6 @@ NSString *kCellID = @"OfferCollectionViewCell";
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
-
-
-
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -155,37 +156,46 @@ NSString *kCellID = @"OfferCollectionViewCell";
 
     OfferCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellID
                                                                               forIndexPath:indexPath];
-    
-        NSLog(@"Cell initialized");
         NSArray* items = [[AppManager sharedInstance].offers valueForKey:[NSString stringWithFormat:@"%li",(long)self.category_id]];
-        if ([items count] && [[items objectAtIndex:indexPath.row] isKindOfClass:[OfferItem class]]) {
+            if ([items count] && [[items objectAtIndex:indexPath.row] isKindOfClass:[OfferItem class]]) {
             cell.item = [_arrOffers objectAtIndex:indexPath.row];
             cell.brandLabel.text = cell.item.brandName;
             cell.titleLabel.text = cell.item.name;
             cell.likesCount.text = [cell.item.likesCount stringValue];
-            
+//            cell.priceLabel.text = [NSString stringWithFormat:@"%.f ₽",cell.item.price];
+            cell.priceLabel.text = [NSString stringWithFormat:@"%.f руб.",cell.item.price];
             cell.priceView.layer.cornerRadius = 4.0f;
             cell.priceView.layer.masksToBounds = YES;
             cell.priceView.backgroundColor = [UIColor appRedColor];
             cell.cellView.layer.borderColor = [[UIColor appLightGrayColor] CGColor];
             cell.cellView.layer.borderWidth = 0.5f;
             cell.cellView.layer.masksToBounds = YES;
-            cell.priceLabel.text = [self printPriceWithCurrencySymbol: cell.item.price];
-            cell.imageView.backgroundColor = [UIColor whiteColor];
             
+            cell.imageView.backgroundColor = [UIColor whiteColor];
+//
             [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[cell.item mainThumbUrl]]
                               placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                         cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+                                                                                  cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
                                      }];
-            
         } else {
-            NSLog(@"Empty category!");
+            if (debug_enabled) {
+                NSLog(@"Empty category!");
+            }
         }
-    
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (debug_enabled) {
+        NSLog(@"willDisplayCell indexPath.row: %ld _arrOffersCount: %lu",(long)indexPath.row, (unsigned long)[_arrOffers count]);
+    }
+    if ([_arrOffers count]) {
+        if (indexPath.row == [_arrOffers count] - 15 ) {
+            [self loadMore:nil];
+        }
+    }
 }
 
 -(IBAction)startRefresh:(id)sender {
@@ -206,19 +216,23 @@ NSString *kCellID = @"OfferCollectionViewCell";
 }
 
 -(IBAction)loadMore:(id)sender {
-    NSLog(@"loadMore");
+    
+    if (debug_enabled ) {
+        NSLog(@"loadMore");
+    }
+    
     [[AppManager sharedInstance] loadOffersFromServerFor:self.category_id offset:[_arrOffers count] WithSuccessBlock:^(BOOL response) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_offersCollectionView reloadData];
                 [_offersCollectionView layoutIfNeeded];
-                [_offersCollectionView.loadControl endLoading];
+//                [_offersCollectionView.loadControl endLoading];
 
             });
     
         } andFailureBlock:^(NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_offersCollectionView layoutIfNeeded];
-                [_offersCollectionView.loadControl endLoading];
+//                [_offersCollectionView.loadControl endLoading];
                 [self throughError:error];
             });
         }];

@@ -7,6 +7,7 @@
 //
 
 #import "SearchCell.h"
+#import "SelectBrandVC.h"
 
 @implementation SearchCell
 
@@ -18,21 +19,48 @@
     return self;
 }
 
+
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     _searchItem = [[SearchItem alloc]init];
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    
+    self.delegate = nil;
 }
+
+
+//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+//    [super setSelected:selected animated:YES];
+//    
+//    // Configure the view for the selected state
+//}
 
 -(void)setSearchItem:(SearchItem *)searchItem {
     _searchItem = searchItem;
     _cellTitle.text = self.searchItem.text;
 }
+
+
+- (IBAction)selectButtonPressed:(id)sender {
+    NSLog(@"Button pressed");
+    
+    UIButton* button = (UIButton*)sender;
+    if (button.tag == 1) {
+        if ([self.delegate respondsToSelector:@selector(delegateForCell:showSubItems:)]) {
+            [self.delegate delegateForCell:self showSubItems:YES];
+        }
+    } else {
+        if ([self.delegate respondsToSelector:@selector(delegateForCell:showSubItems:)]) {
+            [self.delegate delegateForCell:self showSubItems:NO];
+        }
+    }
+}
+
+
 
 @end

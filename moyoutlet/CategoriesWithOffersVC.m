@@ -26,8 +26,10 @@
 
 -(void)viewDidLoad {
 
-    NSLog(@"CategoriesWithOffersVC viewDidLoad");
-
+    if (debug_enabled) {
+        NSLog(@"CategoriesWithOffersVC viewDidLoad");
+    }
+    
     [super viewDidLoad];
 
     [self initNavigationItems];
@@ -40,6 +42,7 @@
                     [self viewDidLoad];
                     [self viewWillAppear:YES];
                     [self viewDidAppear:YES];
+                        
                 });
             } andFailureBlock:^(NSError *error) {
                 [self throughError:error];
@@ -55,8 +58,9 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"CategoriesWithOffersVC viewDidAppear");
-
+    if (debug_enabled) {
+        NSLog(@"CategoriesWithOffersVC viewDidAppear");
+    }
     [self showSellButton];
 
 }
@@ -64,8 +68,9 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    NSLog(@"CategoriesWithOffersVC viewWillDisappear");
-
+    if (debug_enabled) {
+        NSLog(@"CategoriesWithOffersVC viewWillDisappear");
+    }
 }
 
 #pragma mark - otherStuff
@@ -88,11 +93,10 @@
             ofVC0.categoriesWithOffersvc = self;
             ofVC0.offersCollectionView.delegate = self;
             ofVC0.offersCollectionView.loadControl = [[UILoadControl alloc] initWithTarget:ofVC0 action:@selector(loadMore:)];
-
             [controllerArray addObject:ofVC0];
-
         }
     }
+    
 
     id elem = [controllerArray firstObject];
     [controllerArray removeObject:[controllerArray firstObject]];
@@ -112,7 +116,6 @@
 
 -(void)initSellButtonOnFrame {
     CGRect sellButtonRect = CGRectMake(0, 0, 0, 0);
-    float multiplier = 0.0f;
     if (IS_IPHONE_4_OR_LESS) {
         sellButtonRect = CGRectMake(275.0f, 292.0f, 75, 75);
     } else if (IS_IPHONE_5) {
@@ -183,10 +186,6 @@
     view.layer.anchorPoint = anchorPoint;
 }
 
-
-
-
-
 -(void)sellButtonPressed:(id)sender {
     [self showImagePicker];
     
@@ -209,7 +208,7 @@
     
     fsvc.delegate = self;
     fsvc.hasVideo = false;
-    
+    fsvc.fusumaCameraFirst = true;
     [self.navigationController presentViewController:fsvc animated:YES completion:nil];
 
 /*
@@ -248,9 +247,9 @@
     [sender.loadControl update];
 
     if (!_offersCollectionViewIsScrolling) {
-
-        NSLog(@"Scroll starts");
-
+        if (debug_enabled){
+            NSLog(@"Scroll starts");
+        }
         _offersCollectionViewIsScrolling = YES;
         [self hideSellButton];
         _sellButtonHidden = TRUE;
@@ -262,28 +261,33 @@
 
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-
-    NSLog(@"scrollViewWillEndDragging");
+    if (debug_enabled) {
+        NSLog(@"scrollViewWillEndDragging");
+    }
 }
 // called on finger up if the user dragged. decelerate is true if it will continue moving afterwards
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    NSLog(@"scrollViewDidEndDragging");
+    if (debug_enabled) {
+        NSLog(@"scrollViewDidEndDragging");
+    }
     if(_sellButtonHidden & _offersCollectionViewIsScrolling) {
         [self showSellButton];
         _sellButtonHidden = YES;
         _offersCollectionViewIsScrolling = NO;
-
     }
 
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"scrollViewWillBeginDecelerating");
-
+    if (debug_enabled){
+        NSLog(@"scrollViewWillBeginDecelerating");
+    }
 }// called on finger up as we are moving
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"scrollViewDidEndDecelerating");
+    if (debug_enabled) {
+        NSLog(@"scrollViewDidEndDecelerating");
+    }
     if(_sellButtonHidden) {
         [self showSellButton];
         _sellButtonHidden = YES;

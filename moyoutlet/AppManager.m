@@ -23,6 +23,8 @@
         sharedInstance.offers = [NSMutableDictionary dictionary];
         sharedInstance.savedSearch = [NSMutableArray array];
         sharedInstance.searchHistory = [NSMutableArray array];
+        sharedInstance.selectedCategories = [NSMutableArray array];
+        sharedInstance.selectedBrands = [NSMutableArray array];
         // Do any other initialisation stuff here
     });
 
@@ -99,6 +101,24 @@
 
 -(void) loadUserConfigurationFromServer {
 
+}
+
+#pragma mark Get Brands
+
+-(void)getBrandsFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure {
+    [API requestWithMethod:@"getBrands" andData:@{@"Give me the matherfuckin brands": @"Gimmy that shit niger"}
+               withHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                   
+                   if (data) {
+                       self.brands = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:kNilOptions
+                                                                           error:nil];
+                       success(YES);
+                   } else {
+                       success(NO);
+                       failure(error);
+                   }
+               }];
 }
 
 #pragma mark Get Offers
@@ -248,6 +268,21 @@
     }
 }
  */
+#pragma mark Helpers
 
+-(BOOL)checkChildItemsInCategory:(NSInteger)categoryId {
+    for (NSDictionary* d in [[AppManager sharedInstance].categories mutableCopy]) {
+        if ([[d objectForKey:@"parent_id"] integerValue] == categoryId) {
+            return true;
+        }
+    }
+    return false;
+}
+
+-(NSDictionary*)buildTreeForCategory:(NSInteger)category_id {
+    
+    return nil;
+    
+}
 
 @end

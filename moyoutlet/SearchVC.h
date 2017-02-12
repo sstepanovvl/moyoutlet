@@ -7,8 +7,11 @@
 //
 
 #import "baseVC.h"
-
+#import "SelectBrandVC.h"
+#import "SelectCategoryVC.h"
 @interface SearchVC : baseVC <UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+
+
 
 
 
