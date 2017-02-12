@@ -8,6 +8,7 @@
 
 #import "CreateOfferVC.h"
 #import "CreateOfferPhotoCell.h"
+#import "SelectBrandVC.h"
 
 @interface CreateOfferVC ()
 @property (strong, nonatomic) IBOutlet PhotoCollectionView *photoCollectionView;
@@ -22,23 +23,39 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UITextField *offerTitleField;
 @property (unsafe_unretained, nonatomic) IBOutlet UITextView *offerDescriptionField;
 
+@property (weak, nonatomic) IBOutlet UIView *detailsHeaderView;
+@property (weak, nonatomic) IBOutlet UIView *categoryView;
+@property (weak, nonatomic) IBOutlet UIView *brandView;
+@property (weak, nonatomic) IBOutlet UIView *conditionView;
+@property (weak, nonatomic) IBOutlet UILabel *categoryNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *brandNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *conditionNameLabel;
+@property (weak, nonatomic) IBOutlet UIView *shippingFromView;
+@property (weak, nonatomic) IBOutlet UILabel *shippingFromLabel;
+
 
 @end
 
 @implementation CreateOfferVC
 
 
--(instancetype) initFromStoryboard {
+-(instancetype) initFromStoryboardWithItem:(OfferItem*)item {
     self = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"CreateOfferVC"];
     if (self) {
-        self.item = [OfferItem new];
+        if (!item) {
+            self.item = [OfferItem new];
+            self.createNewOffer = YES;
+        } else {
+            self.item = item;
+            self.createNewOffer = NO;
+        }
     }
     return self;
-
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initFields];
     [self initNavigationItems];
 
     _photoCollectionView.clipsToBounds = NO;
@@ -90,6 +107,21 @@
     [self presentViewController:alert animated:YES completion:NULL];
 }
 
+-(void)initFields {
+    if (!_createNewOffer) {
+        _categoryNameLabel.textColor = [UIColor blackColor];
+        _brandNameLabel.textColor = [UIColor blackColor];
+        _conditionNameLabel.textColor = [UIColor blackColor];
+        _shippingFromLabel.textColor = [UIColor blackColor];
+        _categoryNameLabel.text = _item.name;
+        _brandNameLabel.text = _item.brandName;
+        _conditionNameLabel.text = _item.condition;
+        _shippingFromLabel.text = _item.shipping;
+    }
+}
+
+
+
 -(void)initNavigationItems {
     [super initNavigationItems];
     [self.navigationController.navigationBar
@@ -114,16 +146,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 -(IBAction)handleLongPressGesture:(UILongPressGestureRecognizer*)gesture {
 
     if (gesture.state == UIGestureRecognizerStateBegan) {
@@ -146,6 +168,36 @@
     return @0;
 }
 #pragma mark IBAction
+
+- (IBAction)didSelectCategory:(id)sender {
+    if(debug_enabled) {
+        NSLog(@"Choose category");
+    }
+}
+- (IBAction)didSelectBrand:(id)sender {
+    if(debug_enabled) {
+        NSLog(@"Choose brand");
+    }
+    SelectBrandVC* srvc = [[SelectBrandVC alloc] initWithNibName:@"SelectBrandVC" bundle:nil];
+    [self.navigationController presentViewController:srvc animated:YES completion:^{
+        NSLog(@"Brand selected");
+    }];
+    
+}
+- (IBAction)didSelectCondition:(id)sender {
+    if(debug_enabled) {
+        NSLog(@"Choose condition");
+    }
+}
+- (IBAction)didSelectShippingFrom:(id)sender {
+    if(debug_enabled) {
+        NSLog(@"Choose condition");
+    }
+}
+
+
+
+
 
 - (IBAction)publishButtonDidPress:(id)sender {
     NSDictionary* data = @{
@@ -267,8 +319,15 @@
 
 - (void)fusumaDismissedWithImage:(UIImage * _Nonnull)image {
     [self.selfcell.imageView setImage:image];
-    [self.item.arrImages insertObject:image atIndex:[[_photoCollectionView indexPathForCell:self.selfcell] row]];
+    NSInteger row =[[_photoCollectionView indexPathForCell:self.selfcell] row];
+#warning Отследи какого хуя тут пустой массив! НЕ ПОЗОРЬСЯ
     
+    if ([self.item.arrImages count] < 4) {
+        while ([self.item.arrImages count] < 4) {
+            [_item.arrImages addObject:[NSNull null]];
+        }
+    }
+    [self.item.arrImages insertObject:image atIndex: row];
     if (debug_enabled) {
     NSLog(@"fusumaDismissedWithImage");
     }
@@ -325,6 +384,8 @@
         NSLog(@"%@", result);
     }
 }
+
+
 
 
 #pragma mark Alert Stuff

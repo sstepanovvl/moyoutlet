@@ -13,8 +13,9 @@
 
 @interface CreateOfferVC : baseVC <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, FusumaDelegate, NSURLSessionDelegate>
 
--(instancetype) initFromStoryboard;
+-(instancetype) initFromStoryboardWithItem:(OfferItem*)item;
 
 @property (strong,nonatomic) OfferItem* item;
+@property (assign,nonatomic) bool createNewOffer;
 
 @end

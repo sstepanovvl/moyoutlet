@@ -10,7 +10,16 @@
 
 @implementation OfferItem
 
+-(instancetype)init {
+    if (self = [super init]) {
+        self.arrImages = [NSMutableArray arrayWithCapacity:4];
+        for (int i = 0; i < 4; i++) {
+            [_arrImages addObject:[NSNull null]];
+        }
 
+    }
+    return self;
+}
 -(instancetype)initWith:(NSDictionary*)dictionary {
 
     if (self = [super initWith:dictionary]) {
@@ -20,6 +29,7 @@
         _likesCount = [NSNumber numberWithInt:(arc4random() % 1000) + 100];
         _price = [[dictionary valueForKey:@"price"] intValue];
         _photoUrls = [NSMutableArray array];
+
 
         NSString* imageSize = [NSString string];
         
@@ -54,5 +64,6 @@
     }
     return self;
 }
+
 
 @end

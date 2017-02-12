@@ -10,11 +10,13 @@
 
 @protocol MOCollectionViewDelegate <NSObject>
 @required
--(void)MOCollectionViewWillDisplayCellForItemAtIndexPath:(NSIndexPath *)indexPath;
+-(void)hideSellButton;
+-(void)showSellButton;
+-(void)showOfferForItemAt:(NSIndexPath*)indexPath;
 @end
 
 @interface MOCollectionView : UICollectionView
 
-@property (nonatomic, strong) id willDisplayCellForItemAtIndexPathDelegate;
+@property (nonatomic, strong) id showAndHideSellButtonDelegate;
 
 @end

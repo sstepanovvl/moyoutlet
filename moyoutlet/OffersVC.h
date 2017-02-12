@@ -13,7 +13,7 @@
 #import "moyoutlet-swift.h"
 
 @interface OffersVC : baseVC <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
-@property (strong, nonatomic) IBOutlet UICollectionView *offersCollectionView;
+@property (strong, nonatomic) IBOutlet MOCollectionView *offersCollectionView;
 @property (strong, nonatomic) CategoriesWithOffersVC* categoriesWithOffersvc;
 @property (assign, nonatomic) NSInteger category_id;
 @property (assign, nonatomic) NSInteger parent_id;

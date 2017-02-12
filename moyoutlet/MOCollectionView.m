@@ -9,7 +9,7 @@
 #import "MOCollectionView.h"
 
 @implementation MOCollectionView
-@synthesize willDisplayCellForItemAtIndexPathDelegate;
+@synthesize showAndHideSellButtonDelegate;
 
 /*
 // Only override drawRect: if you perform custom drawing.

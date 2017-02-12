@@ -27,13 +27,13 @@ NSString *kCellID = @"OfferCollectionViewCell";
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger totalPages;
 @property (nonatomic, assign) NSInteger totalItems;
+@property (assign, nonatomic) bool sellButtonHidden;
+@property (assign, nonatomic) bool offersCollectionViewIsScrolling;
+
+
 @end
 
 @implementation OffersVC
-//@synthesize refreshControl = _refreshControl;
-//@synthesize categoryButtons = _categoryButtons;
-//@synthesize arrOffers = _arrOffers;
-
 
 #pragma mark - LifeCycle
 
@@ -41,8 +41,6 @@ NSString *kCellID = @"OfferCollectionViewCell";
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    
-//    [_offersCollectionView registerClass:[OfferCollectionViewCell class] forCellWithReuseIdentifier:kCellID];
     
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
 
@@ -62,9 +60,11 @@ NSString *kCellID = @"OfferCollectionViewCell";
     _offersCollectionView.delegate = self;
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)_offersCollectionView.collectionViewLayout;
+
     CGFloat availableWidthForCells = CGRectGetWidth(self.view.bounds) - flowLayout.sectionInset.left - flowLayout.sectionInset.right - flowLayout.minimumInteritemSpacing * (kCellsPerRow - 1);
 
     CGFloat cellWidth = availableWidthForCells / kCellsPerRow;
+    
     CGSize itemSize = CGSizeZero;
     if (IS_IPHONE_6P) {
         itemSize = CGSizeMake(cellWidth, 230.0f);
@@ -172,7 +172,6 @@ NSString *kCellID = @"OfferCollectionViewCell";
             cell.cellView.layer.masksToBounds = YES;
             
             cell.imageView.backgroundColor = [UIColor whiteColor];
-//
             [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[cell.item mainThumbUrl]]
                               placeholderImage:[UIImage imageNamed:@"placeholder.png"]
@@ -197,6 +196,68 @@ NSString *kCellID = @"OfferCollectionViewCell";
         }
     }
 }
+
+#pragma mark ScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender{
+    [sender.loadControl update];
+    
+    if (!_offersCollectionViewIsScrolling) {
+        if (debug_enabled){
+            NSLog(@"Scroll starts");
+        }
+        _offersCollectionViewIsScrolling = YES;
+        [_offersCollectionView.showAndHideSellButtonDelegate hideSellButton];
+        _sellButtonHidden = TRUE;
+    }
+}
+
+// called on finger up if the user dragged. decelerate is true if it will continue moving afterwards
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (debug_enabled) {
+        NSLog(@"scrollViewDidEndDragging");
+    }
+    if(_sellButtonHidden & _offersCollectionViewIsScrolling) {
+        [_offersCollectionView.showAndHideSellButtonDelegate showSellButton];
+        _sellButtonHidden = YES;
+        _offersCollectionViewIsScrolling = NO;
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (debug_enabled) {
+        NSLog(@"scrollViewDidEndDecelerating");
+    }
+    if(_sellButtonHidden) {
+        [_offersCollectionView.showAndHideSellButtonDelegate showSellButton];
+        _sellButtonHidden = YES;
+        _offersCollectionViewIsScrolling = NO;
+    }
+}// called when scroll view grinds to a halt
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [UIView animateWithDuration:1.0f
+                          delay:0
+         usingSpringWithDamping:0.75
+          initialSpringVelocity:10
+                        options:0
+                     animations:^{
+                         OfferCollectionViewCell* cell = (OfferCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+                         
+                         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                         
+                         OfferVC* vc = [sb instantiateViewControllerWithIdentifier:@"OfferVC"];
+                         
+                         vc.offerItem = cell.item;
+                         
+                         [self.navigationController pushViewController:vc animated:YES];
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
+}
+
 
 -(IBAction)startRefresh:(id)sender {
     [[AppManager sharedInstance] loadOffersFromServerFor:self.category_id offset:[_arrOffers count]-20 WithSuccessBlock:^(BOOL response) {

@@ -17,7 +17,6 @@
 
 @property (assign, nonatomic) BOOL sellButtonInitialized;
 @property (assign, nonatomic) bool sellButtonHidden;
-@property (assign, nonatomic) bool offersCollectionViewIsScrolling;
 @property (strong, nonatomic) IBOutlet UIImageView* sellButton;
 
 @end
@@ -91,7 +90,7 @@
             ofVC0.parent_id = [[category valueForKey:@"parent_id"] intValue];
             ofVC0.view.backgroundColor = [UIColor clearColor];
             ofVC0.categoriesWithOffersvc = self;
-            ofVC0.offersCollectionView.delegate = self;
+            ofVC0.offersCollectionView.showAndHideSellButtonDelegate = self;
             ofVC0.offersCollectionView.loadControl = [[UILoadControl alloc] initWithTarget:ofVC0 action:@selector(loadMore:)];
             [controllerArray addObject:ofVC0];
         }
@@ -195,8 +194,8 @@
 
 - (void)fusumaImageSelected:(UIImage *)image {
     
-    CreateOfferVC* cofvc = [[CreateOfferVC alloc] initFromStoryboard];
-    cofvc.item.arrImages = [[NSMutableArray alloc] initWithObjects:image, nil];
+    CreateOfferVC* cofvc = [[CreateOfferVC alloc] initFromStoryboardWithItem:nil];
+    cofvc.item.arrImages = [[NSMutableArray alloc] initWithObjects:image, nil,nil,nil];
 
     [self.navigationController pushViewController:cofvc animated:YES];
 }
@@ -211,112 +210,7 @@
     fsvc.fusumaCameraFirst = true;
     [self.navigationController presentViewController:fsvc animated:YES completion:nil];
 
-/*
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
-        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Сделать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-            
-            [self.navigationController pushViewController:fsvc animated:YES];
-        }]];
-    }
-    
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Выбрать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        
-        [self.navigationController presentViewController:fsvc animated:YES completion:nil];
-        
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:NULL]];
-    
-    alert.popoverPresentationController.sourceView = [self.view  superview];
-    alert.popoverPresentationController.sourceRect = [self.view  frame];
-    
-    [self presentViewController:alert animated:YES completion:NULL];
- */
 }
 
-
-
-
-#pragma mark ScrollView delegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)sender{
-
-
-    [sender.loadControl update];
-
-    if (!_offersCollectionViewIsScrolling) {
-        if (debug_enabled){
-            NSLog(@"Scroll starts");
-        }
-        _offersCollectionViewIsScrolling = YES;
-        [self hideSellButton];
-        _sellButtonHidden = TRUE;
-    }
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-}
-
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    if (debug_enabled) {
-        NSLog(@"scrollViewWillEndDragging");
-    }
-}
-// called on finger up if the user dragged. decelerate is true if it will continue moving afterwards
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (debug_enabled) {
-        NSLog(@"scrollViewDidEndDragging");
-    }
-    if(_sellButtonHidden & _offersCollectionViewIsScrolling) {
-        [self showSellButton];
-        _sellButtonHidden = YES;
-        _offersCollectionViewIsScrolling = NO;
-    }
-
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if (debug_enabled){
-        NSLog(@"scrollViewWillBeginDecelerating");
-    }
-}// called on finger up as we are moving
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if (debug_enabled) {
-        NSLog(@"scrollViewDidEndDecelerating");
-    }
-    if(_sellButtonHidden) {
-        [self showSellButton];
-        _sellButtonHidden = YES;
-        _offersCollectionViewIsScrolling = NO;
-
-    }
-}// called when scroll view grinds to a halt
-
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [UIView animateWithDuration:1.0f
-                          delay:0
-         usingSpringWithDamping:0.75
-          initialSpringVelocity:10
-                        options:0
-                     animations:^{
-                         OfferCollectionViewCell* cell = (OfferCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-                         
-                         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                         
-                         OfferVC* vc = [sb instantiateViewControllerWithIdentifier:@"OfferVC"];
-                         
-                         vc.offerItem = cell.item;
-                         
-                         [self.navigationController pushViewController:vc animated:YES];
-                     }
-                     completion:^(BOOL finished) {
-                         
-                     }];
-}
 
 @end
