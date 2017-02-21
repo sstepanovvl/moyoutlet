@@ -59,12 +59,28 @@ static NSString* kCellIdentifier = @"SearchCell";
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+//    if ([[AppManager sharedInstance].selectedCategories count]) {
+//        SearchItem* searchItem = [[AppManager sharedInstance].selectedCategories lastObject];
+//        if (![searchItem.text isEqual: @"Без категории"]) {
+//            [self deselectNoCategoryRow];
+//        }
+//    } else {
+//        
+//    }
+}
+
 - (void) initFirstItemsInResultTable {
     
-    NSMutableArray* ar = [[AppManager sharedInstance].categories mutableCopy];
+    NSMutableArray* ar = [[AppManager sharedInstance].config.categories mutableCopy];
     
-    self.itemsToDisplay = [[ar filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(parent_id == %@)",[self.parent_id stringValue]]] mutableCopy];
-
+    ar = [[ar filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(parent_id == %@)",[self.parent_id stringValue]]] mutableCopy];
+    if ([_parent_id intValue]) {
+        [self.itemsToDisplay addObject:@{@"id":self.parent_id,
+                                         @"name":@"Все",
+                                         @"parent_id":@"-1"}];
+    }
+    [self.itemsToDisplay addObjectsFromArray:ar];
     [self generateSectionsInBackgroundFromArray:self.itemsToDisplay withFilter:self.searchBar.text];
     
 }
@@ -82,7 +98,6 @@ static NSString* kCellIdentifier = @"SearchCell";
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.sectionsArray = sectionsArray;
             [weakSelf.resultTable reloadData];
-            
             self.currentOperation = nil;
         });
     }];
@@ -109,10 +124,6 @@ static NSString* kCellIdentifier = @"SearchCell";
         
         HeaderView* section = nil;
         if (![[currentLetter uppercaseString] isEqualToString:[firstLetter uppercaseString]] ) {
-            if (debug_enabled) {
-                NSLog(@"%@",[currentLetter uppercaseString]);
-                NSLog(@"%@",[firstLetter uppercaseString]);
-            }
             //        if ([currentLetter caseInsensitiveCompare:firstLetter] != NSOrderedSame ) {
             section = [[HeaderView alloc] init];
             section.name = firstLetter;
@@ -214,38 +225,40 @@ static NSString* kCellIdentifier = @"SearchCell";
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
+    cell.selectedButton.hidden = NO;
     NSDictionary* dic = nil;
     dic = [self.itemsToDisplay objectAtIndex:indexPath.row];
     
     SearchItem* searchItem = [[SearchItem alloc] init];
     if ([dic respondsToSelector:@selector(objectForKey:)]) {
         searchItem.text  = [dic objectForKey:@"name"];
-        searchItem.item_id = [[dic objectForKey:@"id"] integerValue];
-        searchItem.parent_id = [[dic objectForKey:@"parent_id"] integerValue];
+        searchItem.item_id = [dic objectForKey:@"id"];
+//        searchItem.parent_id = [[dic objectForKey:@"parent_id"] integerValue];
     } else {
         searchItem.text  = [dic valueForKey:@"name"];
-        searchItem.item_id = [[dic valueForKey:@"item_id"] integerValue];
-        searchItem.parent_id = [[dic valueForKey:@"parent_id"] integerValue];
+        searchItem.item_id = [dic valueForKey:@"item_id"];
+//        searchItem.parent_id = [[dic valueForKey:@"parent_id"] integerValue];
     }
     
     cell.searchItem = searchItem;
     
-    if (![[AppManager sharedInstance] checkChildItemsInCategory:cell.searchItem.item_id] || searchItem.item_id == 0 ) {
+    if (![[AppManager sharedInstance] checkChildItemsInCategory:cell.searchItem.item_id] || searchItem.item_id == 0 || searchItem.parent_id == -1 ) {
         cell.selectButtonConstraint.constant = 0.f;
         cell.selectButtonTrailingConstraint.constant = 0.f;
+        cell.searchItem.hasChild = false;
     } else {
         cell.selectButtonConstraint.constant = 14.f;
         cell.selectButtonTrailingConstraint.constant = 8.f;
+        cell.searchItem.hasChild = true;
     }
     
     for (SearchItem* selectedItem in [[AppManager sharedInstance]selectedCategories]) {
-        if ([selectedItem.text isEqualToString:cell.searchItem.text] ) {
+        if (selectedItem.item_id == cell.searchItem.item_id && selectedItem.parent_id == cell.searchItem.parent_id && [selectedItem.text isEqual:cell.searchItem.text]) {
             [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
     }
     
     if (!cell.selected) {
-        cell.selectedButton.hidden = NO;
         cell.selectedButton.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001);
     } else {
         cell.selectedButton.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
@@ -255,55 +268,87 @@ static NSString* kCellIdentifier = @"SearchCell";
 
 #pragma SearcChellDelegate
 
--(IBAction)noCategoryRowSelected:(UITapGestureRecognizer*)gesture {
-    if ([[[AppManager sharedInstance]selectedCategories]  count] > 0) {
-        self.tableViewHeaderImage.hidden = false;
-        for (NSIndexPath *indexPath in [self.resultTable indexPathsForSelectedRows]) {
-            
-            self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(0.001,0.001);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [UIView animateWithDuration:0.3
-                                  delay:0
-                                options:0
-                             animations:^{
-                                 self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(1.5, 1.5);
-                                 self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(1, 1);
-                             } completion:^(BOOL finished) {
-                                 [self tableView:self.resultTable didDeselectRowAtIndexPath:indexPath];
-                                 [AppManager sharedInstance].selectedCategories = [NSMutableArray new];
-                             }];
-            });
-            
-        }
-        if (debug_enabled){
-            NSLog(@"No brand state changed");
-        }
-    }
-}
-
--(void)deselectNoCategoryRow {
-    
-    if (self.tableViewHeaderImage.hidden == NO ){
-        dispatch_async(dispatch_get_main_queue(), ^{
-                    [UIView animateWithDuration:0.3
-                              delay:0
-                            options:0
-                         animations:^{
-                             self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(1.5, 1.5);
-                             self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(0.001, 0.001);
-                         } completion:^(BOOL finished) {
-                             self.tableViewHeaderImage.hidden = YES;
-                         }];
-        });
-
-    }
-}
+//-(IBAction)noCategoryRowSelected:(UITapGestureRecognizer*)gesture {
+//    if (debug_enabled) {
+//        NSLog(@"noCategoriesRowSelected now its %lu and %lu items in selectedItems",[[_resultTable indexPathsForSelectedRows] count],[[AppManager sharedInstance].selectedCategories count]);
+//    }
+//    for (NSIndexPath *indexPath in [self.resultTable indexPathsForSelectedRows]) {
+//        SearchCell* cell = [_resultTable cellForRowAtIndexPath:indexPath];
+//        [_resultTable deselectRowAtIndexPath:indexPath animated:YES];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [UIView animateWithDuration:0.3
+//                                  delay:0
+//                                options:0
+//                             animations:^{
+//                                 cell.selectedButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+//                                 cell.selectedButton.transform = CGAffineTransformMakeScale(0.001, 0.001);
+//                             } completion:^(BOOL finished) {
+//                             }];
+//        });
+//    }
+//    
+//    [[AppManager sharedInstance].selectedCategories removeAllObjects];
+//    SearchItem* noBrandItem = [[SearchItem alloc] init];
+//    noBrandItem.text = @"Без бренда";
+//    noBrandItem.item_id = 0;
+//    noBrandItem.parent_id = 0;
+//    [[AppManager sharedInstance].selectedCategories addObject:noBrandItem];
+//    if (debug_enabled) {
+//        NSLog(@"noCategoriesRowSelected now its %lu and %lu items in selectedItems",[[_resultTable indexPathsForSelectedRows] count],[[AppManager sharedInstance].selectedCategories count]);
+//    }
+//    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [UIView animateWithDuration:0.3
+//                              delay:0
+//                            options:0
+//                         animations:^{
+//                             self.tableViewHeaderImage.hidden = false;
+//                             self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(1.5, 1.5);
+//                             self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(1, 1);
+//                         } completion:^(BOOL finished) {
+//                             
+//                         }];
+//    });
+//}
+//
+//-(void)deselectNoCategoryRow {
+//    if (self.tableViewHeaderImage.hidden == NO ){
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [UIView animateWithDuration:0.3
+//                                  delay:0
+//                                options:0
+//                             animations:^{
+//                                 self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(1.5, 1.5);
+//                                 self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(0.001, 0.001);
+//                             } completion:^(BOOL finished) {
+//                                 self.tableViewHeaderImage.hidden = YES;
+//                             }];
+//        });
+//    }
+//}
 
 -(void)delegateForCell:(SearchCell *)cell showSubItems:(BOOL)showSubItems{
     
     NSIndexPath* indexPath = [self.resultTable indexPathForCell:cell];
     
     if (showSubItems) {
+        [[AppManager sharedInstance].selectedCategories removeAllObjects];
+        
+        for (NSIndexPath *indexPath in [_resultTable indexPathsForSelectedRows]) {
+            SearchCell* cell = [_resultTable cellForRowAtIndexPath:indexPath];
+            [_resultTable deselectRowAtIndexPath:indexPath animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView animateWithDuration:0.3
+                                      delay:0
+                                    options:0
+                                 animations:^{
+                                     cell.selectedButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                                     cell.selectedButton.transform = CGAffineTransformMakeScale(0.001, 0.001);
+                                 } completion:^(BOOL finished) {
+                                 }];
+            });
+        }
+
         SelectCategoryVC* svc = [[SelectCategoryVC alloc] init];
         svc.parent_id = [NSNumber numberWithInteger:cell.searchItem.item_id] ;
         [self.navigationController pushViewController:svc animated:YES];
@@ -318,47 +363,66 @@ static NSString* kCellIdentifier = @"SearchCell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self deselectNoCategoryRow];
-    
-    [self.resultTable selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    
-    // apply animation on the accessed view
     SearchCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.selected = true;
-    dispatch_async(dispatch_get_main_queue(), ^{
+    
+    if (cell.searchItem.hasChild) {
+        SelectCategoryVC* svc = [[SelectCategoryVC alloc] init];
+        svc.parent_id = [NSNumber numberWithInteger:cell.searchItem.item_id] ;
+        [self.navigationController pushViewController:svc animated:YES];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
             [UIView animateWithDuration:0.3
-                          delay:0
-                        options:0
-                     animations:^{
-                         cell.selectedButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
-                         cell.selectedButton.transform = CGAffineTransformMakeScale(1, 1);
-                     } completion:^(BOOL finished) {
-                         [[AppManager sharedInstance].selectedCategories addObject:cell.searchItem];
-                     }];
-    });
-
+                                  delay:0
+                                options:0
+                             animations:^{
+                                 cell.selectedButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                                 cell.selectedButton.transform = CGAffineTransformMakeScale(1, 1);
+                             } completion:^(BOOL finished) {
+                                 [[AppManager sharedInstance].selectedCategories insertObject:cell.searchItem atIndex:0];
+                                 if (debug_enabled) {
+                                     NSLog(@"didSelectRowAtIndexPath now its %lu and %lu items in selectedItems",[[_resultTable indexPathsForSelectedRows] count],[[AppManager sharedInstance].selectedCategories count]);
+                                 }
+                                 NSArray* ar = [self.navigationController viewControllers];
+//                                 [self deselectNoCategoryRow];
+                                 [self.navigationController popToViewController:[ar objectAtIndex:1] animated:YES];
+                                 
+                             }];
+        });
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SearchCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[AppManager sharedInstance].selectedCategories removeObject:cell.searchItem];
     
-    [self.resultTable deselectRowAtIndexPath:indexPath animated:NO];
     dispatch_async(dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:0.3
-                          delay:0
-                        options:0
-                     animations:^{
-                         cell.selectedButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
-                         cell.selectedButton.transform = CGAffineTransformMakeScale(0.001, 0.001);
-                     } completion:^(BOOL finished) {
-                         if ([[AppManager sharedInstance].selectedCategories count] == 1 && [[[AppManager sharedInstance].selectedCategories lastObject]isEqual:cell.searchItem]) {
-                             [self performSelector:@selector(noCategoryRowSelected:) withObject:nil];
-                         }
-                         [[AppManager sharedInstance].selectedCategories removeObject:cell.searchItem];
-                     }];
+        [UIView animateWithDuration:0.3
+                              delay:0
+                            options:0
+                         animations:^{
+                             cell.selectedButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                             cell.selectedButton.transform = CGAffineTransformMakeScale(0.001, 0.001);
+                         } completion:^(BOOL finished) {
+                         }];
     });
-
+    [[AppManager sharedInstance].selectedCategories removeAllObjects];
+    
+    for (NSIndexPath *indexPath in [_resultTable indexPathsForSelectedRows]) {
+        SearchCell* cell = [_resultTable cellForRowAtIndexPath:indexPath];
+        [_resultTable deselectRowAtIndexPath:indexPath animated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.3
+                                  delay:0
+                                options:0
+                             animations:^{
+                                 cell.selectedButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
+                                 cell.selectedButton.transform = CGAffineTransformMakeScale(0.001, 0.001);
+                             } completion:^(BOOL finished) {
+                             }];
+        });
+    }
 }
 
 
@@ -386,7 +450,7 @@ static NSString* kCellIdentifier = @"SearchCell";
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self generateSectionsInBackgroundFromArray:[[AppManager sharedInstance].categories mutableCopy] withFilter:self.searchBar.text];
+    [self generateSectionsInBackgroundFromArray:[[AppManager sharedInstance].config.categories mutableCopy] withFilter:self.searchBar.text];
 }
 
 @end

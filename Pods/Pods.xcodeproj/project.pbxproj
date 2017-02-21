@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		13FD4829C1935D33FF0B0E858B84482D /* FSVideoCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD6ADE253FA2A4221A06F270AB4291C0 /* FSVideoCameraView.xib */; };
 		1C82A350630273F914125DBDEA52F683 /* FSAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CF019461AD0894AE6F76F0F9A4E80B0 /* FSAlbumView.xib */; };
-		337EBB7E279C5D1697601D3C6A696A46 /* FusumaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF486C3342DB7969EA9CFB480169763 /* FusumaViewController.swift */; };
 		3424BCC13A3D39DED8081F45EA5DA9AF /* SHSFlagAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0B8814FCA2E7019B719FE038BF2E32 /* SHSFlagAccessoryView.m */; };
-		37D4EF5938F8495CE32638F8BEB53550 /* FSAlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7CFA7626A3FD3F145B9BBCDFD2BFE7 /* FSAlbumViewCell.swift */; };
 		484B8C39828B296D71146C51A0904FC7 /* Fusuma-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2363B6A0561E37109814F7D748305 /* Fusuma-dummy.m */; };
+		488D0A101E5C1FAF00342E88 /* FusumaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D0A0F1E5C1FAF00342E88 /* FusumaViewController.swift */; };
+		488D0A1B1E5C201400342E88 /* FSAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D0A111E5C201400342E88 /* FSAlbumView.swift */; };
+		488D0A1C1E5C201400342E88 /* FSAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488D0A121E5C201400342E88 /* FSAlbumView.xib */; };
+		488D0A1D1E5C201400342E88 /* FSAlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D0A131E5C201400342E88 /* FSAlbumViewCell.swift */; };
+		488D0A1E1E5C201400342E88 /* FSAlbumViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488D0A141E5C201400342E88 /* FSAlbumViewCell.xib */; };
+		488D0A1F1E5C201400342E88 /* FSCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D0A151E5C201400342E88 /* FSCameraView.swift */; };
+		488D0A201E5C201400342E88 /* FSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D0A161E5C201400342E88 /* FSConstants.swift */; };
+		488D0A211E5C201400342E88 /* FSImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D0A171E5C201400342E88 /* FSImageCropView.swift */; };
+		488D0A221E5C201400342E88 /* FSVideoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488D0A181E5C201400342E88 /* FSVideoCameraView.swift */; };
+		488D0A231E5C201400342E88 /* FSVideoCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488D0A191E5C201400342E88 /* FSVideoCameraView.xib */; };
+		488D0A241E5C201400342E88 /* FusumaViewController.swift.orig in Resources */ = {isa = PBXBuildFile; fileRef = 488D0A1A1E5C201400342E88 /* FusumaViewController.swift.orig */; };
 		4B0CB6AD7F31A7293423421ED602CCD2 /* SHSPhoneLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C8715F93452C280EFE448F1F20654E6A /* SHSPhoneLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B1D707925B3CBF9DB2C3A1506295581 /* SHSPhoneNumberFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AB72930A5B3027324EE5BF658972F46 /* SHSPhoneNumberFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BA8AB825BF2F280440E9F8A1C294AB4 /* Pods-moyoutlet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B95FBAA7D858E6AE60AAD4E16B436DE /* Pods-moyoutlet-dummy.m */; };
-		5876F184D9754E4DFBAD67EEF32FCF9C /* FSVideoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7DCB51CE5D7BB42F36DEFB4DB2EF73 /* FSVideoCameraView.swift */; };
 		5E48DC62B09044FCAECC68412EF8C2FC /* SHSFlagAccessoryView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A05DA409572A00BCCF51713B53B3F68 /* SHSFlagAccessoryView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		748C5C8003BBF4968321DE51ADF5D589 /* SHSPhoneLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EF3D70AED8C4544D9E26914574AA0D /* SHSPhoneLogic.m */; };
 		74DCC56E1FEFE07395D47B516FFDE227 /* SHSPhoneLogic.h in Headers */ = {isa = PBXBuildFile; fileRef = 6739846640F3A8620AC3E149A5260CE0 /* SHSPhoneLogic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		75966E9F65F92FF36E562D7E87922EE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		76C218BD1C4FED73A5D8DE0B44133A10 /* FSImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298B52265FA18C040ED4D1FFAC18FE17 /* FSImageCropView.swift */; };
 		85358D5C93EBED85E9A69F0607DA1B1F /* SHSPhoneComponent-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 14DFFBE2C0D7C554D0CEC5CE4F8C348D /* SHSPhoneComponent-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		97D850D3836A89967D5A350E84996568 /* FSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3D645D97D3723E1B40314D5F636190 /* FSConstants.swift */; };
 		98C0F05CF40E7E1C111B0599ABE5BCAD /* FSAlbumViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B3E72B650F87782993CF7AD7E709D2B /* FSAlbumViewCell.xib */; };
 		9B873508C82CD5F231473F335E456221 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		A20EFAA05D007515E75D5FDC00BB67FC /* Pods-moyoutlet-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 67373F49E28B7511B6FC5A3223E1B86D /* Pods-moyoutlet-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,11 +40,9 @@
 		AB06849E936DF04315A16BEC00901BD2 /* SHSPhoneComponent-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE59F0A040DF6E5D509E6EEE23784DB /* SHSPhoneComponent-dummy.m */; };
 		C5C88F4AB62FA845795ACAE292A05E5B /* FusumaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1FD4A0B1ECCCF63AC3F765C3A9DB0B /* FusumaViewController.xib */; };
 		DC63D3C219510CAC0B4B01FEC656D032 /* SHSPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D5536A09A33A7D6773D6502E3B0B773E /* SHSPhoneNumberFormatter.m */; };
-		DC8B2CD64AE5925518C1FD441C723E77 /* FSAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F4B09F057C02CB5B6CA72D992A89FF /* FSAlbumView.swift */; };
 		DCD4E5D11FDD22FF7A4AB4F349BA539A /* SHSPhoneTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C7B69CA520B07FB97FF31DA6F32D88 /* SHSPhoneTextField.m */; };
 		E6601860C4DD564F693235EA528ACD7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		E76B14332EA4BF464EBA72C31769A619 /* FSCameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A90B7F12A24E57F7F042C84E4A336E /* FSCameraView.xib */; };
-		E8CD91CC081DE8166DB3964B70DD91F3 /* FSCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD6D2997EAD129EFDBFFC8FAFC5C2B1 /* FSCameraView.swift */; };
 		F8F2B8EF3A92B1E031FA17F874B40D98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDB27C000D4E1DE2F3F9D38B5093A1C5 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -64,59 +68,63 @@
 		0A1802E66D0C4F5EB948B4CC3B59D68B /* Pods-moyoutlet-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-moyoutlet-acknowledgements.markdown"; sourceTree = "<group>"; };
 		0A2CD5100319816F0984A02CB72A9B24 /* Fusuma-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Fusuma-prefix.pch"; sourceTree = "<group>"; };
 		0CD2086A377E016CB6053A1832A476A2 /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = iOS/Crashlytics.framework/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
-		0DD6D2997EAD129EFDBFFC8FAFC5C2B1 /* FSCameraView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSCameraView.swift; path = Sources/FSCameraView.swift; sourceTree = "<group>"; };
 		139EE1AA446B1B5F504EE985A9CA1F96 /* SHSPhoneTextField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SHSPhoneTextField.h; path = SHSPhoneComponents/SHSPhoneTextField.h; sourceTree = "<group>"; };
 		14DFFBE2C0D7C554D0CEC5CE4F8C348D /* SHSPhoneComponent-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SHSPhoneComponent-umbrella.h"; sourceTree = "<group>"; };
 		17F6EA1DEC9E964CEA4CBFBD6A780B60 /* SHSPhoneComponent-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SHSPhoneComponent-prefix.pch"; sourceTree = "<group>"; };
 		1B3E72B650F87782993CF7AD7E709D2B /* FSAlbumViewCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FSAlbumViewCell.xib; path = Sources/FSAlbumViewCell.xib; sourceTree = "<group>"; };
-		298B52265FA18C040ED4D1FFAC18FE17 /* FSImageCropView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSImageCropView.swift; path = Sources/FSImageCropView.swift; sourceTree = "<group>"; };
 		2A05DA409572A00BCCF51713B53B3F68 /* SHSFlagAccessoryView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SHSFlagAccessoryView.h; path = SHSPhoneComponents/SHSFlagAccessoryView.h; sourceTree = "<group>"; };
 		2B0A208D5117D00418D41F7B949B6867 /* Fusuma.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Fusuma.xcconfig; sourceTree = "<group>"; };
 		2B95FBAA7D858E6AE60AAD4E16B436DE /* Pods-moyoutlet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-moyoutlet-dummy.m"; sourceTree = "<group>"; };
 		2C786D6C94118F5CCD0D8AD859ED3FB8 /* Pods-moyoutlet-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-moyoutlet-frameworks.sh"; sourceTree = "<group>"; };
 		2CF019461AD0894AE6F76F0F9A4E80B0 /* FSAlbumView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FSAlbumView.xib; path = Sources/FSAlbumView.xib; sourceTree = "<group>"; };
 		329CF743A8CA7BBEA33759C46222F033 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
-		3C7DCB51CE5D7BB42F36DEFB4DB2EF73 /* FSVideoCameraView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSVideoCameraView.swift; path = Sources/FSVideoCameraView.swift; sourceTree = "<group>"; };
+		488D0A0F1E5C1FAF00342E88 /* FusumaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FusumaViewController.swift; sourceTree = "<group>"; };
+		488D0A111E5C201400342E88 /* FSAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSAlbumView.swift; sourceTree = "<group>"; };
+		488D0A121E5C201400342E88 /* FSAlbumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSAlbumView.xib; sourceTree = "<group>"; };
+		488D0A131E5C201400342E88 /* FSAlbumViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSAlbumViewCell.swift; sourceTree = "<group>"; };
+		488D0A141E5C201400342E88 /* FSAlbumViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSAlbumViewCell.xib; sourceTree = "<group>"; };
+		488D0A151E5C201400342E88 /* FSCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSCameraView.swift; sourceTree = "<group>"; };
+		488D0A161E5C201400342E88 /* FSConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSConstants.swift; sourceTree = "<group>"; };
+		488D0A171E5C201400342E88 /* FSImageCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSImageCropView.swift; sourceTree = "<group>"; };
+		488D0A181E5C201400342E88 /* FSVideoCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSVideoCameraView.swift; sourceTree = "<group>"; };
+		488D0A191E5C201400342E88 /* FSVideoCameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSVideoCameraView.xib; sourceTree = "<group>"; };
+		488D0A1A1E5C201400342E88 /* FusumaViewController.swift.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FusumaViewController.swift.orig; sourceTree = "<group>"; };
 		5064C0FF3AF8A9745ED4DA8E7C3EC254 /* Fusuma-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Fusuma-umbrella.h"; sourceTree = "<group>"; };
 		573D50FB453C53709B84E62E54CD0145 /* FABAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FABAttributes.h; path = iOS/Fabric.framework/Headers/FABAttributes.h; sourceTree = "<group>"; };
 		5AB72930A5B3027324EE5BF658972F46 /* SHSPhoneNumberFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SHSPhoneNumberFormatter.h; path = SHSPhoneComponents/SHSPhoneNumberFormatter.h; sourceTree = "<group>"; };
 		60BA8C19FCF76F37780F65DBFFD9DB54 /* Pods-moyoutlet-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-moyoutlet-acknowledgements.plist"; sourceTree = "<group>"; };
-		6679DE3367346F47A9061A45CCCA7D75 /* Pods_moyoutlet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_moyoutlet.framework; path = "Pods-moyoutlet.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6679DE3367346F47A9061A45CCCA7D75 /* Pods_moyoutlet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moyoutlet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67373F49E28B7511B6FC5A3223E1B86D /* Pods-moyoutlet-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-moyoutlet-umbrella.h"; sourceTree = "<group>"; };
 		6739846640F3A8620AC3E149A5260CE0 /* SHSPhoneLogic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SHSPhoneLogic.h; path = SHSPhoneComponents/SHSPhoneLogic.h; sourceTree = "<group>"; };
-		6BF486C3342DB7969EA9CFB480169763 /* FusumaViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FusumaViewController.swift; path = Sources/FusumaViewController.swift; sourceTree = "<group>"; };
 		6EA42E4D142FAA011E6F32B7AC53A99D /* Pods-moyoutlet-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-moyoutlet-resources.sh"; sourceTree = "<group>"; };
 		736208FADC1A399C614614BC78DAB902 /* SHSPhoneComponent.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SHSPhoneComponent.xcconfig; sourceTree = "<group>"; };
-		8CD8F4A72E93D0EA1F0FC067EE6CFD85 /* SHSPhoneComponent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SHSPhoneComponent.framework; path = SHSPhoneComponent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CD8F4A72E93D0EA1F0FC067EE6CFD85 /* SHSPhoneComponent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SHSPhoneComponent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1FD4A0B1ECCCF63AC3F765C3A9DB0B /* FusumaViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FusumaViewController.xib; path = Sources/FusumaViewController.xib; sourceTree = "<group>"; };
-		8DAD02AC724BCFC967C9E76E1A4717B4 /* Pods-moyoutlet.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-moyoutlet.modulemap"; sourceTree = "<group>"; };
-		8E7CFA7626A3FD3F145B9BBCDFD2BFE7 /* FSAlbumViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSAlbumViewCell.swift; path = Sources/FSAlbumViewCell.swift; sourceTree = "<group>"; };
+		8DAD02AC724BCFC967C9E76E1A4717B4 /* Pods-moyoutlet.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-moyoutlet.modulemap"; sourceTree = "<group>"; };
 		8F0B8814FCA2E7019B719FE038BF2E32 /* SHSFlagAccessoryView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SHSFlagAccessoryView.m; path = SHSPhoneComponents/SHSFlagAccessoryView.m; sourceTree = "<group>"; };
 		90A90B7F12A24E57F7F042C84E4A336E /* FSCameraView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FSCameraView.xib; path = Sources/FSCameraView.xib; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		943CCA9873ACE36F9F97B279B0E92C51 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		98F6831519F5F8A2095F5794D4CDCB24 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C1680357E02DBD0C1EFD5FC79D5B0BB /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
-		9C3D645D97D3723E1B40314D5F636190 /* FSConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSConstants.swift; path = Sources/FSConstants.swift; sourceTree = "<group>"; };
 		9DE2363B6A0561E37109814F7D748305 /* Fusuma-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Fusuma-dummy.m"; sourceTree = "<group>"; };
 		A13122292C0E4A5FF684CE1874A89056 /* SHSPhoneNumberFormatter+UserConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SHSPhoneNumberFormatter+UserConfig.h"; path = "SHSPhoneComponents/SHSPhoneNumberFormatter+UserConfig.h"; sourceTree = "<group>"; };
 		A2EE98970E481B5B6C4F15938109A86D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A582616D4E079060AF8B3B2502F79C05 /* Pods-moyoutlet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-moyoutlet.release.xcconfig"; sourceTree = "<group>"; };
 		A709BD0A3D4C24CCE382393857CD4B0D /* Pods-moyoutlet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-moyoutlet.debug.xcconfig"; sourceTree = "<group>"; };
-		AAA1CC5695397523F75352D111824035 /* Fusuma.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Fusuma.modulemap; sourceTree = "<group>"; };
+		AAA1CC5695397523F75352D111824035 /* Fusuma.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Fusuma.modulemap; sourceTree = "<group>"; };
 		AAE59F0A040DF6E5D509E6EEE23784DB /* SHSPhoneComponent-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SHSPhoneComponent-dummy.m"; sourceTree = "<group>"; };
 		BD6ADE253FA2A4221A06F270AB4291C0 /* FSVideoCameraView.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = FSVideoCameraView.xib; path = Sources/FSVideoCameraView.xib; sourceTree = "<group>"; };
 		BDB27C000D4E1DE2F3F9D38B5093A1C5 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sources/Assets.xcassets; sourceTree = "<group>"; };
 		C8715F93452C280EFE448F1F20654E6A /* SHSPhoneLibrary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SHSPhoneLibrary.h; path = SHSPhoneComponents/SHSPhoneLibrary.h; sourceTree = "<group>"; };
-		CB10D138BB586E00E41F3489A8CFA94B /* SHSPhoneComponent.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SHSPhoneComponent.modulemap; sourceTree = "<group>"; };
+		CB10D138BB586E00E41F3489A8CFA94B /* SHSPhoneComponent.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SHSPhoneComponent.modulemap; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CC61D2052AE36AA09ACBC3FB34F5D95F /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
 		D5536A09A33A7D6773D6502E3B0B773E /* SHSPhoneNumberFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SHSPhoneNumberFormatter.m; path = SHSPhoneComponents/SHSPhoneNumberFormatter.m; sourceTree = "<group>"; };
-		D6F4B09F057C02CB5B6CA72D992A89FF /* FSAlbumView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FSAlbumView.swift; path = Sources/FSAlbumView.swift; sourceTree = "<group>"; };
 		DC5DCCC4C13D8CCC0212BE830ACD569A /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
 		DC811D58A109EFEF5A449A4DD72C390E /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
 		E474A05B15824E5CB205F844838D04E3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
-		ED57A9E965813F18CE3283E70A2E99FF /* Fusuma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Fusuma.framework; path = Fusuma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED57A9E965813F18CE3283E70A2E99FF /* Fusuma.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fusuma.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1AA43CEFCB42D96D362741575987E4B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1C7B69CA520B07FB97FF31DA6F32D88 /* SHSPhoneTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SHSPhoneTextField.m; path = SHSPhoneComponents/SHSPhoneTextField.m; sourceTree = "<group>"; };
 		F2BD9363F2BBE64DB35DBF6BAFF62DD7 /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
@@ -177,17 +185,20 @@
 		4714A920AE62C3D5FD6FC6A76573A99D /* Fusuma */ = {
 			isa = PBXGroup;
 			children = (
-				D6F4B09F057C02CB5B6CA72D992A89FF /* FSAlbumView.swift */,
-				8E7CFA7626A3FD3F145B9BBCDFD2BFE7 /* FSAlbumViewCell.swift */,
-				0DD6D2997EAD129EFDBFFC8FAFC5C2B1 /* FSCameraView.swift */,
-				9C3D645D97D3723E1B40314D5F636190 /* FSConstants.swift */,
-				298B52265FA18C040ED4D1FFAC18FE17 /* FSImageCropView.swift */,
-				3C7DCB51CE5D7BB42F36DEFB4DB2EF73 /* FSVideoCameraView.swift */,
-				6BF486C3342DB7969EA9CFB480169763 /* FusumaViewController.swift */,
+				488D0A111E5C201400342E88 /* FSAlbumView.swift */,
+				488D0A121E5C201400342E88 /* FSAlbumView.xib */,
+				488D0A131E5C201400342E88 /* FSAlbumViewCell.swift */,
+				488D0A141E5C201400342E88 /* FSAlbumViewCell.xib */,
+				488D0A151E5C201400342E88 /* FSCameraView.swift */,
+				488D0A161E5C201400342E88 /* FSConstants.swift */,
+				488D0A171E5C201400342E88 /* FSImageCropView.swift */,
+				488D0A181E5C201400342E88 /* FSVideoCameraView.swift */,
+				488D0A191E5C201400342E88 /* FSVideoCameraView.xib */,
+				488D0A1A1E5C201400342E88 /* FusumaViewController.swift.orig */,
+				488D0A0F1E5C1FAF00342E88 /* FusumaViewController.swift */,
 				AC1C934FB847EB527BC451015A1FAC2F /* Resources */,
 				F8C59647F02A8A2BEE28CF2D544776B9 /* Support Files */,
 			);
-			name = Fusuma;
 			path = Fusuma;
 			sourceTree = "<group>";
 		};
@@ -221,7 +232,6 @@
 				329CF743A8CA7BBEA33759C46222F033 /* Crashlytics.h */,
 				9EA2A5FFA989F9243CE49464CED2CAA0 /* Frameworks */,
 			);
-			name = Crashlytics;
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
@@ -318,7 +328,6 @@
 				F1C7B69CA520B07FB97FF31DA6F32D88 /* SHSPhoneTextField.m */,
 				3C4BB4CCDC7A8E0859502D62023E5247 /* Support Files */,
 			);
-			name = SHSPhoneComponent;
 			path = SHSPhoneComponent;
 			sourceTree = "<group>";
 		};
@@ -329,7 +338,6 @@
 				DC5DCCC4C13D8CCC0212BE830ACD569A /* Fabric.h */,
 				2D469604E0F91786563601CAD658DFB3 /* Frameworks */,
 			);
-			name = Fabric;
 			path = Fabric;
 			sourceTree = "<group>";
 		};
@@ -470,10 +478,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				488D0A231E5C201400342E88 /* FSVideoCameraView.xib in Resources */,
 				F8F2B8EF3A92B1E031FA17F874B40D98 /* Assets.xcassets in Resources */,
+				488D0A1E1E5C201400342E88 /* FSAlbumViewCell.xib in Resources */,
 				1C82A350630273F914125DBDEA52F683 /* FSAlbumView.xib in Resources */,
+				488D0A1C1E5C201400342E88 /* FSAlbumView.xib in Resources */,
 				98C0F05CF40E7E1C111B0599ABE5BCAD /* FSAlbumViewCell.xib in Resources */,
 				E76B14332EA4BF464EBA72C31769A619 /* FSCameraView.xib in Resources */,
+				488D0A241E5C201400342E88 /* FusumaViewController.swift.orig in Resources */,
 				13FD4829C1935D33FF0B0E858B84482D /* FSVideoCameraView.xib in Resources */,
 				C5C88F4AB62FA845795ACAE292A05E5B /* FusumaViewController.xib in Resources */,
 			);
@@ -494,14 +506,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC8B2CD64AE5925518C1FD441C723E77 /* FSAlbumView.swift in Sources */,
-				37D4EF5938F8495CE32638F8BEB53550 /* FSAlbumViewCell.swift in Sources */,
-				E8CD91CC081DE8166DB3964B70DD91F3 /* FSCameraView.swift in Sources */,
-				97D850D3836A89967D5A350E84996568 /* FSConstants.swift in Sources */,
-				76C218BD1C4FED73A5D8DE0B44133A10 /* FSImageCropView.swift in Sources */,
-				5876F184D9754E4DFBAD67EEF32FCF9C /* FSVideoCameraView.swift in Sources */,
+				488D0A1F1E5C201400342E88 /* FSCameraView.swift in Sources */,
+				488D0A221E5C201400342E88 /* FSVideoCameraView.swift in Sources */,
+				488D0A201E5C201400342E88 /* FSConstants.swift in Sources */,
+				488D0A101E5C1FAF00342E88 /* FusumaViewController.swift in Sources */,
+				488D0A1B1E5C201400342E88 /* FSAlbumView.swift in Sources */,
+				488D0A1D1E5C201400342E88 /* FSAlbumViewCell.swift in Sources */,
 				484B8C39828B296D71146C51A0904FC7 /* Fusuma-dummy.m in Sources */,
-				337EBB7E279C5D1697601D3C6A696A46 /* FusumaViewController.swift in Sources */,
+				488D0A211E5C201400342E88 /* FSImageCropView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

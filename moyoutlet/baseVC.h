@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AppManager.h"
+#import "AppHelper.h"
+#import "IQKeyboardManager.h"
+#import "IQDropDownTextField.h"
+#import "IQUIView+IQKeyboardToolbar.h"
+#import "IQUITextFieldView+Additions.h"
+#import "UITextView+Placeholder.h"
 #import "baseError.h"
 #import "NBPhoneNumberUtil.h"
 #import "NBAsYouTypeFormatter.h"

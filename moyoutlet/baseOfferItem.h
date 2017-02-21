@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Constants.h"
+#import "ConditionItem.h"
 
 @interface baseOfferItem : NSObject
 @property (assign, nonatomic) NSInteger objectId;

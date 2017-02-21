@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,23 +19,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="SearchCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="59" id="KGk-i7-Jjw" customClass="SearchCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uio-VB-wcl">
-                        <rect key="frame" x="25" y="9" width="43" height="24"/>
+                        <rect key="frame" x="25" y="10" width="43" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="5Ps-Ms-46I"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAY-O8-5Cp">
-                        <rect key="frame" x="290" y="11" width="14" height="22"/>
+                        <rect key="frame" x="290" y="22.5" width="14" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="14" id="cra-ab-eja"/>
+                            <constraint firstAttribute="height" constant="14" id="e1d-wo-yQZ"/>
                         </constraints>
                         <state key="normal" image="arrowFront"/>
                         <connections>
@@ -43,44 +47,48 @@
                         </connections>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqY-UU-eUt">
-                        <rect key="frame" x="265" y="11" width="17" height="22"/>
+                        <rect key="frame" x="265" y="19" width="17" height="22"/>
                         <state key="normal" image="checkedImageRed"/>
                         <connections>
                             <action selector="selectButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jQJ-sb-zuU"/>
                         </connections>
                     </button>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мужское - Джинсы - Все" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buc-vz-tFe">
-                        <rect key="frame" x="25" y="23" width="111" height="20"/>
-                        <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="10"/>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buc-vz-tFe" userLabel="Description Label">
+                        <rect key="frame" x="25" y="34" width="237" height="17"/>
+                        <string key="text">Мужское - Джинсы - ВсеМужское - Джинсы - ВсеМужское - Джинсы - ВсеМужское - Джинсы - ВсеМужское - Джинсы - ВсеМужское - Джинсы - ВсеМужское - Джинсы - Все</string>
+                        <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="buc-vz-tFe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="EZv-Gp-2xk"/>
-                    <constraint firstItem="uio-VB-wcl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ox2-2t-R7o"/>
-                    <constraint firstItem="LAY-O8-5Cp" firstAttribute="leading" secondItem="rqY-UU-eUt" secondAttribute="trailing" constant="8" id="bqk-0C-cWF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="rqY-UU-eUt" secondAttribute="trailing" constant="30" id="RH3-9o-u8D"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="buc-vz-tFe" secondAttribute="trailing" constant="50" id="Wfr-dd-Vrz"/>
+                    <constraint firstItem="LAY-O8-5Cp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rqY-UU-eUt" secondAttribute="trailing" constant="8" id="bqk-0C-cWF"/>
                     <constraint firstItem="LAY-O8-5Cp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cav-Vg-wa0"/>
-                    <constraint firstItem="buc-vz-tFe" firstAttribute="top" secondItem="uio-VB-wcl" secondAttribute="bottom" constant="-10" id="etf-g1-mvs"/>
+                    <constraint firstItem="buc-vz-tFe" firstAttribute="top" secondItem="uio-VB-wcl" secondAttribute="bottom" id="etf-g1-mvs"/>
+                    <constraint firstItem="uio-VB-wcl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1.5" id="fcs-c2-m7I"/>
                     <constraint firstItem="uio-VB-wcl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="h9M-92-IUm"/>
+                    <constraint firstItem="rqY-UU-eUt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hzS-RF-jgj"/>
                     <constraint firstAttribute="trailingMargin" secondItem="LAY-O8-5Cp" secondAttribute="trailing" constant="8" id="mGE-lM-KPM"/>
-                    <constraint firstAttribute="bottom" secondItem="buc-vz-tFe" secondAttribute="bottom" id="zDR-Mf-iUd"/>
-                    <constraint firstItem="rqY-UU-eUt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zl8-cB-2BR"/>
+                    <constraint firstAttribute="bottom" secondItem="buc-vz-tFe" secondAttribute="bottom" constant="8" id="zDR-Mf-iUd"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
             <connections>
-                <outlet property="categoriesTitle" destination="buc-vz-tFe" id="ymn-J4-eR7"/>
                 <outlet property="cellTitle" destination="uio-VB-wcl" id="S0d-TF-cqX"/>
+                <outlet property="descriptionLabel" destination="buc-vz-tFe" id="iX7-QR-GCP"/>
                 <outlet property="selectButton" destination="LAY-O8-5Cp" id="3Qb-o1-YVM"/>
                 <outlet property="selectButtonConstraint" destination="cra-ab-eja" id="omD-M8-wEX"/>
                 <outlet property="selectButtonTrailingConstraint" destination="mGE-lM-KPM" id="TUk-pi-SPD"/>
                 <outlet property="selectedButton" destination="rqY-UU-eUt" id="DCu-vl-Hnf"/>
             </connections>
+            <point key="canvasLocation" x="35" y="61.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrowFront" width="14" height="14"/>
+        <image name="arrowFront" width="31" height="31"/>
         <image name="checkedImageRed" width="17" height="17"/>
     </resources>
 </document>

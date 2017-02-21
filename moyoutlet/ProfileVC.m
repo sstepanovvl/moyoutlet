@@ -17,7 +17,7 @@
 NSString *kUserOfferLightCellID = @"OfferLightCollectionViewCell";
 
 -(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-
+    
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         return self;
     } else {
@@ -212,7 +212,7 @@ NSString *kUserOfferLightCellID = @"OfferLightCollectionViewCell";
         cell.item = [[AppManager sharedInstance].authorizedUser.offers objectAtIndex:indexPath.row];
     }
 
-    cell.brandLabel.text = cell.item.brandName;
+    cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
     cell.titleLabel.text = cell.item.name;
 
     cell.priceView.layer.cornerRadius = 4.0f;

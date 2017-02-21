@@ -30,3 +30,14 @@ static const NSString* apiServer = @"http://moyoutlet.ru/api/";
 static const NSString* XDEBUG_SESSION_START = @"11756";
 static const NSString* imageServerUrl = @"http://moyoutlet.ru/api/image";
 static const NSString* imagesSize = @"500x500";
+
+typedef enum searchTypes
+{
+    BRAND,
+    CATEGORY,
+    CITIES,
+    CONDITIONS,
+    WILLSENDIN,
+    SIZES,
+    WEIGHTS
+} SearchType;

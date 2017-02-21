@@ -19,12 +19,19 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[AppManager alloc] init];
-//        [sharedInstance getCategoriesFromServer];
+        sharedInstance.config = [AppConfig new];
         sharedInstance.offers = [NSMutableDictionary dictionary];
         sharedInstance.savedSearch = [NSMutableArray array];
         sharedInstance.searchHistory = [NSMutableArray array];
         sharedInstance.selectedCategories = [NSMutableArray array];
         sharedInstance.selectedBrands = [NSMutableArray array];
+        sharedInstance.selectedCities = [NSMutableArray array];
+        sharedInstance.selectedWeight = [NSMutableArray array];
+        sharedInstance.selectedConditions = [NSMutableArray array];
+        sharedInstance.selectedWillSendIn = [NSMutableArray array];
+        sharedInstance.offerToEdit = [[OfferItem alloc] init];
+        sharedInstance.outletComissionMulitplier = @0.1f;
+        
         // Do any other initialisation stuff here
     });
 
@@ -35,6 +42,10 @@
 
 -(void) initConfiguration {
         
+}
+
+-(void)updateItems:(SearchType)searchType FromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure {
+   
 }
 
 -(void) loadConfigurationFromDB {
@@ -103,14 +114,15 @@
 
 }
 
-#pragma mark Get Brands
+#pragma mark Get Categories
 
--(void)getBrandsFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure {
-    [API requestWithMethod:@"getBrands" andData:@{@"Give me the matherfuckin brands": @"Gimmy that shit niger"}
+-(void) getCategoriesFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure {
+
+    [API requestWithMethod:@"getCategories" andData:@{@"request": @"Gimmy that shit niger"}
                withHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                   
+
                    if (data) {
-                       self.brands = [NSJSONSerialization JSONObjectWithData:data
+                       self.config.categories = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:kNilOptions
                                                                            error:nil];
                        success(YES);
@@ -121,16 +133,30 @@
                }];
 }
 
-#pragma mark Get Offers
--(void) getCategoriesFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure {
+#pragma mark Get AppConfig
 
-    [API requestWithMethod:@"getCategories" andData:@{@"testData": @123}
+-(void) getAppConfigFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure {
+    
+    [API requestWithMethod:@"getAppConfig" andData:@{@"request": @"Gimmy that shit niger"}
                withHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
+                   
                    if (data) {
-                       self.categories = [NSJSONSerialization JSONObjectWithData:data
+                       NSArray* arr = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:kNilOptions
                                                                            error:nil];
+                       NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                                                    ascending:YES];
+                       NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+                       
+                       self.config.weights = [arr valueForKey:@"weights"];
+                       self.config.brands = [arr valueForKey:@"brands"];
+                       [AppManager sharedInstance].config.brands = [[[AppManager sharedInstance].config.brands sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+                       self.config.sizes = [arr valueForKey:@"sizes"];
+                       self.config.cities = [arr valueForKey:@"cities"];
+                       [AppManager sharedInstance].config.cities = [[[AppManager sharedInstance].config.cities sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+                       self.config.conditions = [arr valueForKey:@"conditions"];
+                       self.config.willSendInFields = [arr valueForKey:@"willSendIn"];
+                       
                        success(YES);
                    } else {
                        success(NO);
@@ -270,9 +296,9 @@
  */
 #pragma mark Helpers
 
--(BOOL)checkChildItemsInCategory:(NSInteger)categoryId {
-    for (NSDictionary* d in [[AppManager sharedInstance].categories mutableCopy]) {
-        if ([[d objectForKey:@"parent_id"] integerValue] == categoryId) {
+-(BOOL)checkChildItemsInCategory:(NSNumber*)categoryId {
+    for (NSDictionary* d in [AppManager sharedInstance].config.categories) {
+        if ([d objectForKey:@"parent_id"] == categoryId) {
             return true;
         }
     }

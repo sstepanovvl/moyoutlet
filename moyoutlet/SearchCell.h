@@ -15,7 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *cellTitle;
 @property (strong, nonatomic) SearchItem* searchItem;
 @property (weak, nonatomic) IBOutlet UIButton *selectButton;
-@property (weak, nonatomic) IBOutlet UILabel *categoriesTitle;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectButtonConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectButtonTrailingConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *selectedButton;

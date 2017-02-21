@@ -7,7 +7,7 @@
 //
 
 #import "OfferItem.h"
-
+#import "AppManager.h"
 @implementation OfferItem
 
 -(instancetype)init {
@@ -23,14 +23,22 @@
 -(instancetype)initWith:(NSDictionary*)dictionary {
 
     if (self = [super initWith:dictionary]) {
-        _brandName = [dictionary valueForKey:@"brand"];
+        
+        if ([dictionary valueForKey:@"brand"]) {
+            _brand_id = [dictionary valueForKey:@"brand"];
+        } else {
+            _brand_id = @0;
+        }
+        
+        
         _name = [dictionary valueForKey:@"title"];
-        _size = [dictionary valueForKey:@"size"];
+        _size_id = [dictionary valueForKey:@"size"];
         _likesCount = [NSNumber numberWithInt:(arc4random() % 1000) + 100];
         _price = [[dictionary valueForKey:@"price"] intValue];
         _photoUrls = [NSMutableArray array];
-
-
+        _condition_id = [dictionary valueForKey:@"item_condition"] ;
+        _willSendIn_id = [dictionary valueForKey:@"willSendIn"];
+        
         NSString* imageSize = [NSString string];
         
         if(IS_IPHONE_5 && IS_IPHONE_4_OR_LESS) {
@@ -54,11 +62,11 @@
             _photoUrls = [NSMutableArray arrayWithObject:@"https://static-mercariapp-com.akamaized.net/photos/m944492977_1.jpg?1463985609"];
         }
         _category = [dictionary valueForKey:@"category_id"];
+        _category_id = [dictionary valueForKey:@"category_id"];
         _shipping = [dictionary valueForKey:@"shipping"];
         _created = [dictionary valueForKey:@"created"];
         _itemDescription = [dictionary valueForKey:@"description"];
-        _senderCity = [dictionary valueForKey:@"senderCity"];
-        _condition = [dictionary valueForKey:@"item_condition"];
+        _senderCity_id = [dictionary valueForKey:@"senderCity"];
         _seller = [[UserItem alloc] initWith:[dictionary valueForKey:@"seller"]];
         _categories = [NSMutableArray arrayWithArray:[[dictionary valueForKey:@"categories"] componentsSeparatedByString:@","]];
     }

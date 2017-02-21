@@ -11,6 +11,13 @@
 @interface AppConfig : NSObject
 @property (assign,nonatomic) NSInteger id;
 @property (assign,nonatomic) NSInteger version;
-@property (strong,nonatomic) NSArray* categories;
+@property (strong,nonatomic) NSMutableArray* brands;
+@property (strong,nonatomic) NSMutableArray* cities;
+@property (strong,nonatomic) NSMutableArray* willSendInFields;
+@property (strong,nonatomic) NSMutableArray* conditions;
+@property (strong,nonatomic) NSMutableArray* weights;
+@property (strong,nonatomic) NSMutableArray* sizes;
+@property (strong,nonatomic) NSDictionary* categories;
+
 
 @end

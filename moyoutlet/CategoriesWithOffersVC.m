@@ -34,7 +34,8 @@
     [self initNavigationItems];
 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
-    if (![AppManager sharedInstance].categories) {
+    
+    if (![AppManager sharedInstance].config.categories) {
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             [[AppManager sharedInstance] getCategoriesFromServerwithSuccessBlock:^(BOOL response) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -48,7 +49,7 @@
             }];
         });
     } else {
-        [self initControllers];
+        [self initOffersVC];
     }
 }
 
@@ -74,13 +75,13 @@
 
 #pragma mark - otherStuff
 
--(void)initControllers {
+-(void)initOffersVC {
 
     NSMutableArray *controllerArray = [NSMutableArray array];
 
     UIStoryboard* mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
-    for (NSDictionary* category in [AppManager sharedInstance].categories) {
+    for (NSDictionary* category in [AppManager sharedInstance].config.categories) {
 
         if ([[category valueForKey:@"parent_id"] isEqual:@"0"]) {
 

@@ -8,7 +8,9 @@
 
 #import "CreateOfferVC.h"
 #import "CreateOfferPhotoCell.h"
-#import "SelectBrandVC.h"
+//#import "SelectBrandVC.h"
+#import "SelectVC.h"
+#import "SelectCategoryVC.h"
 
 @interface CreateOfferVC ()
 @property (strong, nonatomic) IBOutlet PhotoCollectionView *photoCollectionView;
@@ -29,9 +31,13 @@
 @property (weak, nonatomic) IBOutlet UIView *conditionView;
 @property (weak, nonatomic) IBOutlet UILabel *categoryNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *brandNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *conditionNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *shippingFromView;
 @property (weak, nonatomic) IBOutlet UILabel *shippingFromLabel;
+@property (weak, nonatomic) IBOutlet UITextField *priceTextField;
+@property (weak, nonatomic) IBOutlet UILabel *comissionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *conditionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *willSendLabel;
 
 
 @end
@@ -55,23 +61,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initFields];
-    [self initNavigationItems];
-
-    _photoCollectionView.clipsToBounds = NO;
     
-    _photoCollectionView.backgroundColor = [UIColor clearColor];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
-    [_photoCollectionView registerNib:[UINib nibWithNibName:@"CreateOfferPhotoCell" bundle:nil] forCellWithReuseIdentifier:@"CreateOfferPhotoCell"];
-
+    [self initNavigationItems];
+    
     UIGestureRecognizer* longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [_photoCollectionView addGestureRecognizer:longPressGesture];
-
+    _photoCollectionView.clipsToBounds = NO;
+    _photoCollectionView.backgroundColor = [UIColor clearColor];
+    [_photoCollectionView registerNib:[UINib nibWithNibName:@"CreateOfferPhotoCell" bundle:nil] forCellWithReuseIdentifier:@"CreateOfferPhotoCell"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
+    _priceTextField.delegate = self;
+    _offerDescriptionField.placeholder = @"Несколько слов о вашей вещи добавьте сюда";
+    _offerDescriptionField.placeholderColor = [UIColor appMidGrayColor];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self initFields];
 }
 
 -(void)showImagePicker {
@@ -109,18 +117,29 @@
 
 -(void)initFields {
     if (!_createNewOffer) {
-        _categoryNameLabel.textColor = [UIColor blackColor];
-        _brandNameLabel.textColor = [UIColor blackColor];
-        _conditionNameLabel.textColor = [UIColor blackColor];
-        _shippingFromLabel.textColor = [UIColor blackColor];
-        _categoryNameLabel.text = _item.name;
-        _brandNameLabel.text = _item.brandName;
-        _conditionNameLabel.text = _item.condition;
-        _shippingFromLabel.text = _item.shipping;
+        if ([[AppManager sharedInstance].selectedCategories count]) {
+            _categoryNameLabel.textColor = [UIColor blackColor];
+            _categoryNameLabel.text = [[[AppManager sharedInstance].selectedCategories objectAtIndex:0] text];
+        }
+        if ([[AppManager sharedInstance].selectedBrands count]) {
+            _brandNameLabel.textColor = [UIColor blackColor];
+            _brandNameLabel.text = [[[AppManager sharedInstance].selectedBrands objectAtIndex:0] text];
+        }
+        if ([[AppManager sharedInstance].selectedConditions count]) {
+            _conditionLabel.textColor = [UIColor blackColor];
+            _conditionLabel.text = [[[AppManager sharedInstance].selectedConditions objectAtIndex:0] text];
+        }
+        if ([[AppManager sharedInstance].selectedCities count]) {
+            _shippingFromLabel.textColor = [UIColor blackColor];
+            _shippingFromLabel.text = [[[AppManager sharedInstance].selectedCities objectAtIndex:0] text];
+        }
+        if ([[AppManager sharedInstance].selectedWillSendIn count]) {
+            _willSendLabel.textColor = [UIColor blackColor];
+            _willSendLabel.text = [[[AppManager sharedInstance].selectedWillSendIn objectAtIndex:0] text];
+        }
+        
     }
 }
-
-
 
 -(void)initNavigationItems {
     [super initNavigationItems];
@@ -157,15 +176,128 @@
         [_photoCollectionView endInteractiveMovement];
     } else {
         [_photoCollectionView cancelInteractiveMovement];
-
     }
 }
 
 #pragma mark Publish helpers
 
--(id)getSelectedCategoryId {
-#warning добавить модель категории
-    return @0;
+-(NSNumber*)getSelectedCategoryId {
+    SearchItem* selectedCategory = nil;
+    if ([[AppManager sharedInstance].selectedCategories count]) {
+        selectedCategory = [[AppManager sharedInstance].selectedCategories lastObject];
+        return [NSNumber numberWithInteger:selectedCategory.item_id];
+    } else {
+        return @-1;
+    }
+}
+-(NSNumber*)getSelectedBrandId {
+    SearchItem* selectedBrand = nil;
+    if ([[AppManager sharedInstance].selectedBrands count]) {
+        selectedBrand = [[AppManager sharedInstance].selectedBrands lastObject];
+        return [NSNumber numberWithInteger:selectedBrand.item_id];
+    } else {
+        return @-1;
+    }
+}
+
+-(NSNumber*)getSelectedConditionId {
+    SearchItem* selectedCondition = nil;
+    if ([[AppManager sharedInstance].selectedConditions count]) {
+        selectedCondition = [[AppManager sharedInstance].selectedConditions lastObject];
+        return [NSNumber numberWithInteger:selectedCondition.item_id];
+    } else {
+        return @-1;
+    }
+}
+
+-(NSNumber*)getSelectedCityId {
+    SearchItem* selectedCity = nil;
+    if ([[AppManager sharedInstance].selectedCities count]) {
+        selectedCity = [[AppManager sharedInstance].selectedCities lastObject];
+        return [NSNumber numberWithInteger:selectedCity.item_id];
+    } else {
+        return @-1;
+    }
+}
+-(NSNumber*)getSelectedWillSendIn {
+    SearchItem* selectedWillSendItem = nil;
+    if ([[AppManager sharedInstance].selectedWillSendIn count]) {
+        selectedWillSendItem = [[AppManager sharedInstance].selectedWillSendIn lastObject];
+        return [NSNumber numberWithInteger:selectedWillSendItem.item_id];
+    } else {
+        return @-1;
+    }
+}
+
+
+-(NSNumber*)getPrice {
+    return [NSNumber numberWithFloat:[_priceTextField.text floatValue]];
+}
+
+
+-(bool)checkFields {
+    if ([[self getSelectedCategoryId] isEqual: @-1] ) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Выберите категорию и попробуйте снова";
+        error.customHeader =@"Категория не выбрана";
+        [self throughError:error];
+        return false;
+    } else if ([[self getSelectedBrandId] isEqual: @-1] ) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Выберите бренд и попробуйте снова";
+        error.customHeader =@"Бренд не выбран";
+        [self throughError:error];
+        return false;
+    } else if ([self.item.arrImages count] < 1) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Кажется вы забыли добавить фотографии";
+        error.customHeader =@"нет фотографий";
+        [self throughError:error];
+        return false;
+    } else if ([[self getSelectedWillSendIn] isEqual:@-1]) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Укажите когда вы сможете отправить вещь";
+        error.customHeader =@"Отпрака в течение не указана";
+        [self throughError:error];
+        return false;
+    } else if ([[self getSelectedConditionId] isEqual:@-1]) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Укажите в каком состоянии ваша вещь";
+        error.customHeader =@"Состояние не выбрано";
+        [self throughError:error];
+        return false;
+    } else if ([[self getSelectedConditionId] isEqual:@-1]) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Укажите в каком состоянии ваша вещь";
+        error.customHeader =@"Состояние не выбрано";
+        [self throughError:error];
+        return false;
+    } else if ([[self getSelectedCityId] isEqual:@-1]) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Укажите из какого города будет отправлена ваша вещь";
+        error.customHeader =@"Город отправки не выбран";
+        [self throughError:error];
+        return false;
+    } else if ([_offerTitleField.text length] < 5) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Добавьте название";
+        error.customHeader =@"Название не добавлено";
+        [self throughError:error];
+        return false;
+    } if ([_offerDescriptionField.text length] < 25) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Добавьте описание, хотябы 25 букв";
+        error.customHeader =@"Описание не добавлено";
+        [self throughError:error];
+        return false;
+    } else if ([_priceTextField.text floatValue] < 5) {
+        baseError* error = [[baseError alloc] init];
+        error.customError = @"Добавьте название";
+        error.customHeader =@"Название не добавлено";
+        [self throughError:error];
+        return false;
+    }
+    return true;
 }
 #pragma mark IBAction
 
@@ -173,51 +305,92 @@
     if(debug_enabled) {
         NSLog(@"Choose category");
     }
+    _createNewOffer = false;
+    
+    SelectCategoryVC* srvc = [[SelectCategoryVC alloc] initWithNibName:@"SelectCategoryVC" bundle:nil];
+    srvc.parent_id = @0;
+    srvc.title = @"Категория";
+    [self.navigationController showViewController:srvc sender:nil];
 }
+
 - (IBAction)didSelectBrand:(id)sender {
     if(debug_enabled) {
         NSLog(@"Choose brand");
     }
-    SelectBrandVC* srvc = [[SelectBrandVC alloc] initWithNibName:@"SelectBrandVC" bundle:nil];
-    [self.navigationController presentViewController:srvc animated:YES completion:^{
-        NSLog(@"Brand selected");
-    }];
-    
+    _createNewOffer = false;
+    SelectVC* srvc = [[SelectVC alloc] initWithNibName:@"SelectVC" bundle:nil];
+    srvc.searchType = BRAND;
+    [self.navigationController pushViewController:srvc animated:YES];
 }
+
 - (IBAction)didSelectCondition:(id)sender {
+    _createNewOffer = false;
     if(debug_enabled) {
         NSLog(@"Choose condition");
     }
+    SelectVC* srvc = [[SelectVC alloc] initWithNibName:@"SelectVC" bundle:nil];
+    srvc.searchType = CONDITIONS;
+    [self.navigationController pushViewController:srvc animated:YES];
 }
 - (IBAction)didSelectShippingFrom:(id)sender {
+    _createNewOffer = false;
     if(debug_enabled) {
         NSLog(@"Choose condition");
     }
+    SelectVC* srvc = [[SelectVC alloc] initWithNibName:@"SelectVC" bundle:nil];
+    srvc.searchType = CITIES;
+    [self.navigationController pushViewController:srvc animated:YES];
 }
 
-
+- (IBAction)didSelecectWillSendIn:(id)sender {
+    _createNewOffer = false;
+    if(debug_enabled) {
+        NSLog(@"Choose condition");
+    }
+    SelectVC* srvc = [[SelectVC alloc] initWithNibName:@"SelectVC" bundle:nil];
+    srvc.searchType = WILLSENDIN;
+    [self.navigationController pushViewController:srvc animated:YES];
+}
 
 
 
 - (IBAction)publishButtonDidPress:(id)sender {
-    NSDictionary* data = @{
-                           @"category_id": [self getSelectedCategoryId],
-                           @"title" : @"Тестовый оффер",
-                           @"description":@"",
-                           @"brand":@"",
-                           @"item_condition":@"",
-                           @"shipping":@"",
-                           @"senderCity":@"",
-                           @"sellerId" : @0,
-                           @"price":@"",
-                           @"size":@"",
-                           @"super_category_id":@"",
-                           @"categories":@""
-                           };
-    
-    [[AppManager sharedInstance] createOfferWithData:data andImages:self.item.arrImages];
+    if ([self checkFields]) {
+        self.item.category_id = [self getSelectedCategoryId];
+        self.item.name = _offerTitleField.text;
+        self.item.brand_id = [self getSelectedBrandId];
+        self.item.condition_id = [self getSelectedConditionId];
+        self.item.itemDescription = _offerDescriptionField.text;
+        self.item.willSendIn_id = [self getSelectedWillSendIn];
+        self.item.senderCity_id = [self getSelectedCityId];
+//        NSDictionary* data = @{
+//                               @"category_id": [self getSelectedCategoryId],
+//                               @"title" : _offerTitleField.text,
+//                               @"description":_offerDescriptionField.text,
+//                               @"brand":[self getSelectedBrandId],
+//                               @"item_condition":[self getSelectedConditionId],
+//                               @"shipping":@"",
+//                               @"senderCity_id":[self getSelectedCityId],
+//                               @"sellerId" : @0,
+//                               @"price":[self getPrice],
+//                               @"size":@"",
+//                               @"willSendIn":_willSendInTextField.text
+//                               };
+//        
+//        [[AppManager sharedInstance] createOfferWithData:data andImages:self.item.arrImages];
+    }
 }
 
+#pragma mark - textField Delegate
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.tag == 1) {
+        float itemPrice = [textField.text floatValue];
+        float comission = itemPrice * [[AppManager sharedInstance].outletComissionMulitplier floatValue];
+        float totalValue = itemPrice - comission;
+        _comissionLabel.text = [NSString stringWithFormat:@"%l.f ₽",comission];
+        _totalLabel.text = [NSString stringWithFormat:@"%l.f ₽", totalValue];
+    }
+}
 #pragma mark - TableView Delegate & DataSource
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -229,20 +402,6 @@
 
 #pragma mark - collectionView Layout &  Delegate & DataSource
 
-
-//- (CGSize)collectionView:(UICollectionView *)collectionView
-//                  layout:(UICollectionViewLayout *)collectionViewLayout
-//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//
-//    float width = 0;
-//    float height = 0;
-//
-//    width = 75.0f;
-//    height = 75.0f;
-//
-//    return CGSizeMake(width, height);
-//    
-//}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 4;
@@ -259,7 +418,6 @@
             [cell.imageView setImage:[UIImage imageNamed:@"photoPlaceholder"]];
             break;
     }
-    
     return cell;
 }
 
@@ -283,29 +441,6 @@
     self.selfcell = (CreateOfferPhotoCell*)[self.photoCollectionView cellForItemAtIndexPath:indexPath];
 
     [self.navigationController presentViewController:fsvc animated:YES completion:^{}];
-
-/*
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-
-    if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
-        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Сделать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-            [self.navigationController presentViewController:fsvc animated:YES completion:^{}];
-        }]];
-    }
-
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Выбрать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-
-        [self.navigationController presentViewController:fsvc animated:YES completion:nil];
-
-    }]];
-
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:NULL]];
-
-    alert.popoverPresentationController.sourceView = [self.selfcell  superview];
-    alert.popoverPresentationController.sourceRect = [self.selfcell  frame];
-    
-    [self presentViewController:alert animated:YES completion:NULL];
- */
 }
 
 #pragma mark Fusuma delegate
@@ -314,7 +449,6 @@
     if (debug_enabled ) {
         NSLog(@"fusumaImageSelected");
     }
-    
 }
 
 - (void)fusumaDismissedWithImage:(UIImage * _Nonnull)image {
@@ -344,14 +478,13 @@
     if (debug_enabled) {
         NSLog(@"fusumaCameraRollUnauthorized");
     }
-
 }
 
 - (void)fusumaClosed {
     if (debug_enabled) {
         NSLog(@"fusumaClosed");
     }
-
+    
 }
 
 #pragma mark NSUrlsession Delegate

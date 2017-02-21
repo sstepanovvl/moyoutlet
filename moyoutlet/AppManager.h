@@ -12,32 +12,36 @@
 #import "OfferItem.h"
 #import "UserItem.h"
 #import "SearchItem.h"
+#import "ConditionItem.h"
+#import "WillSendInItem.h"
 
 
 @interface AppManager : NSObject <NSURLSessionDelegate>
-
 @property (assign,nonatomic) BOOL configured;
 @property (assign,nonatomic) NSString* token;
 @property (assign,nonatomic) BOOL newUser;
 @property (assign,nonatomic) BOOL authorized;
 @property (strong,nonatomic) AppConfig* config;
 @property (strong,nonatomic) NSMutableDictionary* offers;
-@property (strong,nonatomic) NSMutableArray* brands;
-@property (strong,nonatomic) NSDictionary* categories;
 @property (strong,nonatomic) UserItem* authorizedUser;
 @property (strong,nonatomic) NSMutableArray* savedSearch;
 @property (strong,nonatomic) NSMutableArray* searchHistory;
 @property (strong,nonatomic) NSMutableArray* selectedBrands;
 @property (strong,nonatomic) NSMutableArray* selectedCategories;
-
-
-
+@property (strong,nonatomic) NSMutableArray* selectedCities;
+@property (strong,nonatomic) NSMutableArray* selectedWeight;
+@property (strong,nonatomic) NSMutableArray* selectedSize;
+@property (strong,nonatomic) NSMutableArray* selectedConditions;
+@property (strong,nonatomic) NSMutableArray* selectedWillSendIn;
+@property (strong,nonatomic) NSNumber* outletComissionMulitplier;
+@property (strong,nonatomic) OfferItem* offerToEdit;
 
 + (instancetype)sharedInstance;
 
 #pragma mark Get App Config
 
 -(void) initConfiguration;
+-(void)getAppConfigFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure;
 
 #pragma mark Registration 
 
@@ -65,14 +69,12 @@
         WithSuccessBlock:(void (^)(UserItem* user))success
          andFailureBlock:(void (^)(NSError *error))failure;
 
-#pragma mark Get Brands
+#pragma mark Get Categories
 
--(void)getBrandsFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure;
+-(void) getCategoriesFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure;
 
-#pragma mark Get Offers
-
--(void)getCategoriesFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure;
 -(NSArray*) getOffers;
+
 -(void)loadOffersFromServerFor:(NSInteger)categoryId
                         offset:(NSInteger)offset
               WithSuccessBlock:(void (^)(BOOL response))success
@@ -88,7 +90,7 @@
 #pragma mark Helpers
 
 -(NSDictionary*)buildTreeForCategory:(NSInteger)category_id;
--(BOOL)checkChildItemsInCategory:(NSInteger)categoryId;
+-(BOOL)checkChildItemsInCategory:(NSNumber*)categoryId;
 
 
 @end

@@ -236,7 +236,7 @@
     }
 
         cell.item = [_searchResults objectAtIndex:indexPath.row];
-        cell.brandLabel.text = cell.item.brandName;
+        cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
         cell.titleLabel.text = cell.item.name;
         cell.likesCount.text = [cell.item.likesCount stringValue];
 

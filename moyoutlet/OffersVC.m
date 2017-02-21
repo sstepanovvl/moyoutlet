@@ -94,7 +94,6 @@ NSString *kCellID = @"OfferCollectionViewCell";
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_offersCollectionView reloadData];
                         [_offersCollectionView layoutIfNeeded];
-                        NSLog(@"[_offersCollectionView layoutIfNeeded];");
                         [MBProgressHUD hideHUDForView:_offersCollectionView animated:YES];
                     });
                 }
@@ -159,7 +158,7 @@ NSString *kCellID = @"OfferCollectionViewCell";
         NSArray* items = [[AppManager sharedInstance].offers valueForKey:[NSString stringWithFormat:@"%li",(long)self.category_id]];
             if ([items count] && [[items objectAtIndex:indexPath.row] isKindOfClass:[OfferItem class]]) {
             cell.item = [_arrOffers objectAtIndex:indexPath.row];
-            cell.brandLabel.text = cell.item.brandName;
+            cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
             cell.titleLabel.text = cell.item.name;
             cell.likesCount.text = [cell.item.likesCount stringValue];
 //            cell.priceLabel.text = [NSString stringWithFormat:@"%.f ₽",cell.item.price];

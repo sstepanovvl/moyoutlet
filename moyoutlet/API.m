@@ -17,7 +17,6 @@
 #pragma mark Routines
 
 +(void)requestWithMethod:(NSString *)method andData:(NSDictionary*)data withHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))handlerBlock {
-
     
     if (debug_enabled) {
         NSLog(@"API request method: %@",method);

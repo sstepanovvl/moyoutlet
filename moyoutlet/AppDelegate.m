@@ -27,16 +27,30 @@
     [AppManager sharedInstance];
     [AppManager sharedInstance].authorized = YES;
 
-    [[AppManager sharedInstance] getBrandsFromServerwithSuccessBlock:^(BOOL response) {
-        NSLog(@"Brands downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].brands count]);
-        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"name"
-                                                                     ascending:YES];
-        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
-        [AppManager sharedInstance].brands = [[[AppManager sharedInstance].brands sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+    [self getData];
+
+    [Fabric with:@[[Crashlytics class]]];
+
+    return YES;
+}
+
+-(void)getData {
+    [[AppManager sharedInstance] getCategoriesFromServerwithSuccessBlock:^(BOOL response) {
+        NSLog(@"Categories downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.categories count]);
+    } andFailureBlock:^(NSError *error) {
+        
+    }];
+    
+    [[AppManager sharedInstance] getAppConfigFromServerwithSuccessBlock:^(BOOL response) {
+        NSLog(@"Brands downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.brands count]);
+        NSLog(@"Cities downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.cities count]);
+        NSLog(@"Conditions downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.conditions count]);
+        NSLog(@"Sizees downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.sizes count]);
+        NSLog(@"Weights downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.weights count]);
     } andFailureBlock:^(NSError *error) {
         NSLog(@"Brands download failed with error %@",error.localizedDescription);
     }];
-    
+        
     [[AppManager sharedInstance] getUserFromServer:1 WithSuccessBlock:^(UserItem *user) {
         [AppManager sharedInstance].authorizedUser = user;
         if (debug_enabled) {
@@ -45,27 +59,23 @@
     } andFailureBlock:^(NSError *error) {
         NSLog(@"User download failed with error %@",error.localizedDescription);
     }];
-
-
+    
+    
     NSArray* arrSearchHistory = [NSArray arrayWithObjects:@"IPhone",@"IPad",@"Apple", @"Dress", @"Jeans", nil];
     NSArray* arrSavedSearch = [NSArray arrayWithObjects:@"Free",@"IPod",@"Good", nil];
-
+    
     
     for (NSString* str in arrSearchHistory){
         SearchItem* si = [[SearchItem alloc] init];
         si.text = str;
         [[AppManager sharedInstance].searchHistory addObject:si];
     }
-
+    
     for (NSString* str in arrSavedSearch){
         SearchItem* si = [[SearchItem alloc] init];
         si.text = str;
         [[AppManager sharedInstance].savedSearch addObject:si];
     }
-
-    [Fabric with:@[[Crashlytics class]]];
-
-    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

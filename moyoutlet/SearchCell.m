@@ -15,11 +15,12 @@
     if (self = [super init]) {
         _searchItem = searchItem;
         _cellTitle.text = _searchItem.text;
+        if (searchItem.description) {
+            _descriptionLabel.text = _searchItem.description;
+        }
     }
     return self;
 }
-
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -42,7 +43,13 @@
 
 -(void)setSearchItem:(SearchItem *)searchItem {
     _searchItem = searchItem;
-    _cellTitle.text = self.searchItem.text;
+    if (_searchItem.hasChild) {
+        _selectButtonConstraint.constant = 14.0f;
+        _selectButtonTrailingConstraint.constant = 8.0f;
+        _selectButton.hidden = NO;
+    }
+    _cellTitle.text = _searchItem.text;
+    _descriptionLabel.text = _searchItem.itemDescription;
 }
 
 

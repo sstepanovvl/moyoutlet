@@ -11,14 +11,8 @@
 
 @interface SelectBrandVC : baseVC <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, SearchCellDelegate>
 
-typedef enum searchTypes
-{
-    BRAND,
-    CATEGORY
-} SearchType;
 
 @property SearchType searchType;
 @property (assign,nonatomic) NSNumber* parent_id;
-
 
 @end

@@ -61,7 +61,6 @@ NSString *kPhotoCellID = @"PhotoCell";
     _sellerImage.layer.borderColor = [UIColor whiteColor].CGColor;
     _sellerImage.clipsToBounds = YES;
 
-
     [_sellerImage sd_setImageWithURL:[NSURL URLWithString:_offerItem.seller.photoUrl]
                                                   placeholderImage:[UIImage imageNamed:@"userImagePlaceholder"]
                                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -74,23 +73,19 @@ NSString *kPhotoCellID = @"PhotoCell";
                                                                              }];
                                                          }];
 
-
-
-
-
     _commentsHeaderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
 
     _footerPriceLabel.text = [self printPriceWithCurrencySymbol: _offerItem.price];
 
     _likeCountsButton.titleLabel.text = [NSString stringWithFormat:@"Понравилось: %@", _offerItem.likesCount];
-
-    _offerSize.text = [NSString stringWithFormat:@"Размер: %@",_offerItem.size];
-    _offerTitle.text = [NSString stringWithFormat:@"%@ %@",_offerItem.brandName,_offerItem.name];
+    _offerSize.text = [NSString stringWithFormat:@"Размер: %@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.sizes Value:_offerItem.size_id forKey:@"id"] valueForKey:@"name"]];
+//    _offerTitle.text = [NSString stringWithFormat:@"%@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:_offerItem.brand_id forKey:@"id"] valueForKey:@"name"]];
     _offerTitle1.text = [NSString stringWithFormat:@"%@",_offerItem.itemDescription];
-    _offerSize1.text = [NSString stringWithFormat:@"%@",_offerItem.size];
+    
+    _offerSize1.text = [NSString stringWithFormat:@"%@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.sizes Value:_offerItem.size_id forKey:@"id"] valueForKey:@"name"]];
 
-    _offerShipping.text = [NSString stringWithFormat:@"%@ from %@",_offerItem.shipping, _offerItem.senderCity];
-    _offerCondition.text = [NSString stringWithFormat:@"%@",_offerItem.condition];
+    _offerShipping.text = [NSString stringWithFormat:@"%@ from %@",_offerItem.shipping, [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.cities Value:_offerItem.senderCity_id forKey:@"id"] valueForKey:@"name"]];
+    _offerCondition.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.conditions Value:_offerItem.condition_id forKey:@"id"] valueForKey:@"name"];
     _offerCreatonDate.text = [NSString stringWithFormat:@"%@",_offerItem.created];
 
     [_offersCollectionView registerNib:[UINib nibWithNibName:@"OfferLightCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kOfferLightCellID];
@@ -183,7 +178,7 @@ NSString *kPhotoCellID = @"PhotoCell";
 
         NSString* categoryTitle = [[NSString alloc] init];
 
-        for (NSDictionary* category in [AppManager sharedInstance].categories) {
+        for (NSDictionary* category in [AppManager sharedInstance].config.categories) {
             if ([[category valueForKey:@"id"] intValue] == category_id) {
                 categoryTitle = [category valueForKey:@"name"];
             }
@@ -404,7 +399,8 @@ NSString *kPhotoCellID = @"PhotoCell";
 
         cell.item = self.offerItem;
 
-        cell.brandLabel.text = cell.item.brandName;
+        cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
+//        cell.brandLabel.text = cell.item.brandName;
         cell.titleLabel.text = cell.item.name;
 
         cell.priceView.layer.cornerRadius = 4.0f;
