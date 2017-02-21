@@ -21,7 +21,6 @@
     return self;
 }
 -(instancetype)initWith:(NSDictionary*)dictionary {
-
     if (self = [super initWith:dictionary]) {
         
         if ([dictionary valueForKey:@"brand"]) {

@@ -10,6 +10,6 @@
 #import "BaseTableViewController.h"
 #import "moyoutlet-swift.h"
 
-@interface testTableTableViewController : BaseTableViewController <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UICollectionViewDelegate,UICollectionViewDataSource>
+@interface testTableTableViewController : BaseTableViewController <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UICollectionViewDelegate,UICollectionViewDataSource,ImagePickerViewControllerDelegate>
 
 @end

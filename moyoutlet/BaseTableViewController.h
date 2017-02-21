@@ -7,12 +7,14 @@
 //
 
 #import "baseVC.h"
+
 #import "IQKeyboardManager.h"
 #import "IQDropDownTextField.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 #import "IQUITextFieldView+Additions.h"
 #import "UITextView+Placeholder.h"
+#import "StaticDataTableViewController.h"
 
-@interface BaseTableViewController : UITableViewController <UITableViewDelegate>
+@interface BaseTableViewController : StaticDataTableViewController <UITableViewDelegate>
 
 @end

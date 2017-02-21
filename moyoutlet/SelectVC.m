@@ -64,14 +64,12 @@ static NSString* kCellIdentifier = @"SearchCell";
                                              @"parent_id":@"-1"}];
         }
         _headerViewHeighConstraint.constant = 0;
+        _searchBarHeightConstaraint.constant = 0;
         self.tableViewHeaderImage.hidden = true;
         [self.itemsToDisplay addObjectsFromArray:ar];
-//        [self generateSectionsInBackgroundFromArray:self.itemsToDisplay withFilter:self.searchBar.text];
+        [self initNavigationItems];
     } else if (self.searchType == BRAND) {
         self.itemsToDisplay =[[AppManager sharedInstance].config brands];
-        if ([[AppManager sharedInstance].selectedBrands count]>0) {
-            self.tableViewHeaderImage.hidden = true;
-        }
         [self generateSectionsInBackgroundFromArray:self.itemsToDisplay withFilter:self.searchBar.text];
     } else if (self.searchType == SIZES) {
         self.itemsToDisplay =[[AppManager sharedInstance].config sizes];
@@ -80,7 +78,6 @@ static NSString* kCellIdentifier = @"SearchCell";
         self.tableViewHeaderImage.hidden = true;
         _resultTable.rowHeight = UITableViewAutomaticDimension;
         _resultTable.estimatedRowHeight = 44.0f;
-//        [self generateSectionsInBackgroundFromArray:self.itemsToDisplay withFilter:self.searchBar.text];
     } else if (self.searchType == CITIES) {
         self.itemsToDisplay =[[AppManager sharedInstance].config cities];
         _headerViewHeighConstraint.constant = 0;
@@ -576,8 +573,10 @@ static NSString* kCellIdentifier = @"SearchCell";
                              cell.selectedButton.transform = CGAffineTransformMakeScale(1.5, 1.5);
                              cell.selectedButton.transform = CGAffineTransformMakeScale(0.001, 0.001);
                          } completion:^(BOOL finished) {
+                             
                          }];
     });
+    
     if (self.searchType == BRAND) {
         [[AppManager sharedInstance].selectedBrands removeAllObjects];
     } else if (self.searchType == CITIES) {
@@ -651,7 +650,6 @@ static NSString* kCellIdentifier = @"SearchCell";
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
-    
 }
 
 @end

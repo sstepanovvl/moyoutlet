@@ -7,7 +7,7 @@
 //
 
 #import "SearchCell.h"
-#import "SelectBrandVC.h"
+
 
 @implementation SearchCell
 

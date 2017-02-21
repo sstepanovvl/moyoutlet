@@ -30,8 +30,7 @@
         sharedInstance.selectedConditions = [NSMutableArray array];
         sharedInstance.selectedWillSendIn = [NSMutableArray array];
         sharedInstance.offerToEdit = [[OfferItem alloc] init];
-        sharedInstance.outletComissionMulitplier = @0.1f;
-        
+        sharedInstance.config.outletComissionMulitplier = 0.1f;
         // Do any other initialisation stuff here
     });
 

@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSNumber* weight_id;
 
 @property (assign, nonatomic) float price;
+@property (assign, nonatomic) float fee;
+@property (assign, nonatomic) float clientIncome;
 @property (strong, nonatomic) NSMutableArray* photoUrls;
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* mainThumbUrl;

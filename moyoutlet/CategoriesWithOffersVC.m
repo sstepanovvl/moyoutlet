@@ -12,6 +12,7 @@
 #import "OfferVC.h"
 #import "CreateOfferVC.h"
 #import "SearchVC.h"
+#import "testTableTableViewController.h"
 
 @interface CategoriesWithOffersVC()
 
@@ -191,26 +192,13 @@
     
 }
 
-#pragma mark Fusuma delegates 
-
-- (void)fusumaImageSelected:(UIImage *)image {
-    
-    CreateOfferVC* cofvc = [[CreateOfferVC alloc] initFromStoryboardWithItem:nil];
-    cofvc.item.arrImages = [[NSMutableArray alloc] initWithObjects:image, nil,nil,nil];
-
-    [self.navigationController pushViewController:cofvc animated:YES];
-}
 
 #pragma mark get photos first
 
 -(void)showImagePicker {
-    FusumaViewController* fsvc = [FusumaViewController new];
-    
-    fsvc.delegate = self;
-    fsvc.hasVideo = false;
-    fsvc.fusumaCameraFirst = true;
-    [self.navigationController presentViewController:fsvc animated:YES completion:nil];
-
+    UIStoryboard* main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    testTableTableViewController* tvc = [main instantiateViewControllerWithIdentifier:@"testTableTableViewController"];
+    [self.navigationController pushViewController:tvc animated:YES];
 }
 
 

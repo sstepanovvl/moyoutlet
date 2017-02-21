@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CreateOfferPhotoCell : UICollectionViewCell
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *imView;
 
 -(void)initCell;
 

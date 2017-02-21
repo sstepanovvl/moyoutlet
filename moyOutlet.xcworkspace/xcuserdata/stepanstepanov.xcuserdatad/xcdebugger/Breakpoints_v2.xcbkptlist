@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moyoutlet/CategoriesWithOffersVC.m"
-            timestampString = "508829089.562936"
+            timestampString = "509384557.964748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "-initSellButtonOnFrame"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moyoutlet/SelectVC.m"
-            timestampString = "509208885.534684"
+            timestampString = "509390965.606319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "765"
-            endingLineNumber = "765">
+            startingLineNumber = "763"
+            endingLineNumber = "763">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moyoutlet/SelectVC.m"
-            timestampString = "509208885.534684"
+            timestampString = "509390965.606319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "813"
-            endingLineNumber = "813">
+            startingLineNumber = "811"
+            endingLineNumber = "811">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -214,11 +214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moyoutlet/SelectVC.m"
-            timestampString = "509208885.534684"
+            timestampString = "509390965.606319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "908"
-            endingLineNumber = "908">
+            startingLineNumber = "906"
+            endingLineNumber = "906">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -244,11 +244,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "moyoutlet/CreateOfferVC.m"
-            timestampString = "508753291.542942"
+            timestampString = "509385401.199838"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-initFields"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,6 +266,38 @@
             startingLineNumber = "15"
             endingLineNumber = "15"
             landmarkName = "-initWithSearchItem:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "moyoutlet/CameraViewController/CameraViewController.m"
+            timestampString = "509379504.621662"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "506"
+            endingLineNumber = "506"
+            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "moyoutlet/StaticDataTableViewController.m"
+            timestampString = "509401259.490228"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
+            landmarkName = "-cells:setHidden:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

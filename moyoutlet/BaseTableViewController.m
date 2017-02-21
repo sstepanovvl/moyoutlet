@@ -23,6 +23,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.insertTableViewRowAnimation = UITableViewRowAnimationLeft;
+    self.deleteTableViewRowAnimation = UITableViewRowAnimationRight;
+    self.reloadTableViewRowAnimation = UITableViewRowAnimationFade;
     // Do any additional setup after loading the view.
 }
 

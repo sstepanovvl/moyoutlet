@@ -159,19 +159,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            SelectCategoryVC* srvc = [[SelectCategoryVC alloc] initWithNibName:@"SelectCategoryVC" bundle:nil];
-            srvc.parent_id = @0;
-            [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-            
-            [self.navigationController pushViewController:srvc animated:YES];
-            
-        }  else {
-            SelectBrandVC* srvc = [[SelectBrandVC alloc] initWithNibName:@"SelectBrandVC" bundle:nil];
-            [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-            
-            [self.navigationController pushViewController:srvc animated:YES];
-        }
+//        if (indexPath.row == 0) {
+//            SelectCategoryVC* srvc = [[SelectCategoryVC alloc] initWithNibName:@"SelectCategoryVC" bundle:nil];
+//            srvc.parent_id = @0;
+//            [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+//            
+//            [self.navigationController pushViewController:srvc animated:YES];
+//            
+//        }  else {
+//            SelectBrandVC* srvc = [[SelectBrandVC alloc] initWithNibName:@"SelectBrandVC" bundle:nil];
+//            [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+//            
+//            [self.navigationController pushViewController:srvc animated:YES];
+//        }
         
     } else {
         

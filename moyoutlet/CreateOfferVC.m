@@ -10,7 +10,6 @@
 #import "CreateOfferPhotoCell.h"
 //#import "SelectBrandVC.h"
 #import "SelectVC.h"
-#import "SelectCategoryVC.h"
 
 @interface CreateOfferVC ()
 @property (strong, nonatomic) IBOutlet PhotoCollectionView *photoCollectionView;
@@ -83,36 +82,7 @@
 }
 
 -(void)showImagePicker {
-    FusumaViewController* fsvc = [FusumaViewController new];
-    
-    fsvc.delegate = self;
-    fsvc.hasVideo = false;
-    
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    
-    self.selfcell = (CreateOfferPhotoCell*)[self.photoCollectionView cellForItemAtIndexPath:indexPath];
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    if ([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]) {
-        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Сделать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-
-            [self.navigationController pushViewController:fsvc animated:YES];
-        }]];
-    }
-    
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Выбрать фото", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        
-        [self.navigationController presentViewController:fsvc animated:YES completion:nil];
-        
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Отмена", nil) style:UIAlertActionStyleCancel handler:NULL]];
-    
-    alert.popoverPresentationController.sourceView = [self.selfcell  superview];
-    alert.popoverPresentationController.sourceRect = [self.selfcell  frame];
-    
-    [self presentViewController:alert animated:YES completion:NULL];
+    NSLog(@"showImagePicker");
 }
 
 -(void)initFields {
@@ -307,10 +277,10 @@
     }
     _createNewOffer = false;
     
-    SelectCategoryVC* srvc = [[SelectCategoryVC alloc] initWithNibName:@"SelectCategoryVC" bundle:nil];
-    srvc.parent_id = @0;
-    srvc.title = @"Категория";
-    [self.navigationController showViewController:srvc sender:nil];
+//    SelectCategoryVC* srvc = [[SelectCategoryVC alloc] initWithNibName:@"SelectCategoryVC" bundle:nil];
+//    srvc.parent_id = @0;
+//    srvc.title = @"Категория";
+//    [self.navigationController showViewController:srvc sender:nil];
 }
 
 - (IBAction)didSelectBrand:(id)sender {
@@ -385,7 +355,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField.tag == 1) {
         float itemPrice = [textField.text floatValue];
-        float comission = itemPrice * [[AppManager sharedInstance].outletComissionMulitplier floatValue];
+        float comission = itemPrice * [AppManager sharedInstance].config.outletComissionMulitplier ;
         float totalValue = itemPrice - comission;
         _comissionLabel.text = [NSString stringWithFormat:@"%l.f ₽",comission];
         _totalLabel.text = [NSString stringWithFormat:@"%l.f ₽", totalValue];
@@ -409,13 +379,13 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CreateOfferPhotoCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CreateOfferPhotoCell" forIndexPath:indexPath];
-    [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [cell.imView setContentMode:UIViewContentModeScaleAspectFit];
     switch (indexPath.row) {
         case 0:
-            [cell.imageView setImage:[self.item.arrImages objectAtIndex:0]];
+            [cell.imView setImage:[self.item.arrImages objectAtIndex:0]];
             break;
         default:
-            [cell.imageView setImage:[UIImage imageNamed:@"photoPlaceholder"]];
+            [cell.imView setImage:[UIImage imageNamed:@"photoPlaceholder"]];
             break;
     }
     return cell;
@@ -433,14 +403,10 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath  {
 
-    FusumaViewController* fsvc = [FusumaViewController new];
-    
-    fsvc.delegate = self;
-    fsvc.hasVideo = false;
+    CameraViewController* cvc = [CameraViewController new];
+    [self.navigationController presentViewController:cvc animated:YES completion:nil];
     
     self.selfcell = (CreateOfferPhotoCell*)[self.photoCollectionView cellForItemAtIndexPath:indexPath];
-
-    [self.navigationController presentViewController:fsvc animated:YES completion:^{}];
 }
 
 #pragma mark Fusuma delegate
@@ -452,7 +418,7 @@
 }
 
 - (void)fusumaDismissedWithImage:(UIImage * _Nonnull)image {
-    [self.selfcell.imageView setImage:image];
+    [self.selfcell.imView setImage:image];
     NSInteger row =[[_photoCollectionView indexPathForCell:self.selfcell] row];
 #warning Отследи какого хуя тут пустой массив! НЕ ПОЗОРЬСЯ
     

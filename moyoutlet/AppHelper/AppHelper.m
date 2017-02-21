@@ -11,6 +11,7 @@
 @implementation AppHelper
 +(NSDictionary*)searchInDictionaries:(NSMutableArray*)array Value:(id)value forKey:(NSString*)key {
     for (NSDictionary* dic in array) {
+        NSLog(@"%@ isEqual? %@",[dic valueForKey:key],value);
         if ([[dic valueForKey:key] isEqual:value]){
             return dic;
         }

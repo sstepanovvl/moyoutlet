@@ -24,6 +24,7 @@
         self.conditions = [NSMutableArray array];
         self.willSendInFields = [NSMutableArray array];
         self.categories = [NSDictionary new];
+        
     }
     return self;
 }

@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Fusuma.xcscheme</key>
+		<key>GPUImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3E0D8640A124012AB6F0A9F775A38285</key>
+		<key>2597E77C6D3830202BFB48C276629F0A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B2662E03448476E1F558458B80C365D3</key>
+		<key>2814375EEC76736A7EF433BA30E8D3B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA97C78B079D437EFA38D822A3EF795A</key>
+		<key>F4BE62C86F35416812DD925B87E1681F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

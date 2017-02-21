@@ -33,7 +33,7 @@
 @property (strong,nonatomic) NSMutableArray* selectedSize;
 @property (strong,nonatomic) NSMutableArray* selectedConditions;
 @property (strong,nonatomic) NSMutableArray* selectedWillSendIn;
-@property (strong,nonatomic) NSNumber* outletComissionMulitplier;
+
 @property (strong,nonatomic) OfferItem* offerToEdit;
 
 + (instancetype)sharedInstance;

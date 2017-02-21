@@ -17,6 +17,7 @@
 #import "baseError.h"
 #import "NBPhoneNumberUtil.h"
 #import "NBAsYouTypeFormatter.h"
+#import "CameraViewController.h"
 //#import "SHSPhoneLibrary.h"
 #import "IIViewDeckController.h"
 #import "UIColor+CustomColors.h"

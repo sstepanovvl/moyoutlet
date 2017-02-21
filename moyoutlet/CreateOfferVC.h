@@ -11,7 +11,7 @@
 #import "moyoutlet-swift.h"
 
 
-@interface CreateOfferVC : baseVC <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, FusumaDelegate, NSURLSessionDelegate, UITextFieldDelegate,UITextInputDelegate>
+@interface CreateOfferVC : baseVC <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, NSURLSessionDelegate, UITextFieldDelegate,UITextInputDelegate>
 
 -(instancetype) initFromStoryboardWithItem:(OfferItem*)item;
 

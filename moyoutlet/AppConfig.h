@@ -18,6 +18,6 @@
 @property (strong,nonatomic) NSMutableArray* weights;
 @property (strong,nonatomic) NSMutableArray* sizes;
 @property (strong,nonatomic) NSDictionary* categories;
-
+@property (assign,nonatomic) float outletComissionMulitplier;
 
 @end
