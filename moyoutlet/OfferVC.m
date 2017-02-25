@@ -7,6 +7,7 @@
 //
 
 #import "OfferVC.h"
+#import "OfferCheckoutVC.h"
 #import "ProfileVC.h"
 
 @interface OfferVC ()
@@ -75,18 +76,25 @@ NSString *kPhotoCellID = @"PhotoCell";
 
     _commentsHeaderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
 
-    _footerPriceLabel.text = [self printPriceWithCurrencySymbol: _offerItem.price];
-
+    _footerPriceLabel.text = [NSString stringWithFormat:@"%@ \u20BD",[AppHelper numToStr:[NSNumber numberWithFloat:_offerItem.price]]];
+    
     _likeCountsButton.titleLabel.text = [NSString stringWithFormat:@"Понравилось: %@", _offerItem.likesCount];
+    
     _offerSize.text = [NSString stringWithFormat:@"Размер: %@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.sizes Value:_offerItem.size_id forKey:@"id"] valueForKey:@"name"]];
-//    _offerTitle.text = [NSString stringWithFormat:@"%@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:_offerItem.brand_id forKey:@"id"] valueForKey:@"name"]];
+    
+    if ([_offerItem.brand_id isEqual:@"0"]) {
+        _offerTitle.text = _offerItem.name;
+    } else {
+        _offerTitle.text = [NSString stringWithFormat:@"%@ %@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:_offerItem.brand_id forKey:@"id"] valueForKey:@"name"], _offerItem.name];
+    }
+    
     _offerTitle1.text = [NSString stringWithFormat:@"%@",_offerItem.itemDescription];
     
     _offerSize1.text = [NSString stringWithFormat:@"%@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.sizes Value:_offerItem.size_id forKey:@"id"] valueForKey:@"name"]];
 
-    _offerShipping.text = [NSString stringWithFormat:@"%@ from %@",_offerItem.shipping, [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.cities Value:_offerItem.senderCity_id forKey:@"id"] valueForKey:@"name"]];
+    _offerShipping.text = [NSString stringWithFormat:@"%@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.cities Value:_offerItem.senderCity_id forKey:@"id"] valueForKey:@"name"]];
     _offerCondition.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.conditions Value:_offerItem.condition_id forKey:@"id"] valueForKey:@"name"];
-    _offerCreatonDate.text = [NSString stringWithFormat:@"%@",_offerItem.created];
+    _offerCreatonDate.text = [_offerItem.created timeAgo];
 
     [_offersCollectionView registerNib:[UINib nibWithNibName:@"OfferLightCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kOfferLightCellID];
     [self initCategoryButtons];
@@ -124,7 +132,7 @@ NSString *kPhotoCellID = @"PhotoCell";
     [super initNavigationItems];
     
     [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Bold" size:18.0],
+     setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Bold" size:17.0],
                               NSForegroundColorAttributeName :  [UIColor appRedColor]}];
     
     UIButton* rightSearchButton = [[UIButton alloc] init];
@@ -317,11 +325,12 @@ NSString *kPhotoCellID = @"PhotoCell";
 }
 
 - (IBAction)footerBuyButtonPressed:(id)sender {
+    OfferCheckoutVC* ofc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"OfferCheckoutVC"];
+    ofc.offerItem = _offerItem;
+    [self.navigationController pushViewController:ofc animated:YES];
+}
 
-    baseError* err = [[baseError alloc]init];
-    err.customHeader= @"Купить";
-    err.customError = @"Здесь появится экран с оформлением покупки";
-    [self throughError:err];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
 }
 
@@ -398,7 +407,8 @@ NSString *kPhotoCellID = @"PhotoCell";
                                                                                   forIndexPath:indexPath];
 
         cell.item = self.offerItem;
-
+        
+        
         cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
 //        cell.brandLabel.text = cell.item.brandName;
         cell.titleLabel.text = cell.item.name;
@@ -412,7 +422,8 @@ NSString *kPhotoCellID = @"PhotoCell";
         cell.cellView.layer.masksToBounds = YES;
 
         cell.priceLabel.text = [self printPriceWithCurrencySymbol: cell.item.price];
-
+        
+        
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:cell.item.mainThumbUrl]
                           placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -435,10 +446,11 @@ NSString *kPhotoCellID = @"PhotoCell";
         CGRect frame = cell.frame;
         frame.size.width = collectionView.frame.size.width;
         frame.size.height = collectionView.frame.size.height;
-        cell.photoImageView.alpha = 0.0f;
+//        cell.photoImageView.alpha = 0.0f;
         
         cell.layer.cornerRadius = 5.0f;
         cell.layer.masksToBounds = YES;
+        [MBProgressHUD showHUDAddedTo:cell animated:YES];
 
         [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:[_offerItem.photoUrls objectAtIndex:indexPath.row]]
                           placeholderImage:[UIImage imageNamed:@"placeholder.png"]
@@ -447,7 +459,8 @@ NSString *kPhotoCellID = @"PhotoCell";
                                                        duration:0.5f
                                                         options:UIViewAnimationOptionLayoutSubviews
                                                      animations:^{
-                                                         cell.photoImageView.alpha = 1.0f;
+                                                         [MBProgressHUD hideHUDForView:cell animated:YES];
+//                                                         cell.photoImageView.alpha = 1.0f;
                                                      } completion:^(BOOL finished) {
                                                      }];
                                  }];

@@ -15,7 +15,6 @@
 #import "ConditionItem.h"
 #import "WillSendInItem.h"
 
-
 @interface AppManager : NSObject <NSURLSessionDelegate>
 @property (assign,nonatomic) BOOL configured;
 @property (assign,nonatomic) NSString* token;
@@ -84,7 +83,7 @@
 
 #pragma mark Create Offer
 
--(void) createOfferWithData:(NSDictionary*)data andImages:(NSArray*)images;
+-(void) uploadOfferToServer:(OfferItem*)offer withHandler:(void (^)(BOOL success))handlerBlock;
 -(void) saveOfferToDB;
 
 #pragma mark Helpers

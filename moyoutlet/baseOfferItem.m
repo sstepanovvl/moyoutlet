@@ -12,7 +12,7 @@
 -(instancetype)initWith:(NSDictionary*)dictionary {
 
     if (self = [super init]) {
-        self.objectId = [[dictionary valueForKey:@"id"] intValue];
+        self.objectId = [dictionary valueForKey:@"id"];
 //        NSLog(@"New offer item #%ld initialized with dictionary",(long)self.objectId);
 
     }
@@ -21,7 +21,7 @@
 -(instancetype)initWithDB {
 
     if (self = [super init]) {
-        self.objectId = arc4random() % 255255255;
+//        self.objectId = arc4random() % 255255255;
         NSLog(@"New offer item #%ld initialized with DB",(long)self.objectId);
 
     }

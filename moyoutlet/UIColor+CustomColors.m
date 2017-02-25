@@ -16,14 +16,30 @@
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        appRedColor = [UIColor colorWithRed:216.0 / 255.0
-                                           green:67.0 / 255.0
-                                            blue:56.0 / 255.0
+        appRedColor = [UIColor colorWithRed:249.0 / 255.0
+                                           green:65.0 / 255.0
+                                            blue:52.0 / 255.0
                                            alpha:1.0];
     });
 
     return appRedColor;
 }
+
++ (UIColor *)appTextColor {
+    
+    static UIColor *appMidGrayColor;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        appMidGrayColor = [UIColor colorWithRed:184.0 / 255.0
+                                          green:182.0 / 255.0
+                                           blue:187.0 / 255.0
+                                          alpha:1.0];
+    });
+    
+    return appMidGrayColor;
+}
+
 
 + (UIColor *)appMidGrayColor {
 

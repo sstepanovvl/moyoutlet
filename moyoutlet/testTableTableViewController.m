@@ -11,7 +11,7 @@
 #import "CreateOfferPhotoCell.h"
 #import "PhotoCollectionViewCell.h"
 
-@interface testTableTableViewController ()
+@interface testTableTableViewController () <ARSPopoverDelegate>
 @property (strong, nonatomic) IBOutletCollection(UISwitch) NSArray *cellSwitches;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
@@ -31,19 +31,25 @@
 @property (weak, nonatomic) IBOutlet UITextField *offerPriceLabel;
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *deliveryFieldsToHide;
 @property (strong, nonatomic) UISwitch* deliverySwitch;
-
+@property (weak, nonatomic) IBOutlet UILabel *weightLabel;
+@property (weak, nonatomic) IBOutlet UIButton *createOfferButton;
 
 @end
 
 @implementation testTableTableViewController  
 
+{
+    M13ProgressHUD* HUD;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initNavigationItems];
+    [self initHud];
     for (UISwitch* sw in _cellSwitches) {
         sw.transform = CGAffineTransformMakeScale(0.75, 0.75);
     }
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
-    [self.tableView registerNib:[UINib nibWithNibName:@"HeaderView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"HeaderView"];
+    
     _descriptionTextView.delegate = self;
     _titleTextField.delegate = self;
     UIGestureRecognizer* longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
@@ -58,51 +64,101 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    if ([[[AppManager sharedInstance].offerToEdit.arrImages objectAtIndex:0] isEqual:[NSNull null]]) {
-//        [self collectionView:_editPhotoCollectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-//    }
+    if ([[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:@"0"] isEqual:[NSNull null]]) {
+        __weak testTableTableViewController* weaktvc = self;
+        CameraViewController* camv = [[CameraViewController alloc] initWithCroppingEnabled:YES allowsLibraryAccess:YES
+                                                                                completion:^(UIImage * _Nullable asd, PHAsset * _Nullable dsa) {
+                                                                                    if (asd) {
+                                                                                        [[AppManager sharedInstance].offerToEdit.arrImages setValue:asd forKey:@"0"];
+                                                                                    }
+                                                                                    [weaktvc dismissViewControllerAnimated:YES completion:nil];
+                                                                                }];
+        [self presentViewController:camv animated:NO completion:nil];
+    }
     [self initFields];
+    
 }
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+
+-(void)initHud {
+    M13ProgressViewImage* imageHud = [[M13ProgressViewImage alloc]init];
+    [imageHud setProgressImage:[UIImage imageNamed:@"outlet"]];
+    [imageHud setProgressDirection:M13ProgressViewImageProgressDirectionBottomToTop];
+    HUD = [[M13ProgressHUD alloc] initWithProgressView:imageHud];
+//    HUD = [[M13ProgressHUD alloc] initWithProgressView:[[M13ProgressViewRing alloc] init]];
+    HUD.progressViewSize = CGSizeMake(100.0, 100.0);
+    CGPoint ss =CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2);
+    HUD.animationPoint = ss;
+    HUD.primaryColor = [UIColor appRedColor];
+    HUD.secondaryColor = [UIColor whiteColor];
+    HUD.hudBackgroundColor = [UIColor whiteColor];
+    HUD.statusColor = [UIColor appRedColor];
+    HUD.statusFont = [UIFont fontWithName:@"OpenSans" size:12.0];
+//    ((M13ProgressViewRing*)HUD.progressView).backgroundRingWidth = 0.5;
+    HUD.maskType = M13ProgressHUDMaskTypeSolidColor;
+    
+    UIWindow *window = [UIApplication safeM13SharedApplication].delegate.window;
+    
+    [window addSubview:HUD];
+    
+//    [self.view addSubview:HUD];
+    
+}
+
 -(void)initFields {
     [_editPhotoCollectionView reloadData];
     
     OfferItem* editableItem = [AppManager sharedInstance].offerToEdit;
-        if (editableItem.category_id) {
-            NSDictionary* dic = [AppHelper searchInDictionaries:(NSArray*)[AppManager sharedInstance].config.categories Value:[editableItem.category_id stringValue] forKey:@"id"];
+    if (editableItem.name) {
+                _titleTextField.textColor = [UIColor blackColor];
+                _titleTextField.text = editableItem.name;
+        }
+    if (editableItem.itemDescription) {
+        _descriptionTextView.textColor = [UIColor blackColor];
+        _descriptionTextView.text = editableItem.itemDescription;
+    }
+    if (editableItem.category_id) {
+            NSDictionary* dic = [AppHelper searchInDictionaries:(NSArray*)[AppManager sharedInstance].config.categories Value:editableItem.category_id forKey:@"id"];
             if (dic) {
                 _categoryLabel.textColor = [UIColor blackColor];
                 _categoryLabel.text = [dic valueForKey:@"name"];
             }
         }
-        if (editableItem.brand_id) {
+    if (editableItem.brand_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:editableItem.brand_id forKey:@"id"];
             if (dic) {
                 _brandLabel.textColor = [UIColor blackColor];
                 _brandLabel.text = [dic valueForKey:@"name"];
+            } else if ([editableItem.brand_id isEqualToNumber:@0]) {
+                _brandLabel.textColor = [UIColor blackColor];
+                _brandLabel.text = @"Без бренда";
             }
         }
-        if (editableItem.condition_id) {
+    if (editableItem.condition_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.conditions Value:editableItem.condition_id forKey:@"id"] ;
             if (dic) {
                 _conditionLabel.textColor = [UIColor blackColor];
                 _conditionLabel.text = [dic valueForKey:@"name"];
             }
         }
-        if (editableItem.senderCity_id) {
+    if (editableItem.senderCity_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.cities Value:editableItem.senderCity_id forKey:@"id"] ;
             if (dic) {
                 _cityLabel.textColor = [UIColor blackColor];
                 _cityLabel.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"name"]];
             }
         }
-        if (editableItem.willSendIn_id) {
+    if (editableItem.willSendIn_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.willSendInFields Value:editableItem.willSendIn_id forKey:@"id"] ;
             if (dic) {
                 _willSendinLabel.textColor = [UIColor blackColor];
                 _willSendinLabel.text = [dic valueForKey:@"name"];
             }
         }
-
     if (editableItem.size_id) {
         NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.sizes Value:editableItem.size_id forKey:@"id"] ;
         if (dic) {
@@ -110,7 +166,59 @@
             _sizeLabel.text = [NSString stringWithFormat:@"%@ (%@)",[dic valueForKey:@"name"],[dic valueForKey:@"description"]];
         }
     }
+    
+    if (editableItem.price > 0) {
+        [self calculateFeesAndPrices];
+    }
+    
+    [_deliverySwitch setOn:editableItem.deliveryEnabled];
+    [[_cellSwitches objectAtIndex:0] setOn:editableItem.deliveryWillSendByMyselfEnabled];
+    [[_cellSwitches objectAtIndex:1] setOn:editableItem.deliverySamovivoznahEnabled];
+    [[_cellSwitches objectAtIndex:2] setOn:editableItem.deliveryOfficeEnabled];
+    [[_cellSwitches objectAtIndex:3] setOn:editableItem.deliveryCourierEnabled];
+    
+    if (editableItem.weight_id) {
+        NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.weights Value:editableItem.weight_id forKey:@"id"] ;
+        if (dic) {
+            _weightLabel.textColor = [UIColor blackColor];
+            _weightLabel.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"name"]];
+        }
+    }
 }
+
+
+- (void) initNavigationItems  {
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans-Bold" size:17.0],
+                              NSForegroundColorAttributeName :  [UIColor appRedColor]}];
+    
+    
+    
+    UIButton* rightNotifyButton = [[UIButton alloc] init];
+    UIImage *rightNotifyImage = [[UIImage imageNamed:@"navigationItemMore"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [rightNotifyButton setFrame:CGRectMake(0, 0, 35, 35)];
+    [rightNotifyButton setImage:rightNotifyImage forState:UIControlStateNormal];
+    [rightNotifyButton addTarget:self
+                          action:@selector(showLoadOfferOptions:)
+                forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* showOptionsBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightNotifyButton];
+    NSArray* rightBarItems = [[NSArray alloc] initWithObjects:showOptionsBarButtonItem, nil];
+    self.navigationItem.rightBarButtonItems = rightBarItems;
+    
+    self.navigationItem.title = @"Создать объявление";
+    
+    UIButton* leftBarButtonWithLogo = [[UIButton alloc] init];
+    
+    UIImage *image = [[UIImage imageNamed:@"leftMenuBackButton"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [leftBarButtonWithLogo setFrame:CGRectMake(0, 0, 35, 35)];
+    [leftBarButtonWithLogo setImage:image forState:UIControlStateNormal];
+    [leftBarButtonWithLogo addTarget:self action:@selector(showSaveOfferOptions:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* but = [[UIBarButtonItem alloc] initWithCustomView:leftBarButtonWithLogo];
+    NSArray* leftBarItems = [[NSArray alloc] initWithObjects:but, nil];
+    self.navigationItem.leftBarButtonItems = leftBarItems;
+
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -120,14 +228,13 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSString* text = textField.text;
     if (textField.tag == 1) {
-        [AppManager sharedInstance].offerToEdit.itemDescription = text;
+        [AppManager sharedInstance].offerToEdit.name = text;
     } else if (textField.tag == 2) {
-        _offerPriceLabel.text = [self numToStr:[NSNumber numberWithInt:[text intValue]]];
+        _offerPriceLabel.text = [AppHelper numToStr:[NSNumber numberWithInt:[text intValue]]];
         [AppManager sharedInstance].offerToEdit.price = [text integerValue];
         [self calculateFeesAndPrices];
     }
 }
-
 
 #pragma mark - TextView Delegate
 
@@ -149,6 +256,38 @@
 }
 
 #pragma mark - Table view data source
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    int underlineHeight = 0;
+    int lastRow = [self.tableView numberOfRowsInSection:indexPath.section]-1;
+    if (indexPath.section != 0 ) {
+        if (indexPath.section == 1) {
+            switch (indexPath.row) {
+                case 0:
+                    underlineHeight = 1;
+                    break;
+                default:
+                    underlineHeight = 0;
+                    break;
+            }
+        } else if (indexPath.section == 2 && indexPath.row != lastRow) {
+            underlineHeight = 1;
+        } else if (indexPath.section == 3 && indexPath.row != lastRow) {
+            underlineHeight = 1;
+        }
+        
+        UIView* underline = [[UIView alloc] initWithFrame:CGRectMake(25, cell.frame.size.height - 1, cell.frame.size.width-50, underlineHeight)];
+        underline.backgroundColor = [UIColor appMidGrayColor];
+        [cell addSubview:underline];
+    }
+    
+    if (indexPath.section == 4 && indexPath.section == 5) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    return cell;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1 && indexPath.row == 1) {
@@ -249,8 +388,8 @@
         [cell.imView setContentMode:UIViewContentModeScaleAspectFill];
         cell.contentView.backgroundColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor whiteColor];
-        if (![[[AppManager sharedInstance].offerToEdit.arrImages objectAtIndex:indexPath.row] isEqual:[NSNull null]]) {
-            [cell.imView setImage:[[AppManager sharedInstance].offerToEdit.arrImages objectAtIndex:indexPath.row]];
+        if (![[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] isEqual:[NSNull null]]) {
+            [cell.imView setImage:[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:[NSString stringWithFormat:@"%ld",indexPath.row]]];
         } else {
             [cell.imView setImage:[UIImage imageNamed:@"photoPlaceholder"]];
         }
@@ -271,39 +410,237 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath  {
 
-    CameraViewController* cvc = [[CameraViewController alloc]init];
-    cvc.arrayPosition = indexPath.row;
-
-    [self presentViewController:cvc animated:YES completion:nil];
+    
+    __weak testTableTableViewController* weaktvc = self;
+    CameraViewController* camv = [[CameraViewController alloc] initWithCroppingEnabled:YES allowsLibraryAccess:YES
+                                                                            completion:^(UIImage * _Nullable asd, PHAsset * _Nullable dsa) {
+                                                                                NSDictionary* dic = [AppManager sharedInstance].offerToEdit.arrImages;
+                                                                                [[AppManager sharedInstance].offerToEdit.arrImages setValue:asd forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+                                                                                [weaktvc dismissViewControllerAnimated:YES completion:nil];
+                                                                            }];
+    [self presentViewController:camv animated:YES completion:nil];
 }
 
 
 #pragma mark - Other Stuff
 
--(NSString*)numToStr:(NSNumber*)num {
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    [formatter setUsesGroupingSeparator:YES];
-    [formatter setGroupingSize:3];
-    [formatter setGroupingSeparator:@"\u00a0"];
-    NSString *string = [formatter stringFromNumber:num];
-    return string;
+-(BOOL)checkFieldsForValidValues {
+    OfferItem* item = [AppManager sharedInstance].offerToEdit;
+    
+    NSString* message = @"";
+    bool success = 1;
+    if (!item.name.length) {
+        message = [NSString stringWithFormat:@"%@\n%@",message,@"Введите название"];
+        success = 0;
+    }
+    if (!item.itemDescription.length) {
+        message = [NSString stringWithFormat:@"%@\n%@",message,@"Введите описание"];
+        success = 0;
+    }
+    if (!item.category_id) {
+        message = [NSString stringWithFormat:@"%@\n%@",message,@"Выберите категорию"];
+        success = 0;
+    }
+    if (!item.brand_id) {
+        message = [NSString stringWithFormat:@"%@\n%@",message,@"Выберите бренд"];
+        success = 0;
+    }
+    if (!item.size_id) {
+        message = [NSString stringWithFormat:@"%@\n%@",message,@"Выберите размер"];
+        success = 0;
+    }
+    if (!item.condition_id) {
+        message = [NSString stringWithFormat:@"%@\n%@",message, @"Укажите в каком состоянии ваша вещь"];
+        success = 0;
+    }
+    if (!item.willSendIn_id) {
+        message = [NSString stringWithFormat:@"%@\n%@",message, @"Укажите когда вы сможете отправить ваш товар"];
+        success = 0;
+    }
+    if (!item.price){
+        message = [NSString stringWithFormat:@"%@\n%@",message, @"Укажите цену в конце-то-концов"];
+        success = 0;
+    }
+    
+    for (id image in item.arrImages) {
+        if ([image isEqual:[NSNull null]]) {
+            message = [NSString stringWithFormat:@"%@\n%@",message, @"Необходимо добавить 4 фото"];
+            success = 0;
+        }
+    }
+    
+    if (!success) {
+        UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"Кажется вы что-то забыли" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        [errorAlert addAction:defaultAction];
+        [self presentViewController:errorAlert animated:YES completion:^{
+            NSLog(@"OOK");
+        }];
+        return false;
+    } else {
+        return true;
+    }
 }
+
 
 -(void)calculateFeesAndPrices {
     float offerPrice = [AppManager sharedInstance].offerToEdit.price;
     
     [AppManager sharedInstance].offerToEdit.fee = offerPrice * [AppManager sharedInstance].config.outletComissionMulitplier;
     [AppManager sharedInstance].offerToEdit.clientIncome = [AppManager sharedInstance].offerToEdit.price - [AppManager sharedInstance].offerToEdit.fee;
-    _outletFeeLabel.text = [NSString stringWithFormat:@"%@",[self numToStr:[NSNumber numberWithFloat:[AppManager sharedInstance].offerToEdit.fee]]];
-    _totalForClientLabel.text = [NSString stringWithFormat:@"%@",[self numToStr:[NSNumber numberWithFloat:[AppManager sharedInstance].offerToEdit.clientIncome]]];
+    _outletFeeLabel.text = [NSString stringWithFormat:@"%@",[AppHelper numToStr:[NSNumber numberWithFloat:[AppManager sharedInstance].offerToEdit.fee]]];
+    _totalForClientLabel.text = [NSString stringWithFormat:@"%@",[AppHelper numToStr:[NSNumber numberWithFloat:[AppManager sharedInstance].offerToEdit.clientIncome]]];
 }
+
+#pragma mark - ARSPopoverDelegate
+
+- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view {
+    NSLog(@"popoverPresentationController");
+    // delegate for you to use.
+}
+
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    // delegate for you to use.
+    NSLog(@"popoverPresentationControllerDidDismissPopover");
+}
+
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    NSLog(@"popoverPresentationControllerShouldDismissPopover");
+    // delegate for you to use.
+    return YES;
+}
+
 
 #pragma mark IBActions
 
+- (void)showLoadOfferOptions:(UIBarButtonItem*)sender {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *loadOfferAction = [UIAlertAction actionWithTitle:@"Выбрать из сохраненных"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction *action) {
+                                                                OfferItem* offer = [OfferItem new];
+                                                                offer.category_id = @1028;
+                                                                offer.root_category_id = @1004;
+                                                                offer.itemDescription = @"Здесь стандартное описание стандартными буквами раз два три четыре пять шесть семь восемь";
+                                                                offer.name = @"Шаблонный товар который можно удалить";
+                                                                offer.condition_id = @4;
+                                                                offer.brand_id = @201;
+                                                                offer.condition_id= @2;
+                                                                offer.willSendIn_id = @7;
+                                                                offer.senderCity_id = @259;
+                                                                offer.deliveryEnabled = false;
+                                                                offer.price = 65000;
+                                                                offer.size_id = @12;
+                                                                offer.weight_id = @17;
+                                                                offer.arrImages = @{
+                                                                                    @"0":[UIImage imageNamed:@"test"],
+                                                                                    @"1":[UIImage imageNamed:@"test"],
+                                                                                    @"2":[UIImage imageNamed:@"test"],
+                                                                                    @"3":[UIImage imageNamed:@"test"]
+                                                                                    };
+                                                                                    
+                                                                [AppManager sharedInstance].offerToEdit = offer;
+                                                                [self viewWillAppear:YES];
+                                                                [self initFields];
+                                                                [self.tableView reloadData];
+                                                                
+                                                            }];
+    
+    UIAlertAction *otherOfferAction = [UIAlertAction actionWithTitle:@"Еще что-то"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction *action) {
+
+                                                              }];
+    
+    [alertController addAction:loadOfferAction];
+    [alertController addAction:otherOfferAction];
+    [alertController setModalPresentationStyle:UIModalPresentationPopover];
+    
+    UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
+    popPresenter.barButtonItem = sender;
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+- (void)showSaveOfferOptions:(UIBarButtonItem*)sender
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *saveOfferAction = [UIAlertAction actionWithTitle:@"Редактировать позже"
+                                                             style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                                                              [self.navigationController popToRootViewControllerAnimated:YES];
+                                                          }];
+    
+    UIAlertAction *deleteOfferAction = [UIAlertAction actionWithTitle:@"Удалить"
+                                                            style:UIAlertActionStyleDestructive
+                                                          handler:^(UIAlertAction *action) {
+                                                              [AppManager sharedInstance].offerToEdit = [OfferItem new];
+                                                              [self.navigationController popToRootViewControllerAnimated:YES];
+                                                          }];
+    
+    [alertController addAction:saveOfferAction];
+    [alertController addAction:deleteOfferAction];
+    [alertController setModalPresentationStyle:UIModalPresentationPageSheet];
+    
+    UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
+    popPresenter.barButtonItem = sender;
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (IBAction)createOfferButtonDidPressed:(id)sender {
+    if ([self checkFieldsForValidValues]) {
+        HUD.status = @"Публикуем объявление";
+        [HUD show:YES];
+        
+        [API createOfferWithData:[[AppManager sharedInstance].offerToEdit dictionaryRepresentation]
+                       andImages:[AppManager sharedInstance].offerToEdit.arrImages
+                        progress:^(NSProgress *progress) {
+                            [HUD setProgress:progress.fractionCompleted animated:YES];
+        } withHandler:^(BOOL success) {
+            if (success) {
+                HUD.status = @"Всё готово!";
+                [HUD performAction:M13ProgressViewActionSuccess animated:YES];
+                [self performSelector:@selector(createdWithSuccess) withObject:nil afterDelay:2];
+            } else {
+                [HUD hide:YES];
+                NSString* message = @"Что-то пошло не так, попробуйте еще раз или повторите позднее";
+                UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Плохо." style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * action) {
+                                                                          
+                                                                      }];
+                [errorAlert addAction:defaultAction];
+                [self presentViewController:errorAlert animated:YES completion:^{
+                }];
+            }
+        }];
+    }
+}
+
+-(void)createdWithSuccess {
+    [AppManager sharedInstance].offerToEdit = [OfferItem new];
+    [HUD hide:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(IBAction)deliveryOptionSwitchDidChanged:(id)sender {
+    UISwitch* senderSwitch = (UISwitch*)sender;
+    
+    [AppManager sharedInstance].offerToEdit.deliveryWillSendByMyselfEnabled = [NSNumber numberWithBool:senderSwitch.on];
+    [AppManager sharedInstance].offerToEdit.deliverySamovivoznahEnabled = [NSNumber numberWithBool:senderSwitch.on];
+    [AppManager sharedInstance].offerToEdit.deliveryOfficeEnabled = [NSNumber numberWithBool:senderSwitch.on];
+    [AppManager sharedInstance].offerToEdit.deliveryCourierEnabled = [NSNumber numberWithBool:senderSwitch.on];
+}
+
 -(IBAction)deliverySwitchDidChanged:(id)sender {
-    self.hideSectionsWithHiddenRows = YES;
+    self.insertTableViewRowAnimation = UITableViewRowAnimationLeft;
+    self.deleteTableViewRowAnimation = UITableViewRowAnimationRight;
+    self.reloadTableViewRowAnimation = UITableViewRowAnimationNone;
+    self.hideSectionsWithHiddenRows = NO;
+    self.animateSectionHeaders = NO;
     [self cells:_deliveryFieldsToHide setHidden:!_deliverySwitch.on];
-    [self reloadDataAnimated:YES];
+    [self reloadDataAnimated:NO];
+    [AppManager sharedInstance].offerToEdit.deliveryEnabled = [NSNumber numberWithBool:_deliverySwitch.on];
 }
 
 -(IBAction)questionButtonPressed:(id)sender {
@@ -323,6 +660,8 @@
         [_editPhotoCollectionView cancelInteractiveMovement];
     }
 }
+
+#pragma mark - Navigation Controller stuff
 
 #pragma mark - Navigation
 

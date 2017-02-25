@@ -9,5 +9,6 @@
 #import "baseManager.h"
 
 @interface AppHelper : baseManager
-+(NSDictionary*)searchInDictionaries:(NSArray*)array Value:(id)value forKey:(NSString*)key;
++(NSDictionary*)searchInDictionaries:(NSArray*)array Value:(NSNumber*)value forKey:(NSString*)key;
++(NSString*)numToStr:(NSNumber*)num;
 @end

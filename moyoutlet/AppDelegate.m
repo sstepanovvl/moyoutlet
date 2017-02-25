@@ -10,7 +10,6 @@
 //#import "moyoutlet-Swift.h"
 #import <Crashlytics/Crashlytics.h>
 #import "UserItem.h"
-#import "CreateOfferVC.h"
 #import <Fabric/Fabric.h>
 
 
@@ -26,7 +25,6 @@
 
     [AppManager sharedInstance];
     [AppManager sharedInstance].authorized = YES;
-
     [self getData];
 
     [Fabric with:@[[Crashlytics class]]];

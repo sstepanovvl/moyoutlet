@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "Constants.h"
 #import "ConditionItem.h"
+#import "NSObject+NSDictionaryRepresentation.h"
 
 @interface baseOfferItem : NSObject
-@property (assign, nonatomic) NSInteger objectId;
+@property (strong, nonatomic) NSNumber* objectId;
 
 -(instancetype)initWith:(NSDictionary*)dictionary;
 

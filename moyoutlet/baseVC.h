@@ -17,7 +17,7 @@
 #import "baseError.h"
 #import "NBPhoneNumberUtil.h"
 #import "NBAsYouTypeFormatter.h"
-#import "CameraViewController.h"
+#import "CameraViewControllerOld.h"
 //#import "SHSPhoneLibrary.h"
 #import "IIViewDeckController.h"
 #import "UIColor+CustomColors.h"
@@ -30,6 +30,14 @@
 #import "UserItem.h"
 #import "SearchBar.h"
 #import "MOCollectionView.h"
+#import "NSObject+NSDictionaryRepresentation.h"
+#import "NSDate+TimeAgo.h"
+#import "AFNetworking.h"
+#import "M13ProgressHUD.h"
+#import "M13ProgressViewImage.h"
+#import "M13ProgressViewRing.h"
+#import "UIApplication+M13ProgressSuite.h"
+
 
 @interface baseVC : UIViewController <UIPopoverPresentationControllerDelegate,UITableViewDelegate, UITableViewDataSource>
 

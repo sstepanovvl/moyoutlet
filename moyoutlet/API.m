@@ -18,13 +18,14 @@
 
 +(void)requestWithMethod:(NSString *)method andData:(NSDictionary*)data withHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))handlerBlock {
     
-    if (debug_enabled) {
-        NSLog(@"API request method: %@",method);
-        NSLog(@"API request data:%@",data);
-    }
+    
     
     NSString *urlString = [NSString stringWithFormat:@"%@%@?XDEBUG_SESSION_START=%@", apiServer, method,XDEBUG_SESSION_START];
 
+    if (debug_enabled) {
+        NSLog(@"\nURL: **** %@ **** \nAPI request meth: **** %@ **** \nAPI request data: **** %@ ****",urlString,method,data);
+    }
+    
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 
@@ -42,13 +43,16 @@
 
         if ([[dictionary objectForKey:key] isKindOfClass:[NSNumber class]]){
             encodedValue = [[[dictionary objectForKey:key] stringValue] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        } else {
+            NSString* encodedKey = [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString* part = [NSString stringWithFormat: @"%@=%@", encodedKey, encodedValue];
+            [parts addObject:part];
+        } else if (![[dictionary valueForKey:key] isKindOfClass:[NSDictionary class]]) {
             encodedValue = [[dictionary objectForKey:key] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
+            NSString* encodedKey = [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString* part = [NSString stringWithFormat: @"%@=%@", encodedKey, encodedValue];
+            [parts addObject:part];
         }
-        NSString* encodedKey = [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSString* part = [NSString stringWithFormat: @"%@=%@", encodedKey, encodedValue];
-        [parts addObject:part];
+        
     }
     NSString *encodedDictionary = [parts componentsJoinedByString:@"&"];
     return [encodedDictionary dataUsingEncoding:NSUTF8StringEncoding];
@@ -56,28 +60,78 @@
 
 #define POST_BODY_BOURDARY  @"boundary"
 
-+ (void) createOfferWithData:(NSDictionary*)data andImages:(NSArray*)images {
-    if(debug_enabled)  {
-        NSLog(@"createOfferWithData");
-    }
-    
-    [self requestWithMethod:@"createOffer" andData:data withHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (debug_enabled) {
-            NSLog(@"%@",response);
-            NSLog(@"received OK, upload images");
+
++(void)createOfferWithData:(NSDictionary *)data andImages:(NSDictionary*)images progress:(void (^)(NSProgress *))progress withHandler:(void (^)(BOOL))handlerBlock {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];  // allocate AFHTTPManager
+    NSString* url = [NSString stringWithFormat:@"%@createOffer?XDEBUG_SESSION_START=%@",apiServer,XDEBUG_SESSION_START];
+    [manager POST:url parameters:data constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {  // POST DATA USING MULTIPART CONTENT TYPE
+
+        for (id key in images) {
+            UIImage* image = [images valueForKey:key];
+            NSData *imageData =  UIImageJPEGRepresentation(image,kJpegCompressionRate);  // convert your image into data
+            [formData appendPartWithFileData:imageData
+                                        name:key
+                                    fileName:key
+                                    mimeType:@"image/jpeg"];
+            
         }
-        OfferItem* newOffer = [OfferItem new];
-        newOffer.objectId = 500;
-        int imagePosition = 0;
-        for (UIImage* image in images) {
-            [self upload:image withImagePosition:imagePosition toOffer:newOffer];
-            imagePosition++;
+        NSLog(@"Всё готово к отправке");
+    } progress:^(NSProgress* progres){
+        progress(progres);
+    }success:^(NSURLSessionDataTask *task, id responseObject) {
+    
+        if (debug_enabled) {
+            NSLog(@"Response: \n %@",responseObject);
         }
         
+        if ([[responseObject valueForKey:@"id"] integerValue]) {
+            handlerBlock(YES);
+        } else {
+            handlerBlock(NO);
+        
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                NSLog(@"Error: %@", error);   // Gives Error
+                handlerBlock(NO);
     }];
+    
 }
 
-+ (void) upload:(UIImage*)image withImagePosition:(int)position toOffer:(OfferItem*)newOffer {
+
+
+//+(void) createOfferWithData:(NSDictionary*)data andImages:(NSArray*)images progress:^(NSProgress* progres){
+//    //        [imageHUD setProgress:progres.fractionCompleted animated:YES];
+//    //        [HUD setProgress:progres.fractionCompleted animated:YES];
+//} withHandler:(void (^)(BOOL success))handlerBlock {
+//    if(debug_enabled)  {
+//        NSLog(@"createOfferWithData");
+//    }
+//    
+//    [self requestWithMethod:@"createOffer" andData:data withHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:data
+//                                                            options:kNilOptions
+//                                                              error:nil];
+//        if (debug_enabled) {
+//            NSLog(@"Response: \n %@",response);
+//            NSLog(@"Data: \n %@",dic);
+//        }
+//        
+//        if ([dic valueForKey:@"id"]) {
+//            OfferItem* newOffer = [OfferItem new];
+//            newOffer.objectId = [dic valueForKey:@"id"];
+//            int imagePosition = 0;
+//            for (UIImage* image in images) {
+//                [self upload:image withImagePosition:imagePosition toOffer:newOffer];
+//                imagePosition++;
+//            }
+//            handlerBlock(YES);
+//        } else {
+//            handlerBlock(NO);
+//        }
+//    }];
+//}
+
++ (void) upload:(UIImage*)image withImagePosition:(int)position toOffer:(OfferItem*)offer {
     if(debug_enabled)  {
         NSLog(@"uploadImageToServer");
     }
@@ -86,7 +140,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0];
     [request setHTTPMethod:@"POST"];
     
-    [request setHTTPBody:[self encodeDictionary:@{@"offerId" : [NSNumber numberWithInteger:newOffer.objectId], @"imagePosition" : [NSNumber numberWithInt:position]}]];
+    [request setHTTPBody:[self encodeDictionary:@{@"offerId" : offer.objectId, @"imagePosition" : [NSNumber numberWithInt:position]}]];
     
     NSString *contentTypeValue = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", POST_BODY_BOURDARY];
     [request addValue:contentTypeValue forHTTPHeaderField:@"Content-type"];
@@ -94,7 +148,7 @@
     NSMutableData *dataForm = [NSMutableData alloc];
     [dataForm appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",POST_BODY_BOURDARY] dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"offerId\";\r\n\r\n%ld", (long)newOffer.objectId]
+    [dataForm appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"offerId\";\r\n\r\n%@", offer.objectId]
                           dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);

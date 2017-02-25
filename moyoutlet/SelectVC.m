@@ -310,8 +310,13 @@ static NSString* kCellIdentifier = @"SearchCell";
     
     if (self.searchType == CATEGORY) {
         item = [self.itemsToDisplay objectAtIndex:indexPath.row];
-        searchItem.item_id = [item objectForKey:@"id"];
-        searchItem.text = [item objectForKey:@"name"];
+        if ([[item objectForKey:@"id"] isEqual: @"0"]) {
+            searchItem.item_id = @0;
+        } else {
+            searchItem.item_id = [NSNumber numberWithInteger:[[item valueForKey:@"id"] integerValue]];
+        }
+
+        searchItem.text = [item valueForKey:@"name"];
         searchItem.parent_id = [item valueForKey:@"parent_id"];
         
         if ([item objectForKey:@"description"] != nil) {
@@ -452,6 +457,8 @@ static NSString* kCellIdentifier = @"SearchCell";
     noBrandItem.item_id = 0;
     noBrandItem.parent_id = 0;
     [[AppManager sharedInstance].selectedBrands addObject:noBrandItem];
+    [AppManager sharedInstance].offerToEdit.brand_id = [NSNumber numberWithInteger:0];
+    
     if (debug_enabled) {
         NSLog(@"noItemRowSelected now its %lu and %lu items in selectedItems",[[_resultTable indexPathsForSelectedRows] count],[[AppManager sharedInstance].selectedBrands count]);
     }
@@ -464,6 +471,9 @@ static NSString* kCellIdentifier = @"SearchCell";
                              self.tableViewHeaderImage.hidden = false;
                              self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(1.5, 1.5);
                              self.tableViewHeaderImage.transform = CGAffineTransformMakeScale(1, 1);
+                             [self updateOkButton];
+                             [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                             }];
                          } completion:^(BOOL finished) {
                              
                          }];
@@ -486,17 +496,6 @@ static NSString* kCellIdentifier = @"SearchCell";
     }
 }
 
-//-(void)delegateForCell:(SearchCell *)cell showSubItems:(BOOL)showSubItems {
-//    NSIndexPath* indexPath = [self.resultTable indexPathForCell:cell];
-//    if (cell.selected) {
-//        [self.resultTable deselectRowAtIndexPath:indexPath animated:NO];
-//    }
-////    SelectVC* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SelectVC"];
-////    vc.searchType = CATEGORY;
-////    vc.parent_id = [cell.searchItem.item_id integerValue];
-////    [self.navigationController pushViewController:vc animated:YES];
-//}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SearchCell* cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -512,6 +511,9 @@ static NSString* kCellIdentifier = @"SearchCell";
                              }
                          } completion:^(BOOL finished) {
                              if (self.searchType == CATEGORY) {
+                                 if ([cell.searchItem.parent_id  isEqual: @"0"]) {
+                                     [AppManager sharedInstance].offerToEdit.root_category_id = [NSNumber numberWithInteger:[cell.searchItem.item_id integerValue]];
+                                 }
                                  if (cell.searchItem.hasChild) {
                                      SelectVC* vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SelectVC"];
                                      vc.searchType = CATEGORY;
@@ -519,21 +521,21 @@ static NSString* kCellIdentifier = @"SearchCell";
                                      [self.navigationController pushViewController:vc animated:YES];
                                      return;
                                  } else {
-                                     [AppManager sharedInstance].offerToEdit.category_id = cell.searchItem.item_id;
+                                     [AppManager sharedInstance].offerToEdit.category_id = [NSNumber numberWithInteger:[cell.searchItem.item_id integerValue]];
                                  }
                              } else if (self.searchType == BRAND) {
-                                 [AppManager sharedInstance].offerToEdit.brand_id = cell.searchItem.item_id;
+                                 [AppManager sharedInstance].offerToEdit.brand_id = [NSNumber numberWithInteger:[cell.searchItem.item_id integerValue]];
                                  [self deselectNoBrandRow];
                              } else if (self.searchType == CITIES) {
-                                 [AppManager sharedInstance].offerToEdit.senderCity_id = cell.searchItem.item_id;
+                                 [AppManager sharedInstance].offerToEdit.senderCity_id = [NSNumber numberWithInteger:[cell.searchItem.item_id integerValue]];
                              } else if (self.searchType == CONDITIONS) {
-                                 [AppManager sharedInstance].offerToEdit.condition_id = cell.searchItem.item_id;
+                                 [AppManager sharedInstance].offerToEdit.condition_id = [NSNumber numberWithInteger:[cell.searchItem.item_id integerValue]];
                              } else if (self.searchType == WILLSENDIN) {
-                                 [AppManager sharedInstance].offerToEdit.willSendIn_id = cell.searchItem.item_id;
+                                 [AppManager sharedInstance].offerToEdit.willSendIn_id = [NSNumber numberWithInteger:[cell.searchItem.item_id integerValue]];
                              } else if (self.searchType == SIZES) {
-                                 [AppManager sharedInstance].offerToEdit.size_id = cell.searchItem.item_id;
+                                 [AppManager sharedInstance].offerToEdit.size_id = [NSNumber numberWithInteger:[cell.searchItem.item_id integerValue]];
                              } else if (self.searchType == WEIGHTS) {
-                                 [AppManager sharedInstance].offerToEdit.weight_id = cell.searchItem.item_id;
+                                 [AppManager sharedInstance].offerToEdit.weight_id = [NSNumber numberWithInteger:[cell.searchItem.item_id integerValue]];
                              }
                              [self updateOkButton];
                              [self.navigationController dismissViewControllerAnimated:YES completion:^{

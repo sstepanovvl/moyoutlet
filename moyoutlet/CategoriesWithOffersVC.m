@@ -10,7 +10,6 @@
 #import "OffersVC.h"
 #import "OfferCollectionViewCell.h"
 #import "OfferVC.h"
-#import "CreateOfferVC.h"
 #import "SearchVC.h"
 #import "testTableTableViewController.h"
 
@@ -90,7 +89,9 @@
             ofVC0.title = [category valueForKey:@"name"];
             ofVC0.category_id = [[category valueForKey:@"id"] intValue];
             ofVC0.parent_id = [[category valueForKey:@"parent_id"] intValue];
-            ofVC0.view.backgroundColor = [UIColor clearColor];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                ofVC0.view.backgroundColor = [UIColor clearColor];
+            });
             ofVC0.categoriesWithOffersvc = self;
             ofVC0.offersCollectionView.showAndHideSellButtonDelegate = self;
             ofVC0.offersCollectionView.loadControl = [[UILoadControl alloc] initWithTarget:ofVC0 action:@selector(loadMore:)];

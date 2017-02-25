@@ -14,6 +14,7 @@
 + (UIColor *)appLightGrayColor;
 + (UIColor *)appMidGrayColor;
 + (UIColor *)appDarkGrayColor;
++ (UIColor *)appTextColor;
 
 @end
 

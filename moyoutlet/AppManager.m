@@ -117,9 +117,8 @@
 
 -(void) getCategoriesFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure {
 
-    [API requestWithMethod:@"getCategories" andData:@{@"request": @"Gimmy that shit niger"}
+    [API requestWithMethod:@"getCategories" andData:@{@"request": @"Gimme that shit nigga"}
                withHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-
                    if (data) {
                        self.config.categories = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:kNilOptions
@@ -136,7 +135,7 @@
 
 -(void) getAppConfigFromServerwithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure {
     
-    [API requestWithMethod:@"getAppConfig" andData:@{@"request": @"Gimmy that shit niger"}
+    [API requestWithMethod:@"getAppConfig" andData:@{@"request": @"Gimme that shit nigga"}
                withHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                    
                    if (data) {
@@ -171,7 +170,7 @@
 
 
 -(void)loadOffersFromServerFor:(NSInteger)categoryId offset:(NSInteger)offset WithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure{
-
+    
     NSMutableArray* arr = [NSMutableArray array];
 
     [API requestWithMethod:@"getOffers"
@@ -189,22 +188,25 @@
                        if (debug_enabled) {
                             NSLog(@"%@",resp);
                        }
-
-                       for (NSDictionary* offer in [resp valueForKey:@"offers"]) {
-                           OfferItem* item = [[OfferItem alloc] initWith:offer];
-                           NSLog(@"%@",offer);
-                           [arr addObject:item];
-                       }
-
                        NSMutableArray* new_arr = [_offers valueForKey:[NSString stringWithFormat:@"%li",(long)categoryId]];
                        if (!new_arr) {
                            new_arr = [[NSMutableArray alloc] init];
                        }
-
-                       [new_arr addObjectsFromArray:arr];
+                       for (NSDictionary* offer in [resp valueForKey:@"offers"]) {
+                           OfferItem* item = [[OfferItem alloc] initWith:offer];
+                           bool itemAlreadyThere = false;
+                           for (OfferItem* itemInArray in new_arr) {
+                               if ([itemInArray.objectId intValue] == [item.objectId intValue]) {
+                                   itemAlreadyThere = true;
+                                   NSLog(@"%@",offer);
+                               }
+                           }
+                           if (!itemAlreadyThere) {
+                               [new_arr addObject:item];
+                           }
+                       }
 
                        [_offers setValue:new_arr forKey:[NSString stringWithFormat:@"%li",(long)categoryId]];
-
                        success(YES);
                    }
                }];
@@ -216,12 +218,16 @@
 }
 
 #pragma mark Create Offer
-
--(void) createOfferWithData:(NSDictionary*)data andImages:(NSArray*)images {
-    
-    [API createOfferWithData:data andImages:images];
+#warning delete method
+-(void) uploadOfferToServer:(OfferItem*)offer withHandler:(void (^)(BOOL success))handlerBlock{
+//    [API createOfferWithData: andImages:[[offer arrImages] allValues] withHandler:^(BOOL success) {
+//        handlerBlock(success);
+//    }];
     
 }
+
+
+
 -(void) saveOfferToDB {
 
 

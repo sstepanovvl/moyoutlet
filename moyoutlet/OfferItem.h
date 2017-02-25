@@ -17,7 +17,12 @@
 @property (strong, nonatomic) NSNumber* senderCity_id;
 @property (strong, nonatomic) NSNumber* size_id;
 @property (strong, nonatomic) NSNumber* weight_id;
-
+@property (strong, nonatomic) NSNumber* root_category_id;
+@property (strong, nonatomic) NSNumber* deliveryEnabled;
+@property (assign, nonatomic) NSNumber* deliveryWillSendByMyselfEnabled;
+@property (assign, nonatomic) NSNumber* deliverySamovivoznahEnabled;
+@property (assign, nonatomic) NSNumber* deliveryOfficeEnabled;
+@property (assign, nonatomic) NSNumber* deliveryCourierEnabled;
 @property (assign, nonatomic) float price;
 @property (assign, nonatomic) float fee;
 @property (assign, nonatomic) float clientIncome;
@@ -28,12 +33,13 @@
 @property (strong, nonatomic) NSString* category;
 @property (strong, nonatomic) NSString* shipping;
 @property (strong, nonatomic) NSString* willSendIn;
-@property (strong, nonatomic) NSString* created;
+@property (strong, nonatomic) NSDate* created;
 @property (strong, nonatomic) ConditionItem* condition;
 @property (strong, nonatomic) NSString* itemDescription;
 @property (strong, nonatomic) UserItem* seller;
 @property (strong, nonatomic) NSMutableArray* categories;
-@property (strong, nonatomic) NSMutableArray* arrImages;
+@property (strong, nonatomic) NSDictionary* arrImages;
 -(instancetype)initWith:(NSDictionary*)dictionary;
+
 
 @end

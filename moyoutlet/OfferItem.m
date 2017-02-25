@@ -12,10 +12,15 @@
 
 -(instancetype)init {
     if (self = [super init]) {
-        self.arrImages = [NSMutableArray arrayWithCapacity:4];
-        for (int i = 0; i < 4; i++) {
-            [_arrImages addObject:[NSNull null]];
-        }
+        self.arrImages = [NSMutableDictionary dictionaryWithCapacity:4];
+        [self.arrImages setValue:[NSNull null] forKey:@"0"];
+        [self.arrImages setValue:[NSNull null] forKey:@"1"];
+        [self.arrImages setValue:[NSNull null] forKey:@"2"];
+        [self.arrImages setValue:[NSNull null] forKey:@"3"];
+//        for (int i = 0; i < 4; i++) {
+//            [_arrImages addObject:[NSNull null]];
+//        }
+        _deliveryEnabled = [NSNumber numberWithBool:YES];
 
     }
     return self;
@@ -63,7 +68,7 @@
         _category = [dictionary valueForKey:@"category_id"];
         _category_id = [dictionary valueForKey:@"category_id"];
         _shipping = [dictionary valueForKey:@"shipping"];
-        _created = [dictionary valueForKey:@"created"];
+        _created = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKey:@"created"] integerValue]];
         _itemDescription = [dictionary valueForKey:@"description"];
         _senderCity_id = [dictionary valueForKey:@"senderCity"];
         _seller = [[UserItem alloc] initWith:[dictionary valueForKey:@"seller"]];

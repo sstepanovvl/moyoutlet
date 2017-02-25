@@ -11,7 +11,6 @@
 #import "OfferVC.h"
 #import "OfferCollectionViewCell.h"
 #import "customNavigationController.h"
-#import "createOfferVC.h"
 
 
 
@@ -59,23 +58,23 @@ NSString *kCellID = @"OfferCollectionViewCell";
 
     _offersCollectionView.delegate = self;
     
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)_offersCollectionView.collectionViewLayout;
-
-    CGFloat availableWidthForCells = CGRectGetWidth(self.view.bounds) - flowLayout.sectionInset.left - flowLayout.sectionInset.right - flowLayout.minimumInteritemSpacing * (kCellsPerRow - 1);
-
-    CGFloat cellWidth = availableWidthForCells / kCellsPerRow;
-    
-    CGSize itemSize = CGSizeZero;
-    if (IS_IPHONE_6P) {
-        itemSize = CGSizeMake(cellWidth, 230.0f);
-    } else if (IS_IPHONE_6) {
-        itemSize = CGSizeMake(cellWidth, 210.0f);
-    } else {
-        itemSize = CGSizeMake(cellWidth, 180.0f);
-
-    }
-
-    flowLayout.itemSize = itemSize;
+//    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)_offersCollectionView.collectionViewLayout;
+//
+//    CGFloat availableWidthForCells = CGRectGetWidth(self.view.bounds) - flowLayout.sectionInset.left - flowLayout.sectionInset.right - flowLayout.minimumInteritemSpacing * (kCellsPerRow - 1);
+//
+//    CGFloat cellWidth = availableWidthForCells / kCellsPerRow;
+//    
+//    CGSize itemSize = CGSizeZero;
+//    if (IS_IPHONE_6P) {
+//        itemSize = CGSizeMake(cellWidth, 230.0f);
+//    } else if (IS_IPHONE_6) {
+//        itemSize = CGSizeMake(cellWidth, 210.0f);
+//    } else {
+//        itemSize = CGSizeMake(cellWidth, 180.0f);
+//
+//    }
+//
+//    flowLayout.itemSize = itemSize;
 
     if (!_category_id) {
         _arrOffers = [[[AppManager sharedInstance].offers allKeys] mutableCopy];
@@ -158,11 +157,13 @@ NSString *kCellID = @"OfferCollectionViewCell";
         NSArray* items = [[AppManager sharedInstance].offers valueForKey:[NSString stringWithFormat:@"%li",(long)self.category_id]];
             if ([items count] && [[items objectAtIndex:indexPath.row] isKindOfClass:[OfferItem class]]) {
             cell.item = [_arrOffers objectAtIndex:indexPath.row];
-            cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
+//            cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
+            cell.brandLabel.text = @"";
             cell.titleLabel.text = cell.item.name;
             cell.likesCount.text = [cell.item.likesCount stringValue];
 //            cell.priceLabel.text = [NSString stringWithFormat:@"%.f ₽",cell.item.price];
-            cell.priceLabel.text = [NSString stringWithFormat:@"%.f руб.",cell.item.price];
+                NSNumber* price = [NSNumber numberWithFloat:cell.item.price];
+            cell.priceLabel.text = [NSString stringWithFormat:@"%@ руб.",[AppHelper numToStr:price]];
             cell.priceView.layer.cornerRadius = 4.0f;
             cell.priceView.layer.masksToBounds = YES;
             cell.priceView.backgroundColor = [UIColor appRedColor];
@@ -259,7 +260,7 @@ NSString *kCellID = @"OfferCollectionViewCell";
 
 
 -(IBAction)startRefresh:(id)sender {
-    [[AppManager sharedInstance] loadOffersFromServerFor:self.category_id offset:[_arrOffers count]-20 WithSuccessBlock:^(BOOL response) {
+    [[AppManager sharedInstance] loadOffersFromServerFor:self.category_id offset:0 WithSuccessBlock:^(BOOL response) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [_offersCollectionView reloadData];
             [_offersCollectionView layoutIfNeeded];

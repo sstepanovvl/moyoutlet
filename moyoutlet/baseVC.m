@@ -7,7 +7,6 @@
 //
 
 #import "baseVC.h"
-#import "createOfferVC.h"
 #import "PopupWithNotificationsVC.h"
 #import "NotificationCell.h"
 #import "NewsItemVC.h"
@@ -17,6 +16,7 @@
 
 @property (strong,nonatomic) PopupWithNotificationsVC* pwnvc;
 @property (strong,nonatomic) ARSPopover* popoverController;
+
 @end
 
 @implementation UINavigationBar (CustomNavigationBar)
@@ -29,11 +29,13 @@
 @end
 
 @implementation baseVC
-
+{
+    M13ProgressHUD *HUD;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
-
+    [self initHud];
 
 //    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 40, 40)];
 //
@@ -46,11 +48,32 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)initHud {
+    HUD = [[M13ProgressHUD alloc] initWithProgressView:[[M13ProgressViewRing alloc] init]];
+    HUD.progressViewSize = CGSizeMake(120.0, 120.0);
+    CGPoint ss =CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2);
+    HUD.animationPoint = ss;
+    HUD.primaryColor = [UIColor appRedColor];
+    HUD.secondaryColor = [UIColor appRedColor];
+    HUD.hudBackgroundColor = [UIColor whiteColor];
+    HUD.statusColor = [UIColor appRedColor];
+    HUD.statusFont = [UIFont fontWithName:@"OpenSans" size:12.0];
+    ((M13ProgressViewRing*)HUD.progressView).backgroundRingWidth = 0.5;
+    HUD.maskType = M13ProgressHUDMaskTypeSolidColor;
+    
+    //
+    ////    UIWindow *window = ((AppDelegate *)[UIApplication safeM13SharedApplication].delegate).window;
+    ////    [window addSubview:HUD];
+    //
+    [self.view addSubview:HUD];
+
+}
+
 -(void)initNavigationItems {
     
 
     [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor]}];
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor appRedColor]}];
 
     UIView *overlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 0.5f)];
     [overlayView setBackgroundColor:[UIColor appDarkGrayColor]];
@@ -93,7 +116,7 @@
     self.navigationItem.rightBarButtonItems = rightBarItems;
 
 
-    UIBarButtonItem* LOGO = [[UIBarButtonItem alloc] initWithTitle:@"moyoutlet"
+    UIBarButtonItem* LOGO = [[UIBarButtonItem alloc] initWithTitle:@"moўoutlet"
                                                              style:UIBarButtonItemStylePlain
                                                             target:self.viewDeckController
                                                             action:@selector(toggleLeftView)];
@@ -127,8 +150,6 @@
 
 
 -(void)notifyButtonPressed {
-
-
     _popoverController = [ARSPopover new];
     _popoverController.sourceView = _rightBellButton.customView;
     _popoverController.sourceRect = CGRectMake(CGRectGetMidX(_rightSearchButtonItem.customView.bounds), CGRectGetMaxY(_rightSearchButtonItem.customView.bounds), 0, 0);
@@ -195,7 +216,6 @@
 
 -(IBAction)backButtonPressed:(id)sender {
     NSInteger controllerCount = [[self.navigationController viewControllers] count];
-    NSArray* ar = [self.navigationController viewControllers];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:controllerCount -2]
                                           animated:YES];
 }
@@ -227,13 +247,13 @@
 }
 
 -(void)showHud {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [HUD show:YES];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
 }
 
 -(void)hideHud {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-
+    [HUD hide:YES];
 }
 - (NSString *)printPriceWithCurrencySymbol:(CGFloat)price {
 

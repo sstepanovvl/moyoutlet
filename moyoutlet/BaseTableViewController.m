@@ -23,11 +23,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.insertTableViewRowAnimation = UITableViewRowAnimationLeft;
-    self.deleteTableViewRowAnimation = UITableViewRowAnimationRight;
-    self.reloadTableViewRowAnimation = UITableViewRowAnimationFade;
+    
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
+    [self.tableView registerNib:[UINib nibWithNibName:@"HeaderView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"HeaderView"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     // Do any additional setup after loading the view.
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

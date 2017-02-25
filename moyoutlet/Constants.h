@@ -25,12 +25,12 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
-static const BOOL debug_enabled = YES;
-static const NSString* apiServer = @"http://moyoutlet.ru/api/"; 
-static const NSString* XDEBUG_SESSION_START = @"11756";
+static const BOOL debug_enabled = NO;
+static const NSString* apiServer = @"http://moyoutlet.ru/api/";
+static const NSString* XDEBUG_SESSION_START = @"18089";
 static const NSString* imageServerUrl = @"http://moyoutlet.ru/api/image";
 static const NSString* imagesSize = @"500x500";
-
+static const float kJpegCompressionRate = 1;
 typedef enum searchTypes
 {
     BRAND,
