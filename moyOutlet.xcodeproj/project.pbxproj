@@ -166,6 +166,10 @@
 		48A0551B1E5D9D77005027F7 /* NSObject+NSDictionaryRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A0551A1E5D9D77005027F7 /* NSObject+NSDictionaryRepresentation.m */; };
 		48DB1B2B1E6196C20092733C /* OfferCheckoutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB1B2A1E6196C20092733C /* OfferCheckoutVC.m */; };
 		48DB1B301E61BC580092733C /* addPaymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB1B2F1E61BC580092733C /* addPaymentVC.m */; };
+		48DB1B3F1E61CA5D0092733C /* CardIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DB1B341E61CA5D0092733C /* CardIO.m */; };
+		48DB1B401E61CA5D0092733C /* libCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DB1B3C1E61CA5D0092733C /* libCardIO.a */; };
+		48DB1B411E61CA5D0092733C /* libopencv_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DB1B3D1E61CA5D0092733C /* libopencv_core.a */; };
+		48DB1B421E61CA5D0092733C /* libopencv_imgproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DB1B3E1E61CA5D0092733C /* libopencv_imgproc.a */; };
 		48DEEE881E556ECE000E8E3D /* testTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DEEE871E556ECE000E8E3D /* testTableTableViewController.m */; };
 		48DEEE8B1E5585C5000E8E3D /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DEEE8A1E5585C5000E8E3D /* BaseTableViewController.m */; };
 		48DEEE901E55B7A8000E8E3D /* WillSendInItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DEEE8F1E55B7A8000E8E3D /* WillSendInItem.m */; };
@@ -524,10 +528,23 @@
 		48A055141E5CCE6E005027F7 /* StaticDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
 		48A055191E5D9D77005027F7 /* NSObject+NSDictionaryRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+NSDictionaryRepresentation.h"; sourceTree = "<group>"; };
 		48A0551A1E5D9D77005027F7 /* NSObject+NSDictionaryRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+NSDictionaryRepresentation.m"; sourceTree = "<group>"; };
+		48C1B00F1EB760F800CCF405 /* GPUImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPUImage.h; sourceTree = "<group>"; };
 		48DB1B291E6196C20092733C /* OfferCheckoutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferCheckoutVC.h; sourceTree = "<group>"; };
 		48DB1B2A1E6196C20092733C /* OfferCheckoutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferCheckoutVC.m; sourceTree = "<group>"; };
 		48DB1B2E1E61BC580092733C /* addPaymentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addPaymentVC.h; sourceTree = "<group>"; };
 		48DB1B2F1E61BC580092733C /* addPaymentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addPaymentVC.m; sourceTree = "<group>"; };
+		48DB1B331E61CA5D0092733C /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
+		48DB1B341E61CA5D0092733C /* CardIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardIO.m; sourceTree = "<group>"; };
+		48DB1B351E61CA5D0092733C /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
+		48DB1B361E61CA5D0092733C /* CardIODetectionMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIODetectionMode.h; sourceTree = "<group>"; };
+		48DB1B371E61CA5D0092733C /* CardIOPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewController.h; sourceTree = "<group>"; };
+		48DB1B381E61CA5D0092733C /* CardIOPaymentViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewControllerDelegate.h; sourceTree = "<group>"; };
+		48DB1B391E61CA5D0092733C /* CardIOUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOUtilities.h; sourceTree = "<group>"; };
+		48DB1B3A1E61CA5D0092733C /* CardIOView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOView.h; sourceTree = "<group>"; };
+		48DB1B3B1E61CA5D0092733C /* CardIOViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOViewDelegate.h; sourceTree = "<group>"; };
+		48DB1B3C1E61CA5D0092733C /* libCardIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCardIO.a; sourceTree = "<group>"; };
+		48DB1B3D1E61CA5D0092733C /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_core.a; sourceTree = "<group>"; };
+		48DB1B3E1E61CA5D0092733C /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_imgproc.a; sourceTree = "<group>"; };
 		48DEEE861E556ECE000E8E3D /* testTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testTableTableViewController.h; sourceTree = "<group>"; };
 		48DEEE871E556ECE000E8E3D /* testTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testTableTableViewController.m; sourceTree = "<group>"; };
 		48DEEE891E5585C5000E8E3D /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
@@ -645,8 +662,11 @@
 			files = (
 				043752571D4A6382000EE3E5 /* UIKit.framework in Frameworks */,
 				0484A4481D3579BE00A43315 /* Crashlytics.framework in Frameworks */,
+				48DB1B401E61CA5D0092733C /* libCardIO.a in Frameworks */,
 				0484A4471D3579BE00A43315 /* Fabric.framework in Frameworks */,
 				74655A2B1AEC3D4437EB2578 /* Pods_moyoutlet.framework in Frameworks */,
+				48DB1B411E61CA5D0092733C /* libopencv_core.a in Frameworks */,
+				48DB1B421E61CA5D0092733C /* libopencv_imgproc.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,6 +754,7 @@
 		042D17891CE219340032E5DF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				48C1B00F1EB760F800CCF405 /* GPUImage.h */,
 				044CA7A71D397DB400678E24 /* Fonts */,
 				043752561D4A6382000EE3E5 /* UIKit.framework */,
 				0484A4451D3579BE00A43315 /* Fabric.framework */,
@@ -956,8 +977,7 @@
 				48DEEE8D1E55B790000E8E3D /* WillSendInItem */,
 				0437525B1D4A71B4000EE3E5 /* AddressItem */,
 				043752521D4A62A0000EE3E5 /* UserItem */,
-				047C2BF61CE21A1D000FF304 /* OfferItem.h */,
-				047C2BF71CE21A1D000FF304 /* OfferItem.m */,
+				48D0B9621E6364AC0078D7C8 /* OfferItem */,
 				047BE67C1D51CB9A008C999F /* SearchItem */,
 				4881CE021E54211C007E9B29 /* ConditionItem */,
 			);
@@ -1072,6 +1092,7 @@
 		047C2C0F1CE21A84000FF304 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48DB1B321E61CA5D0092733C /* CardIO */,
 				48F84E061E604CDB00663C59 /* M13progressHUD */,
 				48F84D401E5F3F8000663C59 /* AFNetworking */,
 				48F84D331E5EF2BA00663C59 /* NSDate+TimeAgo */,
@@ -1532,6 +1553,15 @@
 			name = StaticTableViewController;
 			sourceTree = "<group>";
 		};
+		48D0B9621E6364AC0078D7C8 /* OfferItem */ = {
+			isa = PBXGroup;
+			children = (
+				047C2BF61CE21A1D000FF304 /* OfferItem.h */,
+				047C2BF71CE21A1D000FF304 /* OfferItem.m */,
+			);
+			name = OfferItem;
+			sourceTree = "<group>";
+		};
 		48DB1B2C1E6196CB0092733C /* OfferCheckoutVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1557,6 +1587,25 @@
 				48DB1B2F1E61BC580092733C /* addPaymentVC.m */,
 			);
 			name = addPaymentVC;
+			sourceTree = "<group>";
+		};
+		48DB1B321E61CA5D0092733C /* CardIO */ = {
+			isa = PBXGroup;
+			children = (
+				48DB1B331E61CA5D0092733C /* CardIO.h */,
+				48DB1B341E61CA5D0092733C /* CardIO.m */,
+				48DB1B351E61CA5D0092733C /* CardIOCreditCardInfo.h */,
+				48DB1B361E61CA5D0092733C /* CardIODetectionMode.h */,
+				48DB1B371E61CA5D0092733C /* CardIOPaymentViewController.h */,
+				48DB1B381E61CA5D0092733C /* CardIOPaymentViewControllerDelegate.h */,
+				48DB1B391E61CA5D0092733C /* CardIOUtilities.h */,
+				48DB1B3A1E61CA5D0092733C /* CardIOView.h */,
+				48DB1B3B1E61CA5D0092733C /* CardIOViewDelegate.h */,
+				48DB1B3C1E61CA5D0092733C /* libCardIO.a */,
+				48DB1B3D1E61CA5D0092733C /* libopencv_core.a */,
+				48DB1B3E1E61CA5D0092733C /* libopencv_imgproc.a */,
+			);
+			path = CardIO;
 			sourceTree = "<group>";
 		};
 		48DEEE8C1E5585C9000E8E3D /* BaseTableViewController */ = {
@@ -2077,6 +2126,7 @@
 				048A73E51CF36F89002CCA31 /* UIButton+WebCache.m in Sources */,
 				48A0550A1E5C48B4005027F7 /* CameraScrollView.m in Sources */,
 				488D09EC1E5832FE00342E88 /* baseManager.m in Sources */,
+				48DB1B3F1E61CA5D0092733C /* CardIO.m in Sources */,
 				48F84E431E604CDC00663C59 /* M13ProgressViewSegmentedRing.m in Sources */,
 				484844331E5206DA004486A1 /* IQTitleBarButtonItem.m in Sources */,
 				48F84D671E5F3F8000663C59 /* AFURLResponseSerialization.m in Sources */,
@@ -2309,6 +2359,10 @@
 				INFOPLIST_FILE = moyoutlet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/moyoutlet/CardIO",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.ssv.moyoutlet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2337,6 +2391,10 @@
 				INFOPLIST_FILE = moyoutlet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/moyoutlet/CardIO",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.ssv.moyoutlet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

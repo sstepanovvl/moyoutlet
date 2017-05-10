@@ -42,7 +42,7 @@
                     [self viewDidLoad];
                     [self viewWillAppear:YES];
                     [self viewDidAppear:YES];
-                        
+                                       
                 });
             } andFailureBlock:^(NSError *error) {
                 [self throughError:error];
@@ -54,7 +54,10 @@
 }
 
 
-
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    NSLog(@"CategoriesWithOffersVC ViewWillAppear");
+}
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -199,6 +202,7 @@
 -(void)showImagePicker {
     UIStoryboard* main = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     testTableTableViewController* tvc = [main instantiateViewControllerWithIdentifier:@"testTableTableViewController"];
+    tvc.offerViewControllerMode = OfferViewControllerModeCreate;
     [self.navigationController pushViewController:tvc animated:YES];
 }
 

@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *otdelenie;
 @property (weak, nonatomic) IBOutlet UISwitch *courier;
 @property (weak, nonatomic) IBOutlet UILabel *willSendinLabel;
+
 @property (strong, nonatomic) IBOutlet PhotoCollectionView *editPhotoCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *outletFeeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalForClientLabel;
@@ -34,10 +35,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
 @property (weak, nonatomic) IBOutlet UIButton *createOfferButton;
 
+#pragma mark viewOfferMode Outlets
+@property (weak, nonatomic) IBOutlet UICollectionView *viewPhotoCollectionView;
+@property (weak, nonatomic) IBOutlet UIButton *viewOfferNextButton;
+@property (weak, nonatomic) IBOutlet UIButton *viewOfferPrevButton;
+
 @end
 
-@implementation testTableTableViewController  
-
+@implementation testTableTableViewController
 {
     M13ProgressHUD* HUD;
 }
@@ -50,6 +55,7 @@
         sw.transform = CGAffineTransformMakeScale(0.75, 0.75);
     }
     
+    self.tableView.delegate = self;
     _descriptionTextView.delegate = self;
     _titleTextField.delegate = self;
     UIGestureRecognizer* longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
@@ -58,23 +64,18 @@
     _editPhotoCollectionView.clipsToBounds = NO;
     [_editPhotoCollectionView registerNib:[UINib nibWithNibName:@"CreateOfferPhotoCell" bundle:nil] forCellWithReuseIdentifier:@"CreateOfferPhotoCell"];
     _editPhotoCollectionView.delegate = self;
+    
+    _viewPhotoCollectionView.layer.cornerRadius = 5.0f;
+    _viewPhotoCollectionView.layer.masksToBounds = YES;
+    _viewPhotoCollectionView.clipsToBounds = NO;
+    [_viewPhotoCollectionView registerClass:[PhotoCollectionViewCell class] forCellWithReuseIdentifier:@"PhotoCollectionViewCell"];
+    
     _offerPriceLabel.delegate = self;
 }
 
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:@"0"] isEqual:[NSNull null]]) {
-        __weak testTableTableViewController* weaktvc = self;
-        CameraViewController* camv = [[CameraViewController alloc] initWithCroppingEnabled:YES allowsLibraryAccess:YES
-                                                                                completion:^(UIImage * _Nullable asd, PHAsset * _Nullable dsa) {
-                                                                                    if (asd) {
-                                                                                        [[AppManager sharedInstance].offerToEdit.arrImages setValue:asd forKey:@"0"];
-                                                                                    }
-                                                                                    [weaktvc dismissViewControllerAnimated:YES completion:nil];
-                                                                                }];
-        [self presentViewController:camv animated:NO completion:nil];
-    }
     [self initFields];
     
 }
@@ -89,7 +90,6 @@
     [imageHud setProgressImage:[UIImage imageNamed:@"outlet"]];
     [imageHud setProgressDirection:M13ProgressViewImageProgressDirectionBottomToTop];
     HUD = [[M13ProgressHUD alloc] initWithProgressView:imageHud];
-//    HUD = [[M13ProgressHUD alloc] initWithProgressView:[[M13ProgressViewRing alloc] init]];
     HUD.progressViewSize = CGSizeMake(100.0, 100.0);
     CGPoint ss =CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2);
     HUD.animationPoint = ss;
@@ -98,25 +98,45 @@
     HUD.hudBackgroundColor = [UIColor whiteColor];
     HUD.statusColor = [UIColor appRedColor];
     HUD.statusFont = [UIFont fontWithName:@"OpenSans" size:12.0];
-//    ((M13ProgressViewRing*)HUD.progressView).backgroundRingWidth = 0.5;
     HUD.maskType = M13ProgressHUDMaskTypeSolidColor;
     
     UIWindow *window = [UIApplication safeM13SharedApplication].delegate.window;
     
     [window addSubview:HUD];
-    
-//    [self.view addSubview:HUD];
-    
 }
 
 -(void)initFields {
-    [_editPhotoCollectionView reloadData];
     
     OfferItem* editableItem = [AppManager sharedInstance].offerToEdit;
+
+    if (_offerViewControllerMode != OfferViewControllerModeView ) {
+        [self cell:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] setHidden:YES];
+        if ([[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:@"0"] isEqual:[NSNull null]]) {
+            __weak testTableTableViewController* weaktvc = self;
+            CameraViewController* camv = [[CameraViewController alloc] initWithCroppingEnabled:YES allowsLibraryAccess:YES
+                                                                                    completion:^(UIImage * _Nullable asd, PHAsset * _Nullable dsa) {
+                                                                                        if (asd) {
+                                                                                            [[AppManager sharedInstance].offerToEdit.arrImages setValue:asd forKey:@"0"];
+                                                                                        }
+                                                                                        [weaktvc dismissViewControllerAnimated:YES completion:nil];
+                                                                                    }];
+            [self presentViewController:camv animated:NO completion:nil];
+        }
+        [_editPhotoCollectionView reloadData];
+
+        if (editableItem.price > 0) {
+            [self calculateFeesAndPrices];
+        }
+
+    } else {
+        [self cell:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] setHidden:YES];
+    }
+    
     if (editableItem.name) {
                 _titleTextField.textColor = [UIColor blackColor];
                 _titleTextField.text = editableItem.name;
         }
+    
     if (editableItem.itemDescription) {
         _descriptionTextView.textColor = [UIColor blackColor];
         _descriptionTextView.text = editableItem.itemDescription;
@@ -129,14 +149,17 @@
             }
         }
     if (editableItem.brand_id) {
+        if ([editableItem.brand_id isEqualToNumber:@0]) {
+            _brandLabel.textColor = [UIColor blackColor];
+            _brandLabel.text = @"Без бренда";
+        } else {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:editableItem.brand_id forKey:@"id"];
             if (dic) {
                 _brandLabel.textColor = [UIColor blackColor];
                 _brandLabel.text = [dic valueForKey:@"name"];
-            } else if ([editableItem.brand_id isEqualToNumber:@0]) {
-                _brandLabel.textColor = [UIColor blackColor];
-                _brandLabel.text = @"Без бренда";
             }
+        }
+        
         }
     if (editableItem.condition_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.conditions Value:editableItem.condition_id forKey:@"id"] ;
@@ -167,9 +190,6 @@
         }
     }
     
-    if (editableItem.price > 0) {
-        [self calculateFeesAndPrices];
-    }
     
     [_deliverySwitch setOn:editableItem.deliveryEnabled];
     [[_cellSwitches objectAtIndex:0] setOn:editableItem.deliveryWillSendByMyselfEnabled];
@@ -236,6 +256,7 @@
     }
 }
 
+
 #pragma mark - TextView Delegate
 
 - (CGFloat)textViewHeightForAttributedText: (NSAttributedString*)text andWidth: (CGFloat)width {
@@ -244,6 +265,13 @@
     CGSize size = [calculationView sizeThatFits:CGSizeMake(width, FLT_MAX)];
     return size.height;
 }
+
+-(void)textViewDidBeginEditing:(UITextView *)textField {
+    if ([textField.text isEqualToString:@"Подробно опишите Ваш товар, напр.:                             «б/у непродолжительное время, имеет несколько царапин, но выглядит как новый»"]) {
+        textField.text = @"";
+    }
+}
+
 
 - (void)textViewDidChange:(UITextView *)textView {
     [self.tableView beginUpdates];
@@ -260,7 +288,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell* cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     int underlineHeight = 0;
-    int lastRow = [self.tableView numberOfRowsInSection:indexPath.section]-1;
+    NSInteger lastRow = [self.tableView numberOfRowsInSection:indexPath.section]-1;
     if (indexPath.section != 0 ) {
         if (indexPath.section == 1) {
             switch (indexPath.row) {
@@ -290,14 +318,19 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.section == 1 && indexPath.row == 1) {
         NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[_descriptionTextView font] forKey:NSFontAttributeName];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_descriptionTextView.text attributes:attrsDictionary];
         return [self textViewHeightForAttributedText:attrString andWidth:CGRectGetWidth(self.tableView.bounds)-31]+20;
     } else if (indexPath.section == 0 && indexPath.row == 0) {
-        return 100.0f;
+        if (_offerViewControllerMode == OfferViewControllerModeView) {
+            return 325.0f;
+        } else {
+            return 100.0f;
+        }
     } else if (indexPath.section == 0 && indexPath.row == 1) {
-        return 350.0f;
+        return 375.0f;
     } else if (indexPath.section == 5 && indexPath.row == 2) {
         return 210.0f;
     } else {
@@ -356,6 +389,37 @@
     }
 }
 
+#pragma mark - TableView Delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (_offerViewControllerMode == OfferViewControllerModeEdit || _offerViewControllerMode == OfferViewControllerModeCreate )
+        {
+            if ([cell.reuseIdentifier  isEqual: @"categoryCell"]) {
+                [self performSegueWithIdentifier:@"selectCategorySegue" sender:nil];
+            }
+            if ([cell.reuseIdentifier  isEqual: @"sizeCell"]) {
+                [self performSegueWithIdentifier:@"selectSizeSegue" sender:nil];
+            }
+            if ([cell.reuseIdentifier  isEqual: @"brandCell"]) {
+                [self performSegueWithIdentifier:@"selectBrandSegue" sender:nil];
+            }
+            if ([cell.reuseIdentifier  isEqual: @"conditionCell"]) {
+                [self performSegueWithIdentifier:@"selectConditionSegue" sender:nil];
+            }
+            if ([cell.reuseIdentifier  isEqual: @"senderCityCell"]) {
+                [self performSegueWithIdentifier:@"selectCitySegue" sender:nil];
+            }
+            if ([cell.reuseIdentifier  isEqual: @"weightCell"]) {
+                [self performSegueWithIdentifier:@"selectWeightCell" sender:nil];
+            }
+            if ([cell.reuseIdentifier  isEqual: @"willSendInCell"]) {
+                [self performSegueWithIdentifier:@"selectWillSendInSegue" sender:nil];
+            }
+        }
+}
+
 -(void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
 
@@ -368,26 +432,62 @@
 #pragma mark - collectionView Layout &  Delegate & DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    switch (collectionView.tag) {
-        case 0:
-            return 4;
-            break;
-        default:
-            return [[AppManager sharedInstance].offerToEdit.arrImages count];
-            break;
+    if (_offerViewControllerMode == OfferViewControllerModeView) {
+        switch (collectionView.tag) {
+            case 0:
+                return 0;
+                break;
+            default:
+                return [[AppManager sharedInstance].offerToEdit.photoUrls count];
+                break;
+        }
+    } else {
+        switch (collectionView.tag) {
+            case 0:
+                return 4;
+                break;
+            default:
+                return [[AppManager sharedInstance].offerToEdit.arrImages count];
+                break;
+        }
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView.tag) {
         PhotoCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell" forIndexPath:indexPath];
+        cell.photoImageView = [[UIImageView alloc] initWithFrame:cell.frame];
+        cell.photoImageView.layer.cornerRadius = 5.0f;
+        cell.photoImageView.layer.masksToBounds = YES;
+        
+        
+        CGSize photoSize = cell.frame.size;
+        
+        CGFloat nativeSCale = [[UIScreen mainScreen]scale];
+        
+        NSString* urlString = [NSString stringWithFormat:@"%@&size=%.fx%.f",[[AppManager sharedInstance].offerToEdit.photoUrls objectAtIndex:indexPath.row],photoSize.width*nativeSCale,photoSize.height*nativeSCale];
+        
+        NSURL * url = [NSURL URLWithString:urlString];
+
+        [[SDWebImageManager sharedManager] downloadImageWithURL:url
+                                                        options:SDWebImageRetryFailed
+                                                       progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                                           NSLog(@"%ld",expectedSize - receivedSize);
+                                                       }
+                                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                                          UIImage* imageToSet = [UIImage imageWithCGImage:[image CGImage]
+                                                                                                    scale:[UIScreen mainScreen].scale
+                                                                                              orientation:UIImageOrientationUp];
+                                                          
+                                                          [cell.photoImageView setImage:imageToSet];
+                                                      }];
+
         return cell;
 
     } else {
         CreateOfferPhotoCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CreateOfferPhotoCell" forIndexPath:indexPath];
         [cell.imView setContentMode:UIViewContentModeScaleAspectFill];
         cell.contentView.backgroundColor = [UIColor whiteColor];
-        cell.backgroundColor = [UIColor whiteColor];
         if (![[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] isEqual:[NSNull null]]) {
             [cell.imView setImage:[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:[NSString stringWithFormat:@"%ld",indexPath.row]]];
         } else {
@@ -414,7 +514,6 @@
     __weak testTableTableViewController* weaktvc = self;
     CameraViewController* camv = [[CameraViewController alloc] initWithCroppingEnabled:YES allowsLibraryAccess:YES
                                                                             completion:^(UIImage * _Nullable asd, PHAsset * _Nullable dsa) {
-                                                                                NSDictionary* dic = [AppManager sharedInstance].offerToEdit.arrImages;
                                                                                 [[AppManager sharedInstance].offerToEdit.arrImages setValue:asd forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
                                                                                 [weaktvc dismissViewControllerAnimated:YES completion:nil];
                                                                             }];
@@ -514,6 +613,12 @@
 
 #pragma mark IBActions
 
+- (IBAction)didPressViewOfferNextButton:(id)sender {
+}
+
+- (IBAction)didPressViewOfferPrevButton:(id)sender {
+}
+
 - (void)showLoadOfferOptions:(UIBarButtonItem*)sender {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -544,6 +649,7 @@
                                                                 [AppManager sharedInstance].offerToEdit = offer;
                                                                 [self viewWillAppear:YES];
                                                                 [self initFields];
+                                                                [self calculateFeesAndPrices];
                                                                 [self.tableView reloadData];
                                                                 
                                                             }];
@@ -562,6 +668,7 @@
     popPresenter.barButtonItem = sender;
     [self presentViewController:alertController animated:YES completion:nil];
 }
+
 - (void)showSaveOfferOptions:(UIBarButtonItem*)sender
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -591,7 +698,6 @@
     if ([self checkFieldsForValidValues]) {
         HUD.status = @"Публикуем объявление";
         [HUD show:YES];
-        
         [API createOfferWithData:[[AppManager sharedInstance].offerToEdit dictionaryRepresentation]
                        andImages:[AppManager sharedInstance].offerToEdit.arrImages
                         progress:^(NSProgress *progress) {

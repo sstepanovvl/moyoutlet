@@ -12,4 +12,6 @@
 
 @interface testTableTableViewController : BaseTableViewController <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UICollectionViewDelegate,UICollectionViewDataSource,ImagePickerViewControllerDelegate>
 
+@property (assign, nonatomic) OfferViewControllerMode offerViewControllerMode;
+
 @end

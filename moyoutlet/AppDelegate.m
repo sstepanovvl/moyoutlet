@@ -27,6 +27,8 @@
     [AppManager sharedInstance].authorized = YES;
     [self getData];
 
+    
+    
     [Fabric with:@[[Crashlytics class]]];
 
     return YES;
@@ -34,17 +36,22 @@
 
 -(void)getData {
     [[AppManager sharedInstance] getCategoriesFromServerwithSuccessBlock:^(BOOL response) {
-        NSLog(@"Categories downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.categories count]);
+        if (debug_enabled) {
+            NSLog(@"Categories downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.categories count]);
+        }
     } andFailureBlock:^(NSError *error) {
         
     }];
     
     [[AppManager sharedInstance] getAppConfigFromServerwithSuccessBlock:^(BOOL response) {
-        NSLog(@"Brands downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.brands count]);
-        NSLog(@"Cities downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.cities count]);
-        NSLog(@"Conditions downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.conditions count]);
-        NSLog(@"Sizees downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.sizes count]);
-        NSLog(@"Weights downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.weights count]);
+        if (debug_enabled) {
+            NSLog(@"Brands downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.brands count]);
+            NSLog(@"Cities downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.cities count]);
+            NSLog(@"Conditions downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.conditions count]);
+            NSLog(@"Sizees downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.sizes count]);
+            NSLog(@"Weights downloaded successfully. Count: %lu", (unsigned long)[[AppManager sharedInstance].config.weights count]);
+        }
+        
     } andFailureBlock:^(NSError *error) {
         NSLog(@"Brands download failed with error %@",error.localizedDescription);
     }];

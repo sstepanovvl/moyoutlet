@@ -61,10 +61,10 @@
     ((M13ProgressViewRing*)HUD.progressView).backgroundRingWidth = 0.5;
     HUD.maskType = M13ProgressHUDMaskTypeSolidColor;
     
-    //
-    ////    UIWindow *window = ((AppDelegate *)[UIApplication safeM13SharedApplication].delegate).window;
-    ////    [window addSubview:HUD];
-    //
+    
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    [window addSubview:HUD];
+    
     [self.view addSubview:HUD];
 
 }
@@ -255,6 +255,8 @@
 -(void)hideHud {
     [HUD hide:YES];
 }
+
+
 - (NSString *)printPriceWithCurrencySymbol:(CGFloat)price {
 
 //    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];

@@ -12,11 +12,5 @@
 @interface PhotoCollectionViewCell : UICollectionViewCell
 
 @property (strong, nonatomic) IBOutlet UIImageView *photoImageView;
-@property (strong, nonatomic) OfferItem* item;
-@property (strong, nonatomic) IBOutlet UIScrollView *photoScrollView;
-
-
--(void)animateZoomIn;
--(void)animateZoomOut;
 
 @end

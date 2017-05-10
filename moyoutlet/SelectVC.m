@@ -41,7 +41,7 @@ static NSString* kCellIdentifier = @"SearchCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self initNavigationItems];
     
     [_resultTable registerNib:[UINib nibWithNibName:@"SearchCell" bundle:nil] forCellReuseIdentifier:kCellIdentifier];
     [_resultTable registerNib:[UINib nibWithNibName:@"HeaderView" bundle:nil] forHeaderFooterViewReuseIdentifier:@"HeaderView"];

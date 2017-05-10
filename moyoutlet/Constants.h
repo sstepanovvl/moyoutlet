@@ -29,8 +29,8 @@ static const BOOL debug_enabled = NO;
 static const NSString* apiServer = @"http://moyoutlet.ru/api/";
 static const NSString* XDEBUG_SESSION_START = @"18089";
 static const NSString* imageServerUrl = @"http://moyoutlet.ru/api/image";
-static const NSString* imagesSize = @"500x500";
-static const float kJpegCompressionRate = 1;
+static const float kJpegCompressionRate = 0.7;
+
 typedef enum searchTypes
 {
     BRAND,
@@ -41,3 +41,11 @@ typedef enum searchTypes
     SIZES,
     WEIGHTS
 } SearchType;
+
+typedef enum OfferViewControllerModes
+{
+    OfferViewControllerModeCreate,
+    OfferViewControllerModeEdit,
+    OfferViewControllerModeView
+    
+} OfferViewControllerMode;

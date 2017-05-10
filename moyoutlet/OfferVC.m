@@ -49,6 +49,8 @@ NSString *kPhotoCellID = @"PhotoCell";
     _detailsHeaderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
     _detailsView.backgroundColor = [UIColor whiteColor];
 
+    _photoCollectionView.layer.cornerRadius = 5.0f;
+    _photoCollectionView.layer.masksToBounds = YES;
 
     _footerBuyButton.layer.cornerRadius = 3.0f;
     _footerBuyButton.layer.masksToBounds = YES;
@@ -97,7 +99,10 @@ NSString *kPhotoCellID = @"PhotoCell";
     _offerCreatonDate.text = [_offerItem.created timeAgo];
 
     [_offersCollectionView registerNib:[UINib nibWithNibName:@"OfferLightCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kOfferLightCellID];
+    
+    
     [self initCategoryButtons];
+    
 
 }
 
@@ -166,8 +171,8 @@ NSString *kPhotoCellID = @"PhotoCell";
     UIBarButtonItem* but = [[UIBarButtonItem alloc] initWithCustomView:leftBarButtonWithLogo];
     NSArray* leftBarItems = [[NSArray alloc] initWithObjects:but, nil];
     self.navigationItem.leftBarButtonItems = leftBarItems;
-
 }
+
 
 -(void)initCategoryButtons {
     int indexOfLeftmostButtonOnCurrentLine = 0;
@@ -177,8 +182,18 @@ NSString *kPhotoCellID = @"PhotoCell";
     float horizontalSpaceBetweenButtons = 10.0f;
     float verticalSpaceBetweenButtons = 10.0f;
     horizontal_size = 50.0f;
-
-
+    
+    NSDictionary* dic = [[AppManager sharedInstance] buildTreeForCategory:[_offerItem.category_id stringValue]];
+    NSMutableArray* arrWithCategories = [NSMutableArray new];
+    
+    
+    [arrWithCategories addObject:dic];
+    for (NSString* str in [dic allKeys]) {
+        if ([str isEqualToString:@"parent_category"]) {
+            [arrWithCategories addObject:[dic valueForKey:@"parent_category"]];
+        }
+    }
+    
     for (int i=0; i<_offerItem.categories.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 
@@ -400,23 +415,20 @@ NSString *kPhotoCellID = @"PhotoCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
-
-    if (collectionView.tag == 1) {
+    if (collectionView.tag == 1) { //related offers
 
         OfferCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kOfferLightCellID
                                                                                   forIndexPath:indexPath];
 
         cell.item = self.offerItem;
         
-        
         cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
-//        cell.brandLabel.text = cell.item.brandName;
         cell.titleLabel.text = cell.item.name;
 
         cell.priceView.layer.cornerRadius = 4.0f;
         cell.priceView.layer.masksToBounds = YES;
         cell.priceView.backgroundColor = [UIColor appRedColor];
-
+        
         cell.cellView.layer.borderColor = [[UIColor appLightGrayColor] CGColor];
         cell.cellView.layer.borderWidth = 0.5f;
         cell.cellView.layer.masksToBounds = YES;
@@ -424,17 +436,25 @@ NSString *kPhotoCellID = @"PhotoCell";
         cell.priceLabel.text = [self printPriceWithCurrencySymbol: cell.item.price];
         
         
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:cell.item.mainThumbUrl]
-                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                     [UIView transitionWithView:cell.cellView
-                                                       duration:0.5f
-                                                        options:UIViewAnimationOptionLayoutSubviews
-                                                     animations:^{
-                                                         cell.cellView.alpha = 1.0f;
-                                                     } completion:^(BOOL finished) {
-                                                     }];
-                                 }];
+        
+        CGSize photoSize = cell.imageView.frame.size;
+        CGFloat nativeSCale = [[UIScreen mainScreen]scale];
+        NSString* urlString = [NSString stringWithFormat:@"%@&size=%.fx%.f",[cell.item.photoUrls objectAtIndex:0],photoSize.width*nativeSCale,photoSize.height*nativeSCale];
+        NSURL * url = [NSURL URLWithString:urlString];
+        [[SDWebImageManager sharedManager] downloadImageWithURL:url
+                                                        options:SDWebImageRetryFailed
+                                                       progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                                           NSLog(@"%ld",expectedSize - receivedSize);
+                                                       }
+                                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                                          UIImage* imageToSet = [UIImage imageWithCGImage:[image CGImage]
+                                                                                                    scale:[UIScreen mainScreen].scale
+                                                                                              orientation:UIImageOrientationUp];
+                                                          
+                                                          [cell.imageView setImage:imageToSet];
+                                                          
+                                                      }];
+
 
         return cell;
 
@@ -443,31 +463,26 @@ NSString *kPhotoCellID = @"PhotoCell";
         PhotoCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kPhotoCellID
                                                                                   forIndexPath:indexPath];
 
-        CGRect frame = cell.frame;
-        frame.size.width = collectionView.frame.size.width;
-        frame.size.height = collectionView.frame.size.height;
-//        cell.photoImageView.alpha = 0.0f;
+        cell.photoImageView.layer.cornerRadius = 5.0f;
+        cell.photoImageView.layer.masksToBounds = YES;
         
-        cell.layer.cornerRadius = 5.0f;
-        cell.layer.masksToBounds = YES;
-        [MBProgressHUD showHUDAddedTo:cell animated:YES];
-
-        [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:[_offerItem.photoUrls objectAtIndex:indexPath.row]]
-                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                     [UIView transitionWithView:cell.photoImageView
-                                                       duration:0.5f
-                                                        options:UIViewAnimationOptionLayoutSubviews
-                                                     animations:^{
-                                                         [MBProgressHUD hideHUDForView:cell animated:YES];
-//                                                         cell.photoImageView.alpha = 1.0f;
-                                                     } completion:^(BOOL finished) {
-                                                     }];
-                                 }];
-
-//        [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:[_offerItem.photoUrls  objectAtIndex:indexPath.row]]
-//                               placeholderImage:placeHolderImage];
-
+        CGSize photoSize = cell.frame.size;
+        
+        CGFloat nativeSCale = [[UIScreen mainScreen]scale];
+        NSString* urlString = [NSString stringWithFormat:@"%@&size=%.fx%.f",[_offerItem.photoUrls objectAtIndex:indexPath.row],photoSize.width*nativeSCale,photoSize.height*nativeSCale];
+        NSURL * url = [NSURL URLWithString:urlString];
+        [[SDWebImageManager sharedManager] downloadImageWithURL:url
+                                                        options:SDWebImageRetryFailed
+                                                       progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                                           NSLog(@"%ld",expectedSize - receivedSize);
+                                                       }
+                                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                                          UIImage* imageToSet = [UIImage imageWithCGImage:[image CGImage]
+                                                                                      scale:[UIScreen mainScreen].scale
+                                                                                orientation:UIImageOrientationUp];
+                                                          
+                                                          [cell.photoImageView setImage:imageToSet];
+                                                      }];
         return cell;
     }
 }

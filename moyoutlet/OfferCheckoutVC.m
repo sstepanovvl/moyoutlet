@@ -8,8 +8,10 @@
 
 #import "OfferCheckoutVC.h"
 #import "addPaymentVC.h"
+#import "CardIO.h"
 
-@interface OfferCheckoutVC ()
+
+@interface OfferCheckoutVC () <CardIOPaymentViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *offerImage;
 @property (weak, nonatomic) IBOutlet UILabel *offerPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *shippingCostLabel;
@@ -43,6 +45,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)viewWillAppear:(BOOL)animated  {
+    [super viewWillAppear:animated];
+//    [[UINavigationBar appearance] setTintColor:[UIColor appRedColor]];
+//    [[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor appRedColor]}];
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor appRedColor]];
+    [CardIOUtilities preload];
 }
 - (IBAction)checkoutButtonDidPressed:(id)sender {
     UIAlertController* errorAlert = [UIAlertController alertControllerWithTitle:nil message:@"Здесь будет экран оплаты" preferredStyle:UIAlertControllerStyleAlert];
@@ -125,8 +134,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 1 &&indexPath.row == 0) {
-        addPaymentVC* apvc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"addPaymentVC"];
-        [self.navigationController pushViewController:apvc animated:YES];
+        CardIOPaymentViewController *scanViewController = [[CardIOPaymentViewController alloc] initWithPaymentDelegate:self];
+        scanViewController.hideCardIOLogo = YES;
+        scanViewController.languageOrLocale = @"ru";
+        scanViewController.guideColor = [UIColor appRedColor];
+//        scanViewController.navigationBarTintColorForCardIO = [UIColor appRedColor];
+        [self presentViewController:scanViewController animated:YES completion:nil];
+        
     }
 }
 
@@ -184,6 +198,22 @@
         return 45;
     }
 }
+
+#pragma mark - CardIO delegate
+- (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)info inPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    
+    // Do whatever needs to be done to deliver the purchased items.
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    _paymentMethodLabel.textColor = [UIColor appDarkGrayColor];
+    _paymentMethodLabel.text = info.redactedCardNumber;
+    //    self.infoLabel.text = [NSString stringWithFormat:@"Received card info. Number: %@, expiry: %02lu/%lu, cvv: %@.", info.redactedCardNumber, (unsigned long)info.expiryMonth, (unsigned long)info.expiryYear, info.cvv];
+}
+
+- (void)userDidCancelPaymentViewController:(CardIOPaymentViewController *)paymentViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 /*

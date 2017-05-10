@@ -28,20 +28,20 @@
 -(instancetype)initWith:(NSDictionary*)dictionary {
     if (self = [super initWith:dictionary]) {
         
-        if ([dictionary valueForKey:@"brand"]) {
-            _brand_id = [dictionary valueForKey:@"brand"];
+        if ([dictionary objectForKey:@"brand"]) {
+            _brand_id = [NSNumber numberWithInt:[[dictionary objectForKey:@"brand"] intValue]];
         } else {
             _brand_id = @0;
         }
         
         
         _name = [dictionary valueForKey:@"title"];
-        _size_id = [dictionary valueForKey:@"size"];
+        _size_id = [NSNumber numberWithInt:[[dictionary objectForKey:@"size"] intValue]];
         _likesCount = [NSNumber numberWithInt:(arc4random() % 1000) + 100];
-        _price = [[dictionary valueForKey:@"price"] intValue];
+        _price = [[dictionary objectForKey:@"price"] integerValue];
         _photoUrls = [NSMutableArray array];
-        _condition_id = [dictionary valueForKey:@"item_condition"] ;
-        _willSendIn_id = [dictionary valueForKey:@"willSendIn"];
+        _condition_id = [NSNumber numberWithInt:[[dictionary objectForKey:@"item_condition"] intValue]];
+        _willSendIn_id = [NSNumber numberWithInt:[[dictionary objectForKey:@"willSendIn"] intValue]];
         
         NSString* imageSize = [NSString string];
         
@@ -65,12 +65,12 @@
         if (!_photoUrls) {
             _photoUrls = [NSMutableArray arrayWithObject:@"https://static-mercariapp-com.akamaized.net/photos/m944492977_1.jpg?1463985609"];
         }
-        _category = [dictionary valueForKey:@"category_id"];
-        _category_id = [dictionary valueForKey:@"category_id"];
-        _shipping = [dictionary valueForKey:@"shipping"];
+//        _category = [NSNumber numberWithInt:[[dictionary objectForKey:@"category_id"] intValue]];;
+        _category_id = [NSNumber numberWithInt:[[dictionary objectForKey:@"category_id"] intValue]];
+//        _shipping = [dictionary objectForKey:@"shipping"];
         _created = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKey:@"created"] integerValue]];
         _itemDescription = [dictionary valueForKey:@"description"];
-        _senderCity_id = [dictionary valueForKey:@"senderCity"];
+        _senderCity_id = [NSNumber numberWithInt:[[dictionary objectForKey:@"senderCity"] intValue]];
         _seller = [[UserItem alloc] initWith:[dictionary valueForKey:@"seller"]];
         _categories = [NSMutableArray arrayWithArray:[[dictionary valueForKey:@"categories"] componentsSeparatedByString:@","]];
     }

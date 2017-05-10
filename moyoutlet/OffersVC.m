@@ -11,8 +11,7 @@
 #import "OfferVC.h"
 #import "OfferCollectionViewCell.h"
 #import "customNavigationController.h"
-
-
+#import "testTableTableViewController.h"
 
 
 NSString *kCellID = @"OfferCollectionViewCell";
@@ -108,6 +107,7 @@ NSString *kCellID = @"OfferCollectionViewCell";
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _offersCollectionView.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -157,12 +157,12 @@ NSString *kCellID = @"OfferCollectionViewCell";
         NSArray* items = [[AppManager sharedInstance].offers valueForKey:[NSString stringWithFormat:@"%li",(long)self.category_id]];
             if ([items count] && [[items objectAtIndex:indexPath.row] isKindOfClass:[OfferItem class]]) {
             cell.item = [_arrOffers objectAtIndex:indexPath.row];
-//            cell.brandLabel.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:cell.item.brand_id forKey:@"id"] objectForKey:@"name"];
+
             cell.brandLabel.text = @"";
             cell.titleLabel.text = cell.item.name;
             cell.likesCount.text = [cell.item.likesCount stringValue];
-//            cell.priceLabel.text = [NSString stringWithFormat:@"%.f ₽",cell.item.price];
-                NSNumber* price = [NSNumber numberWithFloat:cell.item.price];
+            
+            NSNumber* price = [NSNumber numberWithFloat:cell.item.price];
             cell.priceLabel.text = [NSString stringWithFormat:@"%@ руб.",[AppHelper numToStr:price]];
             cell.priceView.layer.cornerRadius = 4.0f;
             cell.priceView.layer.masksToBounds = YES;
@@ -172,12 +172,25 @@ NSString *kCellID = @"OfferCollectionViewCell";
             cell.cellView.layer.masksToBounds = YES;
             
             cell.imageView.backgroundColor = [UIColor whiteColor];
-            [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
-            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[cell.item mainThumbUrl]]
-                              placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                                                  cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-                                     }];
+                
+            CGSize photoSize = cell.imageView.frame.size;
+            CGFloat nativeSCale = [[UIScreen mainScreen]scale];
+            NSString* urlString = [NSString stringWithFormat:@"%@&size=%.fx%.f",[cell.item.photoUrls objectAtIndex:0],photoSize.width*nativeSCale,photoSize.height*nativeSCale];
+            
+                NSURL * url = [NSURL URLWithString:urlString];
+            [[SDWebImageManager sharedManager] downloadImageWithURL:url
+            options:SDWebImageRetryFailed
+            progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                NSLog(@"%ld",expectedSize - receivedSize);
+            }
+            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                image = [UIImage imageWithCGImage:[image CGImage]
+                                                            scale:[UIScreen mainScreen].scale
+                                                      orientation:UIImageOrientationUp];
+                
+                                [cell.imageView setImage:image];
+
+            }];
         } else {
             if (debug_enabled) {
                 NSLog(@"Empty category!");
@@ -237,25 +250,21 @@ NSString *kCellID = @"OfferCollectionViewCell";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    [UIView animateWithDuration:1.0f
-                          delay:0
-         usingSpringWithDamping:0.75
-          initialSpringVelocity:10
-                        options:0
-                     animations:^{
-                         OfferCollectionViewCell* cell = (OfferCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-                         
-                         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                         
-                         OfferVC* vc = [sb instantiateViewControllerWithIdentifier:@"OfferVC"];
-                         
-                         vc.offerItem = cell.item;
-                         
-                         [self.navigationController pushViewController:vc animated:YES];
-                     }
-                     completion:^(BOOL finished) {
-                         
-                     }];
+    OfferCollectionViewCell* cell = (OfferCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+//    testTableTableViewController* vc = [sb instantiateViewControllerWithIdentifier:@"testTableTableViewController"];
+//
+//    [AppManager sharedInstance].offerToEdit = cell.item;
+//    
+//    vc.offerViewControllerMode = OfferViewControllerModeView;
+    
+    OfferVC* vc = [sb instantiateViewControllerWithIdentifier:@"OfferVC"];
+    
+    vc.offerItem = cell.item;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

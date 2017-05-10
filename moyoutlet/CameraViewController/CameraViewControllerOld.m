@@ -14,8 +14,6 @@
 #import "UIImage+Helpers.h"
 #import "AppManager.h"
 
-#define SCREEN_WIDTH UIScreen.mainScreen.bounds.size.width
-#define SCREEN_HEIGHT UIScreen.mainScreen.bounds.size.height
 
 @interface CameraViewControllerOld () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
 

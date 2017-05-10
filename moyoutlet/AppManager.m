@@ -171,7 +171,6 @@
 
 -(void)loadOffersFromServerFor:(NSInteger)categoryId offset:(NSInteger)offset WithSuccessBlock:(void (^)(BOOL response))success andFailureBlock:(void (^)(NSError *error))failure{
     
-    NSMutableArray* arr = [NSMutableArray array];
 
     [API requestWithMethod:@"getOffers"
                    andData:@{@"category_id" : [NSNumber numberWithInteger:categoryId],
@@ -218,13 +217,6 @@
 }
 
 #pragma mark Create Offer
-#warning delete method
--(void) uploadOfferToServer:(OfferItem*)offer withHandler:(void (^)(BOOL success))handlerBlock{
-//    [API createOfferWithData: andImages:[[offer arrImages] allValues] withHandler:^(BOOL success) {
-//        handlerBlock(success);
-//    }];
-    
-}
 
 
 
@@ -310,10 +302,22 @@
     return false;
 }
 
--(NSDictionary*)buildTreeForCategory:(NSInteger)category_id {
-    
-    return nil;
-    
+-(NSMutableDictionary*)buildTreeForCategory:(id)category_id {
+    NSMutableDictionary* dicForReturn = nil;
+    for  (NSDictionary* dic in self.config.categories) {
+        if ([[dic valueForKey:@"id"] isEqual: category_id]) {
+            if ([[dic valueForKey:@"parent_id"] isEqual: @"0"]) {
+                NSLog(@"корневая категория");
+                dicForReturn = [dic mutableCopy];
+            } else {
+                NSLog(@"Ищем дальше!");
+                NSMutableDictionary* dicWithChilds = [dic mutableCopy];
+                [dicWithChilds setValue:[self buildTreeForCategory:[dic valueForKey:@"parent_id"]] forKey:@"parent_category"];
+                dicForReturn = dicWithChilds;
+            }
+        }
+    }
+    return dicForReturn;
 }
 
 @end

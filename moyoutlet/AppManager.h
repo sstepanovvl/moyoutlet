@@ -88,7 +88,7 @@
 
 #pragma mark Helpers
 
--(NSDictionary*)buildTreeForCategory:(NSInteger)category_id;
+-(NSMutableDictionary*)buildTreeForCategory:(NSNumber*)category_id;
 -(BOOL)checkChildItemsInCategory:(NSNumber*)categoryId;
 
 

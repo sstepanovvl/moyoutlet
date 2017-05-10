@@ -8,6 +8,7 @@
 
 #import "BaseTableViewController.h"
 
-@interface addPaymentVC : BaseTableViewController
+
+@interface addPaymentVC : BaseTableViewController 
 
 @end

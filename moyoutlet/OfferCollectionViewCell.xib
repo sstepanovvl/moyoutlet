@@ -48,10 +48,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hb3-ES-ubl" userLabel="priceView">
-                                <rect key="frame" x="8" y="277" width="41.5" height="13"/>
+                                <rect key="frame" x="8" y="277" width="42" height="13"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTh-Rd-Y6X">
-                                        <rect key="frame" x="5" y="-0.5" width="31.5" height="14"/>
+                                        <rect key="frame" x="5" y="0.0" width="32" height="14"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -98,24 +98,23 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vj7-b7-Xnc" userLabel="Brand">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vj7-b7-Xnc" userLabel="Brand">
+                                <rect key="frame" x="8" y="258" width="74" height="15"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Кофточка на все случаи жизни" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIu-mb-W81" userLabel="Title">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" text="Кофточка на все случаи жизни" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIu-mb-W81" userLabel="Title">
+                                <rect key="frame" x="87" y="258" width="165" height="15"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="testContent" translatesAutoresizingMaskIntoConstraints="NO" id="Bvp-o5-jSW" userLabel="ImageView">
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="photoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Bvp-o5-jSW" userLabel="ImageView">
                                 <rect key="frame" x="0.0" y="0.0" width="260" height="247"/>
-                                <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like" translatesAutoresizingMaskIntoConstraints="NO" id="uRQ-xP-tiH" userLabel="Like">
-                                <rect key="frame" x="218" y="276.5" width="16" height="16"/>
+                                <rect key="frame" x="218" y="277" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="ckh-Ka-DXw">
                                         <variation key="heightClass=regular-widthClass=compact" constant="16"/>
@@ -216,9 +215,6 @@
                             <mask key="constraints">
                                 <exclude reference="Zcz-Is-O5T"/>
                                 <exclude reference="n5P-O6-ogY"/>
-                                <exclude reference="1hS-4E-z5A"/>
-                                <exclude reference="Ml7-zs-XJc"/>
-                                <exclude reference="SeD-Pq-mDK"/>
                                 <exclude reference="Pmy-jY-Iwu"/>
                                 <exclude reference="tBb-bJ-NgD"/>
                                 <exclude reference="vFh-Oo-teT"/>
@@ -226,13 +222,16 @@
                                 <exclude reference="F4D-Zv-ohH"/>
                                 <exclude reference="hB4-ku-GkS"/>
                                 <exclude reference="qbw-um-D4T"/>
+                                <exclude reference="Lsi-kC-6ye"/>
+                                <exclude reference="SBr-nT-nrL"/>
+                                <exclude reference="UES-TN-n8t"/>
                                 <exclude reference="WVS-Cv-DNE"/>
                                 <exclude reference="fyS-8k-CG9"/>
                                 <exclude reference="tag-I5-73I"/>
                                 <exclude reference="vbJ-aH-VJh"/>
-                                <exclude reference="Lsi-kC-6ye"/>
-                                <exclude reference="SBr-nT-nrL"/>
-                                <exclude reference="UES-TN-n8t"/>
+                                <exclude reference="1hS-4E-z5A"/>
+                                <exclude reference="Ml7-zs-XJc"/>
+                                <exclude reference="SeD-Pq-mDK"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -248,9 +247,6 @@
                             <mask key="constraints">
                                 <include reference="Zcz-Is-O5T"/>
                                 <include reference="n5P-O6-ogY"/>
-                                <include reference="1hS-4E-z5A"/>
-                                <include reference="Ml7-zs-XJc"/>
-                                <include reference="SeD-Pq-mDK"/>
                                 <include reference="Pmy-jY-Iwu"/>
                                 <include reference="tBb-bJ-NgD"/>
                                 <include reference="vFh-Oo-teT"/>
@@ -258,13 +254,16 @@
                                 <include reference="F4D-Zv-ohH"/>
                                 <include reference="hB4-ku-GkS"/>
                                 <include reference="qbw-um-D4T"/>
+                                <include reference="Lsi-kC-6ye"/>
+                                <include reference="SBr-nT-nrL"/>
+                                <include reference="UES-TN-n8t"/>
                                 <include reference="WVS-Cv-DNE"/>
                                 <include reference="fyS-8k-CG9"/>
                                 <include reference="tag-I5-73I"/>
                                 <include reference="vbJ-aH-VJh"/>
-                                <include reference="Lsi-kC-6ye"/>
-                                <include reference="SBr-nT-nrL"/>
-                                <include reference="UES-TN-n8t"/>
+                                <include reference="1hS-4E-z5A"/>
+                                <include reference="Ml7-zs-XJc"/>
+                                <include reference="SeD-Pq-mDK"/>
                             </mask>
                         </variation>
                     </view>
@@ -320,7 +319,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="like" width="11" height="11"/>
-        <image name="testContent" width="191" height="198"/>
+        <image name="like" width="12" height="12"/>
+        <image name="photoPlaceholder" width="75" height="75"/>
     </resources>
 </document>

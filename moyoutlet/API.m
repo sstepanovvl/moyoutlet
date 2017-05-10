@@ -18,9 +18,13 @@
 
 +(void)requestWithMethod:(NSString *)method andData:(NSDictionary*)data withHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))handlerBlock {
     
+    NSString *urlString = nil;
+    if (debug_enabled) {
+        urlString = [NSString stringWithFormat:@"%@%@", apiServer, method];
+    } else {
+        urlString = [NSString stringWithFormat:@"%@%@?XDEBUG_SESSION_START=%@", apiServer, method,XDEBUG_SESSION_START];
+    }
     
-    
-    NSString *urlString = [NSString stringWithFormat:@"%@%@?XDEBUG_SESSION_START=%@", apiServer, method,XDEBUG_SESSION_START];
 
     if (debug_enabled) {
         NSLog(@"\nURL: **** %@ **** \nAPI request meth: **** %@ **** \nAPI request data: **** %@ ****",urlString,method,data);
@@ -64,7 +68,9 @@
 +(void)createOfferWithData:(NSDictionary *)data andImages:(NSDictionary*)images progress:(void (^)(NSProgress *))progress withHandler:(void (^)(BOOL))handlerBlock {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];  // allocate AFHTTPManager
     NSString* url = [NSString stringWithFormat:@"%@createOffer?XDEBUG_SESSION_START=%@",apiServer,XDEBUG_SESSION_START];
-    [manager POST:url parameters:data constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {  // POST DATA USING MULTIPART CONTENT TYPE
+    [manager POST:url
+       parameters:data
+constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {  // POST DATA USING MULTIPART CONTENT TYPE
 
         for (id key in images) {
             UIImage* image = [images valueForKey:key];
@@ -75,10 +81,11 @@
                                     mimeType:@"image/jpeg"];
             
         }
-        NSLog(@"Всё готово к отправке");
-    } progress:^(NSProgress* progres){
+    }
+         progress:^(NSProgress* progres){
         progress(progres);
-    }success:^(NSURLSessionDataTask *task, id responseObject) {
+    }
+          success:^(NSURLSessionDataTask *task, id responseObject) {
     
         if (debug_enabled) {
             NSLog(@"Response: \n %@",responseObject);
@@ -90,7 +97,8 @@
             handlerBlock(NO);
         
         }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    }
+          failure:^(NSURLSessionDataTask *task, NSError *error) {
                 NSLog(@"Error: %@", error);   // Gives Error
                 handlerBlock(NO);
     }];
