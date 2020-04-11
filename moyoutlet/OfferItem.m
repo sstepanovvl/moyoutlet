@@ -17,9 +17,6 @@
         [self.arrImages setValue:[NSNull null] forKey:@"1"];
         [self.arrImages setValue:[NSNull null] forKey:@"2"];
         [self.arrImages setValue:[NSNull null] forKey:@"3"];
-//        for (int i = 0; i < 4; i++) {
-//            [_arrImages addObject:[NSNull null]];
-//        }
         _deliveryEnabled = [NSNumber numberWithBool:YES];
 
     }
@@ -38,6 +35,7 @@
         _name = [dictionary valueForKey:@"title"];
         _size_id = [NSNumber numberWithInt:[[dictionary objectForKey:@"size"] intValue]];
         _likesCount = [NSNumber numberWithInt:(arc4random() % 1000) + 100];
+        _commentsCount = [NSNumber numberWithInt:(arc4random() % 1000) + 100];
         _price = [[dictionary objectForKey:@"price"] integerValue];
         _photoUrls = [NSMutableArray array];
         _condition_id = [NSNumber numberWithInt:[[dictionary objectForKey:@"item_condition"] intValue]];

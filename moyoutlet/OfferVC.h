@@ -10,7 +10,6 @@
 #import "OfferItem.h"
 #import "OffersVC.h"
 #import "OfferCollectionViewCell.h"
-#import "PhotoCollectionViewCell.h"
 #import "EXPhotoViewer.h"
 #import "moyoutlet-swift.h"
 

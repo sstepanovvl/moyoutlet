@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
-#import "moyoutlet-swift.h"
+#import "moyoutlet-Swift.h"
 
 @interface testTableTableViewController : BaseTableViewController <UITextViewDelegate,UITableViewDataSource,UITableViewDelegate, UITextFieldDelegate, UICollectionViewDelegate,UICollectionViewDataSource,ImagePickerViewControllerDelegate>
 
 @property (assign, nonatomic) OfferViewControllerMode offerViewControllerMode;
-
+@property (strong, nonatomic) OfferItem* offerItem;
 @end

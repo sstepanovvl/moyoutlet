@@ -9,22 +9,26 @@
 #import "testTableTableViewController.h"
 #import "SelectVC.h"
 #import "CreateOfferPhotoCell.h"
-#import "PhotoCollectionViewCell.h"
+
+
+
 
 @interface testTableTableViewController () <ARSPopoverDelegate>
-@property (strong, nonatomic) IBOutletCollection(UISwitch) NSArray *cellSwitches;
-@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
-@property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *brandLabel;
-@property (weak, nonatomic) IBOutlet UILabel *conditionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *shippingWillSenByMyself;
-@property (weak, nonatomic) IBOutlet UISwitch *smovivoz;
-@property (weak, nonatomic) IBOutlet UISwitch *otdelenie;
-@property (weak, nonatomic) IBOutlet UISwitch *courier;
-@property (weak, nonatomic) IBOutlet UILabel *willSendinLabel;
+@property (strong, nonatomic)   IBOutletCollection(UISwitch) NSArray *cellSwitches;
+@property (weak, nonatomic)     IBOutlet UITextField *titleTextField;
+@property (weak, nonatomic) 	IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) 	IBOutlet UILabel *categoryLabel;
+@property (weak, nonatomic) 	IBOutlet UILabel *sizeLabel;
+@property (weak, nonatomic) 	IBOutlet UILabel *brandLabel;
+@property (weak, nonatomic)     IBOutlet UILabel *conditionLabel;
+@property (weak, nonatomic)     IBOutlet UILabel *cityLabel;
+@property (weak, nonatomic) 	IBOutlet UISwitch *shippingWillSenByMyself;
+@property (weak, nonatomic) 	IBOutlet UISwitch *smovivoz;
+@property (weak, nonatomic) 	IBOutlet UISwitch *otdelenie;
+@property (weak, nonatomic)     IBOutlet UISwitch *courier;
+@property (weak, nonatomic)     IBOutlet UILabel *willSendinLabel;
+
+
 
 @property (strong, nonatomic) IBOutlet PhotoCollectionView *editPhotoCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *outletFeeLabel;
@@ -39,38 +43,47 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *viewPhotoCollectionView;
 @property (weak, nonatomic) IBOutlet UIButton *viewOfferNextButton;
 @property (weak, nonatomic) IBOutlet UIButton *viewOfferPrevButton;
+@property (weak, nonatomic) IBOutlet UICollectionView *relatedOffersCollectionView;
+
+
+@property (strong, nonatomic) IBOutlet UIView* stickyFooter;
+@property (strong,nonatomic)    NSArray* offerRelatedItems;
 
 @end
 
 @implementation testTableTableViewController
 {
     M13ProgressHUD* HUD;
+    
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNavigationItems];
     [self initHud];
-    for (UISwitch* sw in _cellSwitches) {
-        sw.transform = CGAffineTransformMakeScale(0.75, 0.75);
+    if (self.offerViewControllerMode == OfferViewControllerModeView) {
+        [self initFooterWithPrice:@999999 andDeliveryText:@"Доставка не включена"];
+        _offerRelatedItems = [[AppManager sharedInstance] getRelatedOffersForOffer:_offerItem];
+        [_relatedOffersCollectionView registerNib:[UINib nibWithNibName:@"OfferLightCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"OfferLightCollectionViewCell"];
+        
+        _viewPhotoCollectionView.layer.cornerRadius = 5.0f;
+        _viewPhotoCollectionView.layer.masksToBounds = YES;
+        _viewPhotoCollectionView.clipsToBounds = YES;
+        [_viewPhotoCollectionView registerNib:[UINib nibWithNibName:@"PhotoCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"PhotoCollectionViewCell"];
+        
+        _offerPriceLabel.delegate = self;
+
+    } else if (self.offerViewControllerMode == OfferViewControllerModeCreate) {
+        [self initEditPhotoCollectionView];
+        _descriptionTextView.delegate = self;
+        _titleTextField.delegate = self;
+        
+        _offerPriceLabel.delegate = self;
     }
     
     self.tableView.delegate = self;
-    _descriptionTextView.delegate = self;
-    _titleTextField.delegate = self;
-    UIGestureRecognizer* longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-    [_editPhotoCollectionView addGestureRecognizer:longPressGesture];
-    _editPhotoCollectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
-    _editPhotoCollectionView.clipsToBounds = NO;
-    [_editPhotoCollectionView registerNib:[UINib nibWithNibName:@"CreateOfferPhotoCell" bundle:nil] forCellWithReuseIdentifier:@"CreateOfferPhotoCell"];
-    _editPhotoCollectionView.delegate = self;
     
-    _viewPhotoCollectionView.layer.cornerRadius = 5.0f;
-    _viewPhotoCollectionView.layer.masksToBounds = YES;
-    _viewPhotoCollectionView.clipsToBounds = NO;
-    [_viewPhotoCollectionView registerClass:[PhotoCollectionViewCell class] forCellWithReuseIdentifier:@"PhotoCollectionViewCell"];
-    
-    _offerPriceLabel.delegate = self;
 }
 
 
@@ -80,10 +93,25 @@
     
 }
 
+
+
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self hideFooterWithPrice];
+}
+
+-(void)initEditPhotoCollectionView {
+    UIGestureRecognizer* longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+    [_editPhotoCollectionView addGestureRecognizer:longPressGesture];
+    _editPhotoCollectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
+    _editPhotoCollectionView.clipsToBounds = NO;
+    [_editPhotoCollectionView registerNib:[UINib nibWithNibName:@"CreateOfferPhotoCell" bundle:nil] forCellWithReuseIdentifier:@"CreateOfferPhotoCell"];
+    _editPhotoCollectionView.delegate = self;
+}
 
 -(void)initHud {
     M13ProgressViewImage* imageHud = [[M13ProgressViewImage alloc]init];
@@ -127,82 +155,81 @@
         if (editableItem.price > 0) {
             [self calculateFeesAndPrices];
         }
-
-    } else {
-        [self cell:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] setHidden:YES];
-    }
-    
-    if (editableItem.name) {
-                _titleTextField.textColor = [UIColor blackColor];
-                _titleTextField.text = editableItem.name;
+        if (editableItem.name) {
+            _titleTextField.textColor = [UIColor blackColor];
+            _titleTextField.text = editableItem.name;
         }
-    
-    if (editableItem.itemDescription) {
-        _descriptionTextView.textColor = [UIColor blackColor];
-        _descriptionTextView.text = editableItem.itemDescription;
-    }
-    if (editableItem.category_id) {
+        
+        if (editableItem.itemDescription) {
+            _descriptionTextView.textColor = [UIColor blackColor];
+            _descriptionTextView.text = editableItem.itemDescription;
+        }
+        if (editableItem.category_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:(NSArray*)[AppManager sharedInstance].config.categories Value:editableItem.category_id forKey:@"id"];
             if (dic) {
                 _categoryLabel.textColor = [UIColor blackColor];
                 _categoryLabel.text = [dic valueForKey:@"name"];
             }
         }
-    if (editableItem.brand_id) {
-        if ([editableItem.brand_id isEqualToNumber:@0]) {
-            _brandLabel.textColor = [UIColor blackColor];
-            _brandLabel.text = @"Без бренда";
-        } else {
-            NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:editableItem.brand_id forKey:@"id"];
-            if (dic) {
+        if (editableItem.brand_id) {
+            if ([editableItem.brand_id isEqualToNumber:@0]) {
                 _brandLabel.textColor = [UIColor blackColor];
-                _brandLabel.text = [dic valueForKey:@"name"];
+                _brandLabel.text = @"Без бренда";
+            } else {
+                NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:editableItem.brand_id forKey:@"id"];
+                if (dic) {
+                    _brandLabel.textColor = [UIColor blackColor];
+                    _brandLabel.text = [dic valueForKey:@"name"];
+                }
             }
+            
         }
-        
-        }
-    if (editableItem.condition_id) {
+        if (editableItem.condition_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.conditions Value:editableItem.condition_id forKey:@"id"] ;
             if (dic) {
                 _conditionLabel.textColor = [UIColor blackColor];
                 _conditionLabel.text = [dic valueForKey:@"name"];
             }
         }
-    if (editableItem.senderCity_id) {
+        if (editableItem.senderCity_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.cities Value:editableItem.senderCity_id forKey:@"id"] ;
             if (dic) {
                 _cityLabel.textColor = [UIColor blackColor];
                 _cityLabel.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"name"]];
             }
         }
-    if (editableItem.willSendIn_id) {
+        if (editableItem.willSendIn_id) {
             NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.willSendInFields Value:editableItem.willSendIn_id forKey:@"id"] ;
             if (dic) {
                 _willSendinLabel.textColor = [UIColor blackColor];
                 _willSendinLabel.text = [dic valueForKey:@"name"];
             }
         }
-    if (editableItem.size_id) {
-        NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.sizes Value:editableItem.size_id forKey:@"id"] ;
-        if (dic) {
-            _sizeLabel.textColor = [UIColor blackColor];
-            _sizeLabel.text = [NSString stringWithFormat:@"%@ (%@)",[dic valueForKey:@"name"],[dic valueForKey:@"description"]];
+        if (editableItem.size_id) {
+            NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.sizes Value:editableItem.size_id forKey:@"id"] ;
+            if (dic) {
+                _sizeLabel.textColor = [UIColor blackColor];
+                _sizeLabel.text = [NSString stringWithFormat:@"%@ (%@)",[dic valueForKey:@"name"],[dic valueForKey:@"description"]];
+            }
         }
-    }
-    
-    
-    [_deliverySwitch setOn:editableItem.deliveryEnabled];
-    [[_cellSwitches objectAtIndex:0] setOn:editableItem.deliveryWillSendByMyselfEnabled];
-    [[_cellSwitches objectAtIndex:1] setOn:editableItem.deliverySamovivoznahEnabled];
-    [[_cellSwitches objectAtIndex:2] setOn:editableItem.deliveryOfficeEnabled];
-    [[_cellSwitches objectAtIndex:3] setOn:editableItem.deliveryCourierEnabled];
-    
-    if (editableItem.weight_id) {
-        NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.weights Value:editableItem.weight_id forKey:@"id"] ;
-        if (dic) {
-            _weightLabel.textColor = [UIColor blackColor];
-            _weightLabel.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"name"]];
+        
+        [_deliverySwitch setOn:editableItem.deliveryEnabled];
+        [[_cellSwitches objectAtIndex:0] setOn:editableItem.deliveryWillSendByMyselfEnabled];
+        [[_cellSwitches objectAtIndex:1] setOn:editableItem.deliverySamovivoznahEnabled];
+        [[_cellSwitches objectAtIndex:2] setOn:editableItem.deliveryOfficeEnabled];
+        [[_cellSwitches objectAtIndex:3] setOn:editableItem.deliveryCourierEnabled];
+        
+        if (editableItem.weight_id) {
+            NSDictionary* dic = [AppHelper searchInDictionaries:[AppManager sharedInstance].config.weights Value:editableItem.weight_id forKey:@"id"] ;
+            if (dic) {
+                _weightLabel.textColor = [UIColor blackColor];
+                _weightLabel.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"name"]];
+            }
         }
+   
+        
+    } else {
+        [self cell:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] setHidden:YES];
     }
 }
 
@@ -225,18 +252,86 @@
     NSArray* rightBarItems = [[NSArray alloc] initWithObjects:showOptionsBarButtonItem, nil];
     self.navigationItem.rightBarButtonItems = rightBarItems;
     
-    self.navigationItem.title = @"Создать объявление";
+    
     
     UIButton* leftBarButtonWithLogo = [[UIButton alloc] init];
     
     UIImage *image = [[UIImage imageNamed:@"leftMenuBackButton"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [leftBarButtonWithLogo setFrame:CGRectMake(0, 0, 35, 35)];
     [leftBarButtonWithLogo setImage:image forState:UIControlStateNormal];
-    [leftBarButtonWithLogo addTarget:self action:@selector(showSaveOfferOptions:) forControlEvents:UIControlEventTouchUpInside];
+    
+    switch (_offerViewControllerMode) {
+        case OfferViewControllerModeEdit:
+            self.navigationItem.title = @"Редактирование объявления";
+            [leftBarButtonWithLogo addTarget:self action:@selector(showSaveOfferOptions:) forControlEvents:UIControlEventTouchUpInside];
+            
+            break;
+            
+        case OfferViewControllerModeView:
+            self.navigationItem.title = _offerItem.name;
+            [leftBarButtonWithLogo addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            break;
+            
+        case OfferViewControllerModeCreate:
+            self.navigationItem.title = @"Создание объявления";
+            [leftBarButtonWithLogo addTarget:self action:@selector(showSaveOfferOptions:) forControlEvents:UIControlEventTouchUpInside];
+            break;
+        default:
+            break;
+    }
+    
+    
+    
     UIBarButtonItem* but = [[UIBarButtonItem alloc] initWithCustomView:leftBarButtonWithLogo];
     NSArray* leftBarItems = [[NSArray alloc] initWithObjects:but, nil];
     self.navigationItem.leftBarButtonItems = leftBarItems;
 
+}
+
+- (void)initFooterWithPrice:(NSNumber*)price andDeliveryText:(NSString*)deliveryText {
+    
+    _stickyFooter = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-55, self.view.bounds.size.width, 55)];
+    
+    _stickyFooter.backgroundColor = [UIColor blackColor];
+    
+    UIButton* buyButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 135, 5 , 130, 45) ];
+    buyButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"buyButtonImage"]];
+    
+    [buyButton addTarget:self action:@selector(buyButtonDidPressed) forControlEvents:UIControlEventTouchUpInside];
+    [_stickyFooter addSubview:buyButton];
+    
+    UILabel* priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 85, _stickyFooter.frame.size.height)];
+    priceLabel.text = [NSString stringWithFormat:@"%@ ₽",price];
+    priceLabel.backgroundColor = [UIColor clearColor];
+    priceLabel.textColor = [UIColor whiteColor];
+    priceLabel.font = [UIFont fontWithName:@"Open-Sans bold" size:22];
+    [_stickyFooter addSubview:priceLabel];
+    
+    UILabel* deliveryLabel = [[UILabel alloc] initWithFrame:CGRectMake(priceLabel.frame.size.width + 5, 0 ,self.view.bounds.size.width - buyButton.frame.size.width - priceLabel.frame.size.width - 15, _stickyFooter.frame.size.height)];
+    deliveryLabel.text = [NSString stringWithFormat:@"%@",deliveryText];
+    deliveryLabel.backgroundColor = [UIColor clearColor];
+    deliveryLabel.textColor = [UIColor whiteColor];
+    deliveryLabel.font = [UIFont fontWithName:@"Open-Sans" size:12];
+    deliveryLabel.adjustsFontSizeToFitWidth = true;
+    [_stickyFooter addSubview:deliveryLabel];
+
+    [self.parentViewController.view addSubview:_stickyFooter];
+    
+    CATransition *applicationLoadViewIn =[CATransition animation];
+    [applicationLoadViewIn setDuration:0.3];
+    [applicationLoadViewIn setType:kCATransitionFromBottom];
+    [applicationLoadViewIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+    [[_stickyFooter layer]addAnimation:applicationLoadViewIn forKey:kCATransitionReveal];
+
+    
+}
+
+- (void)hideFooterWithPrice {
+    [_stickyFooter removeFromSuperview];
+}
+
+- (void)buyButtonDidPressed {
+    NSLog(@"buy button did pressed");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -333,6 +428,12 @@
         return 375.0f;
     } else if (indexPath.section == 5 && indexPath.row == 2) {
         return 210.0f;
+    } else if (indexPath.section == 6) { //
+        return 65.0f;
+    } else if (indexPath.section == 8) {
+        return 220.0f;
+    } else if (indexPath.section == 9) {
+        return 55.0f;
     } else {
         return UITableViewAutomaticDimension;
     }
@@ -346,7 +447,182 @@
 {
     HeaderView* headerCell = nil;
     
-    if (section == 3) {
+    if (section == 1) {
+        headerCell = [[HeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 85)];
+        UILabel* offerTitleLabel = [UILabel new];
+        offerTitleLabel.text = _offerItem.name;
+        offerTitleLabel.font = [UIFont appBoldFontWithSize:13];
+        offerTitleLabel.backgroundColor = [UIColor clearColor];
+        offerTitleLabel.textAlignment = NSTextAlignmentCenter;
+        [headerCell addSubview:offerTitleLabel];
+        
+        
+        UIButton* likesButton = [UIButton new];
+        
+        
+        
+        UIImageView* likeIcon = [[UIImageView alloc] init];
+        likeIcon.image = [UIImage imageNamed:@"like_v2"];
+        likeIcon.contentMode = UIViewContentModeCenter;
+        likeIcon.translatesAutoresizingMaskIntoConstraints = NO;
+        [headerCell addSubview:likeIcon];
+        
+        [headerCell addConstraints:@[[NSLayoutConstraint constraintWithItem:likeIcon
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:headerCell
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                 multiplier:1.0
+                                                                   constant:25.0],
+                                     [NSLayoutConstraint constraintWithItem:likeIcon
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:headerCell
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                 multiplier:1.0
+                                                                   constant:0.0],
+                                     [NSLayoutConstraint constraintWithItem:likeIcon
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0
+                                                                   constant:17]]
+         ];
+        
+        UILabel* likesCountLabel = [UILabel new];
+        likesCountLabel.text = [NSString stringWithFormat: @"Понравилось: %@",_offerItem.likesCount];
+        likesCountLabel.font = [UIFont appRegularFontWithSize:12.0f];
+        likesCountLabel.textColor = [UIColor appDarkGrayColor];
+        likesCountLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [headerCell addSubview:likesCountLabel];
+
+        
+        [headerCell addConstraints:@[[NSLayoutConstraint constraintWithItem:likesCountLabel
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:likeIcon
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0
+                                                                   constant:10.0],
+                                     [NSLayoutConstraint constraintWithItem:likesCountLabel
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:likeIcon
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                 multiplier:1.0
+                                                                   constant:0.0],
+                                     [NSLayoutConstraint constraintWithItem:likesCountLabel
+                                                                  attribute:NSLayoutAttributeHeight
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0
+                                                                   constant:25.0]]];
+        
+        UIImageView* commentIcon = [[UIImageView alloc] init];
+        commentIcon.image = [UIImage imageNamed:@"comments_v2"];
+        commentIcon.contentMode = UIViewContentModeCenter;
+        commentIcon.translatesAutoresizingMaskIntoConstraints = NO;
+        [headerCell addSubview:commentIcon];
+        
+        [headerCell addConstraints:@[[NSLayoutConstraint constraintWithItem:commentIcon
+                                                                attribute:NSLayoutAttributeCenterX
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:headerCell
+                                                                attribute:NSLayoutAttributeCenterX
+                                                               multiplier:1.0f
+                                                                 constant:0.0f],
+         [NSLayoutConstraint constraintWithItem:commentIcon
+                                      attribute:NSLayoutAttributeWidth
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:nil
+                                      attribute:NSLayoutAttributeNotAnAttribute
+                                     multiplier:1.0f
+                                       constant:50.0f],
+         [NSLayoutConstraint constraintWithItem:commentIcon
+                                      attribute:NSLayoutAttributeHeight
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:nil
+                                      attribute:NSLayoutAttributeNotAnAttribute
+                                     multiplier:1.0f
+                                       constant:25.0f],
+         [NSLayoutConstraint constraintWithItem:commentIcon
+                                      attribute:NSLayoutAttributeCenterY
+                                      relatedBy:NSLayoutRelationEqual
+                                         toItem:likeIcon
+                                      attribute:NSLayoutAttributeCenterY
+                                     multiplier:1.0f
+                                       constant:0.0f]
+         ]];
+        
+        UILabel* commentsCountLabel = [UILabel new];
+        commentsCountLabel.text =  [NSString stringWithFormat: @"Комментарии: %@",_offerItem.commentsCount];
+        commentsCountLabel.font = [UIFont appRegularFontWithSize:12.0f];
+        commentsCountLabel.textColor = [UIColor appDarkGrayColor];
+        commentsCountLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [headerCell addSubview:commentsCountLabel];
+        
+        
+        [headerCell addConstraints:@[[NSLayoutConstraint constraintWithItem:commentsCountLabel
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:commentIcon
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0
+                                                                   constant:-5.0],
+                                     [NSLayoutConstraint constraintWithItem:commentsCountLabel
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:likeIcon
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                 multiplier:1.0
+                                                                   constant:0.0],
+                                     [NSLayoutConstraint constraintWithItem:commentsCountLabel
+                                                                  attribute:NSLayoutAttributeHeight
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0
+                                                                   constant:25.0]]];
+        
+        UIImageView* flagIcon = [[UIImageView alloc] init];
+        flagIcon.image = [UIImage imageNamed:@"flag"];
+        flagIcon.contentMode = UIViewContentModeCenter;
+        flagIcon.translatesAutoresizingMaskIntoConstraints = NO;
+        [headerCell addSubview:flagIcon];
+        
+        [headerCell addConstraints:@[[NSLayoutConstraint constraintWithItem:flagIcon
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:headerCell
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0f
+                                                                   constant:-25.0f],
+                                     [NSLayoutConstraint constraintWithItem:flagIcon
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0f
+                                                                   constant:25.0f],
+                                     [NSLayoutConstraint constraintWithItem:flagIcon
+                                                                  attribute:NSLayoutAttributeHeight
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1.0f
+                                                                   constant:25.0f],
+                                     [NSLayoutConstraint constraintWithItem:flagIcon
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:likeIcon
+                                                                  attribute:NSLayoutAttributeCenterY
+                                                                 multiplier:1.0f
+                                                                   constant:0.0f]
+                                     ]];
+        
+    } else if (section == 3) {
             headerCell = [[HeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 45)];
             if (!_deliverySwitch) {
                 self.deliverySwitch = [[UISwitch alloc] initWithFrame:CGRectMake(headerCell.frame.size.width-95,headerCell.frame.size.height-33, 35, 35)];
@@ -360,6 +636,7 @@
             [button addTarget:self action:@selector(questionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             button.tag = 2;
             [headerCell.contentView addSubview:button];
+        
     } else if (section == 4 || section == 3) {
             headerCell = [[HeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 45)];
             UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(headerCell.frame.size.width-52,headerCell.frame.size.height-35, 35, 35)];
@@ -367,6 +644,13 @@
             [button addTarget:self action:@selector(questionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             button.tag = 1;
             [headerCell.contentView addSubview:button];
+    } else if (section == 7) {
+            headerCell = [[HeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 65)];
+            UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0,0, headerCell.frame.size.width, headerCell.frame.size.height)];
+            [button setImage:[UIImage imageNamed:@"commentButton"] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(commentButtonDidPresed) forControlEvents:UIControlEventTouchUpInside];
+            [headerCell.contentView addSubview:button];
+        
     } else {
         headerCell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HeaderView"];
     }
@@ -381,11 +665,18 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 0;
+        return 0.0001;
+    } else if (section == 1 && _offerViewControllerMode == OfferViewControllerModeView)
+    {
+        return 85.0f;
     } else if (section == 5) {
-        return 20;
+        return 20.0f;
+    } else if (section == 7) {
+        return 65.0f;
+    } else if (section == 9) {
+        return 0.0f;
     } else {
-        return 45;
+        return 45.0f;
     }
 }
 
@@ -393,28 +684,29 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    
     if (_offerViewControllerMode == OfferViewControllerModeEdit || _offerViewControllerMode == OfferViewControllerModeCreate )
         {
-            if ([cell.reuseIdentifier  isEqual: @"categoryCell"]) {
+            UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+            if ([cell.reuseIdentifier  isEqual: @"CreateModeCategoryCell"]) {
                 [self performSegueWithIdentifier:@"selectCategorySegue" sender:nil];
             }
-            if ([cell.reuseIdentifier  isEqual: @"sizeCell"]) {
+            if ([cell.reuseIdentifier  isEqual: @"CreateModesizeCell"]) {
                 [self performSegueWithIdentifier:@"selectSizeSegue" sender:nil];
             }
-            if ([cell.reuseIdentifier  isEqual: @"brandCell"]) {
+            if ([cell.reuseIdentifier  isEqual: @"CreateModeBrandCell"]) {
                 [self performSegueWithIdentifier:@"selectBrandSegue" sender:nil];
             }
-            if ([cell.reuseIdentifier  isEqual: @"conditionCell"]) {
+            if ([cell.reuseIdentifier  isEqual: @"CreateModeConditionCell"]) {
                 [self performSegueWithIdentifier:@"selectConditionSegue" sender:nil];
             }
-            if ([cell.reuseIdentifier  isEqual: @"senderCityCell"]) {
+            if ([cell.reuseIdentifier  isEqual: @"CreateModeSenderCityCell"]) {
                 [self performSegueWithIdentifier:@"selectCitySegue" sender:nil];
             }
-            if ([cell.reuseIdentifier  isEqual: @"weightCell"]) {
+            if ([cell.reuseIdentifier  isEqual: @"CreateModeWeightCell"]) {
                 [self performSegueWithIdentifier:@"selectWeightCell" sender:nil];
             }
-            if ([cell.reuseIdentifier  isEqual: @"willSendInCell"]) {
+            if ([cell.reuseIdentifier  isEqual: @"CreateModeWillSendInCell"]) {
                 [self performSegueWithIdentifier:@"selectWillSendInSegue" sender:nil];
             }
         }
@@ -432,43 +724,115 @@
 #pragma mark - collectionView Layout &  Delegate & DataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"indexPath.row = %ld, CollectionView.tag =  %ld",(long)section,(long)collectionView.tag);
+
     if (_offerViewControllerMode == OfferViewControllerModeView) {
         switch (collectionView.tag) {
             case 0:
                 return 0;
                 break;
+            case 1:
+                return [_offerItem.photoUrls count];
+                break;
+            case 2:
+                return [_offerRelatedItems count];
+                break;
             default:
-                return [[AppManager sharedInstance].offerToEdit.photoUrls count];
+                return 0;
                 break;
         }
+    } else if (_offerViewControllerMode == OfferViewControllerModeEdit) {
+            switch (collectionView.tag) {
+                case 0:
+                    return 4;
+                    break;
+                case 1:
+                    return 0;
+                    break;
+                case 2:
+                    return 0;
+                    break;
+                default:
+                    return 0;
+                    break;
+            }
     } else {
         switch (collectionView.tag) {
             case 0:
                 return 4;
                 break;
+            case 1:
+                return 0;
+                break;
+            case 2:
+                return 0;
+                break;
             default:
-                return [[AppManager sharedInstance].offerToEdit.arrImages count];
+                return 0;
                 break;
         }
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (collectionView.tag) {
-        PhotoCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell" forIndexPath:indexPath];
-        cell.photoImageView = [[UIImageView alloc] initWithFrame:cell.frame];
-        cell.photoImageView.layer.cornerRadius = 5.0f;
-        cell.photoImageView.layer.masksToBounds = YES;
+    
+    if (collectionView.tag == 0) {
+        CreateOfferPhotoCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CreateOfferPhotoCell" forIndexPath:indexPath];
+        [cell.imView setContentMode:UIViewContentModeScaleAspectFill];
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        if (![[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] isEqual:[NSNull null]]) {
+            [cell.imView setImage:[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:[NSString stringWithFormat:@"%ld",indexPath.row]]];
+        } else {
+            [cell.imView setImage:[UIImage imageNamed:@"photoPlaceholder"]];
+        }
+        return cell;
+    } else if (collectionView.tag == 1){
         
+        PhotoCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell" forIndexPath:indexPath];
         
         CGSize photoSize = cell.frame.size;
         
         CGFloat nativeSCale = [[UIScreen mainScreen]scale];
         
-        NSString* urlString = [NSString stringWithFormat:@"%@&size=%.fx%.f",[[AppManager sharedInstance].offerToEdit.photoUrls objectAtIndex:indexPath.row],photoSize.width*nativeSCale,photoSize.height*nativeSCale];
+        NSString* urlString = [NSString stringWithFormat:@"%@&size=%.fx%.f",[_offerItem.photoUrls objectAtIndex:indexPath.row],photoSize.width*nativeSCale,photoSize.height*nativeSCale];
         
         NSURL * url = [NSURL URLWithString:urlString];
-
+        
+        [[SDWebImageManager sharedManager] downloadImageWithURL:url
+                                                        options:SDWebImageRetryFailed
+                                                       progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                                           NSLog(@"%ld",receivedSize-expectedSize);
+                                                       }
+                                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                                          UIImage* imageToSet = [UIImage imageWithCGImage:[image CGImage]
+                                                                                                    scale:[UIScreen mainScreen].scale
+                                                                                              orientation:UIImageOrientationUp];
+                                                          if (cell.offerImage != nil) {
+                                                          [cell.offerImage setImage:imageToSet];
+                                                          } else {
+                                                              NSLog(@"offerImage == nil");
+                                                          }
+                                                          
+                                                      }];
+        
+        return cell;
+    } else {
+        
+        OfferLightCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OfferLightCollectionViewCell" forIndexPath:indexPath];
+        
+        OfferItem* offerItem = [_offerRelatedItems objectAtIndex:indexPath.row];
+        
+        cell.offerItem = offerItem;
+        [cell configure];
+        
+        CGSize photoSize = cell.frame.size;
+        
+        CGFloat nativeSCale = [[UIScreen mainScreen]scale];
+        
+        NSString* urlString = [NSString stringWithFormat:@"%@&size=%.fx%.f",[offerItem.photoUrls objectAtIndex:0],photoSize.width*nativeSCale,photoSize.height*nativeSCale];
+        
+        NSURL * url = [NSURL URLWithString:urlString];
+        
         [[SDWebImageManager sharedManager] downloadImageWithURL:url
                                                         options:SDWebImageRetryFailed
                                                        progress:^(NSInteger receivedSize, NSInteger expectedSize) {
@@ -479,23 +843,12 @@
                                                                                                     scale:[UIScreen mainScreen].scale
                                                                                               orientation:UIImageOrientationUp];
                                                           
-                                                          [cell.photoImageView setImage:imageToSet];
+                                                          [cell.offerImage setImage:imageToSet];
                                                       }];
-
+        
         return cell;
-
-    } else {
-        CreateOfferPhotoCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CreateOfferPhotoCell" forIndexPath:indexPath];
-        [cell.imView setContentMode:UIViewContentModeScaleAspectFill];
-        cell.contentView.backgroundColor = [UIColor whiteColor];
-        if (![[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] isEqual:[NSNull null]]) {
-            [cell.imView setImage:[[AppManager sharedInstance].offerToEdit.arrImages valueForKey:[NSString stringWithFormat:@"%ld",indexPath.row]]];
-        } else {
-            [cell.imView setImage:[UIImage imageNamed:@"photoPlaceholder"]];
-        }
-        return cell;
-
     }
+    
 }
 
 -(void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
@@ -509,19 +862,46 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath  {
-
-    
-    __weak testTableTableViewController* weaktvc = self;
-    CameraViewController* camv = [[CameraViewController alloc] initWithCroppingEnabled:YES allowsLibraryAccess:YES
-                                                                            completion:^(UIImage * _Nullable asd, PHAsset * _Nullable dsa) {
-                                                                                [[AppManager sharedInstance].offerToEdit.arrImages setValue:asd forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-                                                                                [weaktvc dismissViewControllerAnimated:YES completion:nil];
-                                                                            }];
-    [self presentViewController:camv animated:YES completion:nil];
+    if (collectionView.tag == 0) {
+        __weak testTableTableViewController* weaktvc = self;
+        CameraViewController* camv = [[CameraViewController alloc] initWithCroppingEnabled:YES allowsLibraryAccess:YES
+                                                                                completion:^(UIImage * _Nullable asd, PHAsset * _Nullable dsa) {
+                                                                                    [[AppManager sharedInstance].offerToEdit.arrImages setValue:asd forKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+                                                                                    [weaktvc dismissViewControllerAnimated:YES completion:nil];
+                                                                                }];
+        [self presentViewController:camv animated:YES completion:nil];
+    }
 }
 
 
 #pragma mark - Other Stuff
+
+-(void)createDummyOffer {
+    OfferItem* offer = [OfferItem new];
+    offer.category_id = @1028;
+    offer.root_category_id = @1004;
+    offer.itemDescription = @"Здесь стандартное описание стандартными буквами раз два три четыре пять шесть семь восемь";
+    offer.name = @"Шаблонный товар который можно удалить";
+    offer.condition_id = @4;
+    offer.brand_id = @201;
+    offer.condition_id= @2;
+    offer.willSendIn_id = @7;
+    offer.senderCity_id = @259;
+    offer.deliveryEnabled = false;
+    offer.price = 65000;
+    offer.size_id = @12;
+    offer.weight_id = @17;
+    offer.arrImages = @{
+                        @"0":[UIImage imageNamed:@"test"],
+                        @"1":[UIImage imageNamed:@"test"],
+                        @"2":[UIImage imageNamed:@"test"],
+                        @"3":[UIImage imageNamed:@"test"]
+                        };
+    
+    [AppManager sharedInstance].offerToEdit = offer;
+}
+
+
 
 -(BOOL)checkFieldsForValidValues {
     OfferItem* item = [AppManager sharedInstance].offerToEdit;
@@ -625,28 +1005,7 @@
     UIAlertAction *loadOfferAction = [UIAlertAction actionWithTitle:@"Выбрать из сохраненных"
                                                               style:UIAlertActionStyleDefault
                                                             handler:^(UIAlertAction *action) {
-                                                                OfferItem* offer = [OfferItem new];
-                                                                offer.category_id = @1028;
-                                                                offer.root_category_id = @1004;
-                                                                offer.itemDescription = @"Здесь стандартное описание стандартными буквами раз два три четыре пять шесть семь восемь";
-                                                                offer.name = @"Шаблонный товар который можно удалить";
-                                                                offer.condition_id = @4;
-                                                                offer.brand_id = @201;
-                                                                offer.condition_id= @2;
-                                                                offer.willSendIn_id = @7;
-                                                                offer.senderCity_id = @259;
-                                                                offer.deliveryEnabled = false;
-                                                                offer.price = 65000;
-                                                                offer.size_id = @12;
-                                                                offer.weight_id = @17;
-                                                                offer.arrImages = @{
-                                                                                    @"0":[UIImage imageNamed:@"test"],
-                                                                                    @"1":[UIImage imageNamed:@"test"],
-                                                                                    @"2":[UIImage imageNamed:@"test"],
-                                                                                    @"3":[UIImage imageNamed:@"test"]
-                                                                                    };
-                                                                                    
-                                                                [AppManager sharedInstance].offerToEdit = offer;
+                                                                [self createDummyOffer];
                                                                 [self viewWillAppear:YES];
                                                                 [self initFields];
                                                                 [self calculateFeesAndPrices];
@@ -723,6 +1082,10 @@
     }
 }
 
+-(void)commentButtonDidPresed {
+    NSLog(@"comment button did pressed");
+}
+
 -(void)createdWithSuccess {
     [AppManager sharedInstance].offerToEdit = [OfferItem new];
     [HUD hide:YES];
@@ -771,7 +1134,6 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UINavigationController* nvc = segue.destinationViewController;
     SelectVC* svc = nvc.topViewController;

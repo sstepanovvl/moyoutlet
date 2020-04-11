@@ -21,6 +21,7 @@
 //#import "SHSPhoneLibrary.h"
 #import "IIViewDeckController.h"
 #import "UIColor+CustomColors.h"
+#import "UIFont+UIFont_appFonts.h"
 #import "UIBarButtonItem+Badge.h"
 #import "ViewDeck/ViewDeckController.h"
 #import "SDWebImage/UIImageView+WebCache.h"

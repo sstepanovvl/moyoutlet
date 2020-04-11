@@ -37,6 +37,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)backButtonPressed:(id)sender {
+    NSInteger controllerCount = [[self.navigationController viewControllers] count];
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:controllerCount -2]
+                                          animated:YES];
+}
 /*
 #pragma mark - Navigation
 

@@ -44,8 +44,6 @@
 		044CA7CF1D39847F00678E24 /* HelpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 044CA7CD1D39847F00678E24 /* HelpVC.m */; };
 		044CA7D01D39847F00678E24 /* HelpVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044CA7CE1D39847F00678E24 /* HelpVC.xib */; };
 		045105461D05DEA0000C740A /* rd_M2DURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 045105451D05DEA0000C740A /* rd_M2DURLConnectionOperation.m */; };
-		045A6A951CFB0DD400B03B5E /* OfferLightCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045A6A941CFB0DD400B03B5E /* OfferLightCollectionViewCell.m */; };
-		045B9BA11CFB658A00616678 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045B9BA01CFB658A00616678 /* PhotoCollectionViewCell.m */; };
 		045D7FF81D4FBA5800513E3D /* UILoadControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D7FF61D4FBA5800513E3D /* UILoadControl.swift */; };
 		045D7FF91D4FBA5800513E3D /* UILoadControl_UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045D7FF71D4FBA5800513E3D /* UILoadControl_UIScrollView.swift */; };
 		046529431D3E083200DAA187 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 046529421D3E083200DAA187 /* MBProgressHUD.m */; };
@@ -147,11 +145,14 @@
 		485A66AE1E50292D00C5F5F7 /* MOCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485A66AD1E50292D00C5F5F7 /* MOCollectionView.m */; };
 		485D41611E524BD500F46707 /* SelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 485D415F1E524BD500F46707 /* SelectVC.m */; };
 		485D41651E52F54E00F46707 /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 485D41641E52F54E00F46707 /* UITextView+Placeholder.m */; };
+		486935161EF57E870006EB5F /* OfferItemViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486935151EF57E870006EB5F /* OfferItemViewConfig.swift */; };
+		486935181EF581210006EB5F /* OfferLightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486935171EF581210006EB5F /* OfferLightCollectionViewCell.swift */; };
 		4881CE011E542118007E9B29 /* ConditionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4881CE001E542118007E9B29 /* ConditionItem.m */; };
 		4881CE061E54B937007E9B29 /* OfferEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4881CE041E54B937007E9B29 /* OfferEditTableViewCell.m */; };
 		4881CE0C1E54B9DD007E9B29 /* OfferEditTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4881CE0B1E54B9DD007E9B29 /* OfferEditTableViewHeaderFooterView.m */; };
 		488D09EC1E5832FE00342E88 /* baseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 488D09EB1E5832FE00342E88 /* baseManager.m */; };
 		488D09F11E58335400342E88 /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 488D09F01E58335400342E88 /* AppHelper.m */; };
+		489F792B1EC352E9005FF470 /* UIFont+UIFont_appFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 489F792A1EC352E9005FF470 /* UIFont+UIFont_appFonts.m */; };
 		48A055081E5C48B4005027F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48A054F91E5C48B4005027F7 /* Assets.xcassets */; };
 		48A055091E5C48B4005027F7 /* CameraHoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A054FB1E5C48B4005027F7 /* CameraHoverView.m */; };
 		48A0550A1E5C48B4005027F7 /* CameraScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A054FD1E5C48B4005027F7 /* CameraScrollView.m */; };
@@ -170,6 +171,8 @@
 		48DB1B401E61CA5D0092733C /* libCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DB1B3C1E61CA5D0092733C /* libCardIO.a */; };
 		48DB1B411E61CA5D0092733C /* libopencv_core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DB1B3D1E61CA5D0092733C /* libopencv_core.a */; };
 		48DB1B421E61CA5D0092733C /* libopencv_imgproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DB1B3E1E61CA5D0092733C /* libopencv_imgproc.a */; };
+		48DBD3001EF69B9C00078A58 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DBD2FE1EF69B9C00078A58 /* PhotoCollectionViewCell.swift */; };
+		48DBD3011EF69B9C00078A58 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48DBD2FF1EF69B9C00078A58 /* PhotoCollectionViewCell.xib */; };
 		48DEEE881E556ECE000E8E3D /* testTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DEEE871E556ECE000E8E3D /* testTableTableViewController.m */; };
 		48DEEE8B1E5585C5000E8E3D /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DEEE8A1E5585C5000E8E3D /* BaseTableViewController.m */; };
 		48DEEE901E55B7A8000E8E3D /* WillSendInItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 48DEEE8F1E55B7A8000E8E3D /* WillSendInItem.m */; };
@@ -291,10 +294,6 @@
 		045105441D05DEA0000C740A /* rd_M2DURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rd_M2DURLConnectionOperation.h; sourceTree = "<group>"; };
 		045105451D05DEA0000C740A /* rd_M2DURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rd_M2DURLConnectionOperation.m; sourceTree = "<group>"; };
 		045984DF1D04A3E600C162A2 /* moyoutlet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "moyoutlet-Bridging-Header.h"; sourceTree = "<group>"; };
-		045A6A931CFB0DD400B03B5E /* OfferLightCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferLightCollectionViewCell.h; sourceTree = "<group>"; };
-		045A6A941CFB0DD400B03B5E /* OfferLightCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferLightCollectionViewCell.m; sourceTree = "<group>"; };
-		045B9B9F1CFB658A00616678 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
-		045B9BA01CFB658A00616678 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		045D7FF61D4FBA5800513E3D /* UILoadControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILoadControl.swift; sourceTree = "<group>"; };
 		045D7FF71D4FBA5800513E3D /* UILoadControl_UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILoadControl_UIScrollView.swift; sourceTree = "<group>"; };
 		046529411D3E083200DAA187 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -500,6 +499,8 @@
 		485D415F1E524BD500F46707 /* SelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectVC.m; sourceTree = "<group>"; };
 		485D41631E52F54E00F46707 /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
 		485D41641E52F54E00F46707 /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
+		486935151EF57E870006EB5F /* OfferItemViewConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferItemViewConfig.swift; sourceTree = "<group>"; };
+		486935171EF581210006EB5F /* OfferLightCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferLightCollectionViewCell.swift; sourceTree = "<group>"; };
 		4881CDFF1E542118007E9B29 /* ConditionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionItem.h; sourceTree = "<group>"; };
 		4881CE001E542118007E9B29 /* ConditionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionItem.m; sourceTree = "<group>"; };
 		4881CE031E54B937007E9B29 /* OfferEditTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferEditTableViewCell.h; sourceTree = "<group>"; };
@@ -510,6 +511,8 @@
 		488D09EB1E5832FE00342E88 /* baseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = baseManager.m; path = baseManager/baseManager.m; sourceTree = "<group>"; };
 		488D09EF1E58335400342E88 /* AppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppHelper.h; path = AppHelper/AppHelper.h; sourceTree = "<group>"; };
 		488D09F01E58335400342E88 /* AppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppHelper.m; path = AppHelper/AppHelper.m; sourceTree = "<group>"; };
+		489F79291EC352E9005FF470 /* UIFont+UIFont_appFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+UIFont_appFonts.h"; sourceTree = "<group>"; };
+		489F792A1EC352E9005FF470 /* UIFont+UIFont_appFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+UIFont_appFonts.m"; sourceTree = "<group>"; };
 		48A054F91E5C48B4005027F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48A054FA1E5C48B4005027F7 /* CameraHoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraHoverView.h; sourceTree = "<group>"; };
 		48A054FB1E5C48B4005027F7 /* CameraHoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraHoverView.m; sourceTree = "<group>"; };
@@ -545,6 +548,8 @@
 		48DB1B3C1E61CA5D0092733C /* libCardIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCardIO.a; sourceTree = "<group>"; };
 		48DB1B3D1E61CA5D0092733C /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_core.a; sourceTree = "<group>"; };
 		48DB1B3E1E61CA5D0092733C /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_imgproc.a; sourceTree = "<group>"; };
+		48DBD2FE1EF69B9C00078A58 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		48DBD2FF1EF69B9C00078A58 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		48DEEE861E556ECE000E8E3D /* testTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testTableTableViewController.h; sourceTree = "<group>"; };
 		48DEEE871E556ECE000E8E3D /* testTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testTableTableViewController.m; sourceTree = "<group>"; };
 		48DEEE891E5585C5000E8E3D /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
@@ -760,9 +765,11 @@
 				0484A4451D3579BE00A43315 /* Fabric.framework */,
 				0484A4461D3579BE00A43315 /* Crashlytics.framework */,
 				047C2C811CE2289A000FF304 /* UIColor+CustomColors.h */,
+				047C2C821CE2289A000FF304 /* UIColor+CustomColors.m */,
+				489F79291EC352E9005FF470 /* UIFont+UIFont_appFonts.h */,
+				489F792A1EC352E9005FF470 /* UIFont+UIFont_appFonts.m */,
 				485D41631E52F54E00F46707 /* UITextView+Placeholder.h */,
 				485D41641E52F54E00F46707 /* UITextView+Placeholder.m */,
-				047C2C821CE2289A000FF304 /* UIColor+CustomColors.m */,
 				042D178A1CE219340032E5DF /* main.m */,
 				48F06A3B1DF5EC31004AD9B1 /* Constants.h */,
 				48A055191E5D9D77005027F7 /* NSObject+NSDictionaryRepresentation.h */,
@@ -1058,15 +1065,14 @@
 				047C2BF31CE21A11000FF304 /* OfferCollectionViewCell.h */,
 				047C2BF41CE21A11000FF304 /* OfferCollectionViewCell.m */,
 				043752671D4B2EB2000EE3E5 /* OfferCollectionViewCell.xib */,
-				045A6A931CFB0DD400B03B5E /* OfferLightCollectionViewCell.h */,
-				045A6A941CFB0DD400B03B5E /* OfferLightCollectionViewCell.m */,
 				04C38D5A1D3A7E2000532FB9 /* OfferLightCollectionViewCell.xib */,
-				045B9B9F1CFB658A00616678 /* PhotoCollectionViewCell.h */,
-				045B9BA01CFB658A00616678 /* PhotoCollectionViewCell.m */,
+				486935171EF581210006EB5F /* OfferLightCollectionViewCell.swift */,
 				04F3CEFD1D4736DC0041D864 /* NotificationCell */,
 				047BE6781D51C76E008C999F /* SearchCell */,
 				4881CE081E54B964007E9B29 /* OfferEditTableViewCell */,
 				048109CC1D621B0800EAB6AA /* CreateOfferPhotoCell */,
+				48DBD2FE1EF69B9C00078A58 /* PhotoCollectionViewCell.swift */,
+				48DBD2FF1EF69B9C00078A58 /* PhotoCollectionViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1558,6 +1564,7 @@
 			children = (
 				047C2BF61CE21A1D000FF304 /* OfferItem.h */,
 				047C2BF71CE21A1D000FF304 /* OfferItem.m */,
+				486935151EF57E870006EB5F /* OfferItemViewConfig.swift */,
 			);
 			name = OfferItem;
 			sourceTree = "<group>";
@@ -1964,6 +1971,7 @@
 				047BE6721D51C41A008C999F /* HeaderView.xib in Resources */,
 				48A0550D1E5C48B4005027F7 /* EarlyBird.acv in Resources */,
 				04F3CEFC1D4736D90041D864 /* NotificationCell.xib in Resources */,
+				48DBD3011EF69B9C00078A58 /* PhotoCollectionViewCell.xib in Resources */,
 				044CA79F1D39641900678E24 /* OpenSans-BoldItalic.ttf in Resources */,
 				04F3CF091D47882A0041D864 /* NewsItemVC.xib in Resources */,
 				044CA7C51D39844C00678E24 /* MyPurchasesVC.xib in Resources */,
@@ -2082,6 +2090,7 @@
 				48F84E371E604CDB00663C59 /* M13ProgressView.m in Sources */,
 				484844291E5206DA004486A1 /* IQUIScrollView+Additions.m in Sources */,
 				48F84D641E5F3F8000663C59 /* AFNetworkReachabilityManager.m in Sources */,
+				48DBD3001EF69B9C00078A58 /* PhotoCollectionViewCell.swift in Sources */,
 				48F84D681E5F3F8000663C59 /* AFURLSessionManager.m in Sources */,
 				047C2C311CE21A9A000FF304 /* IIViewDeckController.m in Sources */,
 				4848442F1E5206DA004486A1 /* IQKeyboardReturnKeyHandler.m in Sources */,
@@ -2098,7 +2107,6 @@
 				047C2C781CE21BA3000FF304 /* categoryItemButton.m in Sources */,
 				047C2BF11CE219F1000FF304 /* baseOfferItem.m in Sources */,
 				485A66AE1E50292D00C5F5F7 /* MOCollectionView.m in Sources */,
-				045A6A951CFB0DD400B03B5E /* OfferLightCollectionViewCell.m in Sources */,
 				484844341E5206DA004486A1 /* IQToolbar.m in Sources */,
 				045D7FF91D4FBA5800513E3D /* UILoadControl_UIScrollView.swift in Sources */,
 				48DEEE901E55B7A8000E8E3D /* WillSendInItem.m in Sources */,
@@ -2108,8 +2116,10 @@
 				047C2C741CE21B74000FF304 /* JVFloatLabeledTextView.m in Sources */,
 				047C2C091CE21A63000FF304 /* AppConfig.m in Sources */,
 				047C2C891CE22E51000FF304 /* UIButton+Badge.m in Sources */,
+				486935161EF57E870006EB5F /* OfferItemViewConfig.swift in Sources */,
 				047C2BF01CE219F1000FF304 /* baseError.m in Sources */,
 				48A055091E5C48B4005027F7 /* CameraHoverView.m in Sources */,
+				489F792B1EC352E9005FF470 /* UIFont+UIFont_appFonts.m in Sources */,
 				484844461E520762004486A1 /* HFColorPickerView.m in Sources */,
 				049F15B71D3D4E4C00CB2132 /* PagingMenuOptions.swift in Sources */,
 				48F84D1E1E5E081500663C59 /* CameraShot.swift in Sources */,
@@ -2229,7 +2239,6 @@
 				049F15B81D3D4E4C00CB2132 /* UIViewController+MenuItemImage.swift in Sources */,
 				04F3CF031D4776660041D864 /* NewsCell.m in Sources */,
 				0405AD631D4918EE0059E668 /* SearchVC.m in Sources */,
-				045B9BA11CFB658A00616678 /* PhotoCollectionViewCell.m in Sources */,
 				048A73E31CF36F89002CCA31 /* SDWebImageManager.m in Sources */,
 				48F84D321E5EE72400663C59 /* NSDate+TimeAgo.m in Sources */,
 				048A73E11CF36F89002CCA31 /* SDWebImageDownloader.m in Sources */,
@@ -2244,6 +2253,7 @@
 				484844441E520762004486A1 /* ColorPickerTextField.m in Sources */,
 				48F84D211E5E081500663C59 /* SingleImageFetcher.swift in Sources */,
 				48F84D6B1E5F3F8000663C59 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				486935181EF581210006EB5F /* OfferLightCollectionViewCell.swift in Sources */,
 				048A73DC1CF36F89002CCA31 /* MKAnnotationView+WebCache.m in Sources */,
 				047C2C831CE2289A000FF304 /* UIColor+CustomColors.m in Sources */,
 				48F84D281E5E081500663C59 /* CameraViewControllerConstraint.swift in Sources */,

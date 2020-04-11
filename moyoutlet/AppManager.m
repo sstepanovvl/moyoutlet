@@ -320,4 +320,13 @@
     return dicForReturn;
 }
 
+-(NSArray*)getRelatedOffersForOffer:(OfferItem*)item {
+    NSDictionary* dic = [AppManager sharedInstance].offers;
+//    NSArray* relatedItems = [[AppManager sharedInstance].offers valueForKey:[NSString stringWithFormat:@"%li",(long)item.category_id]];
+    NSArray* relatedItems = [[AppManager sharedInstance].offers valueForKey:@"0"];
+    
+    return relatedItems;
+    
+}
+
 @end

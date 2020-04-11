@@ -29,9 +29,6 @@
 float horizontal_size;
 
 
-NSString *kOfferLightCellID = @"OfferLightCollectionViewCell";
-NSString *kPhotoCellID = @"PhotoCell";
-
 
 #pragma mark lifeCycle
 
@@ -84,7 +81,7 @@ NSString *kPhotoCellID = @"PhotoCell";
     
     _offerSize.text = [NSString stringWithFormat:@"Размер: %@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.sizes Value:_offerItem.size_id forKey:@"id"] valueForKey:@"name"]];
     
-    if ([_offerItem.brand_id isEqual:@"0"]) {
+    if ([_offerItem.brand_id isEqual:@0]) {
         _offerTitle.text = _offerItem.name;
     } else {
         _offerTitle.text = [NSString stringWithFormat:@"%@ %@",[[AppHelper searchInDictionaries:[AppManager sharedInstance].config.brands Value:_offerItem.brand_id forKey:@"id"] valueForKey:@"name"], _offerItem.name];
@@ -98,7 +95,7 @@ NSString *kPhotoCellID = @"PhotoCell";
     _offerCondition.text = [[AppHelper searchInDictionaries:[AppManager sharedInstance].config.conditions Value:_offerItem.condition_id forKey:@"id"] valueForKey:@"name"];
     _offerCreatonDate.text = [_offerItem.created timeAgo];
 
-    [_offersCollectionView registerNib:[UINib nibWithNibName:@"OfferLightCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kOfferLightCellID];
+    [_offersCollectionView registerNib:[UINib nibWithNibName:@"OfferLightCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"OfferLightCollectionViewCell"];
     
     
     [self initCategoryButtons];
@@ -417,7 +414,7 @@ NSString *kPhotoCellID = @"PhotoCell";
 
     if (collectionView.tag == 1) { //related offers
 
-        OfferCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kOfferLightCellID
+        OfferCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OfferLightCollectionViewCell"
                                                                                   forIndexPath:indexPath];
 
         cell.item = self.offerItem;
@@ -444,7 +441,7 @@ NSString *kPhotoCellID = @"PhotoCell";
         [[SDWebImageManager sharedManager] downloadImageWithURL:url
                                                         options:SDWebImageRetryFailed
                                                        progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                                                           NSLog(@"%ld",expectedSize - receivedSize);
+                                                           NSLog(@"%ld",receivedSize - expectedSize);
                                                        }
                                                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                                                           UIImage* imageToSet = [UIImage imageWithCGImage:[image CGImage]
@@ -460,11 +457,10 @@ NSString *kPhotoCellID = @"PhotoCell";
 
     } else {
 
-        PhotoCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kPhotoCellID
+        
+        PhotoCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell"
                                                                                   forIndexPath:indexPath];
 
-        cell.photoImageView.layer.cornerRadius = 5.0f;
-        cell.photoImageView.layer.masksToBounds = YES;
         
         CGSize photoSize = cell.frame.size;
         
@@ -481,7 +477,7 @@ NSString *kPhotoCellID = @"PhotoCell";
                                                                                       scale:[UIScreen mainScreen].scale
                                                                                 orientation:UIImageOrientationUp];
                                                           
-                                                          [cell.photoImageView setImage:imageToSet];
+                                                          [cell.offerImage setImage:imageToSet];
                                                       }];
         return cell;
     }
@@ -508,7 +504,7 @@ NSString *kPhotoCellID = @"PhotoCell";
 
         PhotoCollectionViewCell* photoCell = (PhotoCollectionViewCell*)[_photoCollectionView cellForItemAtIndexPath:indexPath];
 
-        [EXPhotoViewer showImageFrom:photoCell.photoImageView];
+        [EXPhotoViewer showImageFrom:photoCell.offerImage];
 
     }
 }

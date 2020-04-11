@@ -9,7 +9,7 @@
 #import "baseVC.h"
 #import "OfferCollectionViewCell.h"
 #import "OfferVC.h"
-#import "OfferLightCollectionViewCell.h"
+
 
 
 @interface ProfileVC : baseVC <UICollectionViewDelegate, UICollectionViewDataSource>

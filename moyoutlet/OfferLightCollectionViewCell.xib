@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,18 +21,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OfferLightCollectionViewCell" id="e4G-r8-bll" customClass="OfferLightCollectionViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OfferLightCollectionViewCell" id="e4G-r8-bll" customClass="OfferLightCollectionViewCell" customModule="moyoutlet" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="272" height="197"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="272" height="197"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleAspectFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28q-yK-DcR" userLabel="cellView">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Cw-gc-aL8" userLabel="line">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Cw-gc-aL8" userLabel="line">
+                                <rect key="frame" x="8" y="143" width="256" height="1"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="3oP-64-Kdo"/>
@@ -49,9 +49,9 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9DY-bk-EXL" userLabel="priceView">
-                                <rect key="frame" x="4" y="25" width="42" height="13"/>
+                                <rect key="frame" x="115.5" y="172" width="41" height="13"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="36.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LV-v7-ljX">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LV-v7-ljX">
                                         <rect key="frame" x="5" y="1" width="31" height="12"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -99,14 +99,14 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7y-jJ-ILk" userLabel="Brand">
-                                <rect key="frame" x="8" y="11" width="27" height="10"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7y-jJ-ILk" userLabel="Brand">
+                                <rect key="frame" x="8" y="155" width="29" height="13"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" misplaced="YES" text="Кофточка на все случаи жизни" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byb-RS-YKs" userLabel="Title">
-                                <rect key="frame" x="40" y="11" width="2" height="10"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" ambiguous="YES" text="Кофточка на все случаи жизни" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byb-RS-YKs" userLabel="Title">
+                                <rect key="frame" x="42" y="155" width="0.0" height="13"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -164,21 +164,21 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="SjG-gj-2TC"/>
+                                <exclude reference="GVA-Zq-ywO"/>
+                                <exclude reference="cWw-4l-VGD"/>
+                                <exclude reference="g0s-7s-364"/>
+                                <exclude reference="C7Q-4K-XjL"/>
+                                <exclude reference="GyW-Jc-PdV"/>
+                                <exclude reference="TRi-HK-tet"/>
                                 <exclude reference="U8j-KQ-mKc"/>
                                 <exclude reference="g7p-ar-ztq"/>
-                                <exclude reference="Gwl-me-vyV"/>
-                                <exclude reference="jAD-Lf-kV9"/>
-                                <exclude reference="xpi-2U-Zgq"/>
                                 <exclude reference="3On-aF-Nnn"/>
                                 <exclude reference="JFO-Nl-P0H"/>
                                 <exclude reference="bYt-IK-lyQ"/>
                                 <exclude reference="p5Z-z6-eIG"/>
-                                <exclude reference="C7Q-4K-XjL"/>
-                                <exclude reference="GyW-Jc-PdV"/>
-                                <exclude reference="TRi-HK-tet"/>
-                                <exclude reference="GVA-Zq-ywO"/>
-                                <exclude reference="cWw-4l-VGD"/>
-                                <exclude reference="g0s-7s-364"/>
+                                <exclude reference="Gwl-me-vyV"/>
+                                <exclude reference="jAD-Lf-kV9"/>
+                                <exclude reference="xpi-2U-Zgq"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -191,21 +191,21 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="SjG-gj-2TC"/>
+                                <include reference="GVA-Zq-ywO"/>
+                                <include reference="cWw-4l-VGD"/>
+                                <include reference="g0s-7s-364"/>
+                                <include reference="C7Q-4K-XjL"/>
+                                <include reference="GyW-Jc-PdV"/>
+                                <include reference="TRi-HK-tet"/>
                                 <include reference="U8j-KQ-mKc"/>
                                 <include reference="g7p-ar-ztq"/>
-                                <include reference="Gwl-me-vyV"/>
-                                <include reference="jAD-Lf-kV9"/>
-                                <include reference="xpi-2U-Zgq"/>
                                 <include reference="3On-aF-Nnn"/>
                                 <include reference="JFO-Nl-P0H"/>
                                 <include reference="bYt-IK-lyQ"/>
                                 <include reference="p5Z-z6-eIG"/>
-                                <include reference="C7Q-4K-XjL"/>
-                                <include reference="GyW-Jc-PdV"/>
-                                <include reference="TRi-HK-tet"/>
-                                <include reference="GVA-Zq-ywO"/>
-                                <include reference="cWw-4l-VGD"/>
-                                <include reference="g0s-7s-364"/>
+                                <include reference="Gwl-me-vyV"/>
+                                <include reference="jAD-Lf-kV9"/>
+                                <include reference="xpi-2U-Zgq"/>
                             </mask>
                         </variation>
                     </view>
@@ -217,7 +217,7 @@
                 <constraint firstAttribute="trailing" secondItem="28q-yK-DcR" secondAttribute="trailing" id="OoO-I3-rr5"/>
                 <constraint firstAttribute="bottom" secondItem="28q-yK-DcR" secondAttribute="bottom" id="ZM2-jP-wHM"/>
             </constraints>
-            <size key="customSize" width="207" height="253"/>
+            <size key="customSize" width="429" height="400"/>
             <variation key="default">
                 <mask key="subviews">
                     <exclude reference="28q-yK-DcR"/>
@@ -241,14 +241,14 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="brandLabel" destination="a7y-jJ-ILk" id="wPs-tk-Awt"/>
-                <outlet property="cellView" destination="28q-yK-DcR" id="Xgz-mi-MyS"/>
-                <outlet property="imageView" destination="Bgd-EJ-tnH" id="c7r-oB-TX5"/>
-                <outlet property="priceLabel" destination="6LV-v7-ljX" id="GdI-ki-34v"/>
-                <outlet property="priceView" destination="9DY-bk-EXL" id="DU7-Kw-BPb"/>
-                <outlet property="titleLabel" destination="byb-RS-YKs" id="48f-zF-y6y"/>
+                <outlet property="brandLabel" destination="a7y-jJ-ILk" id="t6d-jt-Gv1"/>
+                <outlet property="cellView" destination="28q-yK-DcR" id="6YX-f9-H0R"/>
+                <outlet property="offerImage" destination="Bgd-EJ-tnH" id="1pA-v5-DZW"/>
+                <outlet property="priceLabel" destination="6LV-v7-ljX" id="SST-3b-R3R"/>
+                <outlet property="priceView" destination="9DY-bk-EXL" id="xJH-2p-Amb"/>
+                <outlet property="titleLabel" destination="byb-RS-YKs" id="M1l-mK-aJc"/>
             </connections>
-            <point key="canvasLocation" x="178.5" y="85.5"/>
+            <point key="canvasLocation" x="289" y="158.5"/>
         </collectionViewCell>
     </objects>
 </document>

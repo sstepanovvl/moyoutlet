@@ -30,6 +30,7 @@
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* mainThumbUrl;
 @property (strong, nonatomic) NSNumber* likesCount;
+@property (strong, nonatomic) NSNumber* commentsCount;
 @property (strong, nonatomic) NSString* category;
 @property (strong, nonatomic) NSString* shipping;
 @property (strong, nonatomic) NSString* willSendIn;

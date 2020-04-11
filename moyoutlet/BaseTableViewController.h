@@ -18,4 +18,5 @@
 
 @interface BaseTableViewController : StaticDataTableViewController <UITableViewDelegate>
 -(void)dismissNavigationController;
+-(IBAction)backButtonPressed;
 @end

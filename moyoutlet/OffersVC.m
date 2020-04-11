@@ -254,15 +254,16 @@ NSString *kCellID = @"OfferCollectionViewCell";
     
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-//    testTableTableViewController* vc = [sb instantiateViewControllerWithIdentifier:@"testTableTableViewController"];
-//
+    testTableTableViewController* vc = [sb instantiateViewControllerWithIdentifier:@"testTableTableViewController"];
+
 //    [AppManager sharedInstance].offerToEdit = cell.item;
-//    
-//    vc.offerViewControllerMode = OfferViewControllerModeView;
     
-    OfferVC* vc = [sb instantiateViewControllerWithIdentifier:@"OfferVC"];
-    
+    vc.offerViewControllerMode = OfferViewControllerModeView;
     vc.offerItem = cell.item;
+    
+//    OfferVC* vc = [sb instantiateViewControllerWithIdentifier:@"OfferVC"];
+//    
+//    vc.offerItem = cell.item;
     
     [self.navigationController pushViewController:vc animated:YES];
 }

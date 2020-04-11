@@ -90,6 +90,7 @@
 
 -(NSMutableDictionary*)buildTreeForCategory:(NSNumber*)category_id;
 -(BOOL)checkChildItemsInCategory:(NSNumber*)categoryId;
+-(NSArray*)getRelatedOffersForOffer:(OfferItem*)item;
 
 
 @end
